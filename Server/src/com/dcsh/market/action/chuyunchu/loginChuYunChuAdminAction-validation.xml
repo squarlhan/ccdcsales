@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE validators PUBLIC     "-//OpenSymphony Group//XWork Validator 1.0.2//EN"     "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<!-- 此xml的DTD声明可以到xwork包下的xwork-validator-1.0.2.dtd里面复制 -->
+<validators>
+ <!-- 对应Action类里面的属性 --> 
+<field name="username"> 
+ <field-validator type="requiredstring">
+  <message>请输入用户名</message> 
+ </field-validator>
+ </field> 
+<field name="password"> 
+ <field-validator type="requiredstring"> 
+  <message>请输入密码</message> 
+ </field-validator>
+ </field>
+ <!--Plain validator Syntax--> 
+ <!-- <field name="password"> 
+ <field-validator type="stringlength"> 
+  <param name="minLength">4</param>   
+<param name="maxLength">10</param> 
+  <param name="trim">true</param>   
+<message>require between 4 and 10</message>  
+</field-validator> </field>  --> 
+<!-- Field validator Syntax -->  
+<!-- <validator type="stringlength">   
+<param name="fieldName">password</param>   
+<param name="minLength">4</param>  
+ <param name="maxLength">10</param>   
+<param name="trim">true</param>   
+<message>require between 4 and 10</message> 
+ </validator> -->
+</validators>

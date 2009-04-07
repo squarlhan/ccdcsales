@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+  <package name="admin" extends="struts-default">
+
+
+ <!--管理员  -->  
+ 
+        <action name="adminloginsystemAdmin" method="execute" class="loginsystemAdminAction">
+               <result>/pages/systemadmin/login.jsp</result>
+               <result name="success" type="chain">adminliststorage</result>
+               <result name="input">/pages/systemadmin/login.jsp</result>
+        </action>
+        
+        <action name="adminproductsmanager" method="execute" class="productsmanagerAction">
+               <result>/pages/systemadmin/productsmanager.jsp</result>
+               <result name="list">/pages/systemadmin/productsmanager.jsp</result>
+               <result name="modify" type="redirect-action">adminproductsmanager</result>
+               <result name="add" type="redirect-action">adminproductsmanager</result>
+               <result name="delete" type="redirect-action">adminproductsmanager</result>
+        </action>
+
+        
+        <action name="adminspemanager" method="execute" class="spemanagerAction">
+               <result>/pages/systemadmin/specificationmanager.jsp</result>
+               <result name="list">/pages/systemadmin/specificationmanager.jsp</result>
+               <result name="modify" type="redirect-action">adminspemanager</result>
+               <result name="add" type="redirect-action">adminspemanager</result>
+               <result name="delete" type="redirect-action">adminspemanager</result>
+        </action>
+    
+        <action name="admincanmanager" method="execute" class="canmanagerAction">
+               <result>/pages/systemadmin/cankumanager.jsp</result>
+               <result name="list">/pages/systemadmin/cankumanager.jsp</result>
+               <result name="modify" type="redirect-action">admincanmanager</result>
+               <result name="add" type="redirect-action">admincanmanager</result>
+               <result name="delete" type="redirect-action">admincanmanager</result>
+        </action>
+        
+        <action name="adminusermanager" method="execute" class="usersmanagerAction">
+               <result>/pages/systemadmin/usermanager.jsp</result>
+               <result name="list">/pages/systemadmin/usermanager.jsp</result>
+               <result name="modify" type="redirect-action">adminusermanager</result>
+               <result name="add" type="redirect-action">adminusermanager</result>
+               <result name="delete" type="redirect-action">adminusermanager</result>
+        </action>
+        <action name="admincustommanager" method="execute" class="custommanagerAction">
+               <result>/pages/systemadmin/custommanager.jsp</result>
+               <result name="list">/pages/systemadmin/custommanager.jsp</result>
+               <result name="modify" type="redirect-action">admincustommanager</result>
+               <result name="add" type="redirect-action">admincustommanager</result>
+               <result name="delete" type="redirect-action">admincustommanager</result>
+        </action>
+		<action name="admingroupmanager" method="execute" class="groupmanagerAction">
+               <result>/pages/systemadmin/groupmanager.jsp</result>
+               <result name="list">/pages/systemadmin/groupmanager.jsp</result>
+               <result name="modify" type="redirect-action">admingroupmanager</result>
+               <result name="add" type="redirect-action">admingroupmanager</result>
+               <result name="delete" type="redirect-action">admingroupmanager</result>
+        </action>
+        
+        <action name="adminfahuomanager" method="execute" class="adminfahuomanagerAction">
+               <result>/pages/systemadmin/fahuomanager.jsp</result>
+               <result name="list">/pages/systemadmin/fahuomanager.jsp</result>
+               <result name="modify" type="redirect-action">adminfahuomanager</result>
+               <result name="add" type="redirect-action">adminfahuomanager</result>
+               <result name="delete" type="redirect-action">adminfahuomanager</result>
+        </action>
+        
+         <action name="adminlogout" method="execute" class="adminlogoutAction">
+               <result>/index.jsp</result>
+               <result name="index">/index.jsp</result>
+        </action>
+
+		<action name="admingetallgroups" method="execute" class="getallGroupsAction">
+               <result>/pages/systemadmin/groupmember.jsp</result>
+               <result name="show">/pages/systemadmin/groupmember.jsp</result>
+        </action>
+		<action name="adminliststorage" method="execute" class="liststorageAdminAction">
+               <result>/pages/systemadmin/liststorage.jsp</result>
+               <result name="list">/pages/systemadmin/liststorage.jsp</result>
+        </action>
+
+        
+         <action name="adminshowgroupmember" method="execute" class="adminShowGroupMemberAction">
+               <result>/pages/systemadmin/groupmember.jsp</result>
+               <result name="list">/pages/systemadmin/showmember.jsp</result>
+        </action>
+        
+         <action name="adminsavegroupmember" method="execute" class="adminSaveGroupMemberAction">
+               <result>/pages/systemadmin/groupmember.jsp</result>
+               <result name="savegroupmember_ok" type="redirect-action">admingetallgroups</result>
+        </action>
+
+        <action name="getcangkuadmin" method="execute" class="getcangkuAdminAction">
+               <result>/pages/systemadmin/liststorage.jsp</result>
+               <result name="show_report">/pages/systemadmin/liststorage.jsp</result>
+        </action>
+        <action name="adminlistsales" method="execute" class="listSalesAction">
+               <result>/pages/systemadmin/listsales.jsp</result>
+               <result name="list">/pages/systemadmin/listsales.jsp</result>
+        </action>
+        <action name="adminlistdestroy" method="execute" class="listDestroyAction">
+               <result>/pages/systemadmin/listdestroy.jsp</result>
+               <result name="list">/pages/systemadmin/listdestroy.jsp</result>
+        </action>
+        <action name="adminlistloss" method="execute" class="listLossAction">
+               <result>/pages/systemadmin/listloss.jsp</result>
+               <result name="list">/pages/systemadmin/listloss.jsp</result>
+        </action>
+        <action name="admingroupprimanager" method="execute" class="admingroupprimanagerAction">
+        	<result name="list">/pages/systemadmin/grouprimanager.jsp</result>
+        	<result name="reset" type="redirect-action">admingroupprimanager</result>
+        </action>
+        <action name="adminuserprimanager" method="execute" class="adminuserprimanagerAction">
+               <result>/pages/systemadmin/userprivemanager.jsp</result>
+               <result name="show">/pages/systemadmin/userprivmanager.jsp</result>
+        </action>
+        <action name="adminshowuserpriv" method="execute" class="adminshowuserprivAction">
+               <result name="show">/pages/systemadmin/showuserprive.jsp</result>
+        </action>
+        <action name="adminsaveuserpriv" method="execute" class="adminsaveuserprivAction">
+        	<result name="save_userpriv" type="redirect-action">adminuserprimanager</result>
+        </action>
+</package>
+
+	
+	
+</struts>

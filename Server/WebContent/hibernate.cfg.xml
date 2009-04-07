@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+        <property name="connection.password">jboss</property>
+        <property name="show_sql">true</property>
+        <property name="connection.url">jdbc:sqlserver://192.168.4.4:1433;databaseName=test</property>
+        <property name="connection.username">jboss</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
+		<!--  
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.CMTTransactionFactory</property>
+		<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
+		-->
+        <mapping class="com.dcsh.market.Users" />
+        <mapping class="com.dcsh.market.UserGroup" />        
+        <mapping class="com.dcsh.market.Specifications" />
+        <mapping class="com.dcsh.market.Rkmx" />
+        <mapping class="com.dcsh.market.Chukumx" />
+        <mapping class="com.dcsh.market.Rkxx" />
+        <mapping class="com.dcsh.market.Kcxx" />
+        <mapping class="com.dcsh.market.Custom" />
+        <mapping class="com.dcsh.market.Products" />
+        <mapping class="com.dcsh.market.Canku" />
+        <mapping class="com.dcsh.market.Chuku" />
+        <mapping class="com.dcsh.market.ReportPmx" />
+        <mapping class="com.dcsh.market.ReportCmx" />
+        <mapping class="com.dcsh.market.Reportxx" />
+        <mapping class="com.dcsh.market.UserPriv" />
+        <mapping class="com.dcsh.market.UserGroup" />
+        <mapping class="com.dcsh.market.UserGroupPriv" />
+        <mapping class="com.dcsh.market.XSyikumx" />
+        <mapping class="com.dcsh.market.XSyikuxx" />
+        <mapping class="com.dcsh.market.Yxyikusign" />
+        <mapping class="com.dcsh.market.XSfahuomx" />
+        <mapping class="com.dcsh.market.XSfahuoxx" />
+        <mapping class="com.dcsh.market.Fahuo" />
+    </session-factory>
+</hibernate-configuration>

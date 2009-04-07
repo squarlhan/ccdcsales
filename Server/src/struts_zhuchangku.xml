@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <package name="zhuchangku" extends="struts-default">
+   <!-- 驻厂库 -->
+        <action name="zcklistuncheckProducts" method="execute" class="zcklistunCheckProductsAction">
+            <result >/pages/zhuchangku/welcome.jsp</result>
+            <result name="input" >/pages/zhuchangku/welcome.jsp</result>
+            <result name="welcome" >/pages/zhuchangku/welcome.jsp</result>
+        </action>
+        <action name="zckcheckinproducts" method="execute" class="zckcheckinProductsAction">
+            <result>/pages/zhuchangku/welcome.jsp</result>
+            <result name="list" type="redirect-action">zcklistuncheckProducts</result>
+        </action>
+         <action name="zckgetreport" method="execute" class="zckgetreportAction">
+               <result>/pages/zhuchangku/report_zck.jsp</result>
+               <result name="list">/pages/zhuchangku/report_zck.jsp</result>
+        </action>
+
+         <action name="zcksavereport" method="execute" class="zcksavereportAction">
+               <result name="save_ok" type="redirect-action">zcklistuncheckProducts</result>
+        </action>
+        <action name="zckgodelivery" method="execute" class="zckgodeliveryAction">
+            <result>/pages/zhuchangku/delivery.jsp</result>
+            <result name="show">/pages/zhuchangku/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+    	<action name="zckloginAdmin" method="execute" class="zckloginAdminAction">
+            <result name="success" type="chain">zcklistcangku </result>
+            <result name="input">/index.jsp</result>
+        </action>
+        
+    	<action name="zcklistallstorage" method="execute" class="zcklistallStorageAction">
+            <result>/pages/zhuchangku/liststorage.jsp</result>
+            <result name="list">/pages/zhuchangku/liststorage.jsp</result>
+            <result name="input">/pages/zhuchangku/welcome.jsp</result>
+            <result name="infoList">/pages/zhuchangku/liststorage.jsp</result>
+        </action>  
+        
+		<action name="zcklogout" method="execute" class="zcklogoutAction">
+               <result>/index.jsp</result>
+               <result name="index">/index.jsp</result>
+        </action>
+        
+        <action name="zckcheckin" method="execute" class="zckcheckinAction">
+            <result>/pages/zhuchangku/checklistin.jsp</result>
+            <result name="list">/pages/zhuchangku/checklistin.jsp</result>
+            <result name="input">/pages/zhuchangku/welcome.jsp</result>
+            <result name="infoList">/pages/zhuchangku/checklistin.jsp</result>
+        </action>   
+        
+         <action name="zckcheckout" method="execute" class="zckcheckoutAction">
+            <result>/pages/zhuchangku/checklistout.jsp</result>
+            <result name="list">/pages/zhuchangku/checklistout.jsp</result>
+            <result name="input">/pages/zhuchangku/welcome.jsp</result>
+            <result name="infoList">/pages/zhuchangku/checklistout.jsp</result>
+        </action>
+		
+		<action name="zckgetreport" method="execute" class="zckgetreportAction">
+               <result>/pages/zhuchangku/report_zck.jsp</result>
+               <result name="list">/pages/zhuchangku/report_zck.jsp</result>
+        </action>
+
+        <action name="zckgodelivery" method="execute" class="zckgodeliveryAction">
+            <result>/pages/zhuchangku/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+            <result name="show">/pages/zhuchangku/delivery.jsp</result>
+        </action>
+        <action name="zckdeliverywarehouse" method="execute" class="zckdeliverywareHouseAction">
+            <result type="redirect-action">zcklistuncheckProducts</result>
+            <result name="ok" type="redirect-action">zcklistuncheckProducts</result>
+            <result name="unequal">/pages/zhuchangku/err01.jsp</result>
+            
+        </action>
+         
+         <action name="zcklistcangku" method="execute" class="zcklistCangkuAction">
+            <result>/pages/zhuchangku/selectcangku.jsp</result>
+            <result name="list">/pages/zhuchangku/selectcangku.jsp</result>
+            
+        </action>
+        <action name="zckselectcangku" method="execute" class="zckselectCangkuAction">
+            <result>/pages/zhuchangku/selectcangku.jsp</result>
+            <result name="selectedcangku" type="redirect-action">zcklistuncheckProducts</result>
+            
+        </action>
+        <action name="zckgolost" method="execute" class="gozcklostAction">
+            <result>/pages/zhuchangku/dealwithlost.jsp</result>
+            <result name="show">/pages/zhuchangku/dealwithlost.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="zckdealwithlost" method="execute" class="dealwithzcklostAction">
+            <result type="redirect-action">zcklistuncheckProducts</result>
+            <result name="ok" type="redirect-action">zckgolost</result>
+        </action>
+		<action name="zckgetxsfahuo" method="execute" class="zckgetxsfahuoAction">
+            <result >/pages/zhuchangku/listxsfahuo.jsp</result>
+            <result name="show_report">/pages/zhuchangku/listxsfahuo.jsp</result>
+        </action>
+        <action name="zckgoxsfahuo" method="execute" class="zckgoxsfahuoAction">
+            <result >/pages/zhuchangku/goxsfahuo.jsp</result>
+            <result name="show_report">/pages/zhuchangku/goxsfahuo.jsp</result>
+        </action>
+</package>
+	
+	
+</struts>
