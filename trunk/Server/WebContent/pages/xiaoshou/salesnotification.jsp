@@ -15,6 +15,12 @@
 <script language = "javascript" >
 	
     var count = 0; 
+	function setweight(obj,line)
+	{
+		var w = weights[obj.selectedIndex];
+		alert(document.getElementById("weight["+line+"]"));
+		document.getElementById("weight["+line+"]").value= w;
+	}
 
 	function insertRecord(){
         count+=1;
@@ -26,6 +32,9 @@
 		var td3 = tr.insertCell();
 		var td4 = tr.insertCell();
 		var td5 = tr.insertCell();
+		var td6 = tr.insertCell();
+		var td7 = tr.insertCell();
+		var td8 = tr.insertCell();
 
 		var select1 =  document.createElement("select");
 		select1.setAttribute("id","deli_canku["+count+"]");
@@ -36,18 +45,37 @@
 		select2.setAttribute("name","product["+count+"]");
 		
 		var select3 = document.createElement("select");
-		select3.setAttribute("id","specification["+count+"]");
-		select3.setAttribute("name","specification["+count+"]");
+		//select3.setAttribute("id","specification["+count+"]");
+		//select3.setAttribute("name","specification["+count+"]");
+		select3.id = "specification["+count+"]";
+		select3.name = "specification["+count+"]";
+		
+		//select3.onchange = "javascript:setweight(this," + count + ")";
+		//select3.se.onchange = "javascript:setweight(this," + count + ")";
+		select3.setAttribute("onchange","javascript:alert('hello');");
+
 
 		
 		
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","deli_num["+count+"]");
 		textfield1.setAttribute("name","deli_num["+count+"]");
+		textfield1.setAttribute("size","10");
 			
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","price["+count+"]");
 		textfield2.setAttribute("name","price["+count+"]");
+		textfield2.setAttribute("size","10");
+
+		var textfield3 = document.createElement("input");
+		textfield3.setAttribute("id","myid["+count+"]");
+		textfield3.setAttribute("value",count);
+
+		var textfield4 = document.createElement("input");
+		textfield3.setAttribute("id","weight["+count+"]");
+
+		var textfield5 = document.createElement("input");
+		textfield3.setAttribute("id","sumweight["+count+"]");
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");
@@ -72,12 +100,22 @@
 	          opts.text=orginspe.children[j].text;
 	          select3.options.add(opts);
 	          }
-         
-		td1.appendChild(select1);
-		td2.appendChild(select2);
-		td3.appendChild(select3);
-		td4.appendChild(textfield1);
-		td5.appendChild(textfield2);
+		td1.appendChild(textfield3);
+		td2.appendChild(select1);
+		td3.appendChild(select2);
+		td4.appendChild(select3);
+		td5.appendChild(textfield1);
+		td6.appendChild(textfield4);
+		td7.appendChild(textfield5);
+		td8.appendChild(textfield2);
+
+		select3.setAttribute("selectedIndex",count);
+		select3.onchange = "javascript:setweight(this," + count + ")";
+		alert(select3.onchange);
+		//eval(select3.onchange);		
+		//alert(1);
+		//eval("alert(1);");
+		
 
 	}
 	function deleteRecord(table){
@@ -97,6 +135,10 @@
 		else
 			return false;
 	}
+
+	var weights = new Array(1,2,3,4,5,6,6);
+
+
 </script>
 <s:head/>
 </head>
@@ -128,8 +170,8 @@
     
 <table align="center" width="100%">
    <tr> 
-        <td><s:text name=" 发货单位: "/><td align="left"><s:select id="orgin" name="orgin" multiple="false" 
-          label="选择发货单位"  list="fahuoList" listValue="name" listKey="name" /></td>
+        <td><s:text name=" 发货单位: "/><s:select id="orgin" name="orgin" multiple="false" 
+          label="选择发货单位"  list="fahuoList" listValue="name" listKey="name" />
          </td>
          <td><s:text name=" 合同号: "/><s:textfield  name="cno"/>
          </td>
@@ -164,15 +206,20 @@
           <td><s:text name=" 备注: "/><s:textarea name="memo"/></td>
          </tr>
 </table>
-<table  class="list_table" id="tb" align="center" width="100%">
+<table  class="list_table" id="tb" align="center" width="80%">
       	<tr bgcolor="#4A708B">
+      	   <th width="">ID</th>
       	   <th width="">发货仓库</th>
       	   <th width="">产品</th>
       	   <th width="">规格</th>
       	   <th width="">发货数目</th>
+      	   <th width="">单重</th>
+      	   <th width="">重量</th>
       	   <th width="">单价</th>
+      	   
       	</tr>
       	  <tr>
+      	  <td><s:textfield id="myid[0]" value="0"></s:textfield>
           <td><s:select id="deli_canku[0]" name="deli_canku[0]" multiple="false" label="选择发货仓库"
             list="cankuList" listValue="name" listKey="id" /></td>
             
@@ -180,23 +227,34 @@
           list="productList" listValue="name" listKey="id"/></td>
           
           <td><s:select id="specification[0]" name="specification[0]" multiple="false" label="选择规格"
-          list="specificationList" listValue="displayName" listKey="id"/></td>
+          list="specificationList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
+
           
-          <td><s:textfield name="deli_num[0]" label="发货数目"/></td>
-          
-          <td><s:textfield name="price[0]" label="单价"/></td>
+          <td><s:textfield size="10"  name="deli_num[0]" label="发货数目" /></td>
+          <td><s:textfield size="10" id="weight[0]" name="weight[0]" label="单重" value="0.025"/></td>
+          <td><s:textfield size="10" id="sumweight[0]" name="sumweight[0]" label="总重"/></td>
+          <td><s:textfield size="10"  name="price[0]" label="单价"/></td>
       </tr>
   </table>
      <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
      <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
-   <table  class="list_table" align="center" width="100%">
+   <table border="0" align="center" width="100%">
        <tr>
-       <td align="right"><s:text name="审核人:"/><s:textfield name="myshr" label="审核人"/></td>
-       <td align="left"><s:text name="内审部:"/><s:textfield name="mynhr" label="内审部"/></td>
+       <td align="center"><s:text name="审核人: "/><s:property value="%{myshr.description}"/></td>
+       <td align="center"><s:text name="内审部: "/><s:property value="%{mynhr.description}"/></td>
        </tr>
        <tr><td align="center"><s:submit value="提交"/>
      </td><td align="center"><s:reset value="重置"/></td></tr>
    </table>
 </s:form>
+<script language = "javascript" >
+  function init(){
+	  var obj = document.getElementById("specification[0]");
+	  obj.onchange(obj);
+  }
+  init();
+</script>
+
 </body>
+
 </html>
