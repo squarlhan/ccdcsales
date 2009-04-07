@@ -105,17 +105,17 @@
   </tr>
  </table>
 <s:form theme="simple" action="xsmoveproduct" onsubmit="return confirmbtn()">
-<table  class="list_table" align="center" width="100%">
+<table align="center" width="100%">
         <tr>
-          <td><s:text name="发送日期:"/></td>
-          <td><s:datetimepicker name="sendtime"  toggleType="explode" value="today"/></td> 
+          <td align="left"><s:text name="发送日期:"/></td>
+          <td align="left"><s:datetimepicker name="sendtime"  toggleType="explode" value="today"/></td> 
           <td align="left"><s:text name="编号:"/></td>
           <td align="left"><s:textfield name="bno"/></td>
         </tr>
        
         <tr>
          <td align="left"><s:text name="发货单位:"/></td>
-         <td><s:select id="orgin" name="orgin" multiple="false" 
+         <td align="left"><s:select id="orgin" name="orgin" multiple="false" 
           label="选择发货单位"  list="fahuoList" listValue="name" listKey="name" /></td>
          <td align="left"><s:text name="到站:"/></td>
          <td align="left"><s:textfield name="aim"/></td>
@@ -123,8 +123,8 @@
         
         
       <tr>
-         <td><s:text name="运输方式:"/></td>
-         <td width=""><select id="delivertype" name="delivertype">
+         <td align="left"><s:text name="运输方式:"/></td>
+         <td align="left"><select id="delivertype" name="delivertype">
               <option value="0">公路运输</option>
 	          <option value="1">铁路运输</option>
 	          <option value="2">海运</option>      
@@ -138,15 +138,15 @@
       
        <tr>
          <td align="left"><s:text name="客户名称:"/></td>
-         <td width="">
+         <td align="left">
          <s:select name="custom" label="客户名" labelposition="left" multiple="false" 
             list="customList"
             listKey="id" listValue="customName"/></td>
           <td align="left"><s:text name="现行价:"/></td>
           <td align="left"><s:textfield name="price"/></td>        
         </tr>
-        <tr><td><s:text name="销售类型:"/></td>
-        <td>
+        <tr><td align="left"><s:text name="销售类型:"/></td>
+        <td align="left">
          <select id="saletype" name="saletype">
               <option value="1">内销</option>
 	          <option value="2">定向</option>
