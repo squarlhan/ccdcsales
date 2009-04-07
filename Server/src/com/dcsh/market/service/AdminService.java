@@ -23,7 +23,11 @@ import com.dcsh.market.UserPriv;
 
 import com.dcsh.market.priv.URLGPriv;
 
-
+/**
+ * Test by SVN
+ * @author wangkp
+ *
+ */
 public interface AdminService {
 	/**
 	 * 产品相关的增删改查
