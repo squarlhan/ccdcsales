@@ -51,8 +51,9 @@
 		select3.id = "specification["+count+"]";
 		select3.name = "specification["+count+"]";
 		select3.setAttribute("onchange","javascript:setweight(this," + count + ")");
-		
-		//select3.onchange = "javascript:setweight(this," + count + ")";
+	
+		//select3.attachEvent('onchange',setweight);
+		select3.onchange = function(){setweight(select3,count)};
 		//select3.se.onchange = "javascript:setweight(this," + count + ")";
 		//select3.setAttribute("onchange","javascript:alert('hello');");
 
