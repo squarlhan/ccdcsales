@@ -19,8 +19,18 @@
 	function setweight(obj,line)
 	{
 		var w = weights[obj.selectedIndex];
-		//alert(document.getElementById("weight["+line+"]"));
 		document.getElementById("weight["+line+"]").value= w;
+		var c = (document.getElementById("sumweight["+line+"]").value)/w;
+		//alert(c);
+		document.getElementById("deli_num["+line+"]").value= c;
+	}
+
+	function setnumber(obj,line)
+	{
+		var w = document.getElementById("weight["+line+"]").value;
+		var n = (obj.value)/w;
+		//alert(c);
+		document.getElementById("deli_num["+line+"]").value= n;
 	}
 
 	function insertRecord(){
@@ -35,7 +45,6 @@
 		var td5 = tr.insertCell(-1);
 		var td6 = tr.insertCell(-1);
 		var td7 = tr.insertCell(-1);
-		var td8 = tr.insertCell(-1);
 
 		var select1 =  document.createElement("select");
 		select1.setAttribute("id","deli_canku["+count+"]");
@@ -46,16 +55,10 @@
 		select2.setAttribute("name","product["+count+"]");
 		
 		var select3 = document.createElement("select");
-		//select3.setAttribute("id","specification["+count+"]");
-		//select3.setAttribute("name","specification["+count+"]");
 		select3.id = "specification["+count+"]";
 		select3.name = "specification["+count+"]";
 		select3.setAttribute("onchange","javascript:setweight(this," + count + ")");
-	
-		//select3.attachEvent('onchange',setweight);
 		select3.onchange = function(){setweight(select3,count)};
-		//select3.se.onchange = "javascript:setweight(this," + count + ")";
-		//select3.setAttribute("onchange","javascript:alert('hello');");
 
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","deli_num["+count+"]");
@@ -67,15 +70,15 @@
 		textfield2.setAttribute("name","price["+count+"]");
 		textfield2.setAttribute("size","10");
 
-		var textfield3 = document.createElement("input");
-		textfield3.setAttribute("id","myid["+count+"]");
-		textfield3.setAttribute("value",count);
-
 		var textfield4 = document.createElement("input");
 		textfield4.setAttribute("id","weight["+count+"]");
+		textfield4.setAttribute("size","10");
 
 		var textfield5 = document.createElement("input");
 		textfield5.setAttribute("id","sumweight["+count+"]");
+		textfield5.setAttribute("size","10");
+		textfield5.setAttribute("onchange","javascript:setnumber(this," + count + ")");
+		textfield5.onchange = function(){setnumber(textfield5,count)};
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");
@@ -107,14 +110,14 @@
 	          select3.options.add(opts);
 			  }
 	          }
-		td1.appendChild(textfield3);
-		td2.appendChild(select1);
-		td3.appendChild(select2);
-		td4.appendChild(select3);
-		td5.appendChild(textfield1);
-		td6.appendChild(textfield4);
-		td7.appendChild(textfield5);
-		td8.appendChild(textfield2);
+
+		td1.appendChild(select1);
+		td2.appendChild(select2);
+		td3.appendChild(select3);
+		td4.appendChild(textfield1);
+		td5.appendChild(textfield4);
+		td6.appendChild(textfield5);
+		td7.appendChild(textfield2);
 
 		select3.onchange(select3,count);
 
@@ -157,80 +160,79 @@
 		</td>
 	</tr>
 </table>
-<s:form theme="simple" action="xssalesnotification"
-	onsubmit="return confirmbtn()">
-	<table align="center" width="100%">
-		<tr>
-			<td><s:text name="区域:" /><select id="domains" name="domains">
-				<option value="东北区">东北区</option>
-				<option value="华北区">华北区</option>
-				<option value="华中区">华中区</option>
-				<option value="西南区">西南区</option>
-				<option value="西北区">西北区</option>
-				<option value="华东区">华东区</option>
-				<option value="华南区">华南区</option>
-			</select></td>
-			<td><s:text name="日期:" /><s:date name="mydate"
-				format="yyyy-MM-dd" /></td>
-
-			<td><s:text name="销售单号:" /><s:textfield name="bno" /></td>
-		</tr>
-	</table>
-
-	<table align="center" width="100%">
-		<tr>
-			<td><s:text name=" 发货单位: " /><s:select id="orgin" name="orgin"
-				multiple="false" label="选择发货单位" list="fahuoList" listValue="name"
-				listKey="name" /></td>
-			<td><s:text name=" 合同号: " /><s:textfield name="cno" /></td>
-		</tr>
-		<tr>
-			<td><s:text name=" 购货单位: " /><s:select name="customer"
-				label="客户名" labelposition="left" multiple="false" list="customList"
-				listKey="id" listValue="customName" /></td>
-			<td><s:text name="销售类型:" /> <select id="saletype"
-				name="saletype">
-				<option value="1">内销</option>
-				<option value="2">定向</option>
-				<option value="3">外销</option>
-				<option value="4">不合格</option>
-			</select></td>
-
-		</tr>
-		<tr>
-			<td><s:text name=" 运输方式: " /><select id="delivertype"
-				name="delivertype">
-				<option value="0">公路运输</option>
-				<option value="1">铁路运输</option>
-				<option value="2">海运</option>
-				<option value="3">自提</option>
-				<option value="4">其他</option>
-			</select></td>
-
-		</tr>
-		<tr>
-			<td><s:text name=" 结算方式: " /><select id="jstype" name="jstype">
-				<option value="0">现金</option>
-				<option value="1">电汇/转账</option>
-				<option value="2">承兑汇票</option>
-			</select></td>
-			<td><s:text name=" 备注: " /><s:textarea name="memo" /></td>
-		</tr>
-	</table>
+<s:form theme="simple" action="xssalesnotification" onsubmit="return confirmbtn()">
+<table  align="center" width="100%">
+    <tr>
+      <td align="left"><s:text name="区域:"/></td>
+      <td align="left"><select id="domains" name="domains">
+              <option value="东北区">东北区</option>
+	          <option value="华北区">华北区</option>
+	          <option value="华中区">华中区</option>  
+	          <option value="西南区">西南区</option>
+	          <option value="西北区">西北区</option>
+	          <option value="华东区">华东区</option>  
+	          <option value="华南区">华南区</option>   
+         </select>
+      </td>    
+      <td align="left"><s:text name="日期:"/></td>
+      <td align="left"><s:date name="mydate" format="yyyy-MM-dd"/></td>     
+    </tr>
+    <tr>           
+      <td align="left"><s:text name="销售单号:"/></td>
+      <td align="left"><s:textfield name="bno"/></td>
+      <td align="left"><s:text name=" 发货单位: "/></td>
+      <td align="left"><s:select id="orgin" name="orgin" multiple="false" 
+          label="选择发货单位"  list="fahuoList" listValue="name" listKey="name" />
+      </td>
+    </tr>
+    <tr>
+      <td align="left"><s:text name=" 合同号: "/></td>
+      <td align="left"><s:textfield  name="cno"/></td>
+      <td align="left"><s:text name=" 购货单位: "/></td>
+      <td align="left"><s:select name="customer" label="客户名" labelposition="left" multiple="false" 
+            list="customList"
+            listKey="id" listValue="customName"/></td>
+    </tr>
+    <tr>
+      <td align="left"><s:text name="销售类型:"/></td>
+      <td align="left"><select id="saletype" name="saletype">
+              <option value="1">内销</option>
+	          <option value="2">定向</option>
+	          <option value="3">外销</option>
+	          <option value="4">不合格</option>            
+         </select></td>
+      <td align="left"><s:text name=" 运输方式: "/></td>
+      <td align="left"><select id="delivertype" name="delivertype">
+              <option value="0">公路运输</option>
+	          <option value="1">铁路运输</option>
+	          <option value="2">海运</option>      
+	          <option value="3">自提</option>   
+	          <option value="4">其他</option>      
+         </select></td>       
+     </tr>
+     <tr>
+       <td align="left"><s:text name=" 结算方式: "/></td>
+       <td align="left"><select id="jstype" name="jstype">
+              <option value="0">现金</option>
+	          <option value="1">电汇/转账</option>
+	          <option value="2">承兑汇票</option>      
+         </select></td>
+       <td align="left"><s:text name=" 备注: "/></td>
+       <td align="left"><s:textarea name="memo"/></td>
+     </tr>
+</table>
 	<table class="list_table" id="tb" align="center" width="80%">
 		<tr bgcolor="#4A708B">
-			<th width="">ID</th>
 			<th width="">发货仓库</th>
 			<th width="">产品</th>
 			<th width="">规格</th>
-			<th width="">发货数目</th>
-			<th width="">单重</th>
-			<th width="">重量</th>
-			<th width="">单价</th>
+			<th width="" style="display:none">发货数目</th>
+			<th width="" style="display:none">单重</th>
+			<th width="">重量(T)</th>
+			<th width="">单价(每吨)</th>
 
 		</tr>
 		<tr>
-			<td><s:textfield id="myid[0]" value="0"></s:textfield>
 			<td><s:select id="deli_canku[0]" name="deli_canku[0]"
 				multiple="false" label="选择发货仓库" list="cankuList" listValue="name"
 				listKey="id" /></td>
@@ -244,11 +246,11 @@
 				onchange="javascript:setweight(this,0)" /></td>
 
 
-			<td><s:textfield size="10" name="deli_num[0]" label="发货数目" /></td>
-			<td><s:textfield size="10" id="weight[0]" name="weight[0]"
+			<td style="display:none"><s:textfield size="10" name="deli_num[0]" label="发货数目" /></td>
+			<td style="display:none"><s:textfield size="10" id="weight[0]" name="weight[0]"
 				label="单重" value="0.025" /></td>
 			<td><s:textfield size="10" id="sumweight[0]" name="sumweight[0]"
-				label="总重" /></td>
+				label="总重" onchange="javascript:setnumber(this,0)"/></td>
 			<td><s:textfield size="10" name="price[0]" label="单价" /></td>
 		</tr>
 	</table>
@@ -272,6 +274,8 @@
   function init(){
 	  var obj = document.getElementById("specification[0]");
 	  obj.onchange(obj);
+	  var obj1 = document.getElementById("sumweight[0]");
+	  obj1.onchange(obj1);
   }
   init();
 </script>
