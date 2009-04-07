@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+			
+
+	<bean id="mywareHouseService"
+		class="com.dcsh.market.service.WareHouseServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
+	</bean>
+	
+	
+<!-- 储运处 -->
+    <bean id="cyccheckinProductsAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.checkinProductsAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+
+	<bean id="listallStorageAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.listAllStorageAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="loginchuYunChuAdminAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.loginChuYunChuAdminAction">
+	</bean> 
+	<bean id="listunCheckProductsAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.listUnCheckProductsAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="listunentryProductsAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.listUnentryProductAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>  
+	<bean id="entrywareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.entryWareHouseAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="goentryAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goEntryAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="allentryWareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.allEntryWareHouseAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="godeliveryAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goDeliveryAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="gozckdeliveryAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goZckDeliveryAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="gozzkdeliveryAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goZzkDeliveryAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="gocycdeliveryAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goCycDeliveryAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="deliverywareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.deliveryWareHouseAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="alldeliveryWareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.allDeliveryWareHouseAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="checkinwarehouseAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.checkinWareHouseAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="gostorageAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goStorageAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+
+
+	
+	<bean id="getcangkuAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.getCangkuAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	<bean id="getreportAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.getReportAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+
+
+    <bean id="savereportAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.saveReportAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+
+    <bean id="logoutAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.logoutAction">
+	</bean>
+	
+	<bean id="checkinAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.checkinAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+
+	<bean id="checkoutAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.checkoutAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	
+	<bean id="dealwithunqualifiedAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.dealWithUnqualifiedAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	<bean id="gounqualifiedAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goUnqualifiedAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="golostAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goLostAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="dealwithlostAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.dealWithLostAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+
+	<bean id="getxsyikuAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.getXSyikuAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	<bean id="goxsyikuAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.goXSyikuAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	<bean id="getxsfahuoAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.getXSfahuoAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+	<bean id="goxsfahuoAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.goXSfahuoAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
+
+	<bean id="cyclistCangkuAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.listCangkuAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="cycselectCangkuAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.selectCangkuAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+
+</beans>

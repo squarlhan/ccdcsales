@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	
+	<bean id="XiaoShouService"
+		class="com.dcsh.market.service.XiaoshouServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
+	</bean>
+
+	
+	<!-- 销售中心 -->
+	<bean id="xsliststorageAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.listStorageAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+    <bean id="xsloginAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.loginAction">
+	</bean>
+	<bean id="xsgomoveproductAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.gomoveProductAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+    <bean id="xsmoveproductAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.moveProductAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+    <bean id="xsgosalesnotificationAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.goSalesnotificationAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+	 <bean id="xssalesnotificationAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.salesNotificationAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+</beans>

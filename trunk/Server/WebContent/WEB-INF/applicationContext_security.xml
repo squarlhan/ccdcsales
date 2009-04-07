@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
+
+	<http access-decision-manager-ref="myAccessDecisionManagerBean" auto-config="false">
+		<form-login login-page='/login.jsp' default-target-url='/index.jsp'
+			always-use-default-target='true' />
+		<logout logout-url="/logout" logout-success-url="/login.jsp"/>
+		<intercept-url pattern='/login.jsp*' filters='none'/>
+		<intercept-url pattern='/images/*' filters='none'/>	
+		<intercept-url pattern='/css/*' filters='none'/>
+		<intercept-url pattern='/**' access="HTTP"/>
+	</http>
+
+	<beans:bean id="authenticationManager"
+		class="com.dcsh.market.priv.UserAndGroupAuthenticationImpl">
+		<custom-authentication-provider />
+		<beans:property name="hibernateTemplate" ref="hibernateTemplate" />
+	</beans:bean>
+
+	<!-- access-decision-manager-ref="myAccessDecisionManagerBean"
+	AccessDecisionManager does not support secure object class: class org.springframework.security.intercept.web.FilterInvocation
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:275)
+	 -->
+	<beans:bean id="myAccessDecisionManagerBean"
+		class="com.dcsh.market.priv.UserAndGroupAccessDecisionManager" />
+
+
+</beans:beans>

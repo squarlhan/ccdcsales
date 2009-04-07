@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+	
+	<bean id="myZhuChangKuService"
+		class="com.dcsh.market.service.ZhuChangKuServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
+	</bean>
+
+	<!-- 驻厂库 -->
+	<bean id="zcklistunCheckProductsAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.listUnCheckProductsAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean> 
+	<bean id="zckcheckinProductsAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.checkinProductsAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="zcklistallStorageAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.listAllStorageAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean> 
+	<bean id="zckloginAdminAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.loginZhuChangKuAdminAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean> 
+
+	<bean id="zckcheckinAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.checkinAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+
+	<bean id="zckcheckoutAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.checkoutAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+	
+	<bean id="zcklogoutAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.logoutAction">
+	</bean>
+
+	<bean id="zckgetreportAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.getReportAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+	<bean id="zcksavereportAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.saveReportAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+	<bean id="zckgodeliveryAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.goDeliveryAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="zckdeliverywareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.deliveryWareHouseAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="zcklistCangkuAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.listCangkuAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="zckselectCangkuAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.selectCangkuAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="gozcklostAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.goLostAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
+	<bean id="dealwithzcklostAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.dealWithLostAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+	<bean id="zckgetxsfahuoAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.getXSfahuoAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+	<bean id="zckgoxsfahuoAction" scope="prototype"
+	    class="com.dcsh.market.action.zhuchangku.goXSfahuoAction">
+	    <constructor-arg ref="myZhuChangKuService"/>
+	</bean>
+
+</beans>

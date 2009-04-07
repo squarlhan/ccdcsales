@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/pages/decorators">
+	<excludes>
+	    <!-- <pattern>/pages/warehouseadmin/login.jsp</pattern> -->
+	</excludes>
+	<decorator name="main" page="maindecorator.jsp">
+	    <pattern>/index.jsp</pattern>
+	    <pattern>/token.jsp</pattern>
+	    <pattern>/login.jsp</pattern>
+	    <pattern>/exception.jsp</pattern>
+	    <pattern>/Users.jsp</pattern>
+	    
+		<pattern>/pages/warehouseadmin/login.jsp</pattern>
+		<pattern>/pages/zhuchangku/login.jsp</pattern>
+		<pattern>/pages/zhongzhuanku/login.jsp</pattern>
+		<pattern>/pages/systemadmin/login.jsp</pattern>
+		
+		<pattern>/cycloginchuyunchuAdmin.action</pattern>
+		<pattern>/xslogin.action</pattern>
+		<pattern>/zzkloginAdmin.action</pattern>
+		<pattern>/zckloginAdmin.action</pattern>
+		
+		<pattern>/usergoUser.action</pattern>
+		<pattern>/userupdateUser.action</pattern>
+		
+		<pattern>/pages/systemadmin/adminlogout.action</pattern>
+		<pattern>/pages/warehouseadmin/cyclogout.action</pattern>
+		<pattern>/pages/zhuchangku/zcklogout.action</pattern>
+		<pattern>/pages/zhongzhuanku/zzklogout.action</pattern>	
+	</decorator>
+	<decorator name="chuyunchu" page="warehouseadmindecorator.jsp">
+		<pattern>/pages/warehouseadmin/*.jsp</pattern>
+		<pattern>/pages/warehouseadmin/*.action</pattern>
+		<pattern>/cyc*.action</pattern>
+	</decorator>
+	<decorator name="zhuchangku" page="zhuchangkudecorator.jsp">
+		<pattern>/pages/zhuchangku/*.jsp</pattern>
+		<pattern>/pages/zhuchangku/*.action</pattern>
+		<pattern>/zck*.action</pattern>
+	</decorator>
+	<decorator name="zhongzhuanku" page="zhongzhuankudecorator.jsp">
+		<pattern>/pages/zhongzhuanku/*.jsp</pattern>
+		<pattern>/pages/zhongzhuanku/*.action</pattern>
+		<pattern>/zzk*.action</pattern>
+	</decorator>
+	<decorator name="admin" page="admindecorator.jsp">
+		<pattern>/pages/systemadmin/*.jsp</pattern>
+		<pattern>/pages/systemadmin/*.action</pattern>
+		<pattern>/admin*.action</pattern>
+	</decorator>
+	<decorator name="xiaoshou" page="xiaoshoudecorator.jsp">
+		<pattern>/pages/xiaoshou/*.jsp</pattern>
+		<pattern>/pages/xiaoshou/*.action</pattern>
+		<pattern>/xs*.action</pattern>
+	</decorator>
+	<decorator name="panel" page="panel.jsp"/>
+</decorators>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <package name="zhongzhuanku" extends="struts-default">
+        
+        <!-- 中转库 -->
+     <action name="zzkgetreport" method="execute" class="zzkgetreportAction">
+               <result>/pages/zhongzhuanku/report_zzk.jsp</result>
+               <result name="list">/pages/zhongzhuanku/report_zzk.jsp</result>
+        </action>
+
+         <action name="zzksavereport" method="execute" class="zzksavereportAction">
+               <result name="save_ok" type="redirect-action">zzklistuncheckProducts</result>
+        </action>
+        <action name="zzkgodelivery" method="execute" class="zzkgodeliveryAction">
+            <result>/pages/zhongzhuanku/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+            <result name="show">/pages/zhongzhuanku/delivery.jsp</result>
+        </action>
+        <action name="zzkgosaledelivery" method="execute" class="zzkgosaledeliveryAction">
+            <result>/pages/zhongzhuanku/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+            <result name="show">/pages/zhongzhuanku/deliverysale.jsp</result>
+        </action>
+        <action name="zzkdeliverywarehouse" method="execute" class="zzkdeliverywareHouseAction">
+            <result type="redirect-action">zzklistuncheckProducts</result>
+            <result name="ok" type="redirect-action">zzklistuncheckProducts</result>
+
+        </action>
+        <action name="zzkloginAdmin" method="execute" class="zzkloginAdminAction">
+            <result name="success" type="chain">zzklistcangku </result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="zzklistuncheckProducts" method="execute" class="zzklistunCheckProductsAction">
+            <result >/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="input" >/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="welcome" >/pages/zhongzhuanku/welcome.jsp</result>
+        </action>
+        <action name="zzkcheckinproducts" method="execute" class="zzkcheckinProductsAction">
+            <result>/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="list" type="redirect-action">zzklistuncheckProducts</result>
+        </action>
+        <action name="zzkcheckin" method="execute" class="zzkcheckinAction">
+            <result>/pages/zhongzhuanku/checklistin.jsp</result>
+            <result name="list">/pages/zhongzhuanku/checklistin.jsp</result>
+            <result name="input">/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="infoList">/pages/zhongzhuanku/checklistin.jsp</result>
+        </action>   
+        
+         <action name="zzkcheckout" method="execute" class="zzkcheckoutAction">
+            <result>/pages/zhongzhuanku/checklistout.jsp</result>
+            <result name="list">/pages/zhongzhuanku/checklistout.jsp</result>
+            <result name="input">/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="infoList">/pages/zhongzhuanku/checklistout.jsp</result>
+        </action>
+        <action name="zzklogout" method="execute" class="zzklogoutAction">
+               <result>/index.jsp</result>
+               <result name="index">/index.jsp</result>
+        </action>
+        <action name="zzklistallstorage" method="execute" class="zzklistallStorageAction">
+            <result>/pages/zhongzhuanku/liststorage.jsp</result>
+            <result name="list">/pages/zhongzhuanku/liststorage.jsp</result>
+            <result name="infoList">/pages/zhongzhuanku/liststorage.jsp</result>
+        </action>  
+         <action name="zzkgolost" method="execute" class="zzkgolostAction">
+            <result>/pages/zhongzhuanku/dealwithlost.jsp</result>
+            <result name="show">/pages/zhongzhuanku/dealwithlost.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="zzkdealwithlost" method="execute" class="zzkdealwithlostAction">
+            <result type="redirect-action">zzklistuncheckProducts</result>
+            <result name="ok" type="redirect-action">zzkgolost</result>
+        </action>
+        <action name="zzklistcangku" method="execute" class="zzklistCangkuAction">
+            <result>/pages/zhongzhuanku/selectcangku.jsp</result>
+            <result name="list">/pages/zhongzhuanku/selectcangku.jsp</result>
+        </action>
+        <action name="zzkselectcangku" method="execute" class="zzkselectCangkuAction">
+            <result>/pages/zhongzhuanku/selectcangku.jsp</result>
+            <result name="selectedcangku" type="redirect-action">zzklistuncheckProducts</result>
+        </action>
+
+		<action name="zzkgetxsyiku" method="execute" class="zzkgetxsyikuAction">
+            <result >/pages/zhongzhuanku/listxsyiku.jsp</result>
+            <result name="show_report">/pages/zhongzhuanku/listxsyiku.jsp</result>
+        </action>
+        <action name="zzkgoxsyiku" method="execute" class="zzkgoxsyikuAction">
+            <result >/pages/zhongzhuanku/goxsyiku.jsp</result>
+            <result name="show_report">/pages/zhongzhuanku/goxsyiku.jsp</result>
+        </action>
+		<action name="zzkgetxsfahuo" method="execute" class="zzkgetxsfahuoAction">
+            <result >/pages/zhongzhuanku/listxsfahuo.jsp</result>
+            <result name="show_report">/pages/zhongzhuanku/listxsfahuo.jsp</result>
+        </action>
+        <action name="zzkgoxsfahuo" method="execute" class="zzkgoxsfahuoAction">
+            <result >/pages/zhongzhuanku/goxsfahuo.jsp</result>
+            <result name="show_report">/pages/zhongzhuanku/goxsfahuo.jsp</result>
+        </action>
+</package>
+	
+</struts>

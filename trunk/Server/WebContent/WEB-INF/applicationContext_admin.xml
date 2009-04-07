@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+	
+	<bean id="adminService"
+		class="com.dcsh.market.service.AdminServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
+	</bean>
+	
+	
+
+	
+	<!--管理员功能--> 
+	<bean id="productsmanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.productsManagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+    <bean id="loginsystemAdminAction" scope="prototype"
+		class="com.dcsh.market.action.admin.loginSystemAdminAction">
+		<constructor-arg ref="adminService" />
+	</bean> 
+	<bean id="spemanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminspemanagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="canmanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.admincanmanagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="usersmanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminUserManagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	
+	<bean id="custommanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminCustomManagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="groupmanagerAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminGroupManagerAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+
+	<bean id="adminlogoutAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.logoutAction">
+	</bean>
+	
+	<bean id="liststorageAdminAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.listStorageAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="getcangkuAdminAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.getCangkuAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="listSalesAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.listSalesAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="listDestroyAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.listDestroyAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="listLossAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.listLossAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="getallGroupsAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.getAllGroupsAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+
+    <bean id="adminShowGroupMemberAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminShowGroupMemberAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	
+	 <bean id="adminSaveGroupMemberAction" scope="prototype"
+	    class="com.dcsh.market.action.admin.adminSaveGroupMemberAction">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+
+	<bean id="admingroupprimanagerAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminGroupPriManagerAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	
+	<bean id="adminfahuomanagerAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminfahuomanagerAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+    <bean id="adminuserprimanagerAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminUserpriManagerAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="adminshowuserprivAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminShowUserprivAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="adminsaveuserprivAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminSaveUserprivAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+
+</beans>

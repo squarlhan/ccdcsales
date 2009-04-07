@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+    <package name="chuyunchu" extends="struts-default">
+<!-- 储运处 -->
+        <action name="cyccheckinproducts" method="execute" class="cyccheckinProductsAction">
+            <result>/pages/warehouseadmin/listunentry.jsp</result>
+            <result name="list" type="redirect-action">cyclistunentryProducts</result>
+        </action>
+        <action name="cyclistallstorage" method="execute" class="listallStorageAction">
+            <result>/pages/warehouseadmin/liststorage.jsp</result>
+            <result name="list">/pages/warehouseadmin/liststorage.jsp</result>
+            <result name="input">/pages/warehouseadmin/welcome.jsp</result>
+            <result name="infoList">/pages/warehouseadmin/liststorage.jsp</result>
+        </action>   
+    
+        <action name="cyclistuncheckProducts" method="execute" class="listunCheckProductsAction">
+            <result >/pages/warehouseadmin/welcome.jsp</result>
+            <result name="welcome" >/pages/warehouseadmin/welcome.jsp</result>
+        </action>
+         <action name="cyclistunentryProducts" method="execute" class="listunentryProductsAction">
+            <result >/pages/warehouseadmin/listunentry.jsp</result>
+            <result name="listunentry" >/pages/warehouseadmin/listunentry.jsp</result>
+        </action>
+        <action name="cycentrywarehouse" method="execute" class="entrywareHouseAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result  name="ok" type="redirect-action">cyclistuncheckProducts</result>
+            <!-- <result>/pages/warehouseadmin/entry.jsp</result>
+            <result name="ok">/pages/warehouseadmin/entry.jsp</result> -->
+        </action>
+        <action name="cycgoentry" method="execute" class="goentryAction">
+            <result>/pages/warehouseadmin/entry.jsp</result>
+            <result name="show">/pages/warehouseadmin/entry.jsp</result>
+        </action>
+        <action name="cycallentrywarehouse" method="execute" class="allentryWareHouseAction">
+            <result name="gork" type="redirect-action">cyclistuncheckProducts</result>
+        </action>
+         <action name="cycgodelivery" method="execute" class="godeliveryAction">
+            <result>/pages/warehouseadmin/deliverysale.jsp</result>
+            <result name="show">/pages/warehouseadmin/deliverysale.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycgozckdelivery" method="execute" class="gozckdeliveryAction">
+            <result>/pages/warehouseadmin/delivery.jsp</result>
+            <result name="show">/pages/warehouseadmin/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+         <action name="cycgocycdelivery" method="execute" class="gocycdeliveryAction">
+            <result>/pages/warehouseadmin/delivery.jsp</result>
+            <result name="show">/pages/warehouseadmin/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycgozzkdelivery" method="execute" class="gozzkdeliveryAction">
+            <result>/pages/warehouseadmin/delivery.jsp</result>
+            <result name="show">/pages/warehouseadmin/delivery.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycdeliverywarehouse" method="execute" class="deliverywareHouseAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result name="ok" type="redirect-action">cyclistuncheckProducts</result>
+            <result name="unequal">/pages/warehouseadmin/err01.jsp</result>
+        </action>
+        <action name="cycalldeliverywarehouse" method="execute" class="alldeliveryWareHouseAction">
+            <result name="gock" type="redirect-action">cyclistuncheckProducts</result>
+        </action>
+        <action name="cyccheckinwarehouse" method="execute" class="checkinwarehouseAction">
+            <result name="list" type="redirect-action">cyclistuncheckProducts</result>
+        </action>
+
+         <action name="cycgostorage" method="execute" class="gostorageAction">
+
+            <result>/pages/warehouseadmin/storage.jsp</result>
+            <result name="show">/pages/warehouseadmin/storage.jsp</result>
+        </action>
+      
+        <action name="cycgetcangku" method="execute" class="getcangkuAction">
+               <result>/pages/warehouseadmin/prereport.jsp</result>
+               <result name="show_report">/pages/warehouseadmin/prereport.jsp</result>
+        </action>
+        
+        <action name="cycgetreport" method="execute" class="getreportAction">
+               <result>/pages/warehouseadmin/report_new.jsp</result>
+               <result name="list">/pages/warehouseadmin/report_new.jsp</result>
+        </action>
+
+        <action name="cycsavereport" method="execute" class="savereportAction">
+               <result>/pages/warehouseadmin/report_new.jsp</result>
+               <result name="save_ok" type="redirect-action">cyclistuncheckProducts</result>
+               <result name="input">/pages/warehouseadmin/report_new.jsp</result>
+        </action>
+        
+        <action name="cyclogout" method="execute" class="logoutAction">
+               <result>/index.jsp</result>
+               <result name="index">/index.jsp</result>
+        </action>
+        
+        <action name="cyccheckin" method="execute" class="checkinAction">
+            <result>/pages/warehouseadmin/checklistin.jsp</result>
+            <result name="list">/pages/warehouseadmin/checklistin.jsp</result>
+            <result name="input">/pages/warehouseadmin/welcome.jsp</result>
+            <result name="infoList">/pages/warehouseadmin/checklistin.jsp</result>
+        </action>   
+        
+         <action name="cyccheckout" method="execute" class="checkoutAction">
+            <result>/pages/warehouseadmin/checklistout.jsp</result>
+            <result name="list">/pages/warehouseadmin/checklistout.jsp</result>
+            <result name="input">/pages/warehouseadmin/welcome.jsp</result>
+            <result name="infoList">/pages/warehouseadmin/checklistout.jsp</result>
+        </action>
+        
+        <action name="cycdealwithuq" method="execute" class="dealwithunqualifiedAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result name="ok" type="redirect-action">cyclistuncheckProducts</result>
+        </action>
+        <action name="cycgounqualified" method="execute" class="gounqualifiedAction">
+            <result>/pages/warehouseadmin/dealwithunqualified.jsp</result>
+            <result name="show">/pages/warehouseadmin/dealwithunqualified.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+         <action name="cycgolost" method="execute" class="golostAction">
+            <result>/pages/warehouseadmin/dealwithlost.jsp</result>
+            <result name="show">/pages/warehouseadmin/dealwithlost.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycdealwithlost" method="execute" class="dealwithlostAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result name="ok" type="redirect-action">cycgolost</result>
+        </action>
+
+        <action name="cycgetxsyiku" method="execute" class="getxsyikuAction">
+            <result >/pages/warehouseadmin/listxsyiku.jsp</result>
+            <result name="show_report">/pages/warehouseadmin/listxsyiku.jsp</result>
+        </action>
+        <action name="cycgoxsyiku" method="execute" class="goxsyikuAction">
+            <result >/pages/warehouseadmin/goxsyiku.jsp</result>
+            <result name="show_report">/pages/warehouseadmin/goxsyiku.jsp</result>
+        </action>
+		<action name="cycgetxsfahuo" method="execute" class="getxsfahuoAction">
+            <result >/pages/warehouseadmin/listxsfahuo.jsp</result>
+            <result name="show_report">/pages/warehouseadmin/listxsfahuo.jsp</result>
+        </action>
+        <action name="cycgoxsfahuo" method="execute" class="goxsfahuoAction">
+            <result >/pages/warehouseadmin/goxsfahuo.jsp</result>
+            <result name="show_report">/pages/warehouseadmin/goxsfahuo.jsp</result>
+        </action>
+        
+        <action name="cycloginchuyunchuAdmin" method="execute" class="loginchuYunChuAdminAction">
+            <result name="success" type="chain">cyclistcangku </result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="cyclistcangku" method="execute" class="cyclistCangkuAction">
+            <result>/pages/warehouseadmin/selectcangku.jsp</result>
+            <result name="list">/pages/warehouseadmin/selectcangku.jsp</result>
+        </action>
+        <action name="cycselectcangku" method="execute" class="cycselectCangkuAction">
+            <result>/pages/warehouseadmin/selectcangku.jsp</result>
+            <result name="selectedcangku" type="redirect-action">cyclistuncheckProducts</result>
+        </action>
+
+    </package>
+  </struts>
