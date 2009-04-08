@@ -391,7 +391,8 @@ private HibernateTemplate hibernateTemplate;
 		hibernateTemplate.save(rkxx);
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
-			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+chukumx.getSpecifications().getName().trim()+"'");
+			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
+			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0]+"'");
 			if((product.size()!=0)&&(specification.size()!=0)){
 				Rkmx temprkmx = new Rkmx(rkxx,product.get(0),specification.get(0),chukumx.getPch().trim(),chukumx.getNumber(),(byte)1,(byte)1,null);
 			    hibernateTemplate.save(temprkmx);
