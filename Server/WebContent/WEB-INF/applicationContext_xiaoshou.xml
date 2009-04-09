@@ -39,4 +39,8 @@
 	    class="com.dcsh.market.action.xiaoshou.salesNotificationAction">
 	    <constructor-arg ref="XiaoShouService"/>
 	</bean>
+	<bean id="getCustomersAction" scope="prototype"
+	    class="com.dcsh.market.action.ajaxaction.GetCustomersAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
 </beans>
