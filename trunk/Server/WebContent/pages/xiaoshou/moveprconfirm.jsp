@@ -36,14 +36,14 @@ function setnumber(obj,line)
 	function insertRecord(){
         count+=1;
         var tb = document.getElementById("tb");
-        var tr = tb.insertRow();  
+        var tr = tb.insertRow(-1);  
         
-		var td1 = tr.insertCell();
-		var td2 = tr.insertCell();
-		var td3 = tr.insertCell();
-		var td4 = tr.insertCell();
-		var td5 = tr.insertCell();
-		var td6 = tr.insertCell();
+		var td1 = tr.insertCell(-1);
+		var td2 = tr.insertCell(-1);
+		var td3 = tr.insertCell(-1);
+		var td4 = tr.insertCell(-1);
+		var td5 = tr.insertCell(-1);
+		var td6 = tr.insertCell(-1);
 
 		var select1 =  document.createElement("select");
 		select1.setAttribute("id","deli_canku["+count+"]");
@@ -63,16 +63,19 @@ function setnumber(obj,line)
 		textfield1.setAttribute("id","deli_num["+count+"]");
 		textfield1.setAttribute("name","deli_num["+count+"]");
 		textfield1.setAttribute("size","10");
+		textfield1.type = "hidden";
 
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","weight["+count+"]");
 		textfield2.setAttribute("size","10");
+		textfield2.type = "hidden";
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sumweight["+count+"]");
 		textfield3.setAttribute("size","10");
 		textfield3.setAttribute("onchange","javascript:setnumber(this," + count + ")");
 		textfield3.onchange = function(){setnumber(textfield3,count)};	
+		
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");
@@ -101,9 +104,12 @@ function setnumber(obj,line)
 		td1.appendChild(select1);
 		td2.appendChild(select2);
 		td3.appendChild(select3);
-		td4.appendChild(textfield2);
-		td5.appendChild(textfield3);
+		td4.appendChild(textfield3);
+		td5.appendChild(textfield2);
 		td6.appendChild(textfield1);
+
+		select3.onchange(select3,count);
+		textfield3.onchange(textfield3,count);
 	
 
 	}
@@ -197,9 +203,9 @@ function setnumber(obj,line)
       	<tr bgcolor="#4A708B">
       	   <th width="">发货仓库</th>
       	   <th width="">产品</th>
-      	   <th width="">规格</th>
-      	   <th width="" style="display:none">单重</th>
+      	   <th width="">规格</th>    	   
       	   <th width="">重量(T)</th>
+      	   <th width="" style="display:none">单重</th>
       	   <th width="" style="display:none">发货数目</th>
       	</tr>
       <tr>
@@ -212,8 +218,8 @@ function setnumber(obj,line)
           <td><s:select id="specification[0]" name="specification[0]" multiple="false" label="选择规格"
           list="specificationList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
 
-          <td style="display:none"><s:textfield size="10" name="weight[0]" id="weight[0]" label="单个重量" value="0.025"/></td>
           <td><s:textfield size="10" name="sumweight[0]" id="sumweight[0]" label="发货总重" onchange="javascript:setnumber(this,0)"/></td>
+          <td style="display:none"><s:textfield size="10" name="weight[0]" id="weight[0]" label="单个重量" value="0.025"/></td>         
           <td style="display:none"><s:textfield size="10" name="deli_num[0]" id="deli_num[0]" label="发货数目"/></td>
    
       </tr>
