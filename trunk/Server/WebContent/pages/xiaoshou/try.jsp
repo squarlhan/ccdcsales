@@ -21,8 +21,8 @@
                     </label>
                 </td>
                 <td>
-                    <s:autocompleter theme="simple" name="user"
-                        list="allcustomers" />
+                    <s:autocompleter theme="simple" name="allcustomers"
+                        list="allcustomers" listValue="id" listKey="customName"/>
                 </td>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                     <s:url id="dataUrl" value="/getcustomers.action" />
                     <s:autocompleter theme="ajax" name="start" href="%{dataUrl}"
                         loadOnTextChange="true" loadMinimumCount="1" indicator="indicator"
-                        autoComplete="false" showDownArrow="false" />
+                        autoComplete="false" showDownArrow="true" dropdownHeight="180" />
                     <img id="indicator" 
                     src="${pageContext.request.contextPath}/images/indicator.gif" 
                     alt="Loading" style="display:none" />
