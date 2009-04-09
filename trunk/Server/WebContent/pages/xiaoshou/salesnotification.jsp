@@ -9,10 +9,8 @@
 <title>销售发货通知单</title>
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
-
 @import "/Server/css/css.css";
 </style>
-
 <script language="javascript">
 	
     var count = 0; 
@@ -64,6 +62,7 @@
 		textfield1.setAttribute("id","deli_num["+count+"]");
 		textfield1.setAttribute("name","deli_num["+count+"]");
 		textfield1.setAttribute("size","10");
+		textfield1.type = "hidden";
 			
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","price["+count+"]");
@@ -73,6 +72,7 @@
 		var textfield4 = document.createElement("input");
 		textfield4.setAttribute("id","weight["+count+"]");
 		textfield4.setAttribute("size","10");
+		textfield4.type = "hidden";
 
 		var textfield5 = document.createElement("input");
 		textfield5.setAttribute("id","sumweight["+count+"]");
@@ -114,13 +114,14 @@
 		td1.appendChild(select1);
 		td2.appendChild(select2);
 		td3.appendChild(select3);
-		td4.appendChild(textfield1);
-		td5.appendChild(textfield4);
-		td6.appendChild(textfield5);
-		td7.appendChild(textfield2);
+		td4.appendChild(textfield5);
+		td5.appendChild(textfield2);
+		td6.appendChild(textfield1);
+		td7.appendChild(textfield4);
 
 		select3.onchange(select3,count);
-
+		textfield5.onchange(textfield5,count);
+        
 
 	}
 	function deleteRecord(table){
@@ -150,7 +151,6 @@
 </head>
 
 <body>
-
 
 
 <table align="center" width="100%">
@@ -225,11 +225,11 @@
 		<tr bgcolor="#4A708B">
 			<th width="">发货仓库</th>
 			<th width="">产品</th>
-			<th width="">规格</th>
-			<th width="" style="display:none">发货数目</th>
-			<th width="" style="display:none">单重</th>
+			<th width="">规格</th>			
 			<th width="">重量(T)</th>
 			<th width="">单价(每吨)</th>
+			<th width="" style="display:none">发货数目</th>
+			<th width="" style="display:none">单重</th>
 
 		</tr>
 		<tr>
@@ -243,15 +243,13 @@
 			<td><s:select id="specification[0]" name="specification[0]"
 				multiple="false" label="选择规格" list="specificationList"
 				listValue="displayName" listKey="id"
-				onchange="javascript:setweight(this,0)" /></td>
-
-
-			<td style="display:none"><s:textfield size="10" name="deli_num[0]" label="发货数目" /></td>
-			<td style="display:none"><s:textfield size="10" id="weight[0]" name="weight[0]"
-				label="单重" value="0.025" /></td>
+				onchange="javascript:setweight(this,0)" /></td>			
 			<td><s:textfield size="10" id="sumweight[0]" name="sumweight[0]"
 				label="总重" onchange="javascript:setnumber(this,0)"/></td>
 			<td><s:textfield size="10" name="price[0]" label="单价" /></td>
+			<td style="display:none"><s:textfield size="10" name="deli_num[0]" label="发货数目" /></td>
+			<td style="display:none"><s:textfield size="10" id="weight[0]" name="weight[0]"
+				label="单重" value="0.025" /></td>
 		</tr>
 	</table>
 	<input type="button" name="addone" value="新加一条"
