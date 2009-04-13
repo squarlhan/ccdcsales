@@ -141,7 +141,7 @@
 </table>
 
 
-  <s:form id="myform" action="zckdeliverywarehouse" theme="simple" onsubmit="return checkNull()">
+  <s:form id="myform" action="zckdeliverywarehouse!sale" theme="simple" onsubmit="return checkNull()">
   
   
   <table class="list_table" id="tbt" align="center" width="100%">

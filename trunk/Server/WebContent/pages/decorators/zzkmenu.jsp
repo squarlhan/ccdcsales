@@ -16,8 +16,8 @@
       <tr align="center"><td><li><s:a href="zzkloginAdmin.action">返回库选择页</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzklistuncheckProducts.action">未到货产品</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzklistallstorage!getInfoByDate.action">查看库存</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="zzkgodelivery.action">移库</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="zzkgosaledelivery.action">销售</s:a></li></td></tr>
+      <!--  <tr align="center"><td><li><s:a href="zzkgodelivery.action">移库</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="zzkgosaledelivery.action">销售</s:a></li></td></tr>-->
       <tr align="center"><td><li><s:a href="zzkgetreport.action">日报单</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzkgolost.action">产成品损耗处理</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzkgetxsyiku.action">销售移库</s:a></li></td></tr>

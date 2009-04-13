@@ -13,21 +13,38 @@
 </style>
 
 <script language = "javascript" >
-
+function accDiv(arg1,arg2){
+    var t1=0,t2=0,r1,r2;
+    try{t1=arg1.toString().split(".")[1].length}catch(e){}
+    try{t2=arg2.toString().split(".")[1].length}catch(e){}
+    with(Math){
+        r1=Number(arg1.toString().replace(".",""))
+        r2=Number(arg2.toString().replace(".",""))
+        return (r1/r2)*pow(10,t2-t1);
+    }
+}
 function setweight(obj,line)
 {
 	var w = weights[obj.selectedIndex];
 	document.getElementById("weight["+line+"]").value= w;
-	var c = (document.getElementById("sumweight["+line+"]").value)/w;
+	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
 	//alert(c);
+	if(c!=parseInt(c)){
+		document.getElementById("deli_num["+line+"]").value=0;
+	 	alert("请重新填写重量"); 
+	}else
 	document.getElementById("deli_num["+line+"]").value= c;
 }
 
 function setnumber(obj,line)
 {
 	var w = document.getElementById("weight["+line+"]").value;
-	var n = (obj.value)/w;
-	//alert(n);
+	var n = accDiv(obj.value,w);
+	if(n!=parseInt(n)){
+		document.getElementById("deli_num["+line+"]").value=0;
+	 	alert("请重新填写重量"); 
+	}else
+	//alert(c);
 	document.getElementById("deli_num["+line+"]").value= n;
 }
 	
@@ -72,10 +89,10 @@ function setnumber(obj,line)
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sumweight["+count+"]");
+		textfield3.setAttribute("name","sumweight["+count+"]");
 		textfield3.setAttribute("size","10");
 		textfield3.setAttribute("onchange","javascript:setnumber(this," + count + ")");
 		textfield3.onchange = function(){setnumber(textfield3,count)};	
-		
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");
@@ -107,7 +124,6 @@ function setnumber(obj,line)
 		td4.appendChild(textfield3);
 		td5.appendChild(textfield2);
 		td6.appendChild(textfield1);
-
 		select3.onchange(select3,count);
 		textfield3.onchange(textfield3,count);
 	
@@ -125,12 +141,23 @@ function setnumber(obj,line)
 		var cf = confirm("确认提交？");
 		if(cf)
 		{
+			document.myform.action="xsmoveproduct.action";
 			return true;
 		}
 		else
 			return false;
 	}
-
+	function confirmPrintbtn()
+	{
+		var cf = confirm("确认打印？");
+		if(cf)
+		{
+			document.myform.action="xsmoveproduct!print.action";
+			return true;
+		}
+		else
+			return false;
+	}
 	var weights = new Array(
 			<s:iterator id="result" value="specificationList">
 				<s:property value="#result.weight"/>,
@@ -147,7 +174,7 @@ function setnumber(obj,line)
      <td><h2>产品移库确认</h2></td>
   </tr>
  </table>
-<s:form theme="simple" action="xsmoveproduct" onsubmit="return confirmbtn()">
+<s:form theme="simple" id="myform">
 <table align="center" width="100%">
         <tr>
           <td align="left"><s:text name="发送日期:"/></td>
@@ -203,7 +230,7 @@ function setnumber(obj,line)
       	<tr bgcolor="#4A708B">
       	   <th width="">发货仓库</th>
       	   <th width="">产品</th>
-      	   <th width="">规格</th>    	   
+      	   <th width="">规格</th>
       	   <th width="">重量(T)</th>
       	   <th width="" style="display:none">单重</th>
       	   <th width="" style="display:none">发货数目</th>
@@ -217,19 +244,22 @@ function setnumber(obj,line)
           
           <td><s:select id="specification[0]" name="specification[0]" multiple="false" label="选择规格"
           list="specificationList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
-
           <td><s:textfield size="10" name="sumweight[0]" id="sumweight[0]" label="发货总重" onchange="javascript:setnumber(this,0)"/></td>
-          <td style="display:none"><s:textfield size="10" name="weight[0]" id="weight[0]" label="单个重量" value="0.025"/></td>         
+          <td style="display:none"><s:textfield size="10" name="weight[0]" id="weight[0]" label="单个重量" value="0.025"/></td>
           <td style="display:none"><s:textfield size="10" name="deli_num[0]" id="deli_num[0]" label="发货数目"/></td>
    
       </tr>
 </table>
      <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
      <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
-     <s:submit value="提交"/>
-     <s:reset value="重置"/>
-   <table align="center" width="100%">
-  
+   <table border="0" align="center" width="100%">
+   		<tr>
+  		<td align="center">
+			<input value="提交"  type="submit" name="Submit" onclick="return confirmbtn()"/>
+			<s:reset value="重置" />
+			<input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+		</td>
+		</tr>
    </table>
 </s:form>
 <script language="javascript">
