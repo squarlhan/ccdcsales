@@ -174,7 +174,7 @@ function setnumber(obj,line)
      <td><h2>产品移库确认</h2></td>
   </tr>
  </table>
-<s:form theme="simple" id="myform">
+<s:form theme="simple" id="myform" target="_blank">
 <table align="center" width="100%">
         <tr>
           <td align="left"><s:text name="发送日期:"/></td>
