@@ -35,7 +35,11 @@ public interface XiaoshouService {
 	List<Specifications> getAllSpecificationList();
     void doYiku(XSyikuxx xsyikuxx);
     void doXsfahuo(XSfahuoxx xsfahuoxx);
-    Users loadmyshr();
+    
+    List<Products> getProductNameById(int id);
+	List<Specifications> getSpecificationNameById(int id);
+	Canku getCangkuById(Integer cangkuId);
+	Custom getCustomerById(Integer customerId);
+	Users loadmyshr();
     Users loadmynhr();
-
 }

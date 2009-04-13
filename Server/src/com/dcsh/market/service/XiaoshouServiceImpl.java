@@ -199,6 +199,34 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Products> getProductNameById(int id){
+		List<Products> productName;
+		productName = hibernateTemplate.find("from Products where id='"+id+"'");
+		return productName;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Specifications> getSpecificationNameById(int id){
+		List<Specifications> specificationName;
+		specificationName = hibernateTemplate.find("from Specifications where id='"+id+"'");
+		return specificationName;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public Canku getCangkuById(Integer cangkuId) {
+		
+		List<Canku> cankulist = hibernateTemplate.find("from Canku where id='"+cangkuId+"'");
+		Canku canku = cankulist.get(0);
+		return canku;
+	}
+	@SuppressWarnings("unchecked")
+	public Custom getCustomerById(Integer customerId){
+		List<Custom> customerList = hibernateTemplate.find("from Custom where id='"+customerId+"'");
+		return customerList.get(0);
+	}
 	@Override
 	public Users loadmyshr(){
 		return (Users) hibernateTemplate.get(Users.class, 9);

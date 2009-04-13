@@ -822,8 +822,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		hibernateTemplate.deleteAll(userpriv);
 		Users user = (Users)hibernateTemplate.get(Users.class, userId);
-		List<Canku> cankus = 
-			(List<Canku>)hibernateTemplate.find("from Canku");
+		List<Canku> cankus = this.getAllCankus();
 		List<Products> products =
 			(List<Products>)hibernateTemplate.find("from Products");
 		for(int i=0;i<cankupriv.size();i++)

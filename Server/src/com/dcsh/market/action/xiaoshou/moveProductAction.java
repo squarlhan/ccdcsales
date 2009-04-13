@@ -1,6 +1,8 @@
 package com.dcsh.market.action.xiaoshou;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.logging.Logger;
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Products;
+import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.XSyikumx;
 import com.dcsh.market.XSyikuxx;
@@ -41,11 +44,18 @@ public class moveProductAction implements Preparable {
 	private List<Integer> deli_num;
 	private String price;
 	private int saletype;
-	
 	private Set<XSyikumx> xsyikumxs = new HashSet();;
 	private XSyikuxx xsyikuxx;
 	private Set<Yxyikusign> yikusigns = new HashSet();
 	
+	private List<BigDecimal> sumweight;
+	private String delivertypeName;
+	private List<SalesPrintInfo> resultList;
+	private String customerName;
+	private String saleTypeName;
+	private SalesPrintInfo spi;
+	private String date;
+	private String aimCangKu;
 	
 	 public moveProductAction(XiaoshouService service)
 	    {
@@ -78,8 +88,45 @@ public class moveProductAction implements Preparable {
 	        		this.getAim(),this.getSendtime(),(byte)this.getDelivertype(),
 	        		this.getMemo(),newcanku,(byte)this.getSaletype(),BigDecimal.valueOf(Double.parseDouble(this.getPrice())),this.getXsyikumxs(),this.getYikusigns());
 	        service.doYiku(xsyikuxx);
-	        return "save_yiku";
+	        return print();
         }
+ 
+ public String print(){
+			System.out.println("%%%%%"+this.getProduct().size());
+			System.out.println("mydate="+mydate);
+			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日");  
+			setDate(bartDateFormat.format(sendtime)); 
+			resultList=new ArrayList(); 
+			switch(this.getSaletype()){
+			case 1:saleTypeName="内销";break;
+			case 2:saleTypeName="定向";break;
+			case 3:saleTypeName="外销";break;
+			case 4:saleTypeName="不合格";break;
+			}
+			
+			switch(this.getDelivertype()){   
+			case 0:delivertypeName="公路运输";break;
+			case 1:delivertypeName="铁路运输";break;
+			case 2:delivertypeName="海运";break;
+			case 3:delivertypeName="自提";break;
+			case 4:delivertypeName="其他";break;
+			}
+			Custom custom = service.getCustomerById(this.getCustom());
+			customerName = custom.getCustomName();
+			System.out.println("aimcanku"+aimcanku);
+			aimCangKu=service.getCangkuById(aimcanku).getName();
+			System.out.println("aimCangKu"+aimCangKu);
+			for(int i=0;i<this.getDeli_canku().size();i++){
+				List<Products> product = service.getProductNameById(this.getProduct().get(i));
+				List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));
+				Canku canku = service.getCangkuById(this.getDeli_canku().get(i));
+				this.spi = 
+		    		new SalesPrintInfo(canku.getName(),product.get(0).getName(),specification.get(0).getDisplayName(),this.getSumweight().get(i).toString(),this.getDeli_num().get(i).toString(),this.getPrice());
+				resultList.add(spi);
+			}
+			return "print";
+		}
+ 
 
 	public Date getMydate() {
 	return mydate;
@@ -228,6 +275,62 @@ public void setSaletype(int saletype) {
 
 	public void prepare() throws Exception {
 
+	}
+
+	public void setSumweight(List<BigDecimal> sumweight) {
+		this.sumweight = sumweight;
+	}
+
+	public List<BigDecimal> getSumweight() {
+		return sumweight;
+	}
+
+	public void setDelivertypeName(String delivertypeName) {
+		this.delivertypeName = delivertypeName;
+	}
+
+	public String getDelivertypeName() {
+		return delivertypeName;
+	}
+
+	public void setResultList(List<SalesPrintInfo> resultList) {
+		this.resultList = resultList;
+	}
+
+	public List<SalesPrintInfo> getResultList() {
+		return resultList;
+	}
+
+	public void setSaleTypeName(String saleTypeName) {
+		this.saleTypeName = saleTypeName;
+	}
+
+	public String getSaleTypeName() {
+		return saleTypeName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setAimCangKu(String aimCangKu) {
+		this.aimCangKu = aimCangKu;
+	}
+
+	public String getAimCangKu() {
+		return aimCangKu;
 	}
 
 }

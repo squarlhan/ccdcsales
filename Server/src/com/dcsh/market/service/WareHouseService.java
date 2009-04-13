@@ -186,5 +186,7 @@ public interface WareHouseService {
 	 * @param rkxx 生成的入库明细
 	 */			
 	void doentryChuYunchu(List<Chukumx> chukumxes,Rkxx rkxx);
-
+	
+	List<Products> getProductNameById(int id);
+	List<Specifications> getSpecificationNameById(int id);
 }

@@ -1,6 +1,7 @@
 package com.dcsh.market.action.chuyunchu;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -11,6 +12,8 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.EntryPrintInfo;
+import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.Rkxx;
@@ -38,10 +41,26 @@ public class entryWareHouseAction implements Preparable{
     private List<String> pch;
     private List<Integer> number;
 	private List<String> memo;
+	private List<BigDecimal> sumweight;
 	private int rkczy;
 	private Set<Rkmx> rkmxes = new HashSet();
+	private EntryPrintInfo epi;
+	private String date;
+	
+	private List<EntryPrintInfo> resultList;
 	private Rkxx rkxx;
 	
+	
+	public List<EntryPrintInfo> getResultList() {
+		return resultList;
+	}
+
+
+	public void setResultList(List<EntryPrintInfo> resultList) {
+		this.resultList = resultList;
+	}
+
+
 	public WareHouseService getService() {
 		return service;
 	}
@@ -271,9 +290,48 @@ public class entryWareHouseAction implements Preparable{
         return "ok";
     }
 
-
+	public String print(){
+		System.out.println("%%%%%"+this.getProduct().size());
+		resultList=new ArrayList();
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
+		Date d = new Date(); 
+		date= bartDateFormat.format(d); 
+		for(int i=0;i<=this.getProduct().size()-1;i++){
+			List<Products> product = service.getProductNameById(this.getProduct().get(i));
+			List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));
+			BigDecimal sum = specification.get(0).getWeight().multiply(new BigDecimal(this.getNumber().get(i)));
+			this.epi = 
+	    		new EntryPrintInfo(product.get(0).getName(),specification.get(0).getName(),specification.get(0).getPackType(),this.getNumber().get(i),sum.toString(),this.getPch().get(i),this.getMemo().get(i));
+			resultList.add(epi);
+		}
+		for(int i=0;i<resultList.size();i++){
+			System.out.println("ProductsName:"+resultList.get(i).getProductsName()+"Pch:"+resultList.get(i).getPchName());
+		}
+		return "print";
+	}
 	public void prepare() throws Exception {
 
     }
+
+	
+
+	public List<BigDecimal> getSumweight() {
+		return sumweight;
+	}
+
+
+	public void setSumweight(List<BigDecimal> sumweight) {
+		this.sumweight = sumweight;
+	}
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+	public String getDate() {
+		return date;
+	}
 
 }

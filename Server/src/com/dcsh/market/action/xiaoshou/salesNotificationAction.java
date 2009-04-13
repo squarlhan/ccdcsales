@@ -1,6 +1,8 @@
 package com.dcsh.market.action.xiaoshou;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -10,7 +12,9 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
+import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
+import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.XSfahuomx;
@@ -35,13 +39,47 @@ public class salesNotificationAction implements Preparable {
 	private int delivertype;
 	private int jstype;
 	private String memo;
+	private String myshr;
+	private String mynhr;
 	private List<Integer> deli_canku;
 	private List<Integer> product;
 	private List<Integer> specification;
 	private List<Integer> deli_num;
 	private List<String> price;
 	private int saletype;
-	
+	private List<BigDecimal> sumweight;
+	private String delivertypeName;
+	private String jstypeName;
+	private List<SalesPrintInfo> resultList;
+	private String customerName;
+	private String saleTypeName;
+	private SalesPrintInfo spi;
+	private String date;
+
+	public String getDelivertypeName() {
+		return delivertypeName;
+	}
+
+	public void setDelivertypeName(String delivertypeName) {
+		this.delivertypeName = delivertypeName;
+	}
+
+	public String getJstypeName() {
+		return jstypeName;
+	}
+
+	public void setJstypeName(String jstypeName) {
+		this.jstypeName = jstypeName;
+	}
+
+	public List<SalesPrintInfo> getResultList() {
+		return resultList;
+	}
+
+	public void setResultList(List<SalesPrintInfo> resultList) {
+		this.resultList = resultList;
+	}
+
 	private Set<XSfahuomx> xsfahuomxs = new HashSet();
 	private XSfahuoxx xsfahuoxx;
 	
@@ -52,7 +90,9 @@ public class salesNotificationAction implements Preparable {
 		}
 	 
 	 public String execute()
-	 {
+	 {    
+		 this.setMynhr(service.loadmynhr().getName());
+		 this.setMyshr(service.loadmyshr().getName());
 		  for(int i=0;i<this.getDeli_canku().size();i++)
 		  {
 				Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
@@ -64,6 +104,9 @@ public class salesNotificationAction implements Preparable {
 		  }
 		  
 		  Custom newcustom = new Custom(this.getCustomer());
+		  System.out.println(this.getMyshr()+"hhhhhhh");
+		  System.out.println(this.getMemo()+"memohhhhhhh");
+		  //System.out.println(Integer.parseInt(this.getMyshr().trim())+"fffffffffff");
 		  Users  tempshr = new Users(9);
 		  Users  tempnhr = new Users(10);
 		  PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
@@ -72,8 +115,48 @@ public class salesNotificationAction implements Preparable {
 				  this.getOrgin(),newcustom,(byte)this.getDelivertype(),(byte)this.getJstype(),
 				  this.getMemo(),tempshr,auth.getPrincipal(),tempnhr,(byte)0,(byte)this.getSaletype(),this.getXsfahuomxs());
 		  service.doXsfahuo(xsfahuoxx);
-		 return "sale_save";
+		 return print();
 	 }
+	 
+	 public String print(){
+			System.out.println("%%%%%"+this.getProduct().size());
+			System.out.println("mydate="+mydate);
+			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
+			Date d = new Date(); 
+			date= bartDateFormat.format(d); 
+			resultList=new ArrayList(); 
+			switch(this.getSaletype()){
+			case 1:saleTypeName="内销";break;
+			case 2:saleTypeName="定向";break;
+			case 3:saleTypeName="外销";break;
+			case 4:saleTypeName="不合格";break;
+			}
+			
+			switch(this.getDelivertype()){   
+			case 0:delivertypeName="公路运输";break;
+			case 1:delivertypeName="铁路运输";break;
+			case 2:delivertypeName="海运";break;
+			case 3:delivertypeName="自提";break;
+			case 4:delivertypeName="其他";break;
+			}
+			switch(this.getJstype()){
+			case 0:jstypeName="现金";break;
+			case 1:jstypeName="电汇/转账";break;
+			case 2:jstypeName="承兑汇票";break;
+			}
+			Custom custom = service.getCustomerById(this.getCustomer());
+			customerName = custom.getCustomName();
+			for(int i=0;i<this.getDeli_canku().size();i++){
+				List<Products> product = service.getProductNameById(this.getProduct().get(i));
+				List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));
+				Canku canku = service.getCangkuById(this.getDeli_canku().get(i));
+				this.spi = 
+		    		new SalesPrintInfo(canku.getName(),product.get(0).getName(),specification.get(0).getDisplayName(),this.getSumweight().get(i).toString(),this.getDeli_num().get(i).toString(),this.getPrice().get(i).toString());
+				resultList.add(spi);
+			}
+			return "print";
+		}
+	 
 	public String getDomains() {
 		return domains;
 	}
@@ -146,6 +229,24 @@ public class salesNotificationAction implements Preparable {
 		this.memo = memo;
 	}
 
+	
+
+	public String getMyshr() {
+		return myshr;
+	}
+
+	public void setMyshr(String myshr) {
+		this.myshr = myshr;
+	}
+
+	public String getMynhr() {
+		return mynhr;
+	}
+
+	public void setMynhr(String mynhr) {
+		this.mynhr = mynhr;
+	}
+
 	public List<Integer> getDeli_canku() {
 		return deli_canku;
 	}
@@ -213,6 +314,38 @@ public class salesNotificationAction implements Preparable {
 	public void prepare() throws Exception {
 		
 
+	}
+
+	public void setSumweight(List<BigDecimal> sumweight) {
+		this.sumweight = sumweight;
+	}
+
+	public List<BigDecimal> getSumweight() {
+		return sumweight;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setSaleTypeName(String saleTypeName) {
+		this.saleTypeName = saleTypeName;
+	}
+
+	public String getSaleTypeName() {
+		return saleTypeName;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getDate() {
+		return date;
 	}
 
 }
