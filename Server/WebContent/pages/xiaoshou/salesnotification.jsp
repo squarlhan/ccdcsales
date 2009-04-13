@@ -193,7 +193,7 @@
 		</td>
 	</tr>
 </table>
-<s:form id="myform" theme="simple" >
+<s:form id="myform" theme="simple" target="_blank">
 <table  align="center" width="100%">
     <tr>
       <td align="left"><s:text name="区域:"/></td>

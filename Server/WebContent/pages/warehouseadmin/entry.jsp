@@ -246,7 +246,7 @@ function setnumber(obj,line)
 
 
 <h2>储运处产成品入库单</h2>
-  <s:form id="myform"  theme="simple" >
+  <s:form id="myform"  theme="simple" target="_blank">
   <table class="list_table"  align="center" width="320" id="tb0">
   	<tr bgcolor="#4A708B">
   		<th width="160">负责人</th>
