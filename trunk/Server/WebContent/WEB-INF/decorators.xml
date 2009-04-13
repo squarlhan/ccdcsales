@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/pages/decorators">
 	<excludes>
-	    <!-- <pattern>/pages/warehouseadmin/login.jsp</pattern> -->
+	    <pattern>/pages/warehouseadmin/printentry.jsp</pattern>
+	    <pattern>/cycentrywarehouse!print.action </pattern>	    
+	    <pattern>/pages/xiaoshou/printsalesnotification.jsp</pattern>
+	    <pattern>/xssalesnotification!print.action </pattern>
+	    <pattern>/xssalesnotification.action</pattern>
+	    <pattern>/pages/xiaoshou/printmoveprconfirm.jsp</pattern>
+	    <pattern>/xsmoveproduct!print.action </pattern>
+	    <pattern>/xsmoveproduct.action</pattern>
 	</excludes>
 	<decorator name="main" page="maindecorator.jsp">
 	    <pattern>/index.jsp</pattern>
