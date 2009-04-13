@@ -12,7 +12,7 @@
         <h2>
             Autocompleter
         </h2>
-        <s:form action="#">
+        <s:form action="testajax.action">
             <s:textfield label="abc" name="abc" />
             <tr>
                 <td class="tdLabel">
@@ -39,6 +39,11 @@
                     <img id="indicator" 
                     src="${pageContext.request.contextPath}/images/indicator.gif" 
                     alt="Loading" style="display:none" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <s:submit value="OK"/>
                 </td>
             </tr>
         </s:form>

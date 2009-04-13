@@ -9,24 +9,43 @@
 <title>销售发货通知单</title>
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
+
 @import "/Server/css/css.css";
 </style>
+
 <script language="javascript">
-	
+	function accDiv(arg1,arg2){
+	    var t1=0,t2=0,r1,r2;
+	    try{t1=arg1.toString().split(".")[1].length}catch(e){}
+	    try{t2=arg2.toString().split(".")[1].length}catch(e){}
+	    with(Math){
+	        r1=Number(arg1.toString().replace(".",""))
+	        r2=Number(arg2.toString().replace(".",""))
+	        return (r1/r2)*pow(10,t2-t1);
+	    }
+	}
     var count = 0; 
 	function setweight(obj,line)
 	{
 		var w = weights[obj.selectedIndex];
 		document.getElementById("weight["+line+"]").value= w;
-		var c = (document.getElementById("sumweight["+line+"]").value)/w;
+		var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
 		//alert(c);
+		if(c!=parseInt(c)){
+			document.getElementById("deli_num["+line+"]").value=0;
+		 	alert("请重新填写重量"); 
+		}else
 		document.getElementById("deli_num["+line+"]").value= c;
 	}
 
 	function setnumber(obj,line)
 	{
 		var w = document.getElementById("weight["+line+"]").value;
-		var n = (obj.value)/w;
+		var n = accDiv(obj.value,w);
+		if(n!=parseInt(n)){
+			document.getElementById("deli_num["+line+"]").value=0;
+		 	alert("请重新填写重量"); 
+		}else
 		//alert(c);
 		document.getElementById("deli_num["+line+"]").value= n;
 	}
@@ -41,6 +60,7 @@
 		var td3 = tr.insertCell(-1);
 		var td4 = tr.insertCell(-1);
 		var td5 = tr.insertCell(-1);
+		td5.setAttribute("style","display:none");
 		var td6 = tr.insertCell(-1);
 		var td7 = tr.insertCell(-1);
 
@@ -53,8 +73,8 @@
 		select2.setAttribute("name","product["+count+"]");
 		
 		var select3 = document.createElement("select");
-		select3.id = "specification["+count+"]";
-		select3.name = "specification["+count+"]";
+		select3.setAttribute("id","specification["+count+"]");
+		select3.setAttribute("name","specification["+count+"]");
 		select3.setAttribute("onchange","javascript:setweight(this," + count + ")");
 		select3.onchange = function(){setweight(select3,count)};
 
@@ -76,6 +96,7 @@
 
 		var textfield5 = document.createElement("input");
 		textfield5.setAttribute("id","sumweight["+count+"]");
+		textfield5.setAttribute("name","sumweight["+count+"]");
 		textfield5.setAttribute("size","10");
 		textfield5.setAttribute("onchange","javascript:setnumber(this," + count + ")");
 		textfield5.onchange = function(){setnumber(textfield5,count)};
@@ -109,7 +130,7 @@
 	          opts.text=orginspe.childNodes[j].text;
 	          select3.options.add(opts);
 			  }
-	          }
+	      }
 
 		td1.appendChild(select1);
 		td2.appendChild(select2);
@@ -118,10 +139,9 @@
 		td5.appendChild(textfield2);
 		td6.appendChild(textfield1);
 		td7.appendChild(textfield4);
-
 		select3.onchange(select3,count);
 		textfield5.onchange(textfield5,count);
-        
+
 
 	}
 	function deleteRecord(table){
@@ -136,6 +156,18 @@
 		var cf = confirm("确认提交？");
 		if(cf)
 		{
+			document.myform.action = "xssalesnotification.action";
+			return true;
+		}
+		else
+			return false;
+	}
+	function confirmPrintbtn()
+	{
+		var cf = confirm("确认打印？");
+		if(cf)
+		{
+			document.myform.action = "xssalesnotification!print.action";
 			return true;
 		}
 		else
@@ -153,6 +185,7 @@
 <body>
 
 
+
 <table align="center" width="100%">
 	<tr align="center">
 		<td>
@@ -160,7 +193,7 @@
 		</td>
 	</tr>
 </table>
-<s:form theme="simple" action="xssalesnotification" onsubmit="return confirmbtn()">
+<s:form id="myform" theme="simple" >
 <table  align="center" width="100%">
     <tr>
       <td align="left"><s:text name="区域:"/></td>
@@ -225,12 +258,11 @@
 		<tr bgcolor="#4A708B">
 			<th width="">发货仓库</th>
 			<th width="">产品</th>
-			<th width="">规格</th>			
+			<th width="">规格</th>
 			<th width="">重量(T)</th>
 			<th width="">单价(每吨)</th>
 			<th width="" style="display:none">发货数目</th>
 			<th width="" style="display:none">单重</th>
-
 		</tr>
 		<tr>
 			<td><s:select id="deli_canku[0]" name="deli_canku[0]"
@@ -243,13 +275,15 @@
 			<td><s:select id="specification[0]" name="specification[0]"
 				multiple="false" label="选择规格" list="specificationList"
 				listValue="displayName" listKey="id"
-				onchange="javascript:setweight(this,0)" /></td>			
+				onchange="javascript:setweight(this,0)" /></td>
 			<td><s:textfield size="10" id="sumweight[0]" name="sumweight[0]"
 				label="总重" onchange="javascript:setnumber(this,0)"/></td>
 			<td><s:textfield size="10" name="price[0]" label="单价" /></td>
-			<td style="display:none"><s:textfield size="10" name="deli_num[0]" label="发货数目" /></td>
+
+			<td style="display:none"><s:textfield readonly="true" size="10" name="deli_num[0]" label="发货数目" /></td>
 			<td style="display:none"><s:textfield size="10" id="weight[0]" name="weight[0]"
 				label="单重" value="0.025" /></td>
+			
 		</tr>
 	</table>
 	<input type="button" name="addone" value="新加一条"
@@ -263,8 +297,11 @@
 				value="%{mynhr.description}" /></td>
 		</tr>
 		<tr>
-			<td align="center"><s:submit value="提交" /></td>
-			<td align="center"><s:reset value="重置" /></td>
+			<td align="center">
+			<input value="提交"  type="submit" name="Submit" onclick="return confirmbtn()"/>
+			<s:reset value="重置" />
+			<input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+			</td>
 		</tr>
 	</table>
 </s:form>

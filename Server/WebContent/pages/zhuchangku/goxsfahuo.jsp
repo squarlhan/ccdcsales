@@ -9,7 +9,8 @@
 <title>驻厂库销售发货装车明细</title>
 <style type="text/css" media="all"> 
 
-@import "/Server/images/style.css";
+@import "/Server/css/main.css";
+@import "/Server/css/css.css";
 </style>
 <script language = "javascript" >
 	
@@ -82,7 +83,7 @@
 <body>
 <h2>驻厂库销售发货装车明细</h2>
 <s:form theme="simple">
-<table align="center" width="100%" >
+<table class="list_table" align="center" width="100%" >
  <tr align="center"><td>
   
      <table align="center" width="100%">
@@ -117,7 +118,7 @@
   </table>
  </s:form>
 <h3>驻厂库可用产品明细</h3> 
-<table align="center" width="640">
+<table class="list_table" align="center" width="640">
   <tr bgcolor="#4A708B">
 	<th width="25%">产品批次号</th>
 	<th width="20%">产品名</th>
@@ -146,7 +147,7 @@
   </s:iterator>
 </table>
 <s:form id="myform" action="zckdeliverywarehouse!sale" theme="simple" >
-  <table id="tbt" align="center" width="100%">
+  <table class="list_table" id="tbt" align="center" width="100%">
    <tr>
           <td><s:text name=" 发货类型：销售"></s:text></td>
   	       <td><s:text name="客户："/></td>
@@ -158,7 +159,7 @@
   	       </td>
   	</tr>
   </table>
-  	<table id="tb" align="center" width="100%">
+  	<table id="tb" class="list_table"  align="center" width="100%">
   	
 		<tr bgcolor="#4A708B">
 		    <th width="120">选择产品</th>

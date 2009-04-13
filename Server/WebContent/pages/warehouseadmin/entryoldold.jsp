@@ -14,56 +14,20 @@
 </style>
 
 <script language = "javascript" >
-function accDiv(arg1,arg2){
-    var t1=0,t2=0,r1,r2;
-    try{t1=arg1.toString().split(".")[1].length}catch(e){}
-    try{t2=arg2.toString().split(".")[1].length}catch(e){}
-    with(Math){
-        r1=Number(arg1.toString().replace(".",""))
-        r2=Number(arg2.toString().replace(".",""))
-        return (r1/r2)*pow(10,t2-t1);
-    }
-}
-function setweight(obj,line)
-{
-	var w = weights[obj.selectedIndex];
-	document.getElementById("weight["+line+"]").value= w;
-	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
-	//alert(c);
-	if(c!=parseInt(c)){
-		document.getElementById("number["+line+"]").value=0;
-	 	alert("请重新填写重量"); 
-	}else
-	document.getElementById("number["+line+"]").value= c;
-}
-
-function setnumber(obj,line)
-{
-	var w = document.getElementById("weight["+line+"]").value;
-	var n = accDiv(obj.value,w);
-	if(n!=parseInt(n)){
-		document.getElementById("number["+line+"]").value=0;
-	 	alert("请重新填写重量"); 
-	}else
-	//alert(c);
-	document.getElementById("number["+line+"]").value= n;
-}
-
+	
     var count = 0; 
 
 	function insertRecord(){
         count+=1;
         
         var tb = document.getElementById("tb");
-        var tr = tb.insertRow(-1);
+        var tr = tb.insertRow();
         
-		var td1 = tr.insertCell(-1);
-		var td2 = tr.insertCell(-1);
-		var td3 = tr.insertCell(-1);
-		var td4 = tr.insertCell(-1);
-		var td5 = tr.insertCell(-1);
-		var td6 = tr.insertCell(-1);
-		var td7 = tr.insertCell(-1);
+		var td1 = tr.insertCell();
+		var td2 = tr.insertCell();
+		var td3 = tr.insertCell();
+		var td4 = tr.insertCell();
+		var td5 = tr.insertCell();
 		
 		var select1 = document.createElement("select");
 		select1.setAttribute("id","product["+count+"]");
@@ -72,8 +36,6 @@ function setnumber(obj,line)
 		var select2 = document.createElement("select");
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
-		select2.setAttribute("onchange","javascript:setweight(this," + count + ")");
-		select2.onchange = function(){setweight(select2,count)};	
 		
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","pch["+count+"]");
@@ -81,26 +43,14 @@ function setnumber(obj,line)
 		textfield1.setAttribute("size","15");
 			
 		var textfield2 = document.createElement("input");
-		textfield2.setAttribute("id","sumweight["+count+"]");
-		textfield2.setAttribute("name","sumweight["+count+"]");
+		textfield2.setAttribute("id","number["+count+"]");
+		textfield2.setAttribute("name","number["+count+"]");
 		textfield2.setAttribute("size","15");
-		textfield2.setAttribute("onchange","javascript:setnumber(this," + count + ")");
-		textfield2.onchange = function(){setnumber(textfield2,count)};
 		
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","memo["+count+"]");
 		textfield3.setAttribute("name","memo["+count+"]");
 		textfield3.setAttribute("size","20");
-
-		var textfield4 = document.createElement("input");
-		textfield4.setAttribute("id","weight["+count+"]");
-		textfield4.setAttribute("name","weight["+count+"]");
-		textfield4.type = "hidden";
-		
-		var textfield5 = document.createElement("input");
-		textfield5.setAttribute("id","number["+count+"]");
-		textfield5.setAttribute("name","number["+count+"]");
-		textfield5.type = "hidden";
 			
 		var orginpro=document.getElementById("product[0]");
 		var orginspe=document.getElementById("specification[0]");
@@ -122,10 +72,6 @@ function setnumber(obj,line)
 		td3.appendChild(textfield1);
 		td4.appendChild(textfield2);
 		td5.appendChild(textfield3);
-		td6.appendChild(textfield4);
-		td7.appendChild(textfield5);
-		select2.onchange(select2,count);
-		textfield2.onchange(textfield2,count);
 
 	}
 	function deleteRecord(table){
@@ -152,7 +98,7 @@ function setnumber(obj,line)
 		for(i=0;i<=count;i++)
 		{	
 			var pch = document.getElementById("pch["+i+"]");
-			var sum = document.getElementById("sumweight["+i+"]");
+			var num = document.getElementById("number["+i+"]");
 			if(pch.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
 				alert("请输入第"+(i+1)+"行批号!");
@@ -163,14 +109,14 @@ function setnumber(obj,line)
 				alert("第"+(i+1)+"行批号应为9位!");
 				return false;
 			}
-			if(sum.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入第"+(i+1)+"行重量!");
+				alert("请输入第"+(i+1)+"行数量!");
 				return false;
 			}
-			if(isNaN(sum.value))
+			if(isNaN(num.value))
 			{
-				alert("第"+(i+1)+"行重量应为数字！");
+				alert("第"+(i+1)+"行袋数应为数字！");
 				return false;
 			} 
 		}
@@ -198,7 +144,7 @@ function setnumber(obj,line)
 		for(i=0;i<=count;i++)
 		{	
 			var pch = document.getElementById("pch["+i+"]");
-			var sum = document.getElementById("sumweight["+i+"]");
+			var num = document.getElementById("number["+i+"]");
 			if(pch.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
 				alert("请输入第"+(i+1)+"行批号!");
@@ -209,14 +155,14 @@ function setnumber(obj,line)
 				alert("第"+(i+1)+"行批号应为9位!");
 				return false;
 			}
-			if(sum.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入第"+(i+1)+"行重量!");
+				alert("请输入第"+(i+1)+"行数量!");
 				return false;
 			}
-			if(isNaN(sum.value))
+			if(isNaN(num.value))
 			{
-				alert("第"+(i+1)+"行重量应为数字！");
+				alert("第"+(i+1)+"行袋数应为数字！");
 				return false;
 			} 
 		}
@@ -227,11 +173,6 @@ function setnumber(obj,line)
 		else
 			return false;
 	}
-	var weights = new Array(
-			<s:iterator id="result" value="specificationsList">
-				<s:property value="#result.weight"/>,
-			</s:iterator>
-		0); 
 	function   previewPrint(){   
 		  WB.ExecWB(7,1)   
 		  }   
@@ -262,10 +203,8 @@ function setnumber(obj,line)
 		    <th width="10%">选择产品</th>
 		    <th width="10%">选择规格</th>
 		    <th width="20%">填写批号</th>
-			<th width="20%">填写重量</th>
+			<th width="20%">填写袋数</th>
 			<th width="20%">备注</th>
-			<th width="20%" style="display:none">袋数</th>
-			<th width="20%" style="display:none">单带重量</th>
 			
 	  </tr>
      <tr  align="center" bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
@@ -273,17 +212,13 @@ function setnumber(obj,line)
             list="productsList" listValue="name" listKey="id" /></td>
 
        <td><s:select id="specification[0]" name="specification[0]" labelposition="left" multiple="false"
-            list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
+            list="specificationsList" listValue="displayName" listKey="id" /></td>
 
        <td><s:textfield size="15" id="pch[0]" name="pch[0]" /></td>
        
-       <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
+       <td><s:textfield size="15"  id="number[0]" name="number[0]" /></td>
        
        <td><s:textfield size="20"  id="memo[0]" name="memo[0]" /></td>
-       
-       <td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
-       
-       <td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
        
      </tr>
   </table>
@@ -298,14 +233,5 @@ function setnumber(obj,line)
  </tr>
   </table>
   </s:form>
-  <script language="javascript">
-  function init(){
-	  var obj = document.getElementById("specification[0]");
-	  obj.onchange(obj);
-	  var obj1 = document.getElementById("sumweight[0]");
-	  obj1.onchange(obj1);
-  }
-  init();
- </script>
 </body>
 </html>
