@@ -76,7 +76,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		for (Rkmx rkmx : rkmxs) {
 			rkmx.setRkxx(rkxx);
 			rkmx.setProducts((Products)hibernateTemplate.load(Products.class, rkmx.getProducts().getId()));
-			rkmx.setSpecifications((Specifications)hibernateTemplate.load(Specifications.class, rkmx.getSpecifications().getId()));
+			rkmx.setSpecifications((Specifications)hibernateTemplate.get(Specifications.class, rkmx.getSpecifications().getId()));
 			hibernateTemplate.save(rkmx);
 			
 			KcxxId id = new KcxxId(rkmx.getProducts().getId(), rkmx.getPch(),
