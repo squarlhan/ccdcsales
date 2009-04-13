@@ -28,6 +28,7 @@
         <action name="cycentrywarehouse" method="execute" class="entrywareHouseAction">
             <result type="redirect-action">cyclistuncheckProducts</result>
             <result  name="ok" type="redirect-action">cyclistuncheckProducts</result>
+            <result name="print">/pages/warehouseadmin/printentry.jsp</result>
             <!-- <result>/pages/warehouseadmin/entry.jsp</result>
             <result name="ok">/pages/warehouseadmin/entry.jsp</result> -->
         </action>

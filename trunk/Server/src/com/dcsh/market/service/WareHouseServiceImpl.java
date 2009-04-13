@@ -855,7 +855,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
 			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
-			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0]+"'");
+			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0].trim()+"' and packType='"+temp[2].trim()+"'");
 			if((product.size()!=0)&&(specification.size()!=0)){
 				Rkmx temprkmx = new Rkmx(rkxx,product.get(0),specification.get(0),chukumx.getPch().trim(),chukumx.getNumber(),(byte)1,(byte)1,null);
 			    hibernateTemplate.save(temprkmx);
@@ -888,6 +888,20 @@ public class WareHouseServiceImpl implements WareHouseService {
 		    }
 		}
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Products> getProductNameById(int id){
+		List<Products> productName;
+		productName = hibernateTemplate.find("from Products where id='"+id+"'");
+		return productName;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Specifications> getSpecificationNameById(int id){
+		List<Specifications> specificationName;
+		specificationName = hibernateTemplate.find("from Specifications where id='"+id+"'");
+		return specificationName;
 	}
 
 }

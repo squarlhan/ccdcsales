@@ -35,6 +35,9 @@
             </result>		
 			<result name="all">/pages/xiaoshou/customers.jsp</result>
 		</action>
+		<action name="testajax" class="com.dcsh.market.action.ajaxaction.TestAjaxAction">
+			<result name="try">/pages/xiaoshou/try.jsp</result>
+		</action>
 	</package>
 	
 	

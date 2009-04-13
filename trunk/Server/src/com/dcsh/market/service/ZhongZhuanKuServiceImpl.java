@@ -392,7 +392,11 @@ private HibernateTemplate hibernateTemplate;
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
 			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
-			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0]+"'");
+			for(String s:temp){
+				System.out.println("规格："+s);
+			}
+			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0].trim()+"' and packType='"+temp[2].trim()+"'");
+			System.out.println("规格数目："+specification.size());
 			List<Rkmx> orinrkmx = (List<Rkmx>) hibernateTemplate.find("from Rkmx where Pch='"+chukumx.getPch().trim()+"'");
 			byte saletype = orinrkmx.get(0).getSaleType();
 			if((product.size()!=0)&&(specification.size()!=0)){

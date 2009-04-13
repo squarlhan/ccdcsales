@@ -27,6 +27,7 @@
        <action name="xsmoveproduct" method="execute" class="xsmoveproductAction">
             <result>/pages/xiaoshou/moveprconfirm.jsp</result>
             <result name="save_yiku" type="redirect-action">xsliststorage</result>
+            <result name="print">/pages/xiaoshou/printmoveprconfirm.jsp</result>
         </action>
          <action name="xsgosalesnotification" method="execute" class="xsgosalesnotificationAction">
             <result>/pages/xiaoshou/salesnotification.jsp</result>
@@ -34,7 +35,9 @@
         </action>
         <action name="xssalesnotification" method="execute" class="xssalesnotificationAction">
             <result>/pages/xiaoshou/salesnotification.jsp</result>
-            <result name="sale_save" type="redirect-action">xsliststorage</result>
+            <result name="sale_save">/pages/xiaoshou/salesnotification.jsp</result>
+            <!-- <result name="sale_save" type="redirect-action">xsliststorage</result> -->
+            <result name="print">/pages/xiaoshou/printsalesnotification.jsp</result>
         </action>
         
 </package>

@@ -392,7 +392,7 @@ private HibernateTemplate hibernateTemplate;
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
 			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
-			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0]+"'");
+			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0].trim()+"' and packType='"+temp[2].trim()+"'");
 			if((product.size()!=0)&&(specification.size()!=0)){
 				Rkmx temprkmx = new Rkmx(rkxx,product.get(0),specification.get(0),chukumx.getPch().trim(),chukumx.getNumber(),(byte)1,(byte)1,null);
 			    hibernateTemplate.save(temprkmx);
@@ -434,19 +434,28 @@ private HibernateTemplate hibernateTemplate;
 	@Override
 	@Transactional
 	public void doDeliveryWareHouse(Chuku ck) {
-		
+		System.out.println("ooooooooo:"+ck.getCankuByRkId().getType());
         if(ck.getCankuByRkId().getType()==(byte)4)//ËðºÄ
 			
-			ck.setCankuByRkId(((List<Canku>)hibernateTemplate.find("from Canku where type=4")).get(0)); 
+			{
+        	System.out.println("444444444:");
+        	ck.setCankuByRkId(((List<Canku>)hibernateTemplate.find("from Canku where type=4")).get(0)); 
+			}
 		else if(ck.getCankuByRkId().getType()==(byte)3)//ÏúÊÛ
+			{
+			System.out.println("33333333333:");
 			ck.setCankuByRkId(((List<Canku>)hibernateTemplate.find("from Canku where type=3")).get(0)); 
-		else
-		ck.setCankuByRkId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByRkId().getId()));//ÒÆ¿â
+			}
+		else{
+			ck.setCankuByRkId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByRkId().getId()));//ÒÆ¿â
+		}
 		
 		
 		ck.setCankuByCankuId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByCankuId().getId()));
 		ck.setUsers((Users)hibernateTemplate.load(Users.class, ck.getUsers().getId()));
 		ck.setCustom((Custom)hibernateTemplate.get(Custom.class, ck.getCustom().getId()));
+		System.out.println("CCCCCCCCCCC:"+ck.getCankuByCankuId().getId());
+		System.out.println("RRRRRRRRRRR:"+ck.getCankuByRkId().getId());
 		hibernateTemplate.save(ck);
 		Set<Chukumx> ckmxs = ck.getChukumxes();
 

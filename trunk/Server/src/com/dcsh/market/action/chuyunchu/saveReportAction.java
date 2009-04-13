@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
-public class saveReportAction extends ActionSupport  implements Preparable {
+public class saveReportAction  implements Preparable {
 
 	private static final Logger log = LogManager.getLogManager().getLogger(saveReportAction.class.getName());
 	private String bno;
