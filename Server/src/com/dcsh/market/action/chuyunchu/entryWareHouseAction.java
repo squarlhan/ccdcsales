@@ -287,7 +287,7 @@ public class entryWareHouseAction implements Preparable{
         service.doEntryWareHouse(rkxx);
         System.out.println("231*****************");
 //        return "gork";
-        return "ok";
+        return print();
     }
 
 	public String print(){
