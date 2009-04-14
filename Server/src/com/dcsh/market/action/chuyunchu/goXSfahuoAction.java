@@ -45,9 +45,8 @@ public class goXSfahuoAction implements Preparable{
 	public String execute() {
     	System.out.println("Enter Excute");
     	Set<String> pchset = new HashSet();
-    	Map session = ActionContext.getContext().getSession();
-    	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
-	    List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.CANKU);
+    	Map session = ActionContext.getContext().getSession();    	
+	    List<CankuPriv> list = (List<CankuPriv>)session.get("tempuser");
 	    System.out.println(list.size()+"  ++++++++");
 	    
     	
@@ -66,7 +65,7 @@ public class goXSfahuoAction implements Preparable{
 	            this.productsList = service.getAllProducts();
 	            this.specificationsList = service.getAllSpecifications();
 	            this.customList = service.getAllCustom();
-	            this.resultList = service.getCheckedProducts(((Canku)list.get(0).getResource()),xsfhmx);
+	            this.resultList = service.getCheckedProducts(((Canku)list.get(0).getCanku()),xsfhmx);
 	            for(int i=0; i<resultList.size();i++){
 	            	pchset.add(this.resultList.get(i).getId().getPch());
 	            }
