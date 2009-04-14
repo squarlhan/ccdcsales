@@ -167,8 +167,45 @@ function setnumber(obj,line)
 				return false;
 			} 
 		}
-		if(confirm("确认装车？"))
+		if(confirm("确认装车？")){
+			document.myform.action = "cycdeliverywarehouse.action";
 			return true;
+		}
+		else
+			return false;
+	}
+
+	function confirmPrintbtn()
+	{
+		var ele = document.getElementById("bno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入编号!");
+		  return false;
+		}
+		if(ele.value.length>12)
+		{
+		  alert("编号应不超过12位!");
+		  return false;
+		}
+		for(i=0;i<=count;i++)
+		{	
+			var num = document.getElementById("number["+i+"]");
+			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入第"+(i+1)+"行袋数!");
+				return false;
+			}
+			if(isNaN(num.value))
+			{
+				alert("第"+(i+1)+"行袋数应为数字！");
+				return false;
+			} 
+		}
+		if(confirm("确认打印？")){
+			document.myform.action = "cycdeliverywarehouse!print.action";
+			return true;
+		}
 		else
 			return false;
 	}
@@ -183,7 +220,7 @@ function setnumber(obj,line)
 <body>
 <h2>储运处产成品装车明细</h2>
 <h3>储运处可用产品明细</h3>
-<table class="list_table"  align="center" width="640">
+<table class="list_table"  align="center" width="640" >
   <tr bgcolor="#4A708B">
 	<th width="25%">产品批次号</th>
 	<th width="20%">产品名</th>
@@ -213,7 +250,7 @@ function setnumber(obj,line)
 </table>
 
 
-  <s:form id="myform" action="cycdeliverywarehouse" theme="simple" onsubmit="return checkNull()">
+  <s:form id="myform" theme="simple" target="_blank">
   
   
   <table class="list_table"  id="tbt" align="center" width="100%">
@@ -263,8 +300,9 @@ function setnumber(obj,line)
      </table><div align="center">
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
        <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
-       <s:submit value="装车"/>
+	   <input value="装车"  type="submit" name="Submit" onclick="return checkNull()"/>
        <s:reset value="取消"/>
+	   <input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
 	</div>
   </s:form>
  <script language="javascript">
