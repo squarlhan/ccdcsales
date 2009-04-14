@@ -117,7 +117,11 @@ public class WareHouseServiceImpl implements WareHouseService {
 		
 		ck.setCankuByCankuId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByCankuId().getId()));
 		ck.setUsers((Users)hibernateTemplate.load(Users.class, ck.getUsers().getId()));
-		ck.setCustom((Custom)hibernateTemplate.get(Custom.class, ck.getCustom().getId()));
+		if(ck.getCustom()!=null){
+			ck.setCustom((Custom)hibernateTemplate.get(Custom.class, ck.getCustom().getId()));
+			}else{
+				ck.setCustom(null);
+			}
 		hibernateTemplate.save(ck);
 		Set<Chukumx> ckmxs = ck.getChukumxes();
 

@@ -168,7 +168,7 @@ public class deliveryWareHouseAction implements Preparable{
           		user.get(0).getCanku(),
           		new Canku(this.getCankuaim(),null,(byte) 0,null,null,null,null),
           		user.get(0).getUser(),
-          		new Custom(this.getCustom(),null,null),
+          		null,
           		this.getBno().trim(),
           		new Date(),
           		this.getChukumxes());

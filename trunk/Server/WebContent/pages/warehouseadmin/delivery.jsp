@@ -154,10 +154,7 @@
   	       <td><s:select name="cankuaim" list="cankusList" label="请选择目标仓库"
   	       labelposition="left" multiple="false" listKey="id" listValue="name" theme="simple" headerValue="--请选择 --"/>
   	       </td>
-  	       <td><s:text name="请填写客户："></s:text>
-  	       </td>
-  	      <td><s:select id="custom" name="custom" label="请选择客户" labelposition="left" multiple="false"
-            list="customList" listValue="customName" listKey="id" /></td>
+  	      
   	       <td><s:text name="请填写编号："></s:text>
   	       </td>
   	       <td><s:textfield name="bno" theme="simple" size="15"></s:textfield>
