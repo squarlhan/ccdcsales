@@ -296,7 +296,7 @@ function setnumber(obj,line)
 		 <!-- 
         <td><s:textfield id="number[0]" label="请填写袋数" name="number[0]"/></td>
 		 -->
-		<td><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
+		<td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
        
 		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
       </tr>
