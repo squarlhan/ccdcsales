@@ -189,4 +189,5 @@ public interface WareHouseService {
 	
 	List<Products> getProductNameById(int id);
 	List<Specifications> getSpecificationNameById(int id);
+	Custom getCustomerById(Integer customerId);
 }
