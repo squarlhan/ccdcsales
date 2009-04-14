@@ -176,11 +176,60 @@ function setnumber(obj,line)
 			tnum=0;
 			return false;
 		}
-		if(confirm("确认装车？"))
+		if(confirm("确认装车？")){
+			document.myform.action = "cycdeliverywarehouse!sale.action";
 			return true;
+		}
+			
 		else
 			return false;
 	}
+
+	function confirmPrintbtn()
+	{
+		var ele = document.getElementById("bno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入编号!");
+		  return false;
+		}
+		if(ele.value.length>16)
+		{
+			alert("编号应不超过16位");
+			return false;
+		}
+		for(i=0;i<=count;i++)
+		{	
+			var tmp = document.getElementById("number["+i+"]");
+			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入袋数!");
+				return false;
+			}
+			if(isNaN(tmp.value))
+			{
+				alert("只允许输入数字！");
+				return false;
+			}
+		}
+		var tnum = 0;
+		for(i=0;i<=count;i++)
+			tnum += Number(document.getElementById("number["+i+"]").value);
+		if(tnum!=Number(document.getElementById("tnumber").value))
+		{
+			alert("数量不符");
+			tnum=0;
+			return false;
+		}
+		if(confirm("确认打印？")){
+			document.myform.action = "cycdeliverywarehouse!printfh.action";
+			return true;
+		}
+			
+		else
+			return false;
+	}
+	
 	var weights = new Array(
 			<s:iterator id="result" value="specificationsList">
 				<s:property value="#result.weight"/>,
@@ -253,7 +302,7 @@ function setnumber(obj,line)
     </tr>
   </s:iterator>
 </table>
-<s:form id="myform" action="cycdeliverywarehouse!sale" theme="simple" onsubmit="return checkNullandNum()">
+<s:form id="myform" theme="simple" target="_blank">
   <table class="list_table"  id="tbt" align="center" width="100%">
    <tr>
           <td><s:text name=" 发货类型：销售"></s:text></td>
@@ -301,8 +350,9 @@ function setnumber(obj,line)
      <div align="center">
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
        <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
-       <s:submit value="装车"/>
+       <input value="装车"  type="submit" name="Submit" onclick="return checkNullandNum()"/>
        <s:reset value="取消"/>
+       <input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
        </div>
   </s:form>
    <script language="javascript">
