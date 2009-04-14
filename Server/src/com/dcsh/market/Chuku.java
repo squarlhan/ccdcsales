@@ -125,7 +125,7 @@ public class Chuku implements java.io.Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "CustomID", nullable = false)
+	@JoinColumn(name = "CustomID")
 	public Custom getCustom() {
 		return this.custom;
 	}
