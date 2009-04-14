@@ -66,6 +66,10 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void delProduct(Products product) {
 		
+		List<UserPriv> ups= (List<UserPriv>)hibernateTemplate.find("from UserPriv where resource='prd:"+String.valueOf(product.getId())+"'");
+		for(UserPriv up:ups){
+			hibernateTemplate.delete(up);
+		}
 		hibernateTemplate.delete(hibernateTemplate.load(Products.class, product.getId()));
 	}
 
@@ -113,6 +117,10 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void delCanku(Canku canku) {
 		// 
+		List<UserPriv> ups= (List<UserPriv>)hibernateTemplate.find("from UserPriv where resource='canku:"+String.valueOf(canku.getId())+"'");
+		for(UserPriv up:ups){
+			hibernateTemplate.delete(up);
+		}
 		hibernateTemplate.delete(hibernateTemplate.load(Canku.class, canku.getId()));
 	}
 
