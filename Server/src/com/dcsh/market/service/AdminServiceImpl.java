@@ -552,12 +552,12 @@ public class AdminServiceImpl implements AdminService {
 		newgpriv.setUsergroup(group);
 		switch (res){
 		case 0: break;
-		case 1: newgpriv.setResource("url:.*(/systemadmin/|/admin|/index).*");hibernateTemplate.save(newgpriv);break;
+		case 1: newgpriv.setResource("url:.*(/systemadmin/|/admin|/index|/user).*");hibernateTemplate.save(newgpriv);break;
 		case 2: newgpriv.setResource("url:.*");hibernateTemplate.save(newgpriv);break;
-		case 3: newgpriv.setResource("url:.*(/warehouseadmin/|/cyc|/index).*");hibernateTemplate.save(newgpriv);break;
-		case 4: newgpriv.setResource("url:.*(/zhongzhuanku/|/zzk|/index).*");hibernateTemplate.save(newgpriv);break;
-		case 5: newgpriv.setResource("url:.*(/zhuchangku/|/zck|/index).*");hibernateTemplate.save(newgpriv);break;
-		case 6: newgpriv.setResource("url:.*(/xiaoshou/|/xs|/index).*");hibernateTemplate.save(newgpriv);break;
+		case 3: newgpriv.setResource("url:.*(/warehouseadmin/|/cyc|/index|/user).*");hibernateTemplate.save(newgpriv);break;
+		case 4: newgpriv.setResource("url:.*(/zhongzhuanku/|/zzk|/index|/user).*");hibernateTemplate.save(newgpriv);break;
+		case 5: newgpriv.setResource("url:.*(/zhuchangku/|/zck|/index|/user).*");hibernateTemplate.save(newgpriv);break;
+		case 6: newgpriv.setResource("url:.*(/xiaoshou/|/xs|/index|/user).*");hibernateTemplate.save(newgpriv);break;
 		default: break;
 		}
 		
