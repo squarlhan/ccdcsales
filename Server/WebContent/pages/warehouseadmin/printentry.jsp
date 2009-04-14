@@ -55,7 +55,7 @@
 				    </td>
 				    </tr>
 				  </table>
-		<form id="myform"  >
+		<form id="myform" action="cyclistuncheckProducts.action" >
 		 <table width="90%" border="1" align="center" bordercolor="#000000" cellspacing="0" bgcolor="#F0F0F0" >
 	    	<tr>
 				<th width="16%"  scope="col">产品名称</th>
@@ -113,6 +113,9 @@
 					</td>
 					<td colspan="1" align="center">
 						<input type="button" value="打印" id="button3" name="button3" onclick="window.print();"/>
+					</td>
+					<td colspan="1" align="center">
+						<input type="submit" value="返回" id="return" name="return"/>
 					</td>
 				</tr>
 			</table>
