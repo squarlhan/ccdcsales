@@ -911,4 +911,11 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return specificationName;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Custom getCustomerById(Integer customerId){
+		System.out.println("customerId="+customerId);
+		List<Custom> customerList = hibernateTemplate.find("from Custom where id='"+customerId+"'");
+		System.out.println("customerList.size()="+customerList.size());
+		return customerList.get(0);
+	}
 }
