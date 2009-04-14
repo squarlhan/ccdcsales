@@ -45,8 +45,7 @@ public class goXSyikuAction implements Preparable{
     	System.out.println("Enter Excute");
     	Set<String> pchset = new HashSet();
     	Map session = ActionContext.getContext().getSession();
-    	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
-	    List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.CANKU);
+    	List<CankuPriv> list = (List<CankuPriv>)session.get("tempuser");
 	    
     	
 //		this.xsyklist = service.getXSyikumx(new Canku(2,"",(byte)0));
@@ -65,7 +64,7 @@ public class goXSyikuAction implements Preparable{
 	            this.productsList = service.getAllProducts();
 	            this.specificationsList = service.getAllSpecifications();
 	            this.customList = service.getAllCustom();
-	            this.resultList = service.getCheckedProducts(((Canku)list.get(0).getResource()),xsykmx);
+	            this.resultList = service.getCheckedProducts(((Canku)list.get(0).getCanku()),xsykmx);
 	            for(int i=0; i<resultList.size();i++){
 	            	pchset.add(this.resultList.get(i).getId().getPch());
 	            }
