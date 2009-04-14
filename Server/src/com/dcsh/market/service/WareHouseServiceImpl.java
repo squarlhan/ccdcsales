@@ -647,6 +647,8 @@ public class WareHouseServiceImpl implements WareHouseService {
 		// TODO Auto-generated method stub
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
+		System.out.println("Canku: "+ canku.getName());
+		System.out.println("SQL: "+ "from Kcxx where cid ="+ canku.getId()+" and saleType ="+ xsfhmx.getXsfahuoxx().getType()+" and specifications ="+ xsfhmx.getSpecification().getId()+" and products ="+ xsfhmx.getProduct().getId());
 		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId()+" and saleType ="+ xsfhmx.getXsfahuoxx().getType()+" and specifications ="+ xsfhmx.getSpecification().getId()+" and products ="+ xsfhmx.getProduct().getId());
 		for(Kcxx kcxx:tempresult){
 			if(kcxx.getSaleType()==1)result.add(new KcxxCheck("内销",kcxx));
@@ -654,6 +656,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 			else if(kcxx.getSaleType()==3)result.add(new KcxxCheck("外销",kcxx));
 			else result.add(new KcxxCheck("未定",kcxx));
 		}
+		System.out.println(result.size());
 		return result;
 
 	}
