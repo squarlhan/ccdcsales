@@ -63,6 +63,9 @@
             <result type="redirect-action">cyclistuncheckProducts</result>
             <result name="ok" type="redirect-action">cyclistuncheckProducts</result>
             <result name="unequal">/pages/warehouseadmin/err01.jsp</result>
+            <result name="print">/pages/warehouseadmin/printdeliveryWH.jsp</result>
+            <result name="printxsyk">/pages/warehouseadmin/printxsyk.jsp</result>
+            <result name="printfh">/pages/warehouseadmin/printfh.jsp</result>
         </action>
         <action name="cycalldeliverywarehouse" method="execute" class="alldeliveryWareHouseAction">
             <result name="gock" type="redirect-action">cyclistuncheckProducts</result>
