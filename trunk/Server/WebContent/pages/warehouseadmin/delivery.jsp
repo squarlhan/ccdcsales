@@ -236,7 +236,7 @@ function setnumber(obj,line)
 		    <th width="120">选择产品</th>
 		    <th width="120">选择规格</th>
 		    <th width="120">填写批号</th>
-			<th width="120">填写袋数</th>
+			<th width="120">填写重量</th>
 			<th width="20%" style="display:none">袋数</th>
 			<th width="20%" style="display:none">单带重量</th>
 		</tr>
