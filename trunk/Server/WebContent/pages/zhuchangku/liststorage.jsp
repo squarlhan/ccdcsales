@@ -52,7 +52,8 @@
 		    <th width="20%">批号</th>
 		    <th width="20%">产品名</th>
 		    <th width="15%">规格</th>
-		    <th width="10%">重量</th>
+		    <th width="10%">重量(T)</th>
+
 		</tr>
 		<s:iterator id="result" value="resultList" status="index">		
 			<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
