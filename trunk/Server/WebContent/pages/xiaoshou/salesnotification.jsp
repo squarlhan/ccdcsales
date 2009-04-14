@@ -31,7 +31,8 @@
 	}
     var count = 0; 
 	function setweight(obj,line)
-	{
+	{ 
+		
 		var w = weights[obj.selectedIndex];
 		document.getElementById("weight["+line+"]").value= w;
 		var c = ForDight(accDiv((document.getElementById("sumweight["+line+"]").value),w),3);
@@ -45,6 +46,7 @@
 
 	function setnumber(obj,line)
 	{
+		alert("line"+line);
 		var w = document.getElementById("weight["+line+"]").value;
 		var n = ForDight(accDiv(obj.value,w),3);
 		if(n!=parseInt(n)){
@@ -65,7 +67,6 @@
 		var td3 = tr.insertCell(-1);
 		var td4 = tr.insertCell(-1);
 		var td5 = tr.insertCell(-1);
-		td5.setAttribute("style","display:none");
 		var td6 = tr.insertCell(-1);
 		var td7 = tr.insertCell(-1);
 
@@ -287,7 +288,7 @@
 
 			<td style="display:none"><s:textfield readonly="true" size="10" name="deli_num[0]" label="发货数目" /></td>
 			<td style="display:none"><s:textfield size="10" id="weight[0]" name="weight[0]"
-				label="单重" value="0.025" /></td>
+				label="单重" value="" /></td>
 			
 		</tr>
 	</table>
