@@ -13,7 +13,41 @@
 @import "/Server/css/css.css";
 </style>
 <script language = "javascript" >
-	
+function accDiv(arg1,arg2){
+    var t1=0,t2=0,r1,r2;
+    try{t1=arg1.toString().split(".")[1].length}catch(e){}
+    try{t2=arg2.toString().split(".")[1].length}catch(e){}
+    with(Math){
+        r1=Number(arg1.toString().replace(".",""))
+        r2=Number(arg2.toString().replace(".",""))
+        return (r1/r2)*pow(10,t2-t1);
+    }
+}
+function setweight(obj,line)
+{
+	var w = weights[obj.selectedIndex];
+	document.getElementById("weight["+line+"]").value= w;
+	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
+	//alert(c);
+	if(c!=parseInt(c)){
+		document.getElementById("number["+line+"]").value=0;
+	 	alert("请重新填写重量"); 
+	}else
+	document.getElementById("number["+line+"]").value= c;
+}
+
+function setnumber(obj,line)
+{
+	var w = document.getElementById("weight["+line+"]").value;
+	var n = accDiv(obj.value,w);
+	if(n!=parseInt(n)){
+		document.getElementById("number["+line+"]").value=0;
+	 	alert("请重新填写重量"); 
+	}else
+	//alert(c);
+	document.getElementById("number["+line+"]").value= n;
+}
+
     var count = 0; 
 
 	function insertRecord(){
@@ -26,6 +60,7 @@
 		var td3 = tr.insertCell();
 		var td4 = tr.insertCell();
 		var td5 = tr.insertCell();
+		var td6 = tr.insertCell();
 		
 		var select1 = document.createElement("select");
 		select1.setAttribute("id","product["+count+"]");
@@ -34,15 +69,33 @@
 		var select2 = document.createElement("select");
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
+		select2.onchange = function(){setweight(select2,count)};	
 		
 		var select3 = document.createElement("select");
 		select3.setAttribute("id","pch["+count+"]");
 		select3.setAttribute("name","pch["+count+"]");
 			
-		var textfield2 = document.createElement("input");
+	/*	var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","number["+count+"]");
-		textfield2.setAttribute("name","number["+count+"]");
-			
+		textfield2.setAttribute("name","number["+count+"]");*/
+
+		var textfield3 = document.createElement("input");
+		textfield3.setAttribute("id","sumweight["+count+"]");
+		textfield3.setAttribute("name","sumweight["+count+"]");
+		textfield3.setAttribute("size","15");
+		textfield3.setAttribute("onchange","javascript:setnumber(this," + count + ")");
+		textfield3.onchange = function(){setnumber(textfield3,count)};
+
+		var textfield4 = document.createElement("input");
+		textfield4.setAttribute("id","weight["+count+"]");
+		textfield4.setAttribute("name","weight["+count+"]");
+		textfield4.type = "hidden";
+		
+		var textfield5 = document.createElement("input");
+		textfield5.setAttribute("id","number["+count+"]");
+		textfield5.setAttribute("name","number["+count+"]");
+		textfield5.type = "hidden";
+		
 		var orginpro=document.getElementById("product[0]");
 		var orginspe=document.getElementById("specification[0]");
 		var orginpch=document.getElementById("pch[0]");
@@ -67,7 +120,12 @@
 		td1.appendChild(select1);
 		td2.appendChild(select2);
 		td3.appendChild(select3);
-		td4.appendChild(textfield2);
+		td4.appendChild(textfield3);
+		td5.appendChild(textfield4);
+		td6.appendChild(textfield5);
+
+		select2.onchange(select2,count);
+		textfield3.onchange(textfield3,count);
 
 	}
 	function deleteRecord(table){
@@ -109,6 +167,12 @@
 		else
 			return false;
 	}
+
+	var weights = new Array(
+			<s:iterator id="result" value="specificationsList">
+				<s:property value="#result.weight"/>,
+			</s:iterator>
+		0); 
 </script>
 </head>
 <body>
@@ -119,7 +183,7 @@
 	<th width="25%">产品批次号</th>
 	<th width="20%">产品名</th>
 	<th width="20%">规格</th>
-	<th width="10%">数目</th>
+	<th width="10%">重量</th>
 	<th width="15%">销售类型</th>
   </tr>
   <s:iterator id="result" value="resultList" status="index">	
@@ -134,7 +198,7 @@
 		<s:property value="#result.specifications.displayName" />
 	  </td>
 	  <td align="center">
-		<s:property value="#result.number" />
+		<s:property value="(#result.number)*(#result.specifications.weight)" />
 	  </td>
 	  <td align="center">
 		<s:property value="#result.saleTypeName" />
@@ -168,6 +232,8 @@
 		    <th width="120">选择规格</th>
 		    <th width="120">填写批号</th>
 			<th width="120">填写袋数</th>
+			<th width="20%" style="display:none">袋数</th>
+			<th width="20%" style="display:none">单带重量</th>
 		</tr>
 
      	<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
@@ -175,13 +241,19 @@
             list="productsList" listValue="name" listKey="id" /></td>
 
         <td><s:select id="specification[0]" name="specification[0]" label="请选择产品规格" labelposition="left" multiple="false"
-            list="specificationsList" listValue="displayName" listKey="id" /></td>
+            list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
 
         <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
             list="pchList" /></td>
-
+		
+		 <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
+		 <!-- 
         <td><s:textfield id="number[0]" label="请填写袋数" name="number[0]"/></td>
-
+		 -->
+		<td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
+       
+		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
+       
       </tr>
      </table><div align="center">
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
@@ -190,5 +262,14 @@
        <s:reset value="取消"/>
 	</div>
   </s:form>
+ <script language="javascript">
+  function init(){
+	  var obj = document.getElementById("specification[0]");
+	  obj.onchange(obj);
+	  var obj1 = document.getElementById("sumweight[0]");
+	  obj1.onchange(obj1);
+  }
+  init();
+ </script>
 </body>
 </html>
