@@ -77,7 +77,7 @@
 					<s:property value="#result.specifications.displayName" />
 			   </td>
 			   <td align="center">
-					<s:property value="#result.number" />
+					<s:property value="(#result.number)*(#result.specifications.weight)" />
 			   </td>
 			   <td align="center">
 					<s:property value="#result.saleTypeName" />
