@@ -254,7 +254,7 @@ function setnumber(obj,line)
 		 -->
         <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
 		 
-		<td><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
+		<td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
        
 		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
 
