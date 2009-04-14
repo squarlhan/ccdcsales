@@ -2,7 +2,8 @@
 <decorators defaultdir="/pages/decorators">
 	<excludes>
 	    <pattern>/pages/warehouseadmin/printentry.jsp</pattern>
-	    <pattern>/cycentrywarehouse!print.action </pattern>	    
+	    <pattern>/cycentrywarehouse!print.action </pattern>	   
+	    <pattern>/cycentrywarehouse.action </pattern>	       
 	    <pattern>/pages/xiaoshou/printsalesnotification.jsp</pattern>
 	    <pattern>/xssalesnotification!print.action </pattern>
 	    <pattern>/xssalesnotification.action</pattern>
