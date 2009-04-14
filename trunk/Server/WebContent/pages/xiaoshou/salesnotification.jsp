@@ -24,12 +24,17 @@
 	        return (r1/r2)*pow(10,t2-t1);
 	    }
 	}
+	function   ForDight(Dight,How)   
+	{   
+	  Dight   =   Math.round   (Dight*Math.pow(10,How))/Math.pow(10,How);   
+	  return   Dight;   
+	}
     var count = 0; 
 	function setweight(obj,line)
 	{
 		var w = weights[obj.selectedIndex];
 		document.getElementById("weight["+line+"]").value= w;
-		var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
+		var c = ForDight(accDiv((document.getElementById("sumweight["+line+"]").value),w),3);
 		//alert(c);
 		if(c!=parseInt(c)){
 			document.getElementById("deli_num["+line+"]").value=0;
@@ -41,7 +46,7 @@
 	function setnumber(obj,line)
 	{
 		var w = document.getElementById("weight["+line+"]").value;
-		var n = accDiv(obj.value,w);
+		var n = ForDight(accDiv(obj.value,w),3);
 		if(n!=parseInt(n)){
 			document.getElementById("deli_num["+line+"]").value=0;
 		 	alert("请重新填写重量"); 
