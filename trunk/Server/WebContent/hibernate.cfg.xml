@@ -15,8 +15,8 @@
 		<property name="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.JBossTransactionManagerLookup</property>
 		-->
         <mapping class="com.dcsh.market.Users" />
-        <mapping class="com.dcsh.market.UserGroup" />        
-        <mapping class="com.dcsh.market.Specifications" />
+        <mapping class="com.dcsh.market.Specifications"/>
+        <!--<mapping resource="specifications.hbm.xml"/>-->
         <mapping class="com.dcsh.market.Rkmx" />
         <mapping class="com.dcsh.market.Chukumx" />
         <mapping class="com.dcsh.market.Rkxx" />

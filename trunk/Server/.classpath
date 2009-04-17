@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.6.0_06"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 5.0 Runtime"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/xwork-2.0.7.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/antlr-2.7.6.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/freemarker-2.3.8.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/hibernate3.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/hibernate-annotations.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/javassist-3.4.GA.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/jta-1.1.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/ognl-2.6.11.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/sitemesh-2.3.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/slf4j-log4j12-1.5.6.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/spring.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/sqljdbc.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/struts2-core-2.0.14.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/struts2-sitemesh-plugin-2.0.11.2.jar"/>
+	<classpathentry kind="lib" path="E:/Dcsh/devlib/struts2-spring-plugin-2.0.14.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
