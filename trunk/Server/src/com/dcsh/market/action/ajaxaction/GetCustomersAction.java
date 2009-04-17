@@ -108,7 +108,7 @@ public class GetCustomersAction implements Action{
 			System.out.println("kkkkkkkkk£º"+c.getCustomName());
 		}
 		
-		return "show";
+		return "all";
 	}
 
 }
