@@ -165,5 +165,8 @@ public interface ZhuChangKuService {
 	 */
 	List<KcxxCheck> getCheckedProducts(Canku canku,XSfahuomx xsfhmx);
 	List<KcxxCheck> getCheckedProducts(Canku canku,XSyikumx xsykmx);
+	List<Products> getProductNameById(int id);
+	List<Specifications> getSpecificationNameById(int id);
+	Custom getCustomerById(Integer customerId);
 }
 
