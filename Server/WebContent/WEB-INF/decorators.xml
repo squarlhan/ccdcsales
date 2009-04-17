@@ -10,6 +10,20 @@
 	    <pattern>/cycdeliverywarehouse!printxsyk.action</pattern>
 	    <pattern>/cycdeliverywarehouse!sale.action</pattern>
 	    <pattern>/cycdeliverywarehouse!yiku.action</pattern>
+    	<pattern>/pages/warehouseadmin/printdeliveryWH.jsp</pattern>
+	    <pattern>/cycdeliverywarehouse!print.action </pattern>	
+	    <pattern>/cycdeliverywarehouse.action </pattern>   
+	    <pattern>/pages/warehouseadmin/printxsyk.jsp</pattern>
+	    <pattern>/cycdeliverywarehouse!printxsyk.action </pattern>
+	    <pattern>/cycdeliverywarehouse!yiku.action </pattern>
+	    <pattern>/cycdeliverywarehouse!printfh.action </pattern>
+	    <pattern>/cycdeliverywarehouse!sale.action </pattern>
+	    <pattern>/zckdeliverywarehouse!printfh.action </pattern>
+	    <pattern>/zckdeliverywarehouse!sale.action </pattern>
+	    <pattern>/zzkdeliverywarehouse!printfh.action </pattern>
+	    <pattern>/zzkdeliverywarehouse!sale.action </pattern>
+	    <pattern>/zzkdeliverywarehouse!printxsyk.action </pattern>
+	    <pattern>/zzkdeliverywarehouse!yiku.action </pattern>
 	    <pattern>/pages/xiaoshou/printsalesnotification.jsp</pattern>
 	    <pattern>/xssalesnotification!print.action </pattern>
 	    <pattern>/xssalesnotification.action</pattern>
