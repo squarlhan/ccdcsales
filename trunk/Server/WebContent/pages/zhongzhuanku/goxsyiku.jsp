@@ -177,8 +177,53 @@ function setnumber(obj,line)
 			
 			return false;
 		}
-		if(confirm("确认装车？"))
+		if(confirm("确认装车？")){
+			document.myform.action="zzkdeliverywarehouse!yiku.action";
 			return true;
+		}
+		else
+			return false;
+	}
+	function confirmPrintbtn()
+	{	
+		var ele = document.getElementById("bno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入编号!");
+		  return false;
+		}
+		if(ele.value.length>16)
+		{
+			alert("编号应不超过16位");
+			return false;
+		}
+		for(i=0;i<=count;i++)
+		{	
+			var tmp = document.getElementById("number["+i+"]");
+			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入袋数!");
+				return false;
+			}
+			if(isNaN(tmp.value))
+			{
+				alert("只允许输入数字！");
+				return false;
+			}
+		}
+		var tnum = 0;
+		for(var i=0;i<=count;i++)
+			tnum += Number(document.getElementById("number["+i+"]").value);
+		if(tnum!=Number(document.getElementById("tnumber").value))
+		{
+			alert("数量不符");
+			
+			return false;
+		}
+		if(confirm("确认打印？")){
+			document.myform.action="zzkdeliverywarehouse!printxsyk.action";
+			return true;
+		}
 		else
 			return false;
 	}
@@ -310,8 +355,9 @@ function setnumber(obj,line)
      </table>
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
        <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
-       <s:submit value="装车"/>
+       <input value="装车"  type="submit" name="Submit" onclick="return checkNullandNum()"/>
        <s:reset value="取消"/>
+	   <input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
   </s:form>
  <script language="javascript">
   function init(){
