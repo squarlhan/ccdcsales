@@ -73,6 +73,7 @@
             <result type="redirect-action">zcklistuncheckProducts</result>
             <result name="ok" type="redirect-action">zcklistuncheckProducts</result>
             <result name="unequal">/pages/zhuchangku/err01.jsp</result>
+            <result name="printfh">/pages/zhuchangku/printfh.jsp</result>
             
         </action>
          
