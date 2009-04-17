@@ -155,15 +155,15 @@ function setnumber(obj,line)
 		}
 		for(i=0;i<=count;i++)
 		{	
-			var tmp = document.getElementById("number["+i+"]");
+			var tmp = document.getElementById("sumweight["+i+"]");
 			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入袋数!");
+				alert("请输入第"+(count+1)+"行的重量!");
 				return false;
 			}
 			if(isNaN(tmp.value))
 			{
-				alert("只允许输入数字！");
+				alert("重量只允许输入数字！");
 				return false;
 			}
 		}
@@ -244,7 +244,7 @@ function setnumber(obj,line)
 		<tr bgcolor="#4A708B">
 		    <th width="25%">产品名</th>
 		    <th width="15%">数量</th>
-		    <th width="15%">重量</th>
+		    <th width="15%">重量(T)</th>
 		    <th width="15%">规格</th>
 		    <th width="15%">编号</th>
 		    <th width="15%">客户</th>
@@ -279,7 +279,7 @@ function setnumber(obj,line)
 	<th width="25%">产品批次号</th>
 	<th width="20%">产品名</th>
 	<th width="20%">规格</th>
-	<th width="10%">重量</th>
+	<th width="10%">重量(T)</th>
 	<th width="15%">销售类型</th>
   </tr>
   <s:iterator id="result" value="resultList" status="index">	
