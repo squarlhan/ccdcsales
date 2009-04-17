@@ -778,5 +778,24 @@ private HibernateTemplate hibernateTemplate;
 		return result;
 
 	}
+	@SuppressWarnings("unchecked")
+	public Custom getCustomerById(Integer customerId){
+		System.out.println("customerId="+customerId);
+		List<Custom> customerList = hibernateTemplate.find("from Custom where id='"+customerId+"'");
+		System.out.println("customerList.size()="+customerList.size());
+		return customerList.get(0);
+	}
+	@SuppressWarnings("unchecked")
+	public List<Products> getProductNameById(int id){
+		List<Products> productName;
+		productName = hibernateTemplate.find("from Products where id='"+id+"'");
+		return productName;
+	}
+	@SuppressWarnings("unchecked")
+	public List<Specifications> getSpecificationNameById(int id){
+		List<Specifications> specificationName;
+		specificationName = hibernateTemplate.find("from Specifications where id='"+id+"'");
+		return specificationName;
+	}
 
 }
