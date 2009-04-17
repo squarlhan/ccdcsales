@@ -33,7 +33,7 @@
 		    <th width="20%">批号</th>
 		    <th width="10%">产品名</th>
 		    <th width="10%">规格</th>
-		    <th width="10%">数目</th>
+		    <th width="10%">重量(T)</th>
 			<th width="20%">备注</th>
 		</tr>
 		<s:iterator id="result" value="resultList" status="index">		
@@ -48,7 +48,7 @@
 					<s:property value="#result.specifications.displayName" />
 			   </td>
 			   <td align="center">
-					<s:property value="#result.number" />
+					<s:property value="#result.number*#result.specifications.weight" />
 			   </td>
 			   <td align="center">
 					<s:property value="#result.memo" />

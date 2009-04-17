@@ -155,15 +155,15 @@ function setnumber(obj,line)
 		}
 		for(i=0;i<=count;i++)
 		{	
-			var num = document.getElementById("number["+i+"]");
+			var num = document.getElementById("sumweight["+i+"]");
 			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入第"+(i+1)+"行袋数!");
+				alert("请输入第"+(i+1)+"行重量!");
 				return false;
 			}
 			if(isNaN(num.value))
 			{
-				alert("第"+(i+1)+"行袋数应为数字！");
+				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
 			} 
 		}
@@ -190,15 +190,15 @@ function setnumber(obj,line)
 		}
 		for(i=0;i<=count;i++)
 		{	
-			var num = document.getElementById("number["+i+"]");
+			var num = document.getElementById("sumweight["+i+"]");
 			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入第"+(i+1)+"行袋数!");
+				alert("请输入第"+(i+1)+"行重量!");
 				return false;
 			}
 			if(isNaN(num.value))
 			{
-				alert("第"+(i+1)+"行袋数应为数字！");
+				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
 			} 
 		}
@@ -225,7 +225,7 @@ function setnumber(obj,line)
 	<th width="25%">产品批次号</th>
 	<th width="20%">产品名</th>
 	<th width="20%">规格</th>
-	<th width="10%">重量</th>
+	<th width="10%">重量(T)</th>
 	<th width="15%">销售类型</th>
   </tr>
   <s:iterator id="result" value="resultList" status="index">	

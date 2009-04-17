@@ -22,7 +22,7 @@
      <table class="list_table"  align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="25%">产品名</th>
-		    <th width="15%">数量</th>
+		    <th width="15%">重量(T)</th>
 		    <th width="15%">规格</th>
 		    <th width="15%">操作</th>
 		</tr>
@@ -32,7 +32,7 @@
 					<s:property value="#result.product.name" />
 			   </td>
 			   <td align="center">
-					<s:property value="#result.number" />
+					<s:property value="#result.number*#result.specification.weight" />
 			   </td>
 			   <td align="center">
 					<s:property value="#result.specification.displayName" />
