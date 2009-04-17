@@ -1,6 +1,7 @@
 package com.dcsh.market.action.zhuchangku;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
+import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.Specifications;
@@ -43,7 +45,31 @@ public class deliveryWareHouseAction implements Preparable{
     private Specifications newspecification;
     private int index;
     private int tnumber;//移库总数
-    
+    private List<EntryPrintInfo> resultList;
+    private String date;
+    private String printCustom;
+    private EntryPrintInfo epi;
+    private List<BigDecimal> sumweight;
+	public EntryPrintInfo getEpi() {
+		return epi;
+	}
+
+
+	public void setEpi(EntryPrintInfo epi) {
+		this.epi = epi;
+	}
+
+
+	public List<EntryPrintInfo> getResultList() {
+		return resultList;
+	}
+
+
+	public void setResultList(List<EntryPrintInfo> resultList) {
+		this.resultList = resultList;
+	}
+
+
 	public ZhuChangKuService getService() {
 		return service;
 	}
@@ -240,12 +266,29 @@ System.out.println(index+"-------- tnumber "+this.getTnumber());
     	if(tmp==this.getTnumber()){
     		service.doDeliveryWareHouse(chuku);
     		service.resetXsfhxxStatus(index);
-    		return "ok";
+    		return printfh();
     	}
         
     	return "unequal";
     }
-
+	public String printfh(){
+		System.out.println("%%%%%"+this.getProduct().size());
+		resultList=new ArrayList();
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
+		Date d = new Date(); 
+		setDate(bartDateFormat.format(d)); 
+		System.out.println("custom="+custom);
+		setPrintCustom(service.getCustomerById(custom).getCustomName());
+		for(int i=0;i<=this.getProduct().size()-1;i++){
+			List<Products> product = service.getProductNameById(this.getProduct().get(i));
+			List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));
+			
+			this.epi = 
+	    		new EntryPrintInfo(product.get(0).getName(),specification.get(0).getName(),specification.get(0).getPackType(),this.getNumber().get(i),this.getSumweight().get(i).toString(),this.getPch().get(i),"");
+			resultList.add(epi);
+		}
+		return "printfh";
+	}
 
 	public int getCankuorgin() {
 		return cankuorgin;
@@ -340,5 +383,35 @@ System.out.println(index+"-------- tnumber "+this.getTnumber());
 	public void prepare() throws Exception {
 
     }
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+	public String getDate() {
+		return date;
+	}
+
+
+	public void setPrintCustom(String printCustom) {
+		this.printCustom = printCustom;
+	}
+
+
+	public String getPrintCustom() {
+		return printCustom;
+	}
+
+
+	public void setSumweight(List<BigDecimal> sumweight) {
+		this.sumweight = sumweight;
+	}
+
+
+	public List<BigDecimal> getSumweight() {
+		return sumweight;
+	}
 
 }
