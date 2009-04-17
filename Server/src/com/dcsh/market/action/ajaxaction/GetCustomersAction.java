@@ -83,11 +83,13 @@ public class GetCustomersAction implements Action{
 			char[] temp = c.getCustomName().toCharArray();
 			try {
 				for(char cc:temp){
-					if((cc>='0'&&cc<='9')||(cc>='a'&&cc<='z')||(cc>='A'&&cc<='Z')){
+					//System.out.println("ccccccc:::"+cc);
+					if((cc>='0'&&cc<='9')||(cc>='a'&&cc<='z')||(cc>='A'&&cc<='Z')||(cc=='(')||(cc==')')||(cc=='£¨')||(cc=='£©')){
 						result+=cc;
 					}else{
 		                 pinyin = PinyinHelper.toHanyuPinyinStringArray(cc,opf);
-		                 result+=pinyin[0];     
+		                 if(pinyin==null)result=result;
+		                 else result+=pinyin[0];     
 					}
 				}
 				//System.out.println("rrrrrrr"+result);

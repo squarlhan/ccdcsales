@@ -8,7 +8,7 @@
 	<property name="src" location="src" />
 	<property name="build" location="build/classes" />
 	<property name="jboss"
-		location="D:\OpenTools\jboss-5.0.0.GA\server\default\deploy\Server.war" />
+		location="E:\Dcsh\jboss-5.0.0.GA\server\default\deploy\Server.war" />
 
 	<target name="compile" description="compile the source ">
 		<javac srcdir="${src}" destdir="${build}" />
@@ -26,7 +26,6 @@
 			<fileset dir="./WebContent">
 				<include name="**/*.xml" />
 				<include name="**/*.jsp" />
-				<include name="**/*.jar" />
 			</fileset>
 		</copy>
 

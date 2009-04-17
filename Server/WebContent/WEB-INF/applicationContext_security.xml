@@ -15,9 +15,9 @@
 		<intercept-url pattern='/**' access="HTTP"/>
 	</http>
 
-	<beans:bean id="authenticationManager"
+	<beans:bean id="authenticationManager"  
 		class="com.dcsh.market.priv.UserAndGroupAuthenticationImpl">
-		<custom-authentication-provider />
+		<custom-authentication-provider/>
 		<beans:property name="hibernateTemplate" ref="hibernateTemplate" />
 	</beans:bean>
 
