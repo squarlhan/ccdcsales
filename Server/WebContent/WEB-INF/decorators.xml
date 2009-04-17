@@ -3,7 +3,13 @@
 	<excludes>
 	    <pattern>/pages/warehouseadmin/printentry.jsp</pattern>
 	    <pattern>/cycentrywarehouse!print.action </pattern>	   
-	    <pattern>/cycentrywarehouse.action </pattern>	       
+	    <pattern>/cycentrywarehouse.action </pattern>
+	    <pattern>/cycdeliverywarehouse!print.action</pattern>
+	    <pattern>/cycdeliverywarehouse.action</pattern>	   
+	    <pattern>/cycdeliverywarehouse!printfh.action</pattern>
+	    <pattern>/cycdeliverywarehouse!printxsyk.action</pattern>
+	    <pattern>/cycdeliverywarehouse!sale.action</pattern>
+	    <pattern>/cycdeliverywarehouse!yiku.action</pattern>
 	    <pattern>/pages/xiaoshou/printsalesnotification.jsp</pattern>
 	    <pattern>/xssalesnotification!print.action </pattern>
 	    <pattern>/xssalesnotification.action</pattern>
