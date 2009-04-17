@@ -28,7 +28,8 @@
         <action name="zzkdeliverywarehouse" method="execute" class="zzkdeliverywareHouseAction">
             <result type="redirect-action">zzklistuncheckProducts</result>
             <result name="ok" type="redirect-action">zzklistuncheckProducts</result>
-
+            <result name="printfh">/pages/zhongzhuanku/printfh.jsp</result>
+			<result name="printxsyk">/pages/zhongzhuanku/printxsyk.jsp</result>
         </action>
         <action name="zzkloginAdmin" method="execute" class="zzkloginAdminAction">
             <result name="success" type="chain">zzklistcangku </result>
