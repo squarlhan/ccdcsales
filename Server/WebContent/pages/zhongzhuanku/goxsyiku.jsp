@@ -304,7 +304,7 @@ function setnumber(obj,line)
     </tr>
   </s:iterator>
 </table>
-<s:form id="myform" action="zzkdeliverywarehouse!yiku" theme="simple" onsubmit="return checkNullandNum()">
+<s:form id="myform" theme="simple" target="_blank">
   <table class="list_table" id="tbt" align="center" width="100%">
    <tr>
           <td><s:text name="请选择目标仓库"></s:text>
