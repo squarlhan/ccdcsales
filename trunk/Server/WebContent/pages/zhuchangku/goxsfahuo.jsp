@@ -303,7 +303,7 @@ function setnumber(obj,line)
     </tr>
   </s:iterator>
 </table>
-<s:form id="myform" theme="simple">
+<s:form id="myform" theme="simple" target="_blank">
   <table class="list_table" id="tbt" align="center" width="100%">
    <tr>
           <td><s:text name=" 发货类型：销售"></s:text></td>
