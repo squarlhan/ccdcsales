@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
-import com.dcsh.market.Kcxx;
 import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
@@ -23,12 +20,12 @@ public class goEntryAction implements Preparable{
     private List<Specifications> specificationsList;
 
     public goEntryAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
+    	
         this.service = service;
     }
     
 	public String execute() {
-    	System.out.println("Enter Excute");
+    
     	
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil
 		.getLoginAuthentication();
@@ -43,10 +40,9 @@ public class goEntryAction implements Preparable{
     	
         this.productsList = plist;
         this.specificationsList = service.getAllSpecifications();
-        System.out.println(productsList);
-        System.out.println(specificationsList);
+      
         return "show";
-        //return Action.SUCCESS;
+     
     }
 
     public WareHouseService getService() {

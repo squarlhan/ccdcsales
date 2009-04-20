@@ -10,16 +10,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
-import com.dcsh.market.Rkmx;
 import com.dcsh.market.Specifications;
-import com.dcsh.market.Users;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.ZhongZhuanKuService;
 import com.opensymphony.xwork2.ActionContext;
@@ -145,16 +142,13 @@ public class deliveryWareHouseAction implements Preparable{
 
 
 	public deliveryWareHouseAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
     
 	public String execute() {
-    	System.out.println("Enter Excute");
-    	System.out.println("%%%%%"+this.getSpecification().size());
-		System.out.println("%%%%%"+this.getProduct().size());
-
+    
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
     	    this.newspecification = new Specifications(this.getSpecification().get(i),null,new BigDecimal(0.025),null);
@@ -174,7 +168,7 @@ public class deliveryWareHouseAction implements Preparable{
           		this.getBno().trim(),
           		new Date(),
           		this.getChukumxes());
-      	//return null;
+
           service.doDeliveryWareHouse(chuku);
     	
     	
@@ -182,12 +176,7 @@ public class deliveryWareHouseAction implements Preparable{
     }
 	
 	public String yiku() {
-    	System.out.println("Enter Excute");
-    	System.out.println("%%%%%"+this.getSpecification().size());
-		System.out.println("%%%%%"+this.getProduct().size());
-		
-		System.out.println(index+"-------- tnumber "+this.getTnumber());
-
+   
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
     	    this.newspecification = new Specifications(this.getSpecification().get(i),null,new BigDecimal(0.025),null);
@@ -207,8 +196,7 @@ public class deliveryWareHouseAction implements Preparable{
           		this.getBno().trim(),
           		new Date(),
           		this.getChukumxes());
-      	//return null;
-          
+       
           Integer tmp = 0;
           for(int i=0;i<this.getNumber().size();i++){
         	  tmp+=this.getNumber().get(i);
@@ -223,7 +211,7 @@ public class deliveryWareHouseAction implements Preparable{
         
     }
 	public String printxsyk(){
-		System.out.println("%%%%%"+this.getProduct().size());
+	
 		resultList=new ArrayList();
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 		Date d = new Date(); 
@@ -241,13 +229,8 @@ public class deliveryWareHouseAction implements Preparable{
 		return "printxsyk";
 	}
 	public String sale() {
-		
-		System.out.println("Enter Excute");
-    	System.out.println("%%%%%"+this.getSpecification().size());
-		System.out.println("%%%%%"+this.getProduct().size());
-		
+				
 		int salecangku = 11;//销售仓库id 11
-System.out.println(index+"-------- tnumber "+this.getTnumber());
 
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
@@ -268,7 +251,6 @@ System.out.println(index+"-------- tnumber "+this.getTnumber());
           		this.getBno().trim(),
           		new Date(),
           		this.getChukumxes());
-      	//return null;
           
           Integer tmp = 0;
           for(int i=0;i<this.getNumber().size();i++){
@@ -284,12 +266,10 @@ System.out.println(index+"-------- tnumber "+this.getTnumber());
     }
 
 	public String printfh(){
-		System.out.println("%%%%%"+this.getProduct().size());
 		resultList=new ArrayList();
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 		Date d = new Date(); 
 		setDate(bartDateFormat.format(d)); 
-		System.out.println("custom="+custom);
 		setPrintCustom(service.getCustomerById(custom).getCustomName());
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			List<Products> product = service.getProductNameById(this.getProduct().get(i));

@@ -28,12 +28,12 @@ public class goZckDeliveryAction implements Preparable{
     private List<Custom> customList;
     private List<String> pchList;
     public goZckDeliveryAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();
     	Set<String> pchset = new HashSet();
@@ -54,12 +54,9 @@ public class goZckDeliveryAction implements Preparable{
             this.specificationsList.addAll(speset);
             this.productsList.addAll(proset);
             this.pchList.addAll(pchset);
-            System.out.println(productsList);
-            System.out.println(specificationsList);
             cankusList = service.getCangkuByType(1);//◊§≥ßø‚¿‡–Õ 1
             return "show";
             }
-        //return Action.SUCCESS;
     }
 
     public WareHouseService getService() {

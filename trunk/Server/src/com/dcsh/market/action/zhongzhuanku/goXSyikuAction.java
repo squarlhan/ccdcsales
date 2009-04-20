@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.KcxxCheck;
@@ -15,11 +14,6 @@ import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.XSyikumx;
 import com.dcsh.market.priv.CankuPriv;
-import com.dcsh.market.priv.PrivAuthenticationImpl;
-import com.dcsh.market.priv.PrivUtil;
-import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
-import com.dcsh.market.priv.ResourceType;
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhongZhuanKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -38,18 +32,17 @@ public class goXSyikuAction implements Preparable{
     private List<String> pchList;
     
     public goXSyikuAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Set<String> pchset = new HashSet();
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> list = (List<CankuPriv>)session.get("zhongzhuanuser");
-	   
-    	
-//		this.xsyklist = service.getXSyikumx(new Canku(2,"",(byte)0));
+ 	
 	    this.xsyklist = service.getXSyikumx(((List<CankuPriv>)session.get("zhongzhuanuser")).get(0).getCanku());
 		
 		for(int i=0;i<xsyklist.size();i++){
@@ -57,9 +50,7 @@ public class goXSyikuAction implements Preparable{
 				xsykmx = xsyklist.get(i);
 		}
 		 if(list.size()!=0)
-//		    	if(list.size()==0)
-//		    		return "novali";
-//		    	else
+
 		    	{
 			 		this.pchList = new ArrayList();
 		            this.productsList = service.getAllProducts();
@@ -70,8 +61,7 @@ public class goXSyikuAction implements Preparable{
 		            	pchset.add(this.resultList.get(i).getId().getPch());
 		            }
 		            this.pchList.addAll(pchset);
-		            System.out.println(productsList);
-		            System.out.println(specificationsList);
+	
 		            cankusList = service.getAllCankus();
 		        }
 		cankusList.clear();

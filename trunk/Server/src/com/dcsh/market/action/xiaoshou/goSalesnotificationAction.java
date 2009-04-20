@@ -35,7 +35,7 @@ public class goSalesnotificationAction implements Preparable {
 	private Users mynhr;
 
 	public goSalesnotificationAction(XiaoshouService service) {
-		System.out.println("Enter Constructor");
+
 		this.service = service;
 	}
 
@@ -53,14 +53,11 @@ public class goSalesnotificationAction implements Preparable {
 		this.setMydate(new Date());
 		this.setCustomList(service.getAllCustom());
 		this.setFahuoList(service.getAllFahuos());
-		//System.out.println(service.getAllCustom().get(0).getCustomName()
-				//+ "--------------");
 		this.setCankuList(service.getAllCankus());
 		this.setProductList(plist);
 		this.setSpecificationList(service.getAllSpecificationList());
         this.myshr = service.loadmyshr();
         this.mynhr = service.loadmynhr();
-        System.out.println(myshr.getDescription()+mynhr.getDescription());
 		return "gosales";
 	}
 

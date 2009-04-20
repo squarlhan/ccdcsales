@@ -21,7 +21,7 @@ public class selectCangkuAction implements Preparable {
     private Integer cangkuId;
     
     public selectCangkuAction(ZhuChangKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
     
@@ -44,15 +44,14 @@ public class selectCangkuAction implements Preparable {
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 		
 		CankuPriv temp = new CankuPriv(auth.getPrincipal(),cangku);
-		System.out.println(cankupriv.size()+"------------------");
+
 		cankupriv.add(temp);
-		System.out.println(cankupriv.size()+"------------------");
+
 		session.put("zhuchanguser", cankupriv);
-		System.out.println(((List<CankuPriv>) session.get("zhuchanguser")).size()+"------------------");
+
 		return "selectedcangku";
 	}
 	public void prepare() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 

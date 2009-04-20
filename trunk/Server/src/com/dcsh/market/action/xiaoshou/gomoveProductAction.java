@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
@@ -16,7 +15,6 @@ import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
 import com.dcsh.market.priv.ResourceType;
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.XiaoshouService;
 import com.opensymphony.xwork2.Preparable;
 
@@ -34,7 +32,7 @@ public class gomoveProductAction implements Preparable {
 	private Date mydate;
 
 	public gomoveProductAction(XiaoshouService service) {
-		System.out.println("Enter Constructor");
+
 		this.service = service;
 	}
 

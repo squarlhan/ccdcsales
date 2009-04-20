@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.priv.CankuPriv;
@@ -12,7 +11,6 @@ import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
 import com.dcsh.market.priv.ResourceType;
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhongZhuanKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -24,14 +22,14 @@ public class listUnCheckProductsAction implements Preparable{
     private Rkmx rkmx;
     private boolean flag;
     public listUnCheckProductsAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
     
 	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
     	List<ResourceGrantedAuthorityImpl> list = 
@@ -54,7 +52,7 @@ public class listUnCheckProductsAction implements Preparable{
     			this.setFlag(false);
             return "welcome";
     	}
-        //return Action.SUCCESS;
+
     }
 
 

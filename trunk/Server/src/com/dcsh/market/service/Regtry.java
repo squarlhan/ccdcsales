@@ -26,18 +26,12 @@ public class Regtry {
 		opf.setToneType(HanyuPinyinToneType .WITHOUT_TONE);
 		opf.setVCharType(HanyuPinyinVCharType.WITH_V);
 		char[] name = "客户".toCharArray();
-		System.out.println(name.length);
-		System.out.println("客户".length());
 		String[] pinyin = null;
 		String result = "";
 		for(char cc:name){
 		   pinyin = PinyinHelper.toHanyuPinyinStringArray(cc,opf);	
 		   result+=pinyin[0];
 		}
-		System.out.println(pinyin.length);
-	
-		System.out.println(result);
-		
 
 	}
 

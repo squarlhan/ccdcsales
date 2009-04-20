@@ -1,22 +1,14 @@
 package com.dcsh.market.action.zhuchangku;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Kcxx;
-import com.dcsh.market.KcxxCheck;
-
 import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.priv.CankuPriv;
-
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -34,7 +26,7 @@ public class listAllStorageAction implements Preparable{
     private boolean flag;
     
     public listAllStorageAction(ZhuChangKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
@@ -45,10 +37,6 @@ public class listAllStorageAction implements Preparable{
 	public void setKcxx(Kcxx kcxx) {
 		this.kcxx = kcxx;
 	}
-	
-	
-
-
 
 	public Date getMydate() {
 		return mydate;
@@ -57,7 +45,6 @@ public class listAllStorageAction implements Preparable{
 	public void setMydate(Date mydate) {
 		this.mydate = mydate;
 	}
-
 
 
 	public List<Kcxx> getResultList() {
@@ -69,15 +56,14 @@ public class listAllStorageAction implements Preparable{
 	}
 
 	public String execute() {
-    	System.out.println("Enter Excute");
     	
             return "list";
         
-        //return Action.SUCCESS;
     }
 
+	@SuppressWarnings("unchecked")
 	public String getInfoByDate(){
-		System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhuchanguser");
     	
@@ -86,9 +72,6 @@ public class listAllStorageAction implements Preparable{
     		return "input";
     	}
     	else{
-    		
-    		System.out.println("mydate="+mydate);
-    		System.out.println("tempuser: "+user.get(0).getCanku().getId());
 
   			this.resultList = service.listZhuChangKuAll(user.get(0).getCanku().getId());
   			
@@ -108,9 +91,7 @@ public class listAllStorageAction implements Preparable{
     			}
     			
     		}
-    		System.out.println("mydate="+mydate);
-    		
-    		
+
     		pmxList = new ArrayList<ReportPmx>();
     		for(int i=0;i<pmxListTemp.size();i++){
     				pmxList.add(i,pmxListTemp.get(i));

@@ -2,21 +2,15 @@ package com.dcsh.market.service;
 
 
 import java.util.ArrayList;
-
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.dcsh.market.Canku;
-import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
@@ -31,12 +25,8 @@ import com.dcsh.market.UserGroup;
 import com.dcsh.market.UserGroupPriv;
 import com.dcsh.market.UserPriv;
 import com.dcsh.market.Users;
-
 import com.dcsh.market.priv.CankuPriv;
-import com.dcsh.market.priv.CankuPrivG;
 import com.dcsh.market.priv.URLGPriv;
-
-import com.dcsh.market.service.WareHouseServiceImpl;
 
 
 public class AdminServiceImpl implements AdminService {
@@ -75,7 +65,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<Products> getAllProducts() {
-		// TODO Auto-generated method stub
 		return hibernateTemplate.find("from Products");
 	}
 
@@ -104,13 +93,6 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void addSpecification(Specifications specification) {
 		hibernateTemplate.save(specification);
-//		if(hibernateTemplate.find("from Specifications where name ='"+ String.valueOf(specification.getName())+"'").size()==0){
-//			hibernateTemplate.save(specification);
-//		}else{
-//			System.out.println("该产品已有！");
-//			throw new IllegalArgumentException("该产品已有！");
-//			
-//		}
 	}
 
 	@Override
@@ -184,12 +166,7 @@ public class AdminServiceImpl implements AdminService {
 		if (users.size() == 0) throw new IllegalArgumentException("错误的用户名！");
 		
 		Users user = users.iterator().next();
-		for(byte b:Password) {System.out.print(b); System.out.print(" ");}
-		System.out.println();
-		for(byte b:user.getPassword()) {System.out.print(b); System.out.print(" ");}
-		System.out.println();
-		//System.out.println("((((("+user.getName());
-		//System.out.println(Password+"----"+user.getPassword());
+	
 		//验证用户名,以后可能需要考虑加密版本
 		
 		if (Arrays.equals(Password, user.getPassword())){
@@ -216,7 +193,7 @@ public class AdminServiceImpl implements AdminService {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(date);
 	    String nowdatestr =bartDateFormat.format(nowdate);
-	    System.out.println("datestr = "+datestr);
+	
 	    
 	    BigDecimal total_kcwt = new BigDecimal(0);
 		BigDecimal total_rkwt = new BigDecimal(0);
@@ -228,12 +205,12 @@ public class AdminServiceImpl implements AdminService {
 		BigDecimal bhgt = new BigDecimal(0);
 		
 	    if((nowdatestr.equals(datestr))==true){
-	    	System.out.println("cankuid = "+cankuid);
+	 
 	    	if(cankuid==0){
 //				全库 当前
 	    		kcxxs = hibernateTemplate.find("from Kcxx");
 	    		list = todaylist(cankuid);//cankuid==0
-	    		System.out.println("line 178 全库 当前");
+	 
 	    	}
 	    	else{
 //				某库 当前
@@ -249,7 +226,7 @@ public class AdminServiceImpl implements AdminService {
 	    		List<ReportPmx> listall = hibernateTemplate.find("from ReportPmx as rp where convert(varchar(10),rp.rxxid.date,120) = '"+datestr+"'");
 	    		List<Products> productall = hibernateTemplate.find("select distinct prdid from ReportPmx as rp where convert(varchar(10),rp.rxxid.date,120) = '"+datestr+"'");
 	    		int pall = productall.size();
-	    		System.out.println("pall = "+pall);
+	    
 	    		for(int i=0;i<pall;i++){
 	    			total_kcwt = new BigDecimal(0);
     				total_rkwt = new BigDecimal(0);
@@ -275,11 +252,11 @@ public class AdminServiceImpl implements AdminService {
 	    					total_rkwt,total_ckwt,total_kcwt,nxt,
 	    					wxt,djt,dxt,bhgt));
 	    		}
-	    		System.out.println("全库 某天  cankuid = "+cankuid +"  date = ");
+	    	
 	    	}
 	    	else{
 //	    		某库 某天
-	    		System.out.println("某库 某天  cankuid = "+cankuid );
+	    	
 	    		list.clear();
 	    		list = hibernateTemplate.find("from ReportPmx as rp where rp.ckid = "+cankuid
 					+" and convert(varchar(10),rp.rxxid.date,120) = '"+datestr+"'");
@@ -329,7 +306,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		for(int i=0;i<skucun;i++){
 			
-			System.out.println("*** begin for of skucun *** "+ i);
+	
 			total_kcwt = new BigDecimal(0);
 			total_rkwt = new BigDecimal(0);
 			total_ckwt = new BigDecimal(0);
@@ -340,24 +317,24 @@ public class AdminServiceImpl implements AdminService {
 			bhgt = new BigDecimal(0);
 			//入库明细总重
 			for(int i1=0;i1<listrkmx.size();i1++){
-//				if(listrkmx.get(i1).getRkxx().getCanku().getId()!=saleck){
+
 					if(listrkmx.get(i1).getProducts().getId()==(pkucun.get(i).getId()))
 					{
 						total_rkwt = total_rkwt.add((listrkmx.get(i1).getSpecifications().getWeight()).multiply(new BigDecimal(listrkmx.get(i1).getNumber())));
 					}
-//				}
+
 			}
 			//日销量
 			for(int i2=0;i2<listchuku.size();i2++){
 				if(listchuku.get(i2).getProducts().getId()==(pkucun.get(i).getId()))
 				{
-					System.out.println("***************  equals   ********** "+i);
+
 					total_ckwt = total_ckwt.add((listchuku.get(i2).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i2).getNumber())));
 				}
 				else
-				System.out.println("*************** un    ********** "+i);
+				System.out.println();
 			}
-			System.out.println("320");
+	
 			//内销.外销.待检.定向--库存
 			listkcxx.clear();
 			listkcxx = hibernateTemplate.find("from Kcxx as kc where kc.products.id="+pkucun.get(i).getId());
@@ -365,11 +342,11 @@ public class AdminServiceImpl implements AdminService {
 				listkcxx = hibernateTemplate.find("from Kcxx as kc where kc.products.id="+pkucun.get(i).getId()+" and kc.id.cid="+canku.getId());
 			}
 			for(int i3=0;i3<listkcxx.size();i3++){
-//				if(listkcxx.get(i3).getId().getCid()!=saleck){
+
 					tmp=new BigDecimal(0);
 					tmp=(listkcxx.get(i3).getSpecifications().getWeight()).multiply
 						(new BigDecimal(listkcxx.get(i3).getNumber()));
-					System.out.println("line 328");
+			
 					total_kcwt = total_kcwt.add(tmp);
 					switch(listkcxx.get(i3).getSaleType())
 					{
@@ -379,7 +356,7 @@ public class AdminServiceImpl implements AdminService {
 						case 2:dxt=dxt.add(tmp);break;//定向
 						case 4:bhgt=bhgt.add(tmp);break;//不合格
 					}
-//				}
+
 			}
 			/*
 			 * 查询当日只有出库且无库存的产品种类
@@ -456,13 +433,13 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	@Transactional
 	public void updateUserGroup(UserGroup usergroup){
-		System.out.println("1");
+	
 		UserGroup temp = (UserGroup) hibernateTemplate.load(UserGroup.class, usergroup.getId());
-		System.out.println("2 usergroup.getId() = "+usergroup.getId());
+	
 		temp.setName(usergroup.getName());
-		System.out.println("3 usergroup.getName() = "+usergroup.getName());
+
 		temp.setDescription(usergroup.getDescription());
-		System.out.println("4 usergroup.getDescription() = "+usergroup.getDescription());
+
 		hibernateTemplate.update(temp);
 	}
 
@@ -540,11 +517,11 @@ public class AdminServiceImpl implements AdminService {
 						else if(resources[1].contains("xs"))griv.setUrl("销售中心");
 						else griv.setUrl("无限制");
 					}
-					System.out.println("groups prev:"+griv.getUrl());
+				
 				}
 			}
 		}
-		System.out.println("result count:"+result.size());
+	
 		return result;
 	}
 	

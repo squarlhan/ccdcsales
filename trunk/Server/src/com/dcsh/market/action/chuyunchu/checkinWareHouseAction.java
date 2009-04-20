@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.Preparable;
@@ -31,7 +29,7 @@ public class checkinWareHouseAction implements Preparable{
 
 
 	public void setResultList(List<Rkmx> resultList) {
-		System.out.println("Here");
+
 		System.out.print(
 				Thread.currentThread().getStackTrace());
 		this.resultList = resultList;
@@ -45,20 +43,19 @@ public class checkinWareHouseAction implements Preparable{
 
 
 	public String execute() {
-    	System.out.println("Enter Excute");
-    	System.out.println("*******"+this.getResultList());
+    
     	for (Iterator it = resultList.iterator();it.hasNext();) {
     		Rkmx r = (Rkmx)it.next();
 			if ((r.getStatus() == (byte) 1) && (r.getSaleType() == (byte) 0)) {
-				System.out.println("*******"+this.getResultList().size());
+			
 				it.remove();
-				System.out.println("*******"+this.getResultList().size());
+			
 			}
 		}
     	if(this.getResultList().size()!=0)service.doCheckProducts(this.getResultList());
-        //System.out.println(this.getResultList().get(1).getSaleType());
+   
         return "list";
-        //return Action.SUCCESS;
+   
     }
 
     public void prepare() throws Exception {

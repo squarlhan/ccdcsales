@@ -4,10 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.XSfahuomx;
-import com.dcsh.market.XSyikumx;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.ActionContext;
@@ -23,8 +20,8 @@ public class getXSfahuoAction implements Preparable{
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
     	Map session = ActionContext.getContext().getSession();
         this.xsfhlist = service.getXSfahuomx(((List<CankuPriv>)session.get("tempuser")).get(0).getCanku());
         System.out.println(xsfhlist);

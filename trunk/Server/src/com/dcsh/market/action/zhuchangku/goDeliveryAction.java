@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
@@ -26,14 +24,15 @@ public class goDeliveryAction implements Preparable{
     private List<KcxxCheck> resultList;
     private List<Custom> customList;
     private List<String> pchList;
-    //private List<Canku> cankusList;
+
     public goDeliveryAction(ZhuChangKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();
     	Set<String> pchset = new HashSet();
@@ -54,12 +53,8 @@ public class goDeliveryAction implements Preparable{
             this.specificationsList.addAll(speset);
             this.productsList.addAll(proset);
             this.pchList.addAll(pchset);
-            System.out.println(productsList);
-            System.out.println(specificationsList);
-//            cankusList = service.getAllCankus();
             return "show";
             }
-        //return Action.SUCCESS;
     }
 
     public ZhuChangKuService getService() {
@@ -94,13 +89,6 @@ public class goDeliveryAction implements Preparable{
 		this.resultList = resultList;
 	}
 
-//	public List<Canku> getCankusList() {
-//		return cankusList;
-//	}
-//
-//	public void setCankusList(List<Canku> cankusList) {
-//		this.cankusList = cankusList;
-//	}
 	public List<String> getPchList() {
 		return pchList;
 	}

@@ -7,19 +7,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.XSfahuomx;
-import com.dcsh.market.XSyikumx;
 import com.dcsh.market.priv.CankuPriv;
-import com.dcsh.market.priv.PrivAuthenticationImpl;
-import com.dcsh.market.priv.PrivUtil;
-import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
-import com.dcsh.market.priv.ResourceType;
 import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -38,18 +32,17 @@ public class goXSfahuoAction implements Preparable{
     private List<String> pchList;
     
     public goXSfahuoAction(ZhuChangKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Set<String> pchset = new HashSet();
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> list = (List<CankuPriv>)session.get("zhuchanguser");
-	    System.out.println(list.size()+"  ++++++++");
-	   
-    	
+
 		this.xsfhlist = service.getXSfahuomx(((List<CankuPriv>)session.get("zhuchanguser")).get(0).getCanku());
 		
 		for(int i=0;i<xsfhlist.size();i++){
@@ -57,9 +50,6 @@ public class goXSfahuoAction implements Preparable{
 				xsfhmx = xsfhlist.get(i);
 		}
 		 if(list.size()!=0)
-//		    	if(list.size()==0)
-//		    		return "novali";
-//		    	else
 		    	{
 			 		this.pchList = new ArrayList();
 		            this.productsList = service.getAllProducts();
@@ -70,12 +60,9 @@ public class goXSfahuoAction implements Preparable{
 		            	pchset.add(this.resultList.get(i).getId().getPch());
 		            }
 		            this.pchList.addAll(pchset);
-		            System.out.println(productsList);
-		            System.out.println(specificationsList);
 		            cankusList = service.getAllCankus();
 		        }
 		cankusList.clear();
-//		cankusList.add(xsfhmx.getXsyikuxx().getAimcanku());
 		for(int i=0;i<specificationsList.size();i++){
 			if(specificationsList.get(i).getId()==xsfhmx.getSpecification().getId()){
 				Specifications tp = new Specifications();

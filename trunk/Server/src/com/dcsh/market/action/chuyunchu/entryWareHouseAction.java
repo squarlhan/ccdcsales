@@ -10,10 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.EntryPrintInfo;
-import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.Rkxx;
@@ -242,16 +240,15 @@ public class entryWareHouseAction implements Preparable{
 
 
 	public entryWareHouseAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
 		List<Rkmx> temprumxs;
-    	System.out.println("Enter Excute");
-    	System.out.println("%%%%%"+this.getSpecification().size());
-		System.out.println("%%%%%"+this.getProduct().size());
+    	
 		Map session = ActionContext.getContext().getSession();
     	if(session.containsKey("temprumxs")){
     		temprumxs = (List<Rkmx>) session.get("temprumxs");
@@ -268,30 +265,19 @@ public class entryWareHouseAction implements Preparable{
 		}
         this.cankusList = service.getAllCankus();
         
-        
-//        Map session = ActionContext.getContext().getSession();
-//    	 temprumxs = (List<Rkmx>) session.get("temprumxs");
-//    	session.put("temprumxs", null);
-    	System.out.println(temprumxs);
-    	System.out.println("220*****************");
     	this.rkmxes.addAll(temprumxs);
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
         this.rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),
-//        		new Users(this.getRkczy()),
         		new Users(this.getRkfzr()),
         		this.getBno().trim(),
         		new Date(),
         		this.getRkmxes());
-    	//return null;
-        System.out.println("229*****************");
         service.doEntryWareHouse(rkxx);
-        System.out.println("231*****************");
-//        return "gork";
         return print();
     }
 
 	public String print(){
-		System.out.println("%%%%%"+this.getProduct().size());
+
 		resultList=new ArrayList();
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
 		Date d = new Date(); 
@@ -304,9 +290,7 @@ public class entryWareHouseAction implements Preparable{
 	    		new EntryPrintInfo(product.get(0).getName(),specification.get(0).getName(),specification.get(0).getPackType(),this.getNumber().get(i),sum.toString(),this.getPch().get(i),this.getMemo().get(i));
 			resultList.add(epi);
 		}
-		for(int i=0;i<resultList.size();i++){
-			System.out.println("ProductsName:"+resultList.get(i).getProductsName()+"Pch:"+resultList.get(i).getPchName());
-		}
+		
 		return "print";
 	}
 	public void prepare() throws Exception {

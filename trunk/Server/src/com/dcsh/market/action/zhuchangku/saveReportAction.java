@@ -22,10 +22,10 @@ public class saveReportAction implements Preparable {
 	
     public saveReportAction(ZhuChangKuService service)
     {
-	   System.out.println("Enter Constructor");
         this.service = service;
 	}
-    public String execute() 
+    @SuppressWarnings("unchecked")
+	public String execute() 
     {
     	List<ReportCmx> reportcmxlist =  new ArrayList<ReportCmx>();
     	List<ReportPmx> reportpmxlist = new ArrayList<ReportPmx>();
@@ -52,12 +52,6 @@ public class saveReportAction implements Preparable {
       		cankuid= canku.getId();
       	}
       	
-      	
-      	System.out.println(reportcmxlist+"reportcmxlist");
-    	System.out.println(reportpmxlist+"reportpmxlist");
-    	System.out.println(users+"users");
-    	System.out.println(canku.getId()+"getjjjjj");
-    	System.out.println(this.getBno());
   
       	service.saveDayReportxx(reportcmxlist, reportpmxlist,users, bno.trim(), new Date(),cankuid);
     	return "save_ok";

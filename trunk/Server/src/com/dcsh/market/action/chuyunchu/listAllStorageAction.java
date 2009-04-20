@@ -7,15 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Kcxx;
 import com.dcsh.market.KcxxCheck;
-
 import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.priv.CankuPriv;
-
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -33,7 +28,7 @@ public class listAllStorageAction implements Preparable{
     private Date mydate;
     private boolean flag;
     public listAllStorageAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
+    
         this.service = service;
     }
 
@@ -67,16 +62,14 @@ public class listAllStorageAction implements Preparable{
 		this.resultList = resultList;
 	}
 
-	public String execute() {
-    	System.out.println("Enter Excute");
+	public String execute() {   
     	
             return "list";
-        
-        //return Action.SUCCESS;
+  
     }
 
 	public String getInfoByDate(){
-		System.out.println("Enter Excute");
+	
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	resultList = new ArrayList<KcxxCheck>();
@@ -85,8 +78,6 @@ public class listAllStorageAction implements Preparable{
     		return "input";
     	}
     	else{
-    		System.out.println("mydate="+mydate);
-    		System.out.println("tempuser: "+user.get(0).getCanku().getId());
     		this.resultListTemp = service.listWarehouse(user.get(0).getCanku().getId());
     		for(int i=0;i<resultListTemp.size();i++){
     			KcxxCheck result = new KcxxCheck();
@@ -162,7 +153,7 @@ public class listAllStorageAction implements Preparable{
     	    
     		if (mydate==null){
     			mydate = new Date();
-        		System.out.println("mydate="+mydate);
+        	
         		this.pmxListTemp = service.getDayReportPmx(user.get(0).getCanku(), mydate);
     		}else{
     			Date nowdate = new Date();
@@ -186,7 +177,7 @@ public class listAllStorageAction implements Preparable{
     			else
     				pmxList.add(i,pmxListTemp.get(i));
     		}
-    		System.out.println("tempuser: "+user.get(0).getCanku().getId());
+    	
             return "infoList";
     	}
 	}

@@ -9,10 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
-import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
@@ -104,9 +102,6 @@ public class salesNotificationAction implements Preparable {
 		  }
 		  
 		  Custom newcustom = new Custom(this.getCustomer());
-		  System.out.println(this.getMyshr()+"hhhhhhh");
-		  System.out.println(this.getMemo()+"memohhhhhhh");
-		  //System.out.println(Integer.parseInt(this.getMyshr().trim())+"fffffffffff");
 		  Users  tempshr = new Users(9);
 		  Users  tempnhr = new Users(10);
 		  PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
@@ -119,8 +114,7 @@ public class salesNotificationAction implements Preparable {
 	 }
 	 
 	 public String print(){
-			System.out.println("%%%%%"+this.getProduct().size());
-			System.out.println("mydate="+mydate);
+
 			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
 			Date d = new Date(); 
 			date= bartDateFormat.format(d); 

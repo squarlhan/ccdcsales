@@ -61,21 +61,13 @@ public class UserAndGroupAuthenticationImpl implements AuthenticationProvider {
 	@Override
 	public Authentication authenticate(Authentication auth)
 			throws AuthenticationException {
-//		ArrayList granted = new ArrayList();
-//		granted.add(new GrantedAuthorityImpl("ROLE_USER"));
-//		UsernamePasswordAuthenticationToken rst = new UsernamePasswordAuthenticationToken(
-//				auth.getPrincipal(),auth.getCredentials(),
-//				(GrantedAuthority[])granted.toArray(new GrantedAuthorityImpl[granted.size()])
-//				);
-//		System.out.println(rst);
-//		return rst;
+
 		String name = null;
 		String pwd = null;
 		try{
-			//if (auth instanceof UsernamePasswordAuthenticationToken){
+	
 				name = (String)auth.getPrincipal();
 				pwd = (String)auth.getCredentials();
-			//}
 			
 		}catch(Exception e){
 			throw new IllegalArgumentException("´íÎóµÄ²ÎÊý!" + e.getMessage());
@@ -147,7 +139,7 @@ public class UserAndGroupAuthenticationImpl implements AuthenticationProvider {
 					ClassMetadata cm = 
 						hibernateTemplate.getSessionFactory().getClassMetadata(type.getResClass());
 					if (cm != null){
-						//hibernate managed resource
+			
 						res = session.get(type.getResClass(), Integer.valueOf(rd));
 					}else
 						res = rd;

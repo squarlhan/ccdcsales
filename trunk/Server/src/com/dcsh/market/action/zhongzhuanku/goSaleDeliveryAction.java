@@ -32,8 +32,9 @@ public class goSaleDeliveryAction implements Preparable{
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();
     	Set<String> pchset = new HashSet();
@@ -54,12 +55,9 @@ public class goSaleDeliveryAction implements Preparable{
             this.specificationsList.addAll(speset);
             this.productsList.addAll(proset);
             this.pchList.addAll(pchset);
-            System.out.println(productsList);
-            System.out.println(specificationsList);
             cankusList = service.getAllCankus();
             return "show";
             }
-        //return Action.SUCCESS;
     }
 
     public ZhongZhuanKuService getService() {

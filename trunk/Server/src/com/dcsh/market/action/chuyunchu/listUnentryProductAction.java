@@ -23,21 +23,20 @@ public class listUnentryProductAction implements Preparable{
     private Rkmx rkmx;
     private boolean flag;
     public listUnentryProductAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
     
 	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
     	List<ResourceGrantedAuthorityImpl> list = 
     		auth.getGrantedAuthorityResource(ResourceType.CANKU);
     	for(ResourceGrantedAuthorityImpl resource: list){
-    		System.out.println(resource.getType());
-    		System.out.println(resource.getResource());
+    	
     	}
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	if(user.size()==0){
@@ -45,7 +44,7 @@ public class listUnentryProductAction implements Preparable{
     		return "input";
     	}
     	else{
-    		System.out.println("zhongzhuanuser: "+user.get(0).getCanku().getId());
+    	
     		this.resultList = service.listUnentryProducts(user.get(0).getCanku().getId());
     		if(resultList.size()==0)
     			this.setFlag(true);
@@ -53,7 +52,7 @@ public class listUnentryProductAction implements Preparable{
     			this.setFlag(false);
             return "listunentry";
     	}
-        //return Action.SUCCESS;
+    
     }
 
 

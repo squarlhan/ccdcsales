@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
-import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
 public class goUserAction implements Preparable {
@@ -16,7 +15,7 @@ public class goUserAction implements Preparable {
 	private String phone;
 	
 	public goUserAction(){
-		System.out.println("Enter Constructor");
+	
 	}
 	
 	public String getUsername() {
@@ -36,7 +35,7 @@ public class goUserAction implements Preparable {
 	}
 
 	public String execute() {
-		System.out.println("Enter Execute:");
+	
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil.getLoginAuthentication();
 		this.username = auth.getPrincipal().getName();
 		this.phone = auth.getPrincipal().getPhone();

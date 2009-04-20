@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.XSyikumx;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.WareHouseService;
@@ -18,15 +16,14 @@ public class getXSyikuAction implements Preparable{
     private List<XSyikumx> xsyklist;
 
     public getXSyikuAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
         this.xsyklist = service.getXSyikumx(((List<CankuPriv>)session.get("tempuser")).get(0).getCanku());
-        System.out.println(xsyklist);
         return "show_report";
       
     }

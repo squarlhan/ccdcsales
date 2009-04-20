@@ -1,7 +1,6 @@
 package com.dcsh.market.action.chuyunchu;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -9,19 +8,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Products;
-import com.dcsh.market.Rkmx;
 import com.dcsh.market.Specifications;
-import com.dcsh.market.Users;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.ActionContext;
@@ -110,10 +102,6 @@ public class dealWithLostAction implements Preparable{
 		this.specification = specification;
 	}
 
-	
-
-
-
 	public String getPch() {
 		return pch;
 	}
@@ -171,7 +159,6 @@ public class dealWithLostAction implements Preparable{
 
     
 	public String execute() {
-    	System.out.println("Enter Excute");
     	
     	this.newproduct = new Products(Integer.valueOf(this.getPid()),null);
     	this.newspecification = new Specifications(Integer.valueOf(this.getSpid()),null,new BigDecimal(0.025),null);

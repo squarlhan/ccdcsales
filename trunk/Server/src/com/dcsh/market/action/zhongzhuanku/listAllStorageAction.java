@@ -7,18 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Kcxx;
 import com.dcsh.market.KcxxCheck;
-
 import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.priv.CankuPriv;
-
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhongZhuanKuService;
-import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
 import java.util.Date;
@@ -36,7 +29,6 @@ public class listAllStorageAction implements Preparable{
     private boolean flag;
     
     public listAllStorageAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
@@ -48,10 +40,6 @@ public class listAllStorageAction implements Preparable{
 		this.kcxx = kcxx;
 	}
 	
-	
-
-
-
 	public Date getMydate() {
 		return mydate;
 	}
@@ -59,8 +47,6 @@ public class listAllStorageAction implements Preparable{
 	public void setMydate(Date mydate) {
 		this.mydate = mydate;
 	}
-
-
 
 	public List<KcxxCheck> getResultList() {
 		return resultList;
@@ -71,15 +57,12 @@ public class listAllStorageAction implements Preparable{
 	}
 
 	public String execute() {
-    	System.out.println("Enter Excute");
     	
             return "list";
         
-        //return Action.SUCCESS;
     }
 
 	public String getInfoByDate(){
-		System.out.println("Enter Excute");
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
     	resultList = new ArrayList<KcxxCheck>();
@@ -87,9 +70,7 @@ public class listAllStorageAction implements Preparable{
     		this.setFlag(true);
     		return "input";
     	}
-    	else{
-    		System.out.println("mydate="+mydate);
-    		System.out.println("zhongzhuanuser: "+user.get(0).getCanku().getId());
+    	else{		
     		this.resultListTemp = service.listZhongZhuanKuAll(user.get(0).getCanku().getId());
     		for(int i=0;i<resultListTemp.size();i++){
     			KcxxCheck result = new KcxxCheck();
@@ -161,7 +142,6 @@ public class listAllStorageAction implements Preparable{
     		}
     		if (mydate==null){
     			mydate = new Date();
-        		System.out.println("mydate="+mydate);
         		this.pmxListTemp = service.getDayReportPmx(user.get(0).getCanku(), mydate);
     		}else{
     			Date nowdate = new Date();
@@ -184,7 +164,6 @@ public class listAllStorageAction implements Preparable{
     			else
     				pmxList.add(i,pmxListTemp.get(i));
     		}
-    		System.out.println("zhongzhuanuser: "+user.get(0).getCanku().getId());
             return "infoList";
     	}
 	}

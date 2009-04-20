@@ -1,22 +1,12 @@
 package com.dcsh.market.action.zhuchangku;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.CheckInTable;
 import com.dcsh.market.Kcxx;
-import com.dcsh.market.KcxxCheck;
-
-import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.priv.CankuPriv;
-
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -32,7 +22,7 @@ public class checkinAction implements Preparable{
     private boolean flag;
     
     public checkinAction(ZhuChangKuService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
@@ -44,10 +34,6 @@ public class checkinAction implements Preparable{
 		this.kcxx = kcxx;
 	}
 	
-	
-
-
-
 	public Date getMydate() {
 		return mydate;
 	}
@@ -55,8 +41,6 @@ public class checkinAction implements Preparable{
 	public void setMydate(Date mydate) {
 		this.mydate = mydate;
 	}
-
-
 
 	public List<CheckInTable> getResultList() {
 		return resultList;
@@ -67,16 +51,12 @@ public class checkinAction implements Preparable{
 	}
 
 	public String execute() {
-    	System.out.println("Enter Excute");
-    	
+  	
         return "list";
     	
-        
-        //return Action.SUCCESS;
     }
 
 	public String getInfoByDate(){
-		System.out.println("CheckinAction");
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhuchanguser");
     	if(user.size()==0){
@@ -88,7 +68,6 @@ public class checkinAction implements Preparable{
     			mydate = new Date();
     		this.resultList = service.getCheckInTable(user.get(0).getCanku(), mydate);
     		
-    		System.out.println("zhuchanguser: "+user.get(0).getCanku().getId());
             return "infoList";
     	}
 	}

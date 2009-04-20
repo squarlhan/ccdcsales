@@ -6,15 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Chukumx;
-import com.dcsh.market.Rkmx;
 import com.dcsh.market.Rkxx;
 import com.dcsh.market.Users;
-import com.dcsh.market.action.chuyunchu.checkinWareHouseAction;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.ZhongZhuanKuService;
-import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
 
@@ -26,9 +22,7 @@ public class checkinProductsAction implements Preparable{
     private int rkfzr;
     private boolean flag;
     private List<Boolean> checked;
-    
-    
-    
+ 
     public String getBno() {
 		return bno;
 	}
@@ -63,13 +57,11 @@ public class checkinProductsAction implements Preparable{
 
 	public checkinProductsAction(ZhongZhuanKuService service) {
 		super();
-		System.out.println("Enter Constructor");
 		this.service = service;
 	}
 
     public String execute() {
-    	System.out.println("Enter Excute");
-    	System.out.println("*******"+this.getResultList());
+
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
     	if(user.size()==0){
@@ -84,7 +76,7 @@ public class checkinProductsAction implements Preparable{
     	    {
     	    	if(this.getChecked().get(i))
     	    		chukumxs.add(this.getResultList().get(i));
-    	    	System.out.println(this.getChecked()+"--------------wl");
+    	 
     	    }
     	    
     	    

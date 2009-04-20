@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.ReportPmx;
 import com.dcsh.market.priv.CankuPriv;
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
@@ -30,19 +28,20 @@ public class getReportAction implements Preparable {
  
 	public getReportAction(ZhuChangKuService service)
     {
-	   System.out.println("Enter Constructor");
+
         this.service = service;
 	}
     
-    public String execute() {
+    @SuppressWarnings("unchecked")
+	public String execute() {
     	Canku canku = new Canku();
     	Map session = ActionContext.getContext().getSession();
         canku= ((List<CankuPriv>) session.get("zhuchanguser")).get(0).getCanku();
       	
-        System.out.println(canku.getId()+"jjjjjjj");
-    	System.out.println("Enter Excute");
+
+ 
     	this.setMydate(new Date());//todo ...
-    	System.out.println(this.getCanku()+"ÈÕÆÚ"+this.getMydate());
+
     	this.reportcmxlist = service.getDayReportCmx(canku, new Date());
         this.reportpmxlist = service.getDayReportPmx(canku, new Date());
       
@@ -50,8 +49,6 @@ public class getReportAction implements Preparable {
   
     		session.put("reportpmxlist", reportpmxlist);
  		
-        System.out.println(reportpmxlist);
-        System.out.println(reportcmxlist+"nihao");
         return "list";
       
     }
