@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
 import org.springframework.orm.hibernate3.HibernateTemplate;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Fahuo;
 import com.dcsh.market.Kcxx;
@@ -18,17 +16,8 @@ import com.dcsh.market.XSKcxx;
 import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSfahuoxx;
 import com.dcsh.market.XSyikuxx;
-
-
-import java.util.List;
-
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
-import com.dcsh.market.Products;
-import com.dcsh.market.Specifications;
 import com.dcsh.market.XSyikumx;
 import com.dcsh.market.Yxyikusign;
 
@@ -69,7 +58,7 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 				
 					for (Kcxx kcxx : kresult) {
 						number += kcxx.getNumber();
-						System.out.println("²úÆ·£º" + number);
+					
 					}
 					switch(saletype)
 					{

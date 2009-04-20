@@ -32,8 +32,9 @@ public class goCycDeliveryAction implements Preparable{
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+    
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();
     	Set<String> pchset = new HashSet();
@@ -53,13 +54,11 @@ public class goCycDeliveryAction implements Preparable{
             }
             this.specificationsList.addAll(speset);
             this.productsList.addAll(proset);
-            this.pchList.addAll(pchset);
-            System.out.println(productsList);
-            System.out.println(specificationsList);
+            this.pchList.addAll(pchset);        
             cankusList = service.getCangkuByType(0);//储运处类型0
             return "show";
             }
-        //return Action.SUCCESS;
+    
     }
 
     public WareHouseService getService() {

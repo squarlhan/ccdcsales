@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Products;
 import com.dcsh.market.XSKcxx;
-import com.dcsh.market.action.chuyunchu.saveReportAction;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
@@ -20,9 +18,7 @@ public class listStorageAction implements Preparable {
 	private static final Logger log = LogManager.getLogManager().getLogger(listStorageAction.class.getName());
 	private XiaoshouService service;
 	private List<XSKcxx> resultList;
-	
-	
-	
+
 	 public List<XSKcxx> getResultList() {
 		return resultList;
 	}
@@ -32,12 +28,12 @@ public class listStorageAction implements Preparable {
 	}
 
 	public listStorageAction(XiaoshouService service){
-		 System.out.println("Enter Constructor");
+
 	     this.service = service;
      }
 	 
 	 public String execute() {
-		 System.out.println("Enter Execlude:");
+
 		 PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 	     List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.PRD);
 		 if(list.size() > 0){

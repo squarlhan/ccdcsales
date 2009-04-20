@@ -98,18 +98,17 @@ public class allEntryWareHouseAction implements Preparable{
 
 
 	public allEntryWareHouseAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	
     	Map session = ActionContext.getContext().getSession();
     	List<Rkmx> temprumxs = (List<Rkmx>) session.get("temprumxs");
     	session.put("temprumxs", null);
-    	System.out.println(temprumxs);
     	this.rkmxes.addAll(temprumxs);
         this.rkxx = new Rkxx(new Canku(this.getCanku(),null,(byte) 0),
         		new Users(this.getRkczy()),
@@ -117,11 +116,9 @@ public class allEntryWareHouseAction implements Preparable{
         		this.getBno().trim(),
         		new Date(),
         		this.getRkmxes());
-    	//return null;
         service.doEntryWareHouse(rkxx);
         
         return "gork";
-        //return Action.SUCCESS;
     }
 	
 

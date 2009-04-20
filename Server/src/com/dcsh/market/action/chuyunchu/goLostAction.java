@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Kcxx;
-import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.priv.CankuPriv;
@@ -23,12 +21,13 @@ public class goLostAction implements Preparable{
     private List<Kcxx> resultList;
     private List<Canku> cankusList;
     public goLostAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
+   
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+    	
     	
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
@@ -37,7 +36,7 @@ public class goLostAction implements Preparable{
             this.resultList = service.getAllProducts(user.get(0).getCanku());
             return "show";
             }
-        //return Action.SUCCESS;
+    
     }
 
     public WareHouseService getService() {

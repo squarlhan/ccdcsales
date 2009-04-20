@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Products;
@@ -59,7 +58,6 @@ public class moveProductAction implements Preparable {
 	
 	 public moveProductAction(XiaoshouService service)
 	    {
-		   System.out.println("Enter Constructor");
 	        this.service = service;
 		}
 	 
@@ -92,8 +90,8 @@ public class moveProductAction implements Preparable {
         }
  
  public String print(){
-			System.out.println("%%%%%"+this.getProduct().size());
-			System.out.println("mydate="+mydate);
+	
+		
 			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’");  
 			setDate(bartDateFormat.format(sendtime)); 
 			resultList=new ArrayList(); 
@@ -113,9 +111,9 @@ public class moveProductAction implements Preparable {
 			}
 			Custom custom = service.getCustomerById(this.getCustom());
 			customerName = custom.getCustomName();
-			System.out.println("aimcanku"+aimcanku);
+		
 			aimCangKu=service.getCangkuById(aimcanku).getName();
-			System.out.println("aimCangKu"+aimCangKu);
+		
 			for(int i=0;i<this.getDeli_canku().size();i++){
 				List<Products> product = service.getProductNameById(this.getProduct().get(i));
 				List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));

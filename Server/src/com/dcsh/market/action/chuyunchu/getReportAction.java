@@ -29,19 +29,15 @@ public class getReportAction implements Preparable {
  
 	public getReportAction(WareHouseService service)
     {
-	   System.out.println("Enter Constructor");
         this.service = service;
 	}
     
-    public String execute() {
+    @SuppressWarnings("unchecked")
+	public String execute() {
     	Canku canku = new Canku();
     	Map session = ActionContext.getContext().getSession();
-        canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();
-      	
-        System.out.println(canku.getId()+"jjjjjjj");
-    	System.out.println("Enter Excute");
+        canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();     	
     	this.setMydate(new Date());//todo ...
-    	System.out.println(this.getCanku()+"ÈÕÆÚ"+this.getMydate());
     	this.reportcmxlist = service.getDayReportCmx(canku, new Date());
         this.reportpmxlist = service.getDayReportPmx(canku, new Date());
       
@@ -49,8 +45,6 @@ public class getReportAction implements Preparable {
   
     		session.put("reportpmxlist", reportpmxlist);
  		
-        System.out.println(reportpmxlist);
-        System.out.println(reportcmxlist+"nihao");
         return "list";
       
     }

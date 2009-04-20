@@ -28,12 +28,13 @@ public class goDeliveryAction implements Preparable{
     private List<Custom> customList;
     private List<String> pchList;
     public goDeliveryAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
+    
         this.service = service;
     }
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+    
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();
     	Set<String> pchset = new HashSet();
@@ -45,7 +46,6 @@ public class goDeliveryAction implements Preparable{
             this.specificationsList = new ArrayList();
             this.pchList = new ArrayList();
             this.customList = service.getAllCustom();
-//            this.resultList = service.getValiProducts(user.get(0).getCanku());
             this.resultList = service.geProductsBySaletype(user.get(0).getCanku(),1);//1ÄÚÏú
             for(int i=0; i<resultList.size();i++){
             	proset.add(this.resultList.get(i).getProducts());
@@ -55,12 +55,11 @@ public class goDeliveryAction implements Preparable{
             this.specificationsList.addAll(speset);
             this.productsList.addAll(proset);
             this.pchList.addAll(pchset);
-            System.out.println(productsList);
-            System.out.println(specificationsList);
+
             cankusList = service.getAllCankus();
             return "show";
             }
-        //return Action.SUCCESS;
+
     }
 
     public ZhongZhuanKuService getService() {

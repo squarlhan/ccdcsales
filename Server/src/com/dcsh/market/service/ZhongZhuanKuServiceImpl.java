@@ -8,15 +8,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.CheckInTable;
 import com.dcsh.market.CheckOutTable;
@@ -30,12 +23,9 @@ import com.dcsh.market.Products;
 import com.dcsh.market.UserPriv;
 import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSyikumx;
-
 import com.dcsh.market.Reportxx;
-
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.Rkxx;
 import com.dcsh.market.Specifications;
@@ -74,9 +64,10 @@ private HibernateTemplate hibernateTemplate;
     	}
 		return cankus;		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<KcxxCheck> getValiProducts(Canku canku) {
-		// TODO Auto-generated method stub
+
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
 		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId()+"and status = 1");
@@ -90,10 +81,11 @@ private HibernateTemplate hibernateTemplate;
 
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<KcxxCheck> geProductsBySaletype(Canku canku,int type) {
-		// TODO Auto-generated method stub
+
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
 		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId()+"and status = 1");
@@ -116,7 +108,6 @@ private HibernateTemplate hibernateTemplate;
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Chukumx> listUnCheckProducts(int ckid) {
-		// TODO Auto-generated method stub
 		List<Chuku> chukus = new ArrayList();
 		List<Chukumx> result = new ArrayList();
 		chukus = (List<Chuku>)hibernateTemplate.find("from Chuku where RkID="+String.valueOf(ckid));
@@ -134,8 +125,6 @@ private HibernateTemplate hibernateTemplate;
 			hibernateTemplate.find("from Users where name = '" +  username.trim() + "'");
 		if (users.size() == 0) throw new IllegalArgumentException("错误的用户名！");
 		Users user = users.iterator().next();
-		//System.out.println("((((("+user.getName());
-		//System.out.println(Password+"----"+user.getPassword());
 		//验证用户名,以后可能需要考虑加密版本
 		
 		if (Arrays.equals(Password, user.getPassword())) {
@@ -170,10 +159,6 @@ private HibernateTemplate hibernateTemplate;
 	    String datestr =bartDateFormat.format(date);
 		
 	    List<Products> pkucun = hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+canku.getId());
-//	    System.out.println("pkucun = "+pkucun.size());
-	    
-//		List<Products> pruku = hibernateTemplate.find("select distinct products from Rkmx as rk where rk.rkxx.canku = "+canku.getId()
-//				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'");
 		
 		List<Rkmx> listrkmx = hibernateTemplate.find("from Rkmx as rk where rk.rkxx.canku = "+canku.getId()
 				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'");
@@ -201,7 +186,7 @@ private HibernateTemplate hibernateTemplate;
 		
 		for(int i=0;i<skucun;i++){
 			
-			System.out.println("*** begin for of skucun *** "+ i);
+	
 			total_kcwt = new BigDecimal(0);
 			total_rkwt = new BigDecimal(0);
 			total_ckwt = new BigDecimal(0);
@@ -222,13 +207,13 @@ private HibernateTemplate hibernateTemplate;
 			for(int i2=0;i2<listchuku.size();i2++){
 				if(listchuku.get(i2).getProducts().getId()==(pkucun.get(i).getId()))
 				{
-					System.out.println("***************  equals   ********** "+i);
+				
 					total_ckwt = total_ckwt.add((listchuku.get(i2).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i2).getNumber())));
 				}
 				else
-				System.out.println("*************** un    ********** "+i);
+				System.out.println();
 			}
-			System.out.println("320");
+		
 			//内销.外销.待检.定向--库存
 			listkcxx.clear();
 			listkcxx = hibernateTemplate.find("from Kcxx as kc where kc.products.id="+pkucun.get(i).getId()+" and kc.id.cid="+canku.getId());
@@ -236,7 +221,7 @@ private HibernateTemplate hibernateTemplate;
 				tmp=new BigDecimal(0);
 				tmp=(listkcxx.get(i3).getSpecifications().getWeight()).multiply
 					(new BigDecimal(listkcxx.get(i3).getNumber()));
-				System.out.println("line 328");
+			
 				total_kcwt = total_kcwt.add(tmp);
 				switch(listkcxx.get(i3).getSaleType())
 				{
@@ -247,7 +232,7 @@ private HibernateTemplate hibernateTemplate;
 					case 4:bhgt=bhgt.add(tmp);break;//不合格
 				}
 			}
-			System.out.println("339");
+	
 			/*
 			 * 查询当日只有出库且无库存的产品种类
 			 */
@@ -307,10 +292,6 @@ private HibernateTemplate hibernateTemplate;
 			}
 		}
 		
-		/*
-		 * ******************************
-		 */
-//		System.out.println("return Pmx & pchuku.size()!=0");
 		return list;
 	}
 
@@ -327,18 +308,18 @@ private HibernateTemplate hibernateTemplate;
 		/*
 		 * 得到出库明细中的	当日该仓库	的出库明细listchuku
 		 */
-		System.out.println("**************   getDayReportCmx 1");
+	
 		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId()
 				+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'");
 		
 		int schuku = listchuku.size();
-		System.out.println("****** "+listchuku.size()+" ******* getDayReportCmx 4");
+
 		BigDecimal total_ckwt = new BigDecimal(0);
 		for(int i=0;i<schuku;i++){
 			total_ckwt = total_ckwt.add((listchuku.get(i).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i).getNumber())));
 			list.add(new CheckOutTable(listchuku.get(i).getProducts(), listchuku.get(i).getChuku(),listchuku.get(i).getSpecifications(),listchuku.get(i).getPch(),listchuku.get(i).getNumber(),listchuku.get(i).getChuku().getCankuByRkId()));	
 		}
-		System.out.println("return Cmx");
+	
 		return list;
 	}
 	
@@ -356,11 +337,6 @@ private HibernateTemplate hibernateTemplate;
 		 * 得到入库明细中的	当日该仓库	的入库明细listrkmx
 		 */
 		
-	 
-//	    System.out.println("pkucun = "+pkucun.size());
-	    
-//		List<Products> pruku = hibernateTemplate.find("select distinct products from Rkmx as rk where rk.rkxx.canku = "+canku.getId()
-//				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'");
 		
 		List<Rkmx> listrkmx = hibernateTemplate.find("from Rkmx as rk where rk.rkxx.canku = "+canku.getId()
 				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'");
@@ -370,33 +346,27 @@ private HibernateTemplate hibernateTemplate;
 		
 		
 		
-		/*
-		 * ******************************
-		 */
-//		System.out.println("return Pmx & pchuku.size()!=0");
 		return list;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Kcxx> listZhongZhuanKu(int ckid) {
-		System.out.println("&&&&&&&String.valueOf"+ckid);
+
 		return hibernateTemplate.find("from Kcxx where cid ="+ String.valueOf(ckid));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public void doentryZhongzhuanku(List<Chukumx> chukumxes,Rkxx rkxx){
-		ArrayList<Rkmx> rkmx = new ArrayList();
 		rkxx.setRkfzr((Users)hibernateTemplate.get(Users.class, rkxx.getRkfzr().getId()));
 		hibernateTemplate.save(rkxx);
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
 			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
-			for(String s:temp){
-				System.out.println("规格："+s);
-			}
+		
 			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0].trim()+"' and packType='"+temp[2].trim()+"'");
-			System.out.println("规格数目："+specification.size());
+		
 			List<Rkmx> orinrkmx = (List<Rkmx>) hibernateTemplate.find("from Rkmx where Pch='"+chukumx.getPch().trim()+"'");
 			byte saletype = orinrkmx.get(0).getSaleType();
 			if((product.size()!=0)&&(specification.size()!=0)){
@@ -504,12 +474,6 @@ private HibernateTemplate hibernateTemplate;
 		tempreportxx.setDate(today);
 		tempreportxx.setCkid(canku);
 		tempreportxx.setReporter(users);
-		System.out.println(tempreportxx.getBno()+"||"+
-				tempreportxx.getDate()+"||"+			
-				tempreportxx.getId()+"||"+
-				tempreportxx.getReporter());
-		System.out.println(
-				tempreportxx.getCkid()+"--||");
 		//判断数据库中是否存在改天的日报，如果不存在则保存当天的日报信息，如果存在则更新已存在的日报信息（根据时间和仓库来查）
 		if(isreportxxexist.size()==0){
 			
@@ -519,17 +483,12 @@ private HibernateTemplate hibernateTemplate;
 		
 		else
 		{
-			System.out.println(isreportxxexist+"|||"+isreportxxexist.size()+"|||"+isreportxxexist.get(0).getId());
-			
+
 			tempreportxx.setId(isreportxxexist.get(0).getId());
 				
 			hibernateTemplate.merge(tempreportxx);
 		}
 			
-		
-		
-		System.out.println("nostophere---");
-		System.out.println("tempreportxx"+tempreportxx);
 	
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(tempreportxx.getDate());
@@ -537,9 +496,7 @@ private HibernateTemplate hibernateTemplate;
 	     
 	     List<Reportxx> tempreportxx_data= hibernateTemplate.find("from Reportxx as rx where " +
 	    		"convert(varchar(10),rx.date,120) = '"+datestr+"'"+" and rx.ckid='"+cankuid+"'");//取reportxx
-	     System.out.println(tempreportxx_data+"|||");
-	     
-	     System.out.println(tempreportxx_data.get(0).getId()+tempreportxx_data.get(0).getBno());//取xx
+	
 	    
 	    tempreportxx.setId(tempreportxx_data.get(0).getId());//取出当天的reportxx.id只有一行数据时适用
 		
@@ -560,7 +517,7 @@ private HibernateTemplate hibernateTemplate;
 			tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
 			tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
 			tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3)); 
-			System.out.println(tempreportpmx+"|||"+i);
+	
 			
 			hibernateTemplate.save(tempreportpmx);
 					
@@ -568,12 +525,12 @@ private HibernateTemplate hibernateTemplate;
 	    }
 	    else
 	    {
-	    	//System.out.println("jjfjjfjfjfjfjfjfjfjffj");
+	  
 	    	List<ReportPmx> temp = hibernateTemplate.find("from ReportPmx as rpmx where rpmx.rxxid.id='"+isreportxxexist.get(0).getId()+"'");
-	    //	System.out.println(temp.size()+"******"+temp);
+
 	    	hibernateTemplate.deleteAll(temp);
 	    	
-	    	//System.out.println("jjfjjfjfjfjfjfjfjfjffj");
+
 	    	for(int i=0;i<reportpmxlist.size();i++)
 			{
 				ReportPmx tempreportpmx = new ReportPmx();
@@ -588,7 +545,7 @@ private HibernateTemplate hibernateTemplate;
 				tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
 				tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
 				tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3)); 
-				System.out.println(tempreportpmx+"|||"+i);
+	
 				
 				hibernateTemplate.save(tempreportpmx);
 						
@@ -605,7 +562,6 @@ private HibernateTemplate hibernateTemplate;
 			tempreportcmx.setPrdid(reportcmxlist.get(i).getPrdid());
 			tempreportcmx.setRkid(reportcmxlist.get(i).getRkid());
 			
-			System.out.println(tempreportcmx+"||||||"+i);
 			
 			hibernateTemplate.saveOrUpdate(tempreportcmx);
 		}
@@ -617,7 +573,6 @@ private HibernateTemplate hibernateTemplate;
 	    {
             
 	    	List<ReportCmx> temp = hibernateTemplate.find("from ReportCmx as rcmx where rcmx.rxxid.id='"+isreportxxexist.get(0).getId()+"'");
-	   // 	System.out.println(temp.size()+"******"+temp);
 	    	hibernateTemplate.deleteAll(temp);
 	    	
 	    	for(int i=0;i<reportcmxlist.size();i++)
@@ -628,8 +583,7 @@ private HibernateTemplate hibernateTemplate;
 				tempreportcmx.setCkt(reportcmxlist.get(i).getCkt().setScale(3)); 
 				tempreportcmx.setPrdid(reportcmxlist.get(i).getPrdid());
 				tempreportcmx.setRkid(reportcmxlist.get(i).getRkid());
-				
-				System.out.println(tempreportcmx+"||||||"+i);
+
 				
 				hibernateTemplate.save(tempreportcmx);
 			}
@@ -649,30 +603,30 @@ private HibernateTemplate hibernateTemplate;
 		/*
 		 * 得到出库明细中的	当日该仓库	的出库明细listchuku
 		 */
-		System.out.println("**************   getDayReportCmx 1");
 		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId()
 				+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'");
 		
 		int schuku = listchuku.size();
-		System.out.println("****** "+listchuku.size()+" ******* getDayReportCmx 4");
+
 		BigDecimal total_ckwt = new BigDecimal(0);
 		for(int i=0;i<schuku;i++){
 			total_ckwt = total_ckwt.add((listchuku.get(i).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i).getNumber())));
 			list.add(new ReportCmx(i, new Reportxx(), canku , listchuku.get(i).getProducts(), listchuku.get(i).getChuku().getCankuByRkId(), total_ckwt));
 			
 		}
-		System.out.println("return Cmx");
+
 		return list;
 	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Kcxx> listZhongZhuanKuAll(int ckid) {
-		System.out.println("&&&&&&&String.valueOf"+ckid);
+	
 		List<Kcxx> list = hibernateTemplate.find("from Kcxx where cid ="+ String.valueOf(ckid));
-		System.out.println("list.size()"+list.size());
+	
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<ReportPmx> listZhongZhuanKuOther(int ckid,Date date){
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(date);
@@ -693,13 +647,15 @@ private HibernateTemplate hibernateTemplate;
 	    }
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Custom> getAllCustom(){
 		return (List<Custom>) hibernateTemplate.find("from Custom");
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Kcxx> getAllProducts(Canku canku) {
-		// TODO Auto-generated method stub
+
 		List<Kcxx> result = new ArrayList();
 		result = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId());
 
@@ -725,7 +681,6 @@ private HibernateTemplate hibernateTemplate;
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public void resetXsfhxxStatus(int index){
@@ -733,6 +688,7 @@ private HibernateTemplate hibernateTemplate;
 		temp.setStatus((byte)1);
 		hibernateTemplate.update(temp);
     }
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<XSyikumx> getXSyikumx(Canku canku){
@@ -747,12 +703,11 @@ private HibernateTemplate hibernateTemplate;
 		temp.setStatus((byte)1);
 		hibernateTemplate.update(temp);
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSfahuomx xsfhmx) {
-		// TODO Auto-generated method stub
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
-		System.out.println("canku.getId()="+canku.getId()+"xsfhmx.getXsfahuoxx().getType()="+xsfhmx.getXsfahuoxx().getType()+"xsfhmx.getSpecification().getId()="+xsfhmx.getSpecification().getId()+"xsfhmx.getProduct().getId()="+xsfhmx.getProduct().getId());
 		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId()+" and saleType ="+ xsfhmx.getXsfahuoxx().getType()+" and specifications ="+ xsfhmx.getSpecification().getId()+" and products ="+ xsfhmx.getProduct().getId());
 		for(Kcxx kcxx:tempresult){
 			if(kcxx.getSaleType()==1)result.add(new KcxxCheck("内销",kcxx));
@@ -763,9 +718,10 @@ private HibernateTemplate hibernateTemplate;
 		return result;
 
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSyikumx xsykmx) {
-		// TODO Auto-generated method stub
+
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
 		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId()+" and saleType ="+ xsykmx.getXsyikuxx().getType()+" and specifications ="+ xsykmx.getSpecification().getId()+" and products ="+ xsykmx.getProduct().getId());
@@ -780,9 +736,9 @@ private HibernateTemplate hibernateTemplate;
 	}
 	@SuppressWarnings("unchecked")
 	public Custom getCustomerById(Integer customerId){
-		System.out.println("customerId="+customerId);
+
 		List<Custom> customerList = hibernateTemplate.find("from Custom where id='"+customerId+"'");
-		System.out.println("customerList.size()="+customerList.size());
+
 		return customerList.get(0);
 	}
 	@SuppressWarnings("unchecked")

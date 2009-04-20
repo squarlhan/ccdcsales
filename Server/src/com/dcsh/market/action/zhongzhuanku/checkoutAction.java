@@ -1,26 +1,14 @@
 package com.dcsh.market.action.zhongzhuanku;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.CheckOutTable;
 import com.dcsh.market.Kcxx;
-import com.dcsh.market.KcxxCheck;
-import com.dcsh.market.ReportCmx;
-
 import com.dcsh.market.ReportPmx;
-
 import com.dcsh.market.priv.CankuPriv;
-
-import com.dcsh.market.service.WareHouseService;
-import com.dcsh.market.service.WareHouseServiceImpl;
 import com.dcsh.market.service.ZhongZhuanKuService;
-import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
 import java.util.Date;
@@ -36,7 +24,6 @@ public class checkoutAction implements Preparable{
     private boolean flag;
     
     public checkoutAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
@@ -48,9 +35,6 @@ public class checkoutAction implements Preparable{
 		this.kcxx = kcxx;
 	}
 	
-	
-
-
 
 	public Date getMydate() {
 		return mydate;
@@ -59,7 +43,6 @@ public class checkoutAction implements Preparable{
 	public void setMydate(Date mydate) {
 		this.mydate = mydate;
 	}
-
 
 
 	public List<CheckOutTable> getResultList() {
@@ -71,7 +54,7 @@ public class checkoutAction implements Preparable{
 	}
 
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
     	if(user.size()==0) return "input";
@@ -81,11 +64,10 @@ public class checkoutAction implements Preparable{
             return "list";
     	}
         
-        //return Action.SUCCESS;
     }
 
 	public String getInfoByDate(){
-		System.out.println("CheckoutAction");
+	
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
     	if(user.size()==0){
@@ -96,7 +78,7 @@ public class checkoutAction implements Preparable{
     		if(mydate==null)
     			mydate = new Date();
     		this.resultList = service.getCheckOutTable(user.get(0).getCanku(), mydate);
-    		System.out.println("tempuser: "+user.get(0).getCanku().getId());
+    
     		return "infoList";
     	}
    

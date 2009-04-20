@@ -19,14 +19,13 @@ public class listUnCheckProductsAction implements Preparable{
     private boolean flag;
     
     public listUnCheckProductsAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
     
 	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	if(user.size()==0){
@@ -34,7 +33,7 @@ public class listUnCheckProductsAction implements Preparable{
     		return "input";
     	}
     	else{
-    		System.out.println("tempuser: "+user.get(0).getCanku().getId());
+    		
     		this.resultList = service.listUnCheckProducts(user.get(0).getCanku().getId());
     		if(this.resultList.size()==0)
     			flag=true;
@@ -42,7 +41,7 @@ public class listUnCheckProductsAction implements Preparable{
     			flag=false;
             return "welcome";
     	}
-        //return Action.SUCCESS;
+     
     }
 
 

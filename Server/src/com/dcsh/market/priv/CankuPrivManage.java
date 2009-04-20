@@ -27,12 +27,5 @@ public class CankuPrivManage {
 		return null;
 	}
 	
-	/* 
-	 * 获取用户组的权限
-	 * 
-	public static List<Canku> getCankuPriv(Users users){
-		
-	}
-	 */
 
 }

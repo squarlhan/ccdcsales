@@ -1,25 +1,17 @@
 package com.dcsh.market.action.zhongzhuanku;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
-import com.dcsh.market.Rkmx;
-import com.dcsh.market.Users;
 import com.dcsh.market.action.zhuchangku.loginZhuChangKuAdminAction;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
 import com.dcsh.market.priv.ResourceType;
-import com.dcsh.market.service.WareHouseService;
 import com.dcsh.market.service.ZhongZhuanKuService;
-import com.dcsh.market.service.ZhuChangKuService;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 public class loginAction implements Preparable{
@@ -30,23 +22,22 @@ public class loginAction implements Preparable{
     private List<CankuPriv> user;
 
     public loginAction(ZhongZhuanKuService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
 	public String execute() {
-    	System.out.println("Enter Excute");
+
         PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 	    List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.CANKU);
-	    System.out.println("list.size()="+list.size());
+
 	    for(int i=0; i<list.size();i++){
-	    	System.out.println("Type="+((Canku)(list.get(i).getResource())).getType());
+
 	    	if(((Canku)(list.get(i).getResource())).getType()==(byte)2){
 	    		return "success";
 	    	}
 	    }
 	    return "input";
-        //return Action.SUCCESS;
+
     }
 
   

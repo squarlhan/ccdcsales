@@ -68,14 +68,13 @@ public class checkinProductsAction implements Preparable{
 
 	public checkinProductsAction(WareHouseService service) {
 		super();
-		System.out.println("Enter Constructor");
+
 		this.service = service;
 	}
 
     @SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
-    	System.out.println("*******"+this.getResultList());
+    
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	if(user.size()==0){
@@ -90,7 +89,7 @@ public class checkinProductsAction implements Preparable{
     	    {
     	    	if(this.getChecked().get(i))
     	    		chukumxs.add(this.getResultList().get(i));
-    	    	System.out.println(this.getChecked()+"--------------wl");
+    	   
     	    }
     	    
     	    

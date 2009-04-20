@@ -7,13 +7,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
-import com.dcsh.market.Rkmx;
-import com.dcsh.market.Rkxx;
 import com.dcsh.market.Users;
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.ActionContext;
@@ -112,17 +109,15 @@ public class allDeliveryWareHouseAction implements Preparable{
 
 
 	public allDeliveryWareHouseAction(WareHouseService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
     
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
     	
     	Map session = ActionContext.getContext().getSession();
     	List<Chukumx> tempchukumxs = (List<Chukumx>) session.get("tempchukumxs");
-    	System.out.println(tempchukumxs);
     	this.chukumxes.addAll(tempchukumxs);
         this.chuku = new Chuku(
         		new Canku(this.getCankuorgin(),null,(byte) 0,null,null,null,null),
@@ -132,11 +127,10 @@ public class allDeliveryWareHouseAction implements Preparable{
         		this.getBno().trim(),
         		new Date(),
         		this.getChukumxes());
-    	//return null;
+
         service.doDeliveryWareHouse(chuku);
         session.put("tempchukumxs", null);
         return "gock";
-        //return Action.SUCCESS;
     }
 	
 

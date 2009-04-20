@@ -20,7 +20,7 @@ public class updateUserAction implements Preparable {
 	private AdminService service;
 	
 	public updateUserAction(AdminService service){
-		System.out.println("Enter Constructor");
+
 		this.service = service;
 	}
 	
@@ -57,7 +57,7 @@ public class updateUserAction implements Preparable {
 	}
 
 	public String execute() {
-		System.out.println("Enter Execute:");
+
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil.getLoginAuthentication();
 		Users user = auth.getPrincipal();
 		user.setPhone(this.getPhone().trim());
