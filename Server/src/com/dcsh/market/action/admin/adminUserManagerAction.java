@@ -1,15 +1,9 @@
 package com.dcsh.market.action.admin;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
@@ -115,31 +109,28 @@ public class adminUserManagerAction implements Preparable {
 	}
 
 	public adminUserManagerAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 	
 	public String execute() {
-    	System.out.println("Enter Excute");
+    
         this.resultList = service.getAllUsers();
-        System.out.println(resultList);
+     
         return "list";
-        //return Action.SUCCESS;
+      
     }
 	
     public String modify(){
-    	System.out.println("Enter Excute");
+    
 	    service.updateUser(new Users(Integer.valueOf(this.getId()),this.getName().trim(),this.getPassword().trim().getBytes(),this.getDescription().trim(),this.getPhone().trim()));
 		return "modify";
 	}
 	public String delete(){
-		System.out.println("Enter Excute");
-		
+			
 		service.delUser(new Users(Integer.valueOf(this.getId())));
 		return "delete";
 	}
-	public String add(){
-		System.out.println("Enter Excute");
+	public String add(){	
 		service.addUser(new Users(this.getNewuname().trim(),this.getNewupass().trim().getBytes(),this.getNewudes().trim(),this.getNewuphone().trim()));
 		return "add";
 	}

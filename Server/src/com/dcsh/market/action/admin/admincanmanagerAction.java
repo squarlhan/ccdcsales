@@ -1,22 +1,13 @@
 package com.dcsh.market.action.admin;
 
-import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Cankumanage;
-import com.dcsh.market.Products;
-import com.dcsh.market.Specifications;
-import com.dcsh.market.action.chuyunchu.listAllStorageAction;
 import com.dcsh.market.service.AdminService;
-import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.Preparable;
 
 public class admincanmanagerAction implements Preparable{
@@ -93,7 +84,6 @@ public class admincanmanagerAction implements Preparable{
 	    	System.out.println("Enter Constructor");
 	        this.service = service;
 	    }
-	@SuppressWarnings("null")
 	public String execute() {
 		byte type;
 		int id;
@@ -101,9 +91,7 @@ public class admincanmanagerAction implements Preparable{
 		String address = null;
 		String typeName = null;
 		this.resultList = new ArrayList<Cankumanage>();
-    	System.out.println("Enter Excute");
-        this.resultListTemp = service.getAllCankus();
-        System.out.println("resultListTemp.size()="+resultListTemp.size());
+        this.resultListTemp = service.getAllCankus();    
         for(int i=0;i<resultListTemp.size();i++){
         	Cankumanage result = new Cankumanage();
         	type=resultListTemp.get(i).getType();
@@ -126,30 +114,13 @@ public class admincanmanagerAction implements Preparable{
         	result.setType(type);
         	result.setTypeName(typeName);
         	resultList.add(i, result);
-        System.out.println("getName"+i+"="+resultList.get(i).getName()+" getAddress"+i+"="+resultList.get(i).getAddress()+" getType"+i+"="+resultList.get(i).getType()+"typeName"+i+"="+typeName);
-        }
-        for(int i=0;i<resultList.size();i++){
-        	System.out.println("getName"+i+"="+resultList.get(i).getName()+" getAddress"+i+"="+resultList.get(i).getAddress()+" getType"+i+"="+resultList.get(i).getType()+"typeName"+i+"="+typeName);
+     
         }
         return "list";
-        //return Action.SUCCESS;
+   
     }
 	public String modify(){
 		
-
-	//	HttpServletRequest request = ServletActionContext.getRequest();
-
-		System.out.println("modify");
-
-
-	//	String id = request.getParameter("id");
-	//	String name = request.getParameter("name");
-	//	String type = request.getParameter("type");
-	//	String address = request.getParameter("address");
-		System.out.println(this.getId().trim()+new String(this.getName().trim()));
-		System.out.println("type "+this.getType().trim());
-		System.out.println("name "+this.getName().trim());
-
 		canku = new Canku();
 
 		canku.setId(Integer.valueOf(this.getId().trim()));
@@ -161,22 +132,17 @@ public class admincanmanagerAction implements Preparable{
 		return "modify";
 	}
 	public String delete(){
-	//	HttpServletRequest request = ServletActionContext.getRequest();
-		System.out.println("delete");
-	//	String id = request.getParameter("id");
-		System.out.println(this.getId().trim());
+
 		canku = new Canku();
 		canku.setId(Integer.valueOf(this.getId().trim()));
 		service.delCanku(canku);
 		return "delete";
 	}
 	public String add(){
-		System.out.println("add!!"+newcname);
 		canku = new Canku();
 		canku.setName(newcname.trim());
 		canku.setAddress(newcaddr.trim());
 		canku.setType(newctype);
-		System.out.println("newctype="+newctype);
 		service.addCanku(canku);
 		return "add";
 	}

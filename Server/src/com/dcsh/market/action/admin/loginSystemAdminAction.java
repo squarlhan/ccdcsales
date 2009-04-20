@@ -1,15 +1,10 @@
 package com.dcsh.market.action.admin;
 
 import java.util.List;
-import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Users;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.service.AdminService;
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.Preparable;
 
 public class loginSystemAdminAction implements Preparable{
@@ -20,7 +15,6 @@ public class loginSystemAdminAction implements Preparable{
     private List<CankuPriv> user;
 
     public loginSystemAdminAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
@@ -28,10 +22,7 @@ public class loginSystemAdminAction implements Preparable{
     	
         	return "success";
         
-        //return Action.SUCCESS;
     }
-
-  
 
 
 	public AdminService getService() {

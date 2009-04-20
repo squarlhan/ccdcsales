@@ -4,12 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Chukumx;
-import com.dcsh.market.Kcxx;
 import com.dcsh.market.ReportCmx;
-import com.dcsh.market.ReportPmx;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
@@ -22,25 +18,21 @@ public class listDestroyAction implements Preparable{
     private Date enddate;
 
 	public listDestroyAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 
 	public String execute() {
-    	System.out.println("Enter Excute");
     	Date today = new Date();
     	this.cmxList = service.listDestroy(today, today);
     	this.listchukumx = service.listDestroymx(today, today);
         return "list";
-        //return Action.SUCCESS;
     }
 	
 	public String listBetween() {
-    	System.out.println("Enter Excute");
+
     	this.cmxList = service.listDestroy(begindate, enddate);
     	this.listchukumx = service.listDestroymx(begindate, enddate);
         return "list";
-        //return Action.SUCCESS;
     }
 	
     public AdminService getService() {

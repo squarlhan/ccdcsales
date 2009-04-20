@@ -12,7 +12,7 @@ import com.dcsh.market.ReportPmx;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
-//from chuyunchu listAllStorageAction
+
 public class listStorageAction implements Preparable{
 	private static final Logger log = LogManager.getLogManager().getLogger(listStorageAction.class.getName());
     private AdminService service;
@@ -39,9 +39,9 @@ public class listStorageAction implements Preparable{
 		this.resultList = kcxxs;
 	}
 
+	@SuppressWarnings("unchecked")
 	public String execute1() {
-    	System.out.println("Enter Excute1");
-    	System.out.println(date);
+
     	this.resultList = service.listStorage(canku,date);
     	List<Canku> tempcankus = service.getAllCankus();
     	tempcankus.add(0, new Canku(0,"全部",(byte)0));
@@ -52,14 +52,15 @@ public class listStorageAction implements Preparable{
     		}
     	}
     	this.cangkusList = tempcankus;
-    	System.out.println(resultList);
+
         return "list";
-        //return Action.SUCCESS;
+    
     }
 
 	
+	@SuppressWarnings("unchecked")
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	this.resultList = service.listStorage(0,new Date());
     	List<Canku> tempcankus = service.getAllCankus();
     	tempcankus.add(0, new Canku(0,"全部",(byte)0));
@@ -70,10 +71,10 @@ public class listStorageAction implements Preparable{
     		}
     	}
     	this.cangkusList = tempcankus;
-        System.out.println(resultList);
+    
         this.date = new Date();
         return "list";
-        //return Action.SUCCESS;
+     
     }
      public List<ReportPmx> getresultList() {
         return resultList;

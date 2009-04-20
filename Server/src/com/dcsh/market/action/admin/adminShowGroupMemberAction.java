@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.UserGroup;
 import com.dcsh.market.Users;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.ActionContext;
@@ -20,7 +18,6 @@ public class adminShowGroupMemberAction implements Preparable {
 	private List<Boolean> selectedUserIdlist;
 
 	public adminShowGroupMemberAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 	
@@ -41,17 +38,9 @@ public class adminShowGroupMemberAction implements Preparable {
 		return groupId;
 	}
 
-
-
-
-
 	public void setGroupId(Integer groupId) {
 		this.groupId = groupId;
 	}
-
-
-
-
 
 	public List<Users> getUserlist() {
 		return userlist;
@@ -64,13 +53,12 @@ public class adminShowGroupMemberAction implements Preparable {
 
 
 	public void prepare() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 	
 	@SuppressWarnings("unchecked")
 	public String execute() {		
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	session.put("groupId", groupId);
     	this.userlist=service.getAllUsers();

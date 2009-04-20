@@ -27,16 +27,13 @@ public class adminShowUserprivAction implements Preparable {
     private List<Boolean> cankupriv;
     
     public adminShowUserprivAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
     
     @SuppressWarnings("unchecked")
 	public String execute() {
     	
-    	System.out.println("Enter Excute");
         this.cankus = service.getAllCankus();
-        System.out.println(this.getCankus().size()+"fffffffffffffffffffff");
         this.products = service.getAllProducts();    
         this.userprivs = service.getuserprivByUserId(this.getUserId());
         

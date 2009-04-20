@@ -29,35 +29,6 @@ public class getAllGroupsAction implements Preparable{
 	public String execute() {
     	System.out.println("Enter Excute");
         this.resultList = service.getAllGroups();
-//        switch(tempList.size()%4){
-//        case 0:if(tempList.size()!=0){
-//        	for(int i = 0; i<=tempList.size()-4;i+=4){
-//        	resultList.add(new FourGroups(tempList.get(i),tempList.get(i+1),tempList.get(i+2),tempList.get(i+3)));
-//        }}break;
-//        case 1:if(tempList.size()==1){
-//        	resultList.add(new FourGroups(tempList.get(0)));
-//        }else{
-//        	for(int i = 0; i<=tempList.size()-5;i+=4){
-//            	resultList.add(new FourGroups(tempList.get(i),tempList.get(i+1),tempList.get(i+2),tempList.get(i+3)));
-//            	}resultList.add(new FourGroups(tempList.get(tempList.size()-1)));	
-//        }break;
-//        case 2:if(tempList.size()==2){
-//        	resultList.add(new FourGroups(tempList.get(0),tempList.get(1)));
-//        }else{
-//        	for(int i = 0; i<=tempList.size()-5;i+=4){
-//            	resultList.add(new FourGroups(tempList.get(i),tempList.get(i+1),tempList.get(i+2),tempList.get(i+3)));
-//            	}resultList.add(new FourGroups(tempList.get(tempList.size()-1),tempList.get(tempList.size()-2)));	
-//        }break;
-//        case 3:if(tempList.size()==1){
-//        	resultList.add(new FourGroups(tempList.get(0),tempList.get(1),tempList.get(2)));
-//        }else{
-//        	for(int i = 0; i<=tempList.size()-5;i+=4){
-//            	resultList.add(new FourGroups(tempList.get(i),tempList.get(i+1),tempList.get(i+2),tempList.get(i+3)));
-//            	}resultList.add(new FourGroups(tempList.get(tempList.size()-1),tempList.get(tempList.size()-2),tempList.get(tempList.size()-3)));	
-//        }break;
-//        }
-        
-        System.out.println(resultList);
         return "show";
       
     }
