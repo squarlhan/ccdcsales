@@ -4,12 +4,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import com.dcsh.market.Canku;
 import com.dcsh.market.Chukumx;
-import com.dcsh.market.Kcxx;
 import com.dcsh.market.ReportCmx;
-import com.dcsh.market.ReportPmx;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
@@ -22,17 +18,16 @@ public class listSalesAction implements Preparable{
     private Date enddate;
 
 	public listSalesAction(AdminService service) {
-    	System.out.println("Enter Constructor");
+
         this.service = service;
     }
 
 	public String execute() {
-    	System.out.println("Enter Excute");
+
     	Date today = new Date();
     	this.cmxList = service.listSales(today, today);
     	this.listchukumx = service.listSalesmx(today, today);
         return "list";
-        //return Action.SUCCESS;
     }
 	
 	public String listBetween() {
@@ -40,7 +35,6 @@ public class listSalesAction implements Preparable{
     	this.cmxList = service.listSales(begindate, enddate);
     	this.listchukumx = service.listSalesmx(begindate, enddate);
         return "list";
-        //return Action.SUCCESS;
     }
 	
     public AdminService getService() {

@@ -4,17 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
-import com.dcsh.market.Canku;
-import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
-import com.dcsh.market.action.chuyunchu.listAllStorageAction;
 import com.dcsh.market.service.AdminService;
-import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.Preparable;
 
 public class adminspemanagerAction implements Preparable {
@@ -90,27 +81,17 @@ public class adminspemanagerAction implements Preparable {
 		this.packtype = packtype;
 	}
 	public adminspemanagerAction(AdminService service) {
-	    	System.out.println("Enter Constructor");
+	
 	        this.service = service;
 	    }
 	public String execute() {
-    	System.out.println("Enter Excute");
+   
         this.resultList = service.getAllSpecifications();
-        System.out.println(resultList);
+      
         return "list";
-        //return Action.SUCCESS;
     }
 	public String modify(){
-		
-	//	HttpServletRequest request = ServletActionContext.getRequest();
-		System.out.println("modify");
-	//	String id = request.getParameter("id");
-	//	String name = request.getParameter("name");
-	//	String weight = request.getParameter("weight");
-	//	String packtype = request.getParameter("packtype");
-		System.out.println(this.getId().trim()+this.getName().trim());
-		System.out.println("weight "+this.getWeight().trim());
-		System.out.println("packtype "+this.getPacktype().trim());
+	
 		specifications = new Specifications();
 		specifications.setId(Integer.valueOf(this.getId().trim()));
 		specifications.setName(this.getName().trim());
@@ -120,17 +101,14 @@ public class adminspemanagerAction implements Preparable {
 		return "modify";
 	}
 	public String delete(){
-	//	HttpServletRequest request = ServletActionContext.getRequest();
-	//	System.out.println("delete");
-	//	String id = request.getParameter("id");
-		System.out.println(id);
+
 		specifications = new Specifications();
 		specifications.setId(Integer.valueOf(this.getId().trim()));
 		service.delSpecification(specifications);
 		return "delete";
 	}
 	public String add(){
-		System.out.println("add!!"+newsname);
+	
 		specifications = new Specifications();
 		specifications.setName(newsname.trim());
 		specifications.setWeight(new BigDecimal(newsweight.trim()));

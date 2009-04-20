@@ -1,17 +1,10 @@
 package com.dcsh.market.action.admin;
 
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.dcsh.market.Custom;
-import com.dcsh.market.Specifications;
-import com.dcsh.market.Users;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
@@ -104,34 +97,30 @@ public class adminCustomManagerAction implements Preparable {
 	}
 
 	public adminCustomManagerAction(AdminService service) {
-    	System.out.println("Enter Constructor");
+    
         this.service = service;
     }
 	
 	public String execute() {
-    	System.out.println("Enter Excute");
+    
         this.resultList = service.getAllCustoms();
-        System.out.println(resultList);
+     
         return "list";
-        //return Action.SUCCESS;
+      
     }
 	public String modify(){
-    	System.out.println("Enter Excute");
-    	System.out.println("id"+this.getId());
-    	System.out.println("name"+this.getCustomName());
-    	System.out.println("shdz"+this.getShdz());
-    	System.out.println("phone"+this.getPhone());
+    
 	    service.updateCustom(new Custom((Integer.valueOf(this.getId())),this.getCustomName().trim(),this.getShdz().trim(),this.getPhone().trim()));
 		return "modify";
 	}
 	public String delete(){
-		System.out.println("Enter Excute");
+		
 		service.delCustom(new Custom(Integer.valueOf(this.getId())));
 		return "delete";
 	}
 	
 	public String add(){
-		System.out.println("Enter Excute");
+	
 		service.addCustom(new Custom(this.getNewname().trim(),this.getNewshdz().trim(),this.getNewuphone().trim()));
 		return "add";
 	}

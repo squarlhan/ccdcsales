@@ -18,7 +18,6 @@ public class adminSaveGroupMemberAction implements Preparable {
 	private Integer groupId;
 	
 	public adminSaveGroupMemberAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
 	
@@ -43,8 +42,9 @@ public class adminSaveGroupMemberAction implements Preparable {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	public String execute() {		
-    	System.out.println("Enter Excute");
+
     	Map session = ActionContext.getContext().getSession();
     	if(session.containsKey("groupId"))
     		groupId = (Integer)session.get("groupId");
@@ -64,7 +64,6 @@ public class adminSaveGroupMemberAction implements Preparable {
 	
 	
 	public void prepare() throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 

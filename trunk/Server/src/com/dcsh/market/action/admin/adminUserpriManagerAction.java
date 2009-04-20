@@ -13,15 +13,12 @@ public class adminUserpriManagerAction implements Preparable{
     private List<Users> resultList;
     
 
-	public adminUserpriManagerAction(AdminService service) {
-    	System.out.println("Enter Constructor");
+	public adminUserpriManagerAction(AdminService service) {    
         this.service = service;
     }
 	
-	public String execute() {
-    	System.out.println("Enter Excute");
+	public String execute() {    
         this.resultList = service.getAllUsers();        
-        System.out.println(resultList);
         return "show";
       
     }

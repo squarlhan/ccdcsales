@@ -14,14 +14,13 @@ public class getCangkuAction implements Preparable{
     private List<Canku> cangkusList;
 
     public getCangkuAction(AdminService service) {
-    	System.out.println("Enter Constructor");
         this.service = service;
     }
     
 	public String execute() {
-    	System.out.println("Enter Excute");
+   
         this.cangkusList = service.getAllCankus();
-        System.out.println(cangkusList);
+     
         return "show_report";
       
     }

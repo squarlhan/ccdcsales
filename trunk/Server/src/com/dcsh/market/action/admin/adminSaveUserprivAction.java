@@ -27,10 +27,7 @@ public class adminSaveUserprivAction implements Preparable {
     {
     	Map session = ActionContext.getContext().getSession();
     	if(session.containsKey("userId"))
-    		this.userId = (Integer)session.get("userId");
-    	
-    	System.out.println("========"+this.cankupriv.size()+"=========="+this.cankupriv.get(0));
-    	
+    		this.userId = (Integer)session.get("userId");	
     	service.saveUserpriv(this.cankupriv,this.prdpriv,this.userId);
     	
     	
