@@ -23,7 +23,7 @@ String context = request.getContextPath();
         * {
 			font:12px "Segoe UI", Tahoma;	
         }
-		h3 {
+		h3 {  
 			font-size:16px;
 			font-weight:bold;
 		}
