@@ -155,10 +155,10 @@ function setnumber(obj,line)
 		}
 		for(i=0;i<=count;i++)
 		{	
-			var tmp = document.getElementById("number["+i+"]");
+			var tmp = document.getElementById("sumweight["+i+"]");
 			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入袋数!");
+				alert("请输入第"+(i+1)+"行的重量！");
 				return false;
 			}
 			if(isNaN(tmp.value))
