@@ -6,6 +6,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
 <title>产品移库确认</title>
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
@@ -163,6 +166,80 @@ function setnumber(obj,line)
 				<s:property value="#result.weight"/>,
 			</s:iterator>
 		0); 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var xmlHttp = false;
+	try{
+	    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+
+	}catch(e){
+	    try{
+	        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+	    }catch(e){
+	        xmlHttp = false;
+
+	    }
+	}
+	if(!xmlHttp && typeof XMLHttpRequest != 'undefined'){
+	    xmlHttp = new XMLHttpRequest();
+
+	}
+		
+	function xmlHandle(){
+
+		if(xmlHttp.readyState==4) {
+		
+			  var obj1 = eval('('+xmlHttp.responseText+')');
+			  	 
+
+			  var customer = document.getElementById("customer");
+
+			  for(j=0;j<customer.options.length;j++){
+				  if ((customer.options[j].nodeName == "OPTION")||(customer.options[j].nodeName == "option")){		                    
+					  customer.options[j]= null;            
+				            }
+				  customer.value = null;
+				  customer.options[j] = null;
+			  }
+			  var opts0 = document.createElement("option");
+			  opts0.value = "0";
+              opts0.text = " ";
+              customer.options.add(opts0);	
+			  for(i=1;i<=obj1.length;i++){
+				      var opts = document.createElement("option");
+				      opts.value = obj1[i-1][1];
+		              opts.text = obj1[i-1][0];
+		              if(i<customer.childNodes.length)customer.options[i]=opts;
+		              else customer.options.add(opts);		           
+			  }
+		  }
+	}
+	function getOs()   
+	{   
+	   var OsObject = "";   
+	   if(navigator.userAgent.indexOf("MSIE")>0) {   
+	        return "MSIE";
+	   }
+	   if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){   
+	        return "Firefox";
+	   }
+	   if(isSafari=navigator.userAgent.indexOf("Safari")>0) {   
+	        return "Safari";
+	   }
+	   if(isCamino=navigator.userAgent.indexOf("Camino")>0){   
+	        return "Camino"; 
+	   }
+	   if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){   
+	        return "Gecko"; 
+	   }   
+	} 
+			function idchange(value){
+				  var btype=getOs();
+				  xmlHttp.open("GET",encodeURI("getcustomers.action?start="+value),true);
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());				
+				  xmlHttp.send(null);
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
+			}
 
 </script>
 <s:head/>
@@ -207,13 +284,13 @@ function setnumber(obj,line)
       </tr>
       
        <tr>
+         <td align="left"><s:text name="现行价:"/></td>
+         <td align="left"><s:textfield name="price"/></td>        
          <td align="left"><s:text name="客户名称:"/></td>
          <td align="left">
-         <s:select name="custom" label="客户名" labelposition="left" multiple="false" 
-            list="customList"
-            listKey="id" listValue="customName"/></td>
-          <td align="left"><s:text name="现行价:"/></td>
-          <td align="left"><s:textfield name="price"/></td>        
+          <input id="customer_show" type="text" maxlength="100" style="position:absolute;top:245px;width:200px;height:21px" name="start" onkeyup="idchange(this.value)" />
+      <select id="customer" name="customer" style="position:absolute;top:245px;width:200px;height:20px;clip:rect(0 200 110 180)"
+	          onChange="document.getElementById('customer_show').value=this.options[this.selectedIndex].text" /></td>
         </tr>
         <tr><td align="left"><s:text name="销售类型:"/></td>
         <td align="left">
