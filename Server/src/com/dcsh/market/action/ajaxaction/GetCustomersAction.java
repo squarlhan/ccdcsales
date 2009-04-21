@@ -98,7 +98,7 @@ public class GetCustomersAction implements Action{
 				e1.printStackTrace();
 			}
 			
-			if(result.startsWith(start.toLowerCase())) {
+			if(result.startsWith(start.toLowerCase())||c.getCustomName().startsWith(start)) {
 				customers.add(c);
 				names.add(new String[]{c.getCustomName(),String.valueOf(c.getId())});
             }
@@ -108,7 +108,7 @@ public class GetCustomersAction implements Action{
 			System.out.println("kkkkkkkkk£º"+c.getCustomName());
 		}
 		
-		return "all";
+		return "show";
 	}
 
 }
