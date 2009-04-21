@@ -29,7 +29,7 @@
 		<action name="jsonTest" class="com.dcsh.market.action.ajaxaction.TestAction">
 			<result type="json" />
 		</action>
-		<action name="getcustomers" class="getCustomersAction">
+		<action name="xsgetcustomers" class="getCustomersAction">
 		    <result type="json" name="show">
                <param name="root">names</param>
             </result>		
