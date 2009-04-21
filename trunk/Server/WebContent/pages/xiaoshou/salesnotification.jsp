@@ -1,15 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
+<%
+String context = request.getContextPath();
+%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>销售发货通知单</title>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">    
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="This is my page">
+
+ 
+	<script type="text/javascript" src="<%= context%>/js/lib/prototype.js"></script>
+    <script type="text/javascript" src="<%= context%>/js/lib/autocomplete.js"></script>
+    <link rel="stylesheet" type="text/css" href="<%= context%>/css/autocomplete/autocomplete.css" /> 
+    <style>
+        * {
+			font:12px "Segoe UI", Tahoma;	
+        }
+		h3 {
+			font-size:16px;
+			font-weight:bold;
+		}
+    </style>
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
-
 @import "/Server/css/css.css";
 </style>
 
@@ -184,6 +204,79 @@
 			<s:property value="#result.weight"/>,
 		</s:iterator>
 	0);  //last elment is FAKE
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var xmlHttp = false;
+	try{
+	    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+
+	}catch(e){
+	    try{
+	        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+	    }catch(e){
+	        xmlHttp = false;
+
+	    }
+	}
+	if(!xmlHttp && typeof XMLHttpRequest != 'undefined'){
+	    xmlHttp = new XMLHttpRequest();
+
+	}
+		
+	function xmlHandle(){
+
+		if(xmlHttp.readyState==4) {
+		
+			  var obj1 = eval('('+xmlHttp.responseText+')');
+			  	 
+
+			  var customer = document.getElementById("customer");
+
+			  for(j=0;j<customer.options.length;j++){
+				  if ((customer.options[j].nodeName == "OPTION")||(customer.options[j].nodeName == "option")){		                    
+					  customer.options[j]= null;            
+				            }
+				  customer.value = null;
+				  customer.options[j] = null;
+			  }
+			  for(i=0;i<obj1.length;i++){
+				
+				  var opts = document.createElement("option");
+				  opts.value = obj1[i][1];
+		          opts.text = obj1[i][0];
+		          if(i<customer.childNodes.length)customer.options[i]=opts;
+		          else customer.options.add(opts);   
+			  }
+		  }
+	}
+	function getOs()   
+	{   
+	   var OsObject = "";   
+	   if(navigator.userAgent.indexOf("MSIE")>0) {   
+	        return "MSIE";
+	   }
+	   if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){   
+	        return "Firefox";
+	   }
+	   if(isSafari=navigator.userAgent.indexOf("Safari")>0) {   
+	        return "Safari";
+	   }
+	   if(isCamino=navigator.userAgent.indexOf("Camino")>0){   
+	        return "Camino"; 
+	   }
+	   if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){   
+	        return "Gecko"; 
+	   }   
+	} 
+			function idchange(value){
+				  var btype=getOs();
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
+				  xmlHttp.open("GET","getcustomers.action?start="+value,true);
+				  xmlHttp.send(null);
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
+			}
+
+	
 </script>
 <s:head />
 </head>
@@ -228,9 +321,10 @@
       <td align="left"><s:text name=" 合同号: "/></td>
       <td align="left"><s:textfield  name="cno"/></td>
       <td align="left"><s:text name=" 购货单位: "/></td>
-      <td align="left"><s:select name="customer" label="客户名" labelposition="left" multiple="false" 
-            list="customList"
-            listKey="id" listValue="customName"/></td>
+      <td align="left">
+      <input id="customer_show" type="text" maxlength="100" style="position:absolute;top:220px;width:200px;height:21px" name="start" onkeyup="idchange(this.value)" />
+      <select id="customer" name="customer" style="position:absolute;top:220px;width:200px;height:20px;clip:rect(0 200 110 180)"
+	          onChange="document.getElementById('customer_show').value=this.options[this.selectedIndex].text" /></td>
     </tr>
     <tr>
       <td align="left"><s:text name="销售类型:"/></td>
@@ -311,16 +405,6 @@
 		</tr>
 	</table>
 </s:form>
-<script language="javascript">
-  function init(){
-	  var obj = document.getElementById("specification[0]");
-	  obj.onchange(obj);
-	  var obj1 = document.getElementById("sumweight[0]");
-	  obj1.onchange(obj1);
-  }
-  init();
-</script>
-
 </body>
 
 </html>
