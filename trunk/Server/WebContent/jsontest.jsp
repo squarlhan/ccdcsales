@@ -15,12 +15,30 @@ var xmlHttp;
 			 // 	"age":10
 			 // };
 		  var obj1 = eval('('+xmlHttp.responseText+')');
+		  //div = document.getElementById("sd_1239786648646");
+		  //div.innerHTML = obj1;
 		  st = document.getElementById("st");
+		  cuts = document.getElementById("cuts");
+		  for(j=0;j<cuts.options.length;j++){
+			  if ((cuts.options[j].nodeName == "OPTION")||(cuts.options[j].nodeName == "option")){		                    
+				  cuts.options[j]= null;            
+			            }
+			  cuts.value = null;
+			  cuts.options[j] = null;
+			  alert("del:"+j); 
+		  }
 		  for(i=0;i<obj1.length;i++){
 			  var tr = st.insertRow(-1);
 			  var td1 = tr.insertCell(-1);
 			  td1.innerHTML = obj1[i][0];
+			  var opts = document.createElement("option");
+			  opts.value = obj1[i][1];
+	          opts.text = obj1[i][0];
+	          if(i<cuts.childNodes.length)cuts.options[i]=opts;
+	          else cuts.options.add(opts);   
 		  }
+
+		  
 		  alert(obj1[0][0]);
 		  //xmlHttp.responseText;
 	      //alert(obj.name);
@@ -41,7 +59,9 @@ var xmlHttp;
 </head>
 <body>
 <form action="s" name="f">
-<input id="kw" type="text" maxlength="100" size="42" name="start" autocomplete="off" onchange="idchange(this.value)" />
+
+<input id="kw" type="text" maxlength="100" size="42" name="start" autocomplete="on" onchange="idchange(this.value)" />
+<select id="cuts" name="cuts" onChange="document.getElementById('kw').value=this.options[this.selectedIndex].value"/>
 <input id="sb" type="submit" value="Jilin"/>
 <span id="hp">
 </span>
