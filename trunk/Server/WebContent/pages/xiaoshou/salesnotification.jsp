@@ -212,7 +212,7 @@
 	}
 		
 	function xmlHandle(){
-		//alert("xmlHandle");
+		
 		if(xmlHttp.readyState==4) {
 		
 			  var obj1 = eval('('+xmlHttp.responseText+')');
@@ -242,7 +242,7 @@
 	}
 	function getOs()   
 	{   
-		//alert("getOs");
+		
 	   var OsObject = "";   
 	   if(navigator.userAgent.indexOf("MSIE")>0) {   
 	        return "MSIE";
@@ -261,18 +261,18 @@
 	   }   
 	} 
 			function idchange(value){
-				//alert("here");
+				
 				  var btype=getOs();
-				  alert(btype);
-				  //alert("here1");
-				  xmlHttp.open("GET",encodeURI("getcustomers.action?start="+value),true);
-				  //alert("here2");
+			
+				
+				  xmlHttp.open("GET",encodeURI("xsgetcustomers.action?start="+value),true);
+				
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
-				  //alert("here3");				
+				
 				  xmlHttp.send(null);
-				 // alert("here4");
+				
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
-				 // alert("here5");
+			
 			}
 
 	

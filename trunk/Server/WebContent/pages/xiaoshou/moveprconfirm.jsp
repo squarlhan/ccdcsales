@@ -235,7 +235,7 @@ function setnumber(obj,line)
 	} 
 			function idchange(value){
 				  var btype=getOs();
-				  xmlHttp.open("GET",encodeURI("getcustomers.action?start="+value),true);
+				  xmlHttp.open("GET",encodeURI("xsgetcustomers.action?start="+value),true);
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());				
 				  xmlHttp.send(null);
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
