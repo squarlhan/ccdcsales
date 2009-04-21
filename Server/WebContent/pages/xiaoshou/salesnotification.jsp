@@ -1,33 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%
-String context = request.getContextPath();
-%>
 <%@taglib prefix="s" uri="/struts-tags"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>销售发货通知单</title>
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="Cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">    
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
 
- 
-	<script type="text/javascript" src="<%= context%>/js/lib/prototype.js"></script>
-    <script type="text/javascript" src="<%= context%>/js/lib/autocomplete.js"></script>
-    <link rel="stylesheet" type="text/css" href="<%= context%>/css/autocomplete/autocomplete.css" /> 
-    <style>
-        * {
-			font:12px "Segoe UI", Tahoma;	
-        }
-		h3 {
-			font-size:16px;
-			font-weight:bold;
-		}
-    </style>
+    <meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
 @import "/Server/css/css.css";
@@ -75,6 +58,11 @@ String context = request.getContextPath();
 		}else
 		//alert(c);
 		document.getElementById("deli_num["+line+"]").value= n;
+	}
+
+	function setcustomer(obj)
+	{
+		document.getElementById("customer_show").value = obj;
 	}
 
 	function insertRecord(){
@@ -204,7 +192,7 @@ String context = request.getContextPath();
 			<s:property value="#result.weight"/>,
 		</s:iterator>
 	0);  //last elment is FAKE
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var xmlHttp = false;
 	try{
 	    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -239,13 +227,16 @@ String context = request.getContextPath();
 				  customer.value = null;
 				  customer.options[j] = null;
 			  }
-			  for(i=0;i<obj1.length;i++){
-				
-				  var opts = document.createElement("option");
-				  opts.value = obj1[i][1];
-		          opts.text = obj1[i][0];
-		          if(i<customer.childNodes.length)customer.options[i]=opts;
-		          else customer.options.add(opts);   
+			  var opts0 = document.createElement("option");
+			  opts0.value = "0";
+              opts0.text = " ";
+              customer.options.add(opts0);	
+			  for(i=1;i<=obj1.length;i++){
+				      var opts = document.createElement("option");
+				      opts.value = obj1[i-1][1];
+		              opts.text = obj1[i-1][0];
+		              if(i<customer.childNodes.length)customer.options[i]=opts;
+		              else customer.options.add(opts);		           
 			  }
 		  }
 	}
@@ -321,10 +312,11 @@ String context = request.getContextPath();
       <td align="left"><s:text name=" 合同号: "/></td>
       <td align="left"><s:textfield  name="cno"/></td>
       <td align="left"><s:text name=" 购货单位: "/></td>
+
       <td align="left">
       <input id="customer_show" type="text" maxlength="100" style="position:absolute;top:220px;width:200px;height:21px" name="start" onkeyup="idchange(this.value)" />
       <select id="customer" name="customer" style="position:absolute;top:220px;width:200px;height:20px;clip:rect(0 200 110 180)"
-	          onChange="document.getElementById('customer_show').value=this.options[this.selectedIndex].text" /></td>
+	          onChange="javascript:setcustomer(this.options[this.selectedIndex].text)" /></td>
     </tr>
     <tr>
       <td align="left"><s:text name="销售类型:"/></td>
