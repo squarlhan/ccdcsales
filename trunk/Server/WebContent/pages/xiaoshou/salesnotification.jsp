@@ -204,7 +204,7 @@ String context = request.getContextPath();
 			<s:property value="#result.weight"/>,
 		</s:iterator>
 	0);  //last elment is FAKE
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	var xmlHttp = false;
 	try{
 	    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -405,6 +405,15 @@ String context = request.getContextPath();
 		</tr>
 	</table>
 </s:form>
+<script language="javascript">
+  function init(){
+	  var obj = document.getElementById("specification[0]");
+	  obj.onchange(obj);
+	  var obj1 = document.getElementById("sumweight[0]");
+	  obj1.onchange(obj1);
+  }
+  init();
+ </script>
 </body>
 
 </html>
