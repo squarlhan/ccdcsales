@@ -244,7 +244,7 @@ function setnumber(obj,line)
 				      opts.value = obj1[i-1][1];
 		              opts.text = obj1[i-1][0];
 		              if(i<customer.childNodes.length)customer.options[i]=opts;
-		              else customer.options.add(opts);		           
+		              else customer.options.add(opts,i);		           
 			  }
 		  }
 	}
