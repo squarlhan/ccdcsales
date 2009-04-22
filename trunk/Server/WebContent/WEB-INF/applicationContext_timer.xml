@@ -31,6 +31,27 @@
 		</property>
 	</bean>
 
+	<bean id="reportJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.dcsh.market.service.MyQuartzJob</value>
+		</property>
+	</bean>
+
+	<bean id="cronReportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="reportJob" />
+		<property name="cronExpression">
+			<value>0 * 23 * * ?</value>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronReportTrigger" />
+			</list>
+		</property>
+	</bean>
+
 
 
 </beans>
