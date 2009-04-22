@@ -33,5 +33,6 @@
 	<import resource="applicationContext_xiaoshou.xml"/>
 	<import resource="applicationContext_security.xml"/>
     <import resource="applicationContext_user.xml"/>
+    <import resource="applicationContext_timer.xml"/>
 
 	</beans>
