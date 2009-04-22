@@ -160,18 +160,36 @@ function setnumber(obj,line)
 		}
 		for(i=0;i<=count;i++)
 		{	
-			var num = document.getElementById("number["+i+"]");
+			var num = document.getElementById("sumweight["+i+"]");
 			if(num.value.replace(/(^\s*)|(\s*$)/g,"")=="")
 			{
-				alert("请输入第"+(i+1)+"行袋数!");
+				alert("请输入第"+(i+1)+"行重量!");
 				return false;
 			}
 			if(isNaN(num.value))
 			{
-				alert("第"+(i+1)+"行袋数应为数字！");
+				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
 			} 
 		}
+
+		  var cst = document.getElementById("customer");
+		  var dm = 	document.all("dealmethod");
+		  var dealmethod = 0;
+		  for(var i=0;i<dm.length;i++)
+			  {
+			           if(dm[i].checked)
+				           {
+			        	          dealmethod=dm[i].value;
+				                  break;
+				           }
+			  }   	
+			if(cst.value==0&&dealmethod==2)
+				{
+				alert("    请填写客户名称\n并在下拉框中选择一个客户！");  
+				return false;
+				}
+		
 		if(confirm("确认出库？"))
 			return true;
 		else
@@ -181,11 +199,102 @@ function setnumber(obj,line)
 			<s:iterator id="result" value="specificationsList">
 				<s:property value="#result.weight"/>,
 			</s:iterator>
-		0); 
+		0);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	var xmlHttp = false;
+	try{
+	    xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+
+	}catch(e){
+	    try{
+	        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+
+	    }catch(e){
+	        xmlHttp = false;
+
+	    }
+	}
+	if(!xmlHttp && typeof XMLHttpRequest != 'undefined'){
+	    xmlHttp = new XMLHttpRequest();
+
+	}
+		
+	function xmlHandle(){
+
+		if(xmlHttp.readyState==4) {
+		
+			  var obj1 = eval('('+xmlHttp.responseText+')');
+			  	 
+
+			  var customer = document.getElementById("customer");
+
+			  for(j=0;j<customer.options.length;j++){
+				  if ((customer.options[j].nodeName == "OPTION")||(customer.options[j].nodeName == "option")){		                    
+					  customer.options[j]= null;            
+				            }
+				  customer.value = null;
+				  customer.options[j] = null;
+			  }
+			  var opts0 = document.createElement("option");
+			  opts0.value = "0";
+              opts0.text = " ";
+              customer.options.add(opts0,0);	
+			  for(i=1;i<=obj1.length;i++){
+				      var opts = document.createElement("option");
+				      opts.value = obj1[i-1][1];
+		              opts.text = obj1[i-1][0];
+		              if(i<customer.childNodes.length)customer.options[i]=opts;
+		              else customer.options.add(opts);		           
+			  }
+		  }
+	}
+	function getOs()   
+	{   
+	   var OsObject = "";   
+	   if(navigator.userAgent.indexOf("MSIE")>0) {   
+	        return "MSIE";
+	   }
+	   if(isFirefox=navigator.userAgent.indexOf("Firefox")>0){   
+	        return "Firefox";
+	   }
+	   if(isSafari=navigator.userAgent.indexOf("Safari")>0) {   
+	        return "Safari";
+	   }
+	   if(isCamino=navigator.userAgent.indexOf("Camino")>0){   
+	        return "Camino"; 
+	   }
+	   if(isMozilla=navigator.userAgent.indexOf("Gecko/")>0){   
+	        return "Gecko"; 
+	   }   
+	} 
+			function idchange(value){
+				  var btype=getOs();
+				  xmlHttp.open("GET",encodeURI("xsgetcustomers.action?start="+value),true);
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());				
+				  xmlHttp.send(null);
+				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
+			} 
 </script>
 </head>
 <body>
 <h2>储运处不合格产成品处理</h2>
+<br>
+ <s:form id="myform" action="cycdealwithuq" theme="simple" onsubmit="return checkNull()">
+<table id="tbt" align="left" width="60%">
+   <tr>
+   	       <td align="center">
+   	       <s:text name="请填写编号："></s:text>
+  	       <s:textfield name="bno" theme="simple" size="15"></s:textfield>
+  	       </td>
+  	        <td align="left">
+  	        <s:text name="请填写客户："></s:text>    
+	        <input id="customer_show" type="text" maxlength="100" style="position:absolute;top:183px;width:200px;height:21px" name="start" onkeyup="idchange(this.value)" />
+            <select id="customer" name="customer" style="position:absolute;top:183px;width:200px;height:20px;clip:rect(0 200 110 180)"
+	          onChange="document.getElementById('customer_show').value=this.options[this.selectedIndex].text" />
+	       </td>
+  	</tr>
+  </table>
+<br><br>
 <h3>储运处不合格产品明细</h3>
 <table class="list_table"  align="center" width="640">
   <tr bgcolor="#4A708B">
@@ -214,22 +323,11 @@ function setnumber(obj,line)
 </table>
 
 
-  <s:form id="myform" action="cycdealwithuq" theme="simple" onsubmit="return checkNull()">
+ 
   	<div style="margin-left:30">
-  	<s:radio id="dealmethod" name="dealmethod" label="选择处理方法：" value="1" labelposition="top" list="#{'1':'销毁','2':'销售'}" listKey="key" listValue="value"></s:radio>
+  	 <input   type="radio"   name="dealmethod"   value="1" checked="checked">销毁   
+     <input   type="radio"   name="dealmethod"   value="2">销售   
   </div>
-  <table class="list_table"  id="tbt" align="center" width="100%">
-   <tr>
-  	       <td><s:text name="请填写编号："></s:text>
-  	       </td>
-  	       <td><s:textfield name="bno" theme="simple" size="15"></s:textfield>
-  	       </td>
-  	        <td><s:text name="请填写客户："></s:text>
-  	       </td>
-  	      <td><s:select id="custom" name="custom" label="请选择客户" labelposition="left" multiple="false"
-            list="customList" listValue="customName" listKey="id" /></td>
-  	</tr>
-  </table>
   	<table class="list_table"  id="tb" align="center" width="100%">
   	
 		<tr bgcolor="#4A708B">
