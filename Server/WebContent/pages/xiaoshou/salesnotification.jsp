@@ -167,6 +167,13 @@
 	}
 	function confirmbtn()
 	{
+        var cst = document.getElementById("customer");
+		
+		if(cst.value==0)
+			{
+			alert("    请填写购货单位\n并在下拉框中选择一个客户！");
+			return false;
+			}
 		var cf = confirm("确认提交？");
 		if(cf)
 		{
@@ -178,6 +185,13 @@
 	}
 	function confirmPrintbtn()
 	{
+		var cst = document.getElementById("customer");
+		
+		if(cst.value==0)
+			{
+			alert("    请填写购货单位\n并在下拉框中选择一个客户！");
+			return false;
+			}
 		var cf = confirm("确认打印？");
 		if(cf)
 		{
@@ -230,7 +244,7 @@
 			  var opts0 = document.createElement("option");
 			  opts0.value = "0";
               opts0.text = " ";
-              customer.options.add(opts0);	
+              customer.options.add(opts0,0);	
 			  for(i=1;i<=obj1.length;i++){
 				      var opts = document.createElement("option");
 				      opts.value = obj1[i-1][1];
@@ -266,7 +280,7 @@
 			
 				
 				  xmlHttp.open("GET",encodeURI("xsgetcustomers.action?start="+value),true);
-				
+				//alert("我"+value+"我");
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
 				
 				  xmlHttp.send(null);
