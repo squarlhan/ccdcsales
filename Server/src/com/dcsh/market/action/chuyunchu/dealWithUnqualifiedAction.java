@@ -26,7 +26,7 @@ public class dealWithUnqualifiedAction implements Preparable{
 	private int cankuorgin;
 	private int cankuaim;
 	private int users;
-	private int custom;
+	private int customer;
 	private Chuku chuku;
 	private String bno;
 	private Set<Chukumx> chukumxes = new HashSet();
@@ -145,7 +145,7 @@ public class dealWithUnqualifiedAction implements Preparable{
           		user.get(0).getCanku(),
           		new Canku(12,null,(byte) 5,null,null,null,null),
           		user.get(0).getUser(),
-          		new Custom(this.getCustom(),null,null),
+          		null,//销毁时客户作废
           		this.getBno().trim(),
           		new Date(),
           		this.getChukumxes());
@@ -155,7 +155,7 @@ public class dealWithUnqualifiedAction implements Preparable{
     		          		user.get(0).getCanku(),
     		          		new Canku(11,null,(byte) 3,null,null,null,null),
     		          		user.get(0).getUser(),
-    		          		new Custom(this.getCustom(),null,null),
+    		          		new Custom(this.getCustomer(),null,null),
     		          		this.getBno().trim(),
     		          		new Date(),
     		          		this.getChukumxes());
@@ -197,13 +197,15 @@ public class dealWithUnqualifiedAction implements Preparable{
 	}
 
 
-	public int getCustom() {
-		return custom;
+
+
+	public int getCustomer() {
+		return customer;
 	}
 
 
-	public void setCustom(int custom) {
-		this.custom = custom;
+	public void setCustomer(int customer) {
+		this.customer = customer;
 	}
 
 
