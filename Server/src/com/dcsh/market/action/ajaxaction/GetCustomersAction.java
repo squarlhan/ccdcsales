@@ -60,8 +60,6 @@ public class GetCustomersAction implements Action{
 	}
 
 	public String execute() {
-		System.out.println("Enter Execute");
-		
 		HanyuPinyinOutputFormat opf = new HanyuPinyinOutputFormat();
 		opf.setCaseType(HanyuPinyinCaseType.LOWERCASE);
 		opf.setToneType(HanyuPinyinToneType .WITHOUT_TONE);
@@ -75,11 +73,11 @@ public class GetCustomersAction implements Action{
             start = "a";
            
         }
-		System.out.println("xxxxxxx£º"+start);
 
 		for(Custom c:allcustomers){
 			String[] pinyin = null;
 			String result = "";
+			String result_head = "";
 			char[] temp = c.getCustomName().toCharArray();
 			try {
 				for(char cc:temp){
@@ -89,7 +87,11 @@ public class GetCustomersAction implements Action{
 					}else{
 		                 pinyin = PinyinHelper.toHanyuPinyinStringArray(cc,opf);
 		                 if(pinyin==null)result=result;
-		                 else result+=pinyin[0];     
+		                 else 
+		                	 {
+		                	     result+=pinyin[0];
+		                	     result_head+=pinyin[0].charAt(0);
+		                	 }     
 					}
 				}
 				//System.out.println("rrrrrrr"+result);
@@ -98,15 +100,16 @@ public class GetCustomersAction implements Action{
 				e1.printStackTrace();
 			}
 			
-			if(result.startsWith(start.toLowerCase())||c.getCustomName().startsWith(start)) {
+			if(result.startsWith(start.toLowerCase())||c.getCustomName().startsWith(start)||result_head.startsWith(start.toLowerCase())) { 
 				customers.add(c);
 				names.add(new String[]{c.getCustomName(),String.valueOf(c.getId())});
             }
 			
 		}
-		for(Custom c:customers){
-			System.out.println("kkkkkkkkk£º"+c.getCustomName());
-		}
+//		for(Custom ccc:customers)
+//		{
+//			System.out.println(ccc.getCustomName());
+//		}
 		
 		return "show";
 	}
