@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.Preparable;
 public class SearchDayReportAction implements Preparable {
 	private static final Logger log = LogManager.getLogManager().getLogger(SearchDayReportAction.class.getName());
 	private WareHouseService service;
-	private Date mydate;
+	private Date mydaterq;
 	private List<ReportPmx> reportpmxlist;
 	private List<ReportCmx> reportcmxlist;
 	
@@ -37,31 +37,33 @@ public class SearchDayReportAction implements Preparable {
         canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();   
         
         SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(mydate);
+	    String datestr =bartDateFormat.format(this.getMydaterq());
 	    String nowstr =bartDateFormat.format(new Date());
 	    System.out.println(datestr+"***"+nowstr);//dddd
 	    
-		if(mydate.equals(null)||datestr.equals(nowstr)){
+		if(mydaterq.equals(null)||datestr.equals(nowstr)){
 			System.out.println("today++++++++++++++++++");
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
 		this.reportcmxlist = this.service.getDayReportCmx(canku, new Date());
 		}
 		else{
-			System.out.println(mydate+"++++++++++++++++++");
-		this.reportpmxlist = this.service.searchDayReportPmx(mydate,canku);
-		this.reportcmxlist = this.service.searchDayReportCmx(mydate,canku);	
+			System.out.println(mydaterq+"++++++++++++++++++");
+		this.reportpmxlist = this.service.searchDayReportPmx(mydaterq,canku);
+		this.reportcmxlist = this.service.searchDayReportCmx(mydaterq,canku);	
 			
 		}
 		
 		return "show_report";
 	}
 	
-	public Date getMydate() {
-		return mydate;
+
+
+	public Date getMydaterq() {
+		return mydaterq;
 	}
 
-	public void setMydate(Date mydate) {
-		this.mydate = mydate;
+	public void setMydaterq(Date mydaterq) {
+		this.mydaterq = mydaterq;
 	}
 
 	public List<ReportPmx> getReportpmxlist() {
