@@ -19,7 +19,7 @@
 <s:form name="formname" label="label" action="cycsearchdayreport">
 <table class="list_table"  align="center" border="0" width="100%">
  <tr>
-     <td><s:datetimepicker name="mydate" label="选择日期" toggleType="explode" theme="simple"/></td>
+     <td><s:datetimepicker name="mydaterq" label="选择日期" toggleType="explode" theme="simple"/></td>
      <td align="left"><s:submit value="提交" theme="simple"/></td>
 </tr>
 </table>
