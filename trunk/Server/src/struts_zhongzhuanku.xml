@@ -100,6 +100,10 @@
             <result >/pages/zhongzhuanku/goxsfahuo.jsp</result>
             <result name="show_report">/pages/zhongzhuanku/goxsfahuo.jsp</result>
         </action>
+        <action name="zzksearchdayreport" method="execute" class="zzksearchDayReportAction">
+            <result>/pages/zhongzhuanku/report_zzk.jsp</result>
+            <result name="show_report">/pages/zhongzhuanku/report_zzk.jsp</result>
+        </action>
 </package>
 	
 </struts>
