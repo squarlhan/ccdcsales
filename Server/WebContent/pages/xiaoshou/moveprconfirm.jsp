@@ -160,11 +160,16 @@ function setnumber(obj,line)
 		  alert("请输入到站!");
 		  return false;
 		}
-		var ele2 = document.getElementById("aim");
+		var ele2 = document.getElementById("price");
 		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 		  alert("请输入现行价!");
 		  return false;
+		}
+		if(isNaN(ele2.value))
+		{
+			alert("现行价只允许输入数字！");
+			return false;
 		}
 		for(i=0;i<=count;i++)
 		{	

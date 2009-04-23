@@ -177,15 +177,16 @@
 		var ele = document.getElementById("bno");
 		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
-		  alert("请输入编号!");
+		  alert("请输入销售单号!");
 		  return false;
 		}
 		var cele = document.getElementById("cno");
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		if(cele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 		  alert("请输入合同号!");
 		  return false;
 		}
+		
 /*		if(ele.value.length>16)
 		{
 			alert("合同号应不超过16位");
