@@ -184,7 +184,7 @@ AutoTip.AutoComplete.prototype =
    {
       text = $(text) ? $(text) : document.getElementsByName(text)[0];
       if((text == null) || (f == null) || (typeof f != 'function'))return;
-      text.setAttribute('autocomplete', 'off');
+      text.setAttribute('autocomplete', 'on');
       this.onchange = text.onchange;
       text.onchange = function()
       {
