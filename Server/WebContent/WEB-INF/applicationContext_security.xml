@@ -12,6 +12,7 @@
 		<intercept-url pattern='/login.jsp*' filters='none'/>
 		<intercept-url pattern='/images/*' filters='none'/>	
 		<intercept-url pattern='/css/*' filters='none'/>
+		<intercept-url pattern='/xsgetcustomers.action' filters='none'/>
 		<intercept-url pattern='/**' access="HTTP"/>
 	</http>
 
