@@ -13,6 +13,7 @@
     <table align="center" width="100%" id="nav">
       <tr align="center"><td><li><s:a href="/Server/index.jsp">返回主页</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="xsliststorage.action">查看库存</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="xslistsales.action">查看销售记录</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="xsgomoveproduct.action">产品移库确认</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="xsgosalesnotification.action">销售发货通知单</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="/Server/logout">退出登陆</s:a></li></td></tr>
