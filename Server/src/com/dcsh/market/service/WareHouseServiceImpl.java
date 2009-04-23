@@ -862,7 +862,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    
 	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
 				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
-	    
+	    if(listrpxx.size()==0)
+	    	return null;
+	        	
 	    List<ReportCmx> listreportcmx = hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(0).getId());
 		
 	    return listreportcmx;
@@ -876,7 +878,8 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    
 	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
 				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
-	    
+	    if(listrpxx.size()==0)
+	    	return null;
 	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
 		
 	    return listreportpmx;
