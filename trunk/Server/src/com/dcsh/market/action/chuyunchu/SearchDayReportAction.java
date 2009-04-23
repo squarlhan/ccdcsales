@@ -1,5 +1,6 @@
 package com.dcsh.market.action.chuyunchu;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,13 @@ public class SearchDayReportAction implements Preparable {
 		Canku canku = new Canku();
     	Map session = ActionContext.getContext().getSession();
         canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();   
-        System.out.println(mydate+"***"+new Date());//dddd
         
-		if(mydate==null||mydate==new Date()){
+        SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(mydate);
+	    String nowstr =bartDateFormat.format(new Date());
+	    System.out.println(datestr+"***"+nowstr);//dddd
+	    
+		if(mydate.equals(null)||datestr.equals(nowstr)){
 			System.out.println("today++++++++++++++++++");
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
 		this.reportcmxlist = this.service.getDayReportCmx(canku, new Date());
