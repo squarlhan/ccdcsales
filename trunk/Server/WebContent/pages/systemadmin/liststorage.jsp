@@ -36,7 +36,7 @@
  <tr bgcolor="#4A708B">
      <th>产品名称</th>
      <th>入库量(T)</th>
-     <th>日销量(T)</th>
+     <th>出库量(T)</th>
      <th>工厂库存(T)</th>
  </tr>
  <s:iterator id="pr" value="resultList" status="index"> 
