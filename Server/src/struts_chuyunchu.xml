@@ -163,6 +163,9 @@
             <result>/pages/warehouseadmin/selectcangku.jsp</result>
             <result name="selectedcangku" type="redirect-action">cyclistuncheckProducts</result>
         </action>
-
+        <action name="cycsearchdayreport" method="execute" class="cycsearchDayReportAction">
+            <result>/pages/warehouseadmin/report_new.jsp</result>
+            <result name="show_report">/pages/warehouseadmin/report_new.jsp</result>
+        </action>
     </package>
   </struts>
