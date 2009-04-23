@@ -104,6 +104,10 @@
             <result >/pages/zhuchangku/goxsfahuo.jsp</result>
             <result name="show_report">/pages/zhuchangku/goxsfahuo.jsp</result>
         </action>
+        <action name="zcksearchdayreport" method="execute" class="zcksearchDayReportAction">
+            <result>/pages/zhuchangku/report_zck.jsp</result>
+            <result name="show_report">/pages/zhuchangku/report_zck.jsp</result>
+        </action>
 </package>
 	
 	
