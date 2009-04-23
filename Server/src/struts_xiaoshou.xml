@@ -14,6 +14,10 @@
             <result name="list" >/pages/xiaoshou/welcome.jsp</result>
             <result name="index" >/index.jsp</result>
         </action>
+        <action name="xslistsales" method="execute" class="xslistsalesAction">
+               <result>/pages/xiaoshou/listsales.jsp</result>
+               <result name="list">/pages/xiaoshou/listsales.jsp</result>
+        </action>
          <action name="xslogin" method="execute" class="xsloginAction">
             <result >/pages/xiaoshou/welcome.jsp</result>
             <result name="go" type="redirect-action">xsliststorage</result>
