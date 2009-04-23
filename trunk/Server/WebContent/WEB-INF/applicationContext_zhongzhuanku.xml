@@ -99,4 +99,8 @@
 	    class="com.dcsh.market.action.zhongzhuanku.goXSfahuoAction">
 	    <constructor-arg ref="ZhongZhuanKuService"/>
 	</bean>
+	<bean id="zzksearchDayReportAction" scope="prototype"
+		class="com.dcsh.market.action.zhongzhuanku.SearchDayReportAction">
+		<constructor-arg ref="ZhongZhuanKuService" />
+	</bean>
 </beans>
