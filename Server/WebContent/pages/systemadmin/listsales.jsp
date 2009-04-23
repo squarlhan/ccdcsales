@@ -49,15 +49,19 @@
 	 
  <table class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th width="20%">批号</th>
+		    <th width="10%">发货仓库</th>
+		    <th width="10%">批号</th>
 		    <th width="10%">产品名</th>
 		    <th width="10%">规格</th>
-		    <th width="10%">重量</th>
-			<th width="20%">去向</th>
+		    <th width="5%">重量</th>
+			<th width="25%">去向</th>
 		</tr>
 		<s:iterator id="result" value="listchukumx" status="index">		
 			<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
 	           <td align="center">
+					<s:property value="#result.chuku.cankuByCankuId.name" />
+			   </td>
+			   <td align="center">
 					<s:property value="#result.pch" />
 			   </td>
 			   <td align="center">
