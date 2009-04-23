@@ -20,6 +20,10 @@
 	    class="com.dcsh.market.action.xiaoshou.listStorageAction">
 	    <constructor-arg ref="XiaoShouService"/>
 	</bean>
+	<bean id="xslistsalesAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.listSalesAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
     <bean id="xsloginAction" scope="prototype"
 	    class="com.dcsh.market.action.xiaoshou.loginAction">
 	</bean>
