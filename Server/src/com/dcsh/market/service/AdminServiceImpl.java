@@ -269,22 +269,27 @@ public class AdminServiceImpl implements AdminService {
 		canku.setId(cankuid);
 //		代表销售的仓库id
 //		int saleck = 99999;
+		
+		Date nowdate = new Date();
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String nowdatestr =bartDateFormat.format(nowdate);
+		
 		List<ReportPmx> list = new ArrayList<ReportPmx>();
 		
 		List<Products> pkucun = hibernateTemplate.find("select distinct products from Kcxx");
 			
-		List<Rkmx> listrkmx = hibernateTemplate.find("from Rkmx");
+		List<Rkmx> listrkmx = hibernateTemplate.find("from Rkmx as rk where convert(varchar(10),rk.rkxx.rksj,120) = '"+nowdatestr+"'");
 			
-		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx");
+		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx as ck where convert(varchar(10),ck.chuku.cksj,120) = '"+nowdatestr+"'");
 			
 		List<Products> pchuku = hibernateTemplate.find("select distinct products from Chukumx");
 
 		if(cankuid!=0){
 		    pkucun = hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+canku.getId());
 			
-			listrkmx = hibernateTemplate.find("from Rkmx as rk where rk.rkxx.canku = "+canku.getId());
+			listrkmx = hibernateTemplate.find("from Rkmx as rk where convert(varchar(10),rk.rkxx.rksj,120) = '"+nowdatestr+"' and rk.rkxx.canku = "+canku.getId());
 				
-			listchuku = hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId());
+			listchuku = hibernateTemplate.find("from Chukumx as ck where convert(varchar(10),ck.chuku.cksj,120) = '"+nowdatestr+"' and ck.chuku.cankuByCankuId = "+canku.getId());
 				
 			pchuku = hibernateTemplate.find("select distinct products from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId());
 			
