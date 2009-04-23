@@ -10,7 +10,7 @@ import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
 public class listSalesAction implements Preparable{
-	private static final Logger log = LogManager.getLogManager().getLogger(listStorageAction.class.getName());
+	private static final Logger log = LogManager.getLogManager().getLogger(listSalesAction.class.getName());
     private AdminService service;
     private List<ReportCmx> cmxList;
     private List<Chukumx> listchukumx;
