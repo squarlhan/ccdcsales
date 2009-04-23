@@ -27,15 +27,15 @@ if(!xmlHttp && typeof XMLHttpRequest != 'undefined'){
 }
 	
 function xmlHandle(){
-	alert("start xmlHandle:"+xmlHttp.readyState);
+	//alert("start xmlHandle:"+xmlHttp.readyState);
 	if(xmlHttp.readyState==4) {
-		  alert("test:"+xmlHttp.responseText);
+	//	  alert("test:"+xmlHttp.responseText);
 		  var obj1 = eval('('+xmlHttp.responseText+')');
 		  
 		  var st = document.getElementById("st");
-		  alert("st"+obj1);
+		//  alert("st"+obj1);
 		  var cuts = document.getElementById("cuts");
-		  alert("cuts"+obj1);
+		//  alert("cuts"+obj1);
 		  for(j=0;j<cuts.options.length;j++){
 			  if ((cuts.options[j].nodeName == "OPTION")||(cuts.options[j].nodeName == "option")){		                    
 				  cuts.options[j]= null;            
