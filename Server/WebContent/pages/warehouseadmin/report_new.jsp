@@ -6,26 +6,6 @@
 <%@page import = "java.text.SimpleDateFormat" %>
 <html>
 <head>
-<script type="text/javascript">
-function checkNull()
-{
-	var ele = document.getElementById("bno");
-	if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-	{
-	  alert("请输入编号!");
-	  return false;
-	}
-	if(ele.value.length>12)
-	{
-	  alert("编号应不超过12位!");
-	  return false;
-	}
-	if(confirm("确认提交？"))
-		return true;
-	else
-		return false;
-}
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>产成品进销存（发运）日报</title>
 <style type="text/css" media="all">
@@ -39,18 +19,10 @@ function checkNull()
      <td><h2>产成品进销存（发运）日报</h2></td>
   </tr>
  </table>
-<s:form name="formname" label="label" action="cycsavereport" onsubmit="return checkNull()">
+<s:form name="formname" label="label" action="cycsearchdayreport">
 <table class="list_table"  align="center" border="0" width="100%">
  <tr>
-   	<td width="80" align="left"><s:text name="日报编号:"/></td>
-     <td width="100" align="left"><s:textfield label="lab" name="bno" theme="simple"/></td>
-     <td width="60" align="left"><s:text name="日期:"/></td>
-     <td width="100" align="left">
-     <%	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-     	out.print(df.format(new Date()));
-	    %>
-     </td>
-     <!-- <td width="100" align="left"><s:date name="mydate" format="yyyy-MM-dd"/></td> -->
+     <td><s:datetimepicker name="mydate" label="选择日期" toggleType="explode" theme="simple"/></td>
      <td width="100" align="left"><s:submit value="提交" theme="simple"/></td>
 </tr>
 </table>
