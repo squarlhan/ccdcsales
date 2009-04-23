@@ -8,22 +8,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>产成品进销存（发运）日报</title>
+<s:head/>
 <style type="text/css" media="all">
 @import "/Server/css/main.css";
 @import "/Server/css/css.css";
 </style>
 </head>
 <body>
-<table class="list_table"  align="center" width="100%">
-  <tr align="center">
-     <td><h2>产成品进销存（发运）日报</h2></td>
-  </tr>
- </table>
+<h2>产成品进销存（发运）日报</h2></td>
 <s:form name="formname" label="label" action="cycsearchdayreport">
 <table class="list_table"  align="center" border="0" width="100%">
  <tr>
      <td><s:datetimepicker name="mydate" label="选择日期" toggleType="explode" theme="simple"/></td>
-     <td width="100" align="left"><s:submit value="提交" theme="simple"/></td>
+     <td align="left"><s:submit value="提交" theme="simple"/></td>
 </tr>
 </table>
 <table class="list_table"  align="center" border="1" width="100%">
