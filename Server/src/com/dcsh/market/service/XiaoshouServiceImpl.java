@@ -249,7 +249,6 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		    if(cankus.size()!=0){
 		    	cid = String.valueOf(cankus.get(0).getId());
 		        for(Products product:products){
-		        	System.out.println("hanxs's products: "+product.getName());
 			      listchuku.addAll(hibernateTemplate.find("from Chukumx as ck where ck.products = "+String.valueOf(product.getId())+" and ck.chuku.cankuByRkId = "+cid
 					+" and convert(varchar(10),ck.chuku.cksj,120) >= '"+date1+"' " +
 					" and convert(varchar(10),ck.chuku.cksj,120) <= '"+date2+"' "));
