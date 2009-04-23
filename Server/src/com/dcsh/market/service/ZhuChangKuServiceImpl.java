@@ -713,6 +713,34 @@ private HibernateTemplate hibernateTemplate;
 		specificationName = hibernateTemplate.find("from Specifications where id='"+id+"'");
 		return specificationName;
 	}
+	@SuppressWarnings("unchecked")
+	public List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku) {
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(mydate);
+	    
+	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
+	    if(listrpxx.size()==0)
+	    	return null;
+	        	
+	    List<ReportCmx> listreportcmx = hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(0).getId());
+		
+	    return listreportcmx;
+	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku) {
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(mydate);
+	    
+	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
+	    if(listrpxx.size()==0)
+	    	return null;
+	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
+		
+	    return listreportpmx;
+	}
 }
 

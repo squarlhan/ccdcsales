@@ -171,4 +171,14 @@ public interface ZhongZhuanKuService {
 	List<Products> getProductNameById(int id);
 	List<Specifications> getSpecificationNameById(int id);
 	Custom getCustomerById(Integer customerId);
+	/**
+	 * 查询特定日期的日报信息
+	 * @param mydate 日期
+	 */
+	List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku);
+	/**
+	 * 查询特定日期的日报信息
+	 * @param mydate 日期
+	 */
+	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
 }
