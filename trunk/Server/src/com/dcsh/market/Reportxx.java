@@ -81,7 +81,7 @@ public class Reportxx implements java.io.Serializable {
 	}
 	
 	@ManyToOne
-	@JoinColumn(name = "Reporter", nullable = false)
+	@JoinColumn(name = "Reporter")
 	public Users getReporter() {
 		return reporter;
 	}
