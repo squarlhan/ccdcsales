@@ -1,15 +1,19 @@
 package com.dcsh.market.service;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chukumx;
 import com.dcsh.market.Fahuo;
 import com.dcsh.market.Kcxx;
 import com.dcsh.market.Products;
+import com.dcsh.market.ReportCmx;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.XSKcxx;
@@ -225,5 +229,70 @@ public class XiaoshouServiceImpl implements XiaoshouService {
     public Users loadmynhr(){
 		return  (Users) hibernateTemplate.get(Users.class, 10);
     }
+	
+	@Override
+	@Transactional
+	public List<ReportCmx> listSales(List<Products> products,Date begindate,Date enddate){
+		List<ReportCmx> list = new ArrayList<ReportCmx>();
+		List<Chukumx> listchuku = new ArrayList<Chukumx>();
+		List<Products> pchuku = products;
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		BigDecimal total_ckwt = new BigDecimal(0);
+		
+		if(begindate.compareTo(enddate)<=0){
+			
+		    String date1 =bartDateFormat.format(begindate);
+		    String date2 =bartDateFormat.format(enddate);
+		    
+		    String cid = null;
+		    List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type = 3");
+		    if(cankus.size()!=0){
+		    	cid = String.valueOf(cankus.get(0).getId());
+		        for(Products product:products){
+		        	System.out.println("hanxs's products: "+product.getName());
+			      listchuku.addAll(hibernateTemplate.find("from Chukumx as ck where ck.products = "+String.valueOf(product.getId())+" and ck.chuku.cankuByRkId = "+cid
+					+" and convert(varchar(10),ck.chuku.cksj,120) >= '"+date1+"' " +
+					" and convert(varchar(10),ck.chuku.cksj,120) <= '"+date2+"' "));
+			    }
+		    }
+			
+			for(int i=0;i<pchuku.size();i++){
+				total_ckwt = new BigDecimal(0);
+				//出库明细总重
+				for(int i1=0;i1<listchuku.size();i1++){
+					if(listchuku.get(i1).getProducts().getId()==(pchuku.get(i).getId()))
+					{
+						total_ckwt = total_ckwt.add((listchuku.get(i1).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i1).getNumber())));
+					}
+				}
+				list.add(new ReportCmx(pchuku.get(i),total_ckwt));
+			}
+		}
+		return list;
+	}
+	@Override
+	@Transactional
+	public List<Chukumx> listSalesmx(List<Products> products,Date begindate,Date enddate){
+		List<Chukumx> listchuku = new ArrayList<Chukumx>();
+		
+		if(begindate.compareTo(enddate)<=0){
+				
+			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		    String date1 =bartDateFormat.format(begindate);
+		    String date2 =bartDateFormat.format(enddate);
+		    
+		    String cid = null;
+		    List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type = 3");
+		    if(cankus.size()!=0){
+		    	cid = String.valueOf(cankus.get(0).getId());
+		        for(Products product:products){
+			      listchuku.addAll(hibernateTemplate.find("from Chukumx as ck where ck.products = "+String.valueOf(product.getId())+" and ck.chuku.cankuByRkId = "+cid
+					+" and convert(varchar(10),ck.chuku.cksj,120) >= '"+date1+"' " +
+					" and convert(varchar(10),ck.chuku.cksj,120) <= '"+date2+"' "));
+			    }
+		    }
+		}
+		return listchuku;
+	}
 
 }

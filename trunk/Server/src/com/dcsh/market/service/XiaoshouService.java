@@ -1,6 +1,7 @@
 package com.dcsh.market.service;
 
 
+import java.util.Date;
 import java.util.List;
 
 import com.dcsh.market.Products;
@@ -10,9 +11,11 @@ import com.dcsh.market.XSKcxx;
 import java.util.List;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
 import com.dcsh.market.Products;
+import com.dcsh.market.ReportCmx;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.XSfahuoxx;
@@ -42,4 +45,13 @@ public interface XiaoshouService {
 	Custom getCustomerById(Integer customerId);
 	Users loadmyshr();
     Users loadmynhr();
+    
+    /**
+     * 获得销售总量和明细
+     * @param begindate开始日期
+     * @param enddate截至日期
+     * @return
+     */
+	List<ReportCmx> listSales(List<Products> products,Date begindate,Date enddate);
+	List<Chukumx> listSalesmx(List<Products> products,Date begindate,Date enddate);
 }
