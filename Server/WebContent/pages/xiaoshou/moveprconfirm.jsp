@@ -148,6 +148,39 @@ function setnumber(obj,line)
 			alert("    请填写客户名称\n并在下拉框中选择一个客户！");  
 			return false;
 			}
+		var ele = document.getElementById("bno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入编号!");
+		  return false;
+		}
+		var ele1 = document.getElementById("aim");
+		if(ele1.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入到站!");
+		  return false;
+		}
+		var ele2 = document.getElementById("aim");
+		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入现行价!");
+		  return false;
+		}
+		for(i=0;i<=count;i++)
+		{	
+			var tmp = document.getElementById("sumweight["+i+"]");
+			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入第"+(count+1)+"行的重量!");
+				return false;
+			}
+			if(isNaN(tmp.value))
+			{
+				alert("重量只允许输入数字！");
+				return false;
+			}
+			
+		}
 		var cf = confirm("确认提交？");
 		if(cf)
 		{
