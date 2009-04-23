@@ -370,9 +370,9 @@
 </table>
 	<table class="list_table" id="tb" align="center" width="80%">
 		<tr bgcolor="#4A708B">
-			<th width="10%">发货仓库</th>
-			<th width="15%">产品</th>
-			<th width="15%">规格</th>
+			<th width="5%">发货仓库</th>
+			<th width="10%">产品</th>
+			<th width="10%">规格</th>
 			<th width="10%">重量(T)</th>
 			<th width="10%">单价(每吨)</th>
 			<th width="20%" style="display:none">发货数目</th>
