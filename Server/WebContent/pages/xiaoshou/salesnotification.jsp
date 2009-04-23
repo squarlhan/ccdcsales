@@ -174,6 +174,49 @@
 			alert("    请填写购货单位\n并在下拉框中选择一个客户！");
 			return false;
 			}
+		var ele = document.getElementById("bno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入编号!");
+		  return false;
+		}
+		var cele = document.getElementById("cno");
+		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+		{
+		  alert("请输入合同号!");
+		  return false;
+		}
+/*		if(ele.value.length>16)
+		{
+			alert("合同号应不超过16位");
+			return false;
+		}*/
+		for(i=0;i<=count;i++)
+		{	
+			var tmp = document.getElementById("sumweight["+i+"]");
+			if(tmp.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入第"+(count+1)+"行的重量!");
+				return false;
+			}
+			if(isNaN(tmp.value))
+			{
+				alert("重量只允许输入数字！");
+				return false;
+			}
+			var tmp1 = document.getElementById("price["+i+"]");
+			if(tmp1.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+				alert("请输入第"+(count+1)+"行的单价!");
+				return false;
+			}
+			if(isNaN(tmp1.value))
+			{
+				alert("重量只允许输入数字！");
+				return false;
+			}
+		}
+		
 		var cf = confirm("确认提交？");
 		if(cf)
 		{
