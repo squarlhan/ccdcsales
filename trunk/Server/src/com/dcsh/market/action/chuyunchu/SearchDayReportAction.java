@@ -37,11 +37,14 @@ public class SearchDayReportAction implements Preparable {
         canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();   
         
         SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(this.getMydaterq());
+        String datestr = null;
+        if(this.getMydaterq()!=null){
+	        datestr = bartDateFormat.format(this.getMydaterq());
+	    }
 	    String nowstr =bartDateFormat.format(new Date());
 	    System.out.println(datestr+"***"+nowstr);//dddd
 	    
-		if(mydaterq.equals(null)||datestr.equals(nowstr)){
+		if((mydaterq==null)||datestr.equals(nowstr)){
 			System.out.println("today++++++++++++++++++");
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
 		this.reportcmxlist = this.service.getDayReportCmx(canku, new Date());
