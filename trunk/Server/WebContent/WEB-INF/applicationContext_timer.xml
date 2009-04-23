@@ -9,38 +9,28 @@
 
 
 	<!--定时器功能-->
-
-	<bean id="infoCenterAutoBuildTask" class="com.dcsh.market.service.Mytask">
+	<bean id="mywareHouseService" class="com.dcsh.market.service.WareHouseServiceImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
 	</bean>
 
-	<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
-		<!-- wait 10 seconds before starting repeated execution -->
-		<property name="delay" value="10000" />
-		<!-- run every 50 seconds -->
-		<property name="period" value="20000" />
-		<property name="timerTask" ref="infoCenterAutoBuildTask" />
-	</bean>
-
-
-	<bean id="timerFactory" class="org.springframework.scheduling.timer.TimerFactoryBean">
-		<property name="scheduledTimerTasks">
-			<list>
-				<!-- see the example above -->
-				<ref bean="scheduledTask" />
-			</list>
-		</property>
-	</bean>
 
 	<bean id="reportJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 		<property name="jobClass">
-			<value>com.dcsh.market.service.MyQuartzJob</value>
+			<value>com.dcsh.market.service.MyQuartzJob</value>		
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="mywareHouseService">
+					<ref bean="mywareHouseService" />
+				</entry>
+			</map>
 		</property>
 	</bean>
 
 	<bean id="cronReportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="reportJob" />
 		<property name="cronExpression">
-			<value>0 * 23 * * ?</value>
+			<value>0 0 12,23 * * ?</value>
 		</property>
 	</bean>
 

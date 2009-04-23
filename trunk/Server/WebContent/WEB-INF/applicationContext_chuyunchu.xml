@@ -155,5 +155,8 @@
 		class="com.dcsh.market.action.chuyunchu.selectCangkuAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean>
-
+   <bean id="cycsearchDayReportAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.SearchDayReportAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
 </beans>
