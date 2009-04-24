@@ -17,19 +17,20 @@
 <h2>库存状态</h2>
 
 
-<s:form action="adminliststorage!execute1">
-  <table align="center" width="50%" border="0"> 
- <tr>      
-	<td><s:datetimepicker theme="simple" name="date" label="选择报表日期" toggleType="explode" value="today"/></td>      
+<s:form theme="simple">
+  <table align="center" width="80%" border="0" class="list_table"> 
+ <tr>
+    <td><s:text name="选择时间:"/></td>      
+	<td><s:datetimepicker theme="simple" name="date" label="选择报表日期" toggleType="explode"/></td>      
+	<td><s:text name="选择仓库:"/></td>
 	<td><s:select  theme="simple" name="canku" label="选择仓库名" labelposition="left" multiple="false" 
             list="cangkusList" listKey="id" listValue="name"/>
     </td>
+  
     <td align="left">
-				<s:submit  theme="simple" value="查看" />
-	  </td>
-	  <td width="120" align="right"><s:date name="date" format="yyyy-MM-dd"/></td>
+		  <s:submit value="查看" theme="simple" action="adminliststorage!execute1"/></td>
+	<td><s:submit value="打印库存单" theme="simple" action="adminprintwarehouse"/></td>
  </tr>
- <tr><td>　</td></tr>
 </table>
 
  <table class="list_table" align="center" border="1" width="100%">
