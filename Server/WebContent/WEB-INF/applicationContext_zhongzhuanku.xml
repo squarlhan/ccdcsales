@@ -103,4 +103,8 @@
 		class="com.dcsh.market.action.zhongzhuanku.SearchDayReportAction">
 		<constructor-arg ref="ZhongZhuanKuService" />
 	</bean>
+	<bean id="zzkprintWarehouseAction" scope="prototype"
+		class="com.dcsh.market.action.zhongzhuanku.PrintWarehouseAction">
+		<constructor-arg ref="ZhongZhuanKuService" />
+	</bean>
 </beans>

@@ -109,5 +109,8 @@
 		class="com.dcsh.market.action.admin.adminSaveUserprivAction">
 		<constructor-arg ref="adminService"/>
 	</bean>
-
+    <bean id="adminprintwarehouseAction" scope="prototype"
+		class="com.dcsh.market.action.admin.PrintWarehouseAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
 </beans>
