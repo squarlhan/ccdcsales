@@ -167,5 +167,9 @@
             <result>/pages/warehouseadmin/report_new.jsp</result>
             <result name="show_report">/pages/warehouseadmin/report_new.jsp</result>
         </action>
+        <action name="cycprintwarehouse" method="execute" class="cycprintWarehouseAction">
+            <result name="input">/pages/warehouseadmin/welcome.jsp</result>
+            <result name="print">/pages/warehouseadmin/printwarehouse.jsp</result>
+        </action>
     </package>
   </struts>

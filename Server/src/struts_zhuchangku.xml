@@ -108,6 +108,11 @@
             <result>/pages/zhuchangku/report_zck.jsp</result>
             <result name="show_report">/pages/zhuchangku/report_zck.jsp</result>
         </action>
+         <action name="zckprintwarehouse" method="execute" class="zckprintWarehouseAction">
+            <result>/pages/zhuchangku/liststorage.jsp</result>
+            <result name="input">/pages/zhuchangku/welcome.jsp</result>
+            <result name="print">/pages/zhuchangku/printwarehouse.jsp</result>
+        </action>
 </package>
 	
 	
