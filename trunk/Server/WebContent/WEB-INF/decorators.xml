@@ -18,6 +18,18 @@
 	    <pattern>/cycdeliverywarehouse!yiku.action </pattern>
 	    <pattern>/cycdeliverywarehouse!printfh.action </pattern>
 	    <pattern>/cycdeliverywarehouse!sale.action </pattern>
+	    
+	    <pattern>/cycprintwarehouse.action </pattern>
+	    <pattern>/cycprintwarehouse!print.action </pattern>
+	    <pattern>/cyclistallstorage.action </pattern>
+	    <pattern>/adminliststorage.action</pattern>
+	    <pattern>/zckprintwarehouse.action</pattern>
+	    <pattern>/zckprintwarehouse!print.action</pattern>
+	    <pattern>/zcklistallstorage.action</pattern>
+
+	    <pattern>/zzkprintwarehouse.action</pattern>
+	    <pattern>/zzkprintwarehouse!print.action</pattern>
+	    
 	    <pattern>/zckdeliverywarehouse!printfh.action </pattern>
 	    <pattern>/zckdeliverywarehouse!sale.action </pattern>
 	    <pattern>/zzkdeliverywarehouse!printfh.action </pattern>

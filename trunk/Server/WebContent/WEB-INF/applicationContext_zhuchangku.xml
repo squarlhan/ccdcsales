@@ -90,4 +90,8 @@
 		class="com.dcsh.market.action.zhuchangku.SearchDayReportAction">
 		<constructor-arg ref="myZhuChangKuService" />
 	</bean>
+	 <bean id="zckprintWarehouseAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.PrintWarehouseAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean>
 </beans>
