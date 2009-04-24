@@ -104,6 +104,10 @@
             <result>/pages/zhongzhuanku/report_zzk.jsp</result>
             <result name="show_report">/pages/zhongzhuanku/report_zzk.jsp</result>
         </action>
+         <action name="zzkprintwarehouse" method="execute" class="zzkprintWarehouseAction">
+            <result name="input">/pages/zhongzhuanku/welcome.jsp</result>
+            <result name="print">/pages/zhongzhuanku/printwarehouse.jsp</result>
+        </action>
 </package>
 	
 </struts>

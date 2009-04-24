@@ -125,6 +125,10 @@
         <action name="adminsaveuserpriv" method="execute" class="adminsaveuserprivAction">
         	<result name="save_userpriv" type="redirect-action">adminuserprimanager</result>
         </action>
+        <action name="adminprintwarehouse" method="execute" class="adminprintwarehouseAction">
+            <result>/pages/systemadmin/liststorage.jsp</result>
+        	<result name="print">/pages/systemadmin/printwarehouse.jsp</result>
+        </action>
 </package>
 
 	
