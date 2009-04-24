@@ -27,6 +27,8 @@ public class listAllStorageAction implements Preparable{
     private List<ReportPmx> pmxList;
     private Date mydate;
     private boolean flag;
+    private String printcanku;
+    private String printmydate;
     public listAllStorageAction(WareHouseService service) {
     
         this.service = service;
@@ -181,7 +183,7 @@ public class listAllStorageAction implements Preparable{
             return "infoList";
     	}
 	}
-	
+
 
     public Integer getCanku() {
         return canku;
@@ -201,6 +203,22 @@ public class listAllStorageAction implements Preparable{
 
 	public void setFlag(boolean flag) {
 		this.flag = flag;
+	}
+
+	public String getPrintcanku() {
+		return printcanku;
+	}
+
+	public void setPrintcanku(String printcanku) {
+		this.printcanku = printcanku;
+	}
+
+	public String getPrintmydate() {
+		return printmydate;
+	}
+
+	public void setPrintmydate(String printmydate) {
+		this.printmydate = printmydate;
 	}
 
 	public boolean isFlag() {
