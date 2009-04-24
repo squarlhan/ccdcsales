@@ -41,6 +41,9 @@ public class listStorageAction implements Preparable{
 
 	@SuppressWarnings("unchecked")
 	public String execute1() {
+		
+		if(this.date==null)
+			this.date = new Date();
 
     	this.resultList = service.listStorage(canku,date);
     	List<Canku> tempcankus = service.getAllCankus();
