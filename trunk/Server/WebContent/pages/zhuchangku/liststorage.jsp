@@ -18,11 +18,12 @@
 <s:form theme="simple">
 <table class="list_table" align="center" width="100%" >
  <tr>      
-	    <td width=""><s:datetimepicker name="mydate" label="选择报表日期" toggleType="explode" value="" theme="simple"/></td>      
+	    <td width=""><s:text name="选择日期:"/><s:datetimepicker name="mydate" label="选择报表日期" toggleType="explode" theme="simple"/></td>      
 	    <td width="">
 				<s:submit value="查库存" theme="simple" action="zcklistallstorage!getInfoByDate" />
 				<s:submit value="查入库单" theme="simple" action="zckcheckin!getInfoByDate"/>
 				<s:submit value="查出库单" theme="simple" action="zckcheckout!getInfoByDate"/>
+				<s:submit value="打印表单" theme="simple" action="zckprintwarehouse!print"/>
 		</td>
 
  </tr>
