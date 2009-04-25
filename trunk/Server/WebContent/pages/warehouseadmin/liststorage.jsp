@@ -11,11 +11,17 @@
 @import "/Server/css/main.css";
 @import "/Server/css/css.css";
 </style>
+<script language="javascript">
+	function print(){
+		document.myform.action = "cycprintwarehouse!print.action";
+		return true;
+	}
+</script>
 <s:head/>
 </head>
 <body>
 <h2>储运处库存状态</h2>
-<s:form theme="simple">
+<s:form id="myform" theme="simple">
 <table class="list_table"  align="center" width="100%" >
  <tr>      
 	    <td width=""><s:datetimepicker name="mydate" label="选择报表日期" toggleType="explode" theme="simple"/></td>      
@@ -23,7 +29,7 @@
 				<s:submit value="查库存" theme="simple" action="cyclistallstorage!getInfoByDate" />
 				<s:submit value="查入库单" theme="simple" action="cyccheckin!getInfoByDate"/>
 				<s:submit value="查出库单" theme="simple" action="cyccheckout!getInfoByDate"/>
-				<s:submit value="打印库存单" theme="simple" action="cycprintwarehouse!print"/>
+				<input value="打印库存单"  type="submit" onclick="return print()"/>
 		</td>
 
  </tr>
