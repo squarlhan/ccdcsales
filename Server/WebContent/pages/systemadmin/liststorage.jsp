@@ -11,13 +11,19 @@
 @import "/Server/css/main.css";
 @import "/Server/css/css.css";
 </style>
+<script language="javascript">
+	function print(){
+		document.myform.action = "adminprintwarehouse.action";
+		return true;
+	}
+</script>
 <s:head/>
 </head>
 <body>
 <h2>库存状态</h2>
 
 
-<s:form theme="simple">
+<s:form id="myform" theme="simple">
   <table align="center" width="80%" border="0" class="list_table"> 
  <tr>
     <td><s:text name="选择时间:"/></td>      
@@ -29,7 +35,7 @@
   
     <td align="left">
 		  <s:submit value="查看" theme="simple" action="adminliststorage!execute1"/></td>
-	<td><s:submit value="打印库存单" theme="simple" action="adminprintwarehouse"/></td>
+	<td><input value="打印库存单"  type="submit" onclick="return print()"/></td>
  </tr>
 </table>
 
