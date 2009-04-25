@@ -38,7 +38,7 @@ public class PrintWarehouseAction implements Preparable{
 
 	public String execute() {   
     	
-            return "list";
+            return print();
   
     }
     
