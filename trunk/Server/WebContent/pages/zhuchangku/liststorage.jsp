@@ -11,19 +11,25 @@
 @import "/Server/css/main.css";
 @import "/Server/css/css.css";
 </style>
+<script language="javascript">
+	function print(){
+		document.myform.action = "zckprintwarehouse!print.action";
+		return true;
+	}
+</script>
 <s:head/>
 </head>
 <body>
 <h2>驻厂库的库存状态</h2>
-<s:form theme="simple">
+<s:form id="myform" theme="simple">
 <table class="list_table" align="center" width="100%" >
  <tr>      
-	    <td width=""><s:text name="选择日期:"/><s:datetimepicker name="mydate" label="选择报表日期" toggleType="explode" theme="simple"/></td>      
+	    <td width=""><s:datetimepicker name="mydate" label="选择报表日期" toggleType="explode" theme="simple"/></td>      
 	    <td width="">
 				<s:submit value="查库存" theme="simple" action="zcklistallstorage!getInfoByDate" />
 				<s:submit value="查入库单" theme="simple" action="zckcheckin!getInfoByDate"/>
 				<s:submit value="查出库单" theme="simple" action="zckcheckout!getInfoByDate"/>
-				<s:submit value="打印表单" theme="simple" action="zckprintwarehouse!print"/>
+				<input value="打印库存单"  type="submit" onclick="return print()"/>
 		</td>
 
  </tr>
