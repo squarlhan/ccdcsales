@@ -246,13 +246,8 @@ function setnumber(obj,line)
 
 			  var customer = document.getElementById("customer");
 
-			  for(j=0;j<customer.options.length;j++){
-				  if ((customer.options[j].nodeName == "OPTION")||(customer.options[j].nodeName == "option")){		                    
-					  customer.options[j]= null;            
-				            }
-				  customer.value = null;
-				  customer.options[j] = null;
-			  }
+			  customer.options.length = 0;
+			  
 			  var opts0 = document.createElement("option");
 			  opts0.value = "0";
               opts0.text = " ";

@@ -274,17 +274,11 @@
 		if(xmlHttp.readyState==4) {
 		
 			  var obj1 = eval('('+xmlHttp.responseText+')');
-			  	 
 
 			  var customer = document.getElementById("customer");
-
-			  for(j=0;j<customer.options.length;j++){
-				  if ((customer.options[j].nodeName == "OPTION")||(customer.options[j].nodeName == "option")){		                    
-					  customer.options[j]= null;            
-				            }
-				  customer.value = null;
-				  customer.options[j] = null;
-			  }
+	
+			  customer.options.length = 0;
+			  
 			  var opts0 = document.createElement("option");
 			  opts0.value = "0";
               opts0.text = " ";
@@ -324,7 +318,7 @@
 			
 				
 				  xmlHttp.open("GET",encodeURI("xsgetcustomers.action?start="+value),true);
-				//alert("我"+value+"我");
+
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
 				
 				  xmlHttp.send(null);
@@ -332,13 +326,12 @@
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
 			
 			}
-
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////
 </script>
 <s:head />
 </head>
 
-<body>
+<body onload="showdiv(mysel.offsetWidth)">   
 
 
 
@@ -382,7 +375,7 @@
       <td align="left">
       <input id="customer_show" type="text" maxlength="100" style="position:absolute;top:220px;width:200px;height:21px" name="start" onkeyup="idchange(this.value)" />
       <select id="customer" name="customer" style="position:absolute;top:220px;width:200px;height:20px;clip:rect(0 200 110 180)"
-	          onChange="javascript:setcustomer(this.options[this.selectedIndex].text)" /></td>
+	          onChange="javascript:setcustomer(this.options[this.selectedIndex].text)"/></td>
     </tr>
     <tr>
       <td align="left"><s:text name="销售类型:"/></td>
