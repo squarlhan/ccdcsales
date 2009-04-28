@@ -45,12 +45,10 @@ public class SearchDayReportAction implements Preparable {
 	    System.out.println(datestr+"***"+nowstr);//dddd
 	    
 		if((mydaterq==null)||datestr.equals(nowstr)){
-			System.out.println("today++++++++++++++++++");
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
 		this.reportcmxlist = this.service.getDayReportCmx(canku, new Date());
 		}
 		else{
-			System.out.println(mydaterq+"++++++++++++++++++");
 		this.reportpmxlist = this.service.searchDayReportPmx(mydaterq,canku);
 		this.reportcmxlist = this.service.searchDayReportCmx(mydaterq,canku);	
 			
