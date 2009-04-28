@@ -320,12 +320,12 @@ function setnumber(obj,line)
   	<table class="list_table" id="tb" align="center" width="100%">
   	
 		<tr bgcolor="#4A708B">
-		    <th width="120">选择产品</th>
-		    <th width="120">选择规格</th>
-		    <th width="120">填写批号</th>
-			<th width="120">填写重量</th>
-			<th width="20%" style="display:none">袋数</th>
-			<th width="20%" style="display:none">单带重量</th>
+		    <th>选择产品</th>
+		    <th>选择规格</th>
+		    <th>填写批号</th>
+			<th>填写重量</th>
+			<th style="display:none">袋数</th>
+			<th style="display:none">单带重量</th>
 		</tr>
 
      	<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
