@@ -352,12 +352,12 @@ function setnumber(obj,line)
 </table>
 <table  class="list_table" id="tb" align="center" width="80%">
       	<tr bgcolor="#4A708B">
-      	   <th width="10%">发货仓库</th>
-      	   <th width="15%">产品</th>
-      	   <th width="15%">规格</th>
-      	   <th width="10%">重量(T)</th>
-      	   <th width="20%" style="display:none">单重</th>
-      	   <th width="30%" style="display:none">发货数目</th>
+      	   <th>发货仓库</th>
+      	   <th>产品</th>
+      	   <th>规格</th>
+      	   <th>重量(T)</th>
+      	   <th style="display:none">单重</th>
+      	   <th style="display:none">发货数目</th>
       	</tr>
       <tr>
           <td><s:select id="deli_canku[0]" name="deli_canku[0]" multiple="false" label="选择发货仓库"
