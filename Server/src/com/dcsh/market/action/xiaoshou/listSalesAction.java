@@ -50,7 +50,7 @@ public class listSalesAction implements Preparable{
     }
 	
 	public String listBetween() {
-    	System.out.println("Enter Excute");
+
     	this.cmxList = service.listSales(this.getproducts(),begindate, enddate);
     	this.listchukumx = service.listSalesmx(this.getproducts(),begindate, enddate);
         return "list";
