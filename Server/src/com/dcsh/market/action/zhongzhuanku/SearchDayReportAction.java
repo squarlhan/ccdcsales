@@ -25,8 +25,7 @@ public class SearchDayReportAction implements Preparable {
 	
 	
 	public SearchDayReportAction(ZhongZhuanKuService service)
-    {
-	 
+    {	 
         this.service = service;
 	}
 
@@ -42,9 +41,7 @@ public class SearchDayReportAction implements Preparable {
         if(this.getMydaterq()!=null){
 	        datestr = bartDateFormat.format(this.getMydaterq());
 	    }
-	    String nowstr =bartDateFormat.format(new Date());
-	    System.out.println(datestr+"***"+nowstr);
-	    
+	    String nowstr =bartDateFormat.format(new Date());	    
 		if((mydaterq==null)||datestr.equals(nowstr)){
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
 		this.reportcmxlist = this.service.getDayReportCmx(canku, new Date());
