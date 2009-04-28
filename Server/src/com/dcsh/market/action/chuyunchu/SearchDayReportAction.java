@@ -42,7 +42,6 @@ public class SearchDayReportAction implements Preparable {
 	        datestr = bartDateFormat.format(this.getMydaterq());
 	    }
 	    String nowstr =bartDateFormat.format(new Date());
-	    System.out.println(datestr+"***"+nowstr);//dddd
 	    
 		if((mydaterq==null)||datestr.equals(nowstr)){
 		this.reportpmxlist = this.service.getDayReportPmx(canku, new Date());
