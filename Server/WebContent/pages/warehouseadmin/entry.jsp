@@ -249,8 +249,8 @@ function setnumber(obj,line)
   <s:form id="myform"  theme="simple" target="_blank">
   <table class="list_table"  align="center" width="100%" id="tb0">
   	<tr bgcolor="#4A708B">
-  		<th width="160">负责人</th>
-		<th width="160">编号</th>
+  		<th>负责人</th>
+		<th>编号</th>
   	</tr>
   	<tr>
   		<td><s:textfield id="wer" name="rkfzr" labelposition="top"/></td>
@@ -259,13 +259,13 @@ function setnumber(obj,line)
   </table>
      <table class="list_table"  align="center" width="100%" id="tb">
        <tr bgcolor="#4A708B">
-		    <th width="10%">选择产品</th>
-		    <th width="10%">选择规格</th>
-		    <th width="20%">填写批号</th>
-			<th width="10%">填写重量(T)</th>
-			<th width="20%">备注</th>
-			<th width="10%" style="display:none">袋数</th>
-			<th width="10%" style="display:none">单带重量</th>
+		    <th>选择产品</th>
+		    <th>选择规格</th>
+		    <th>填写批号</th>
+			<th>填写重量(T)</th>
+			<th>备注</th>
+			<th style="display:none">袋数</th>
+			<th style="display:none">单带重量</th>
 			
 	  </tr>
      <tr  align="center" bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
