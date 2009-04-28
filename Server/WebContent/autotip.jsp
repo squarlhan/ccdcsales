@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GBK"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
 String context = request.getContextPath();
 %>
@@ -7,7 +8,7 @@ String context = request.getContextPath();
 <html>
   <head>
     <title>My JSP 'AutoTip.jsp' starting page</title>
-    
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -31,31 +32,31 @@ String context = request.getContextPath();
   </head>
   
   <body>
-    <h3>¿Í»§µÄAjaxComplete</h3>
+    <h3>å®¢æˆ·çš„AjaxComplete</h3>
 	<table>
 	<tr>
-	<td>Òş²ØÖµ</td>
+	<td>éšè—å€¼</td>
 	<td><input name="provinceId" type="text" id="provinceId" size="24"/></td>
 	</tr>
 	<tr>
-	<td>¿Í»§</td>
+	<td>å®¢æˆ·</td>
 	<td><input type="text" name="province" size="24"/></td>
 	</tr>
 	</table>
 	
 	<script type="text/javascript">
-	    //Ö»ÒªÒ»¾ä»°¾Í¿ÉÒÔÍê³É×Ô¶¯Íê³É£¬Ìá¸ß¿ª·¢ËÙ¶È£¬count±íÊ¾Ò»´ÎÏÔÊ¾µÄ¼ÇÂ¼ÌõÊı£¬ÏÔÊ¾¼ÇÂ¼µÄÊ±ºò£¬³¬¹ı10ÌõÏÔÊ¾ÏÂÀ­¿ò
+	    //åªè¦ä¸€å¥è¯å°±å¯ä»¥å®Œæˆè‡ªåŠ¨å®Œæˆï¼Œæé«˜å¼€å‘é€Ÿåº¦ï¼Œcountè¡¨ç¤ºä¸€æ¬¡æ˜¾ç¤ºçš„è®°å½•æ¡æ•°ï¼Œæ˜¾ç¤ºè®°å½•çš„æ—¶å€™ï¼Œè¶…è¿‡10æ¡æ˜¾ç¤ºä¸‹æ‹‰æ¡†
 	    new AutoTip.AutoComplete("province", function() {
 	        return "<%= context%>/autocomplete.do?method=province&count=10&inputValue=" + escape(this.text.value);
 	    });
 	
 	</script>
 	
-	<h3>¿Í»§µÄAjaxComplete</h3>
+	<h3>å®¢æˆ·çš„AjaxComplete</h3>
 	<form>
 	<table>
 	<tr>
-	<td>¿Í»§</td>
+	<td>å®¢æˆ·</td>
 	<td><input type="text" name="city" size="24"/></td>
 	</tr>
 	</table>
