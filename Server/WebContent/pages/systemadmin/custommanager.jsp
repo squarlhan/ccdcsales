@@ -119,7 +119,7 @@ function confirm_add()
          
         <td align="center" width="">
         	<a href="javascript:confirm_modify(${index.index})">修改</a>
-        	&nbsp 
+        	&nbsp; 
         	<a href="javascript:confirm_delete(${index.index})">删除</a> 
         </td>
       </tr>
