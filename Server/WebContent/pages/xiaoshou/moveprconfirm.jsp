@@ -76,8 +76,9 @@ function setnumber(obj,line)
 		var select3 = document.createElement("select");
 		select3.setAttribute("id","specification["+count+"]");
 		select3.setAttribute("name","specification["+count+"]");
-		select3.setAttribute("onchange","javascript:setweight(this," + count + ")");
-		select3.onchange = function(){setweight(select3,count)};		
+		select3.setAttribute("label",count);
+		select3.setAttribute("onchange","javascript:setweight(this," + select3.label + ")");
+		select3.onchange = function(){setweight(select3,select3.label)};		
 		
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","deli_num["+count+"]");
@@ -94,8 +95,9 @@ function setnumber(obj,line)
 		textfield3.setAttribute("id","sumweight["+count+"]");
 		textfield3.setAttribute("name","sumweight["+count+"]");
 		textfield3.setAttribute("size","10");
-		textfield3.setAttribute("onchange","javascript:setnumber(this," + count + ")");
-		textfield3.onchange = function(){setnumber(textfield3,count)};	
+		textfield3.setAttribute("label",count);
+		textfield3.setAttribute("onchange","javascript:setnumber(this," + textfield3.label + ")");
+		textfield3.onchange = function(){setnumber(textfield3,textfield3.label)};	
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");

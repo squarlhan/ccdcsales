@@ -39,7 +39,6 @@
 		var w = weights[obj.selectedIndex];
 		document.getElementById("weight["+line+"]").value= w;
 		var c = ForDight(accDiv((document.getElementById("sumweight["+line+"]").value),w),3);
-		//alert(c);
 		if(c!=parseInt(c)){
 			document.getElementById("deli_num["+line+"]").value=0;
 		 	alert("请重新填写重量"); 
@@ -49,14 +48,12 @@
 
 	function setnumber(obj,line)
 	{
-		//alert("line"+line);
 		var w = document.getElementById("weight["+line+"]").value;
 		var n = ForDight(accDiv(obj.value,w),3);
 		if(n!=parseInt(n)){
 			document.getElementById("deli_num["+line+"]").value=0;
 		 	alert("请重新填写重量"); 
 		}else
-		//alert(c);
 		document.getElementById("deli_num["+line+"]").value= n;
 	}
 
@@ -89,8 +86,9 @@
 		var select3 = document.createElement("select");
 		select3.setAttribute("id","specification["+count+"]");
 		select3.setAttribute("name","specification["+count+"]");
-		select3.setAttribute("onchange","javascript:setweight(this," + count + ")");
-		select3.onchange = function(){setweight(select3,count)};
+		select3.setAttribute("label",count);
+		select3.setAttribute("onchange","javascript:setweight(this," + select3.label + ")");
+		select3.onchange = function(){setweight(select3,select3.label)};
 
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","deli_num["+count+"]");
@@ -112,8 +110,9 @@
 		textfield5.setAttribute("id","sumweight["+count+"]");
 		textfield5.setAttribute("name","sumweight["+count+"]");
 		textfield5.setAttribute("size","10");
-		textfield5.setAttribute("onchange","javascript:setnumber(this," + count + ")");
-		textfield5.onchange = function(){setnumber(textfield5,count)};
+		textfield5.setAttribute("label",count);
+		textfield5.setAttribute("onchange","javascript:setnumber(this," + textfield5.label + ")");
+		textfield5.onchange = function(){setnumber(textfield5,textfield5.label)};
 
 		var orgincan=document.getElementById("deli_canku[0]");	
 		var orginpro=document.getElementById("product[0]");
