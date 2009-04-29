@@ -29,7 +29,6 @@ function setweight(obj,line)
 	var w = weights[obj.selectedIndex];
 	document.getElementById("weight["+line+"]").value= w;
 	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
-	//alert(c);
 	if(c!=parseInt(c)){
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
@@ -45,7 +44,6 @@ function setnumber(obj,line)
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
 	}else
-	//alert(c);
 	document.getElementById("number["+line+"]").value= n;
 }
 
@@ -72,8 +70,9 @@ function setnumber(obj,line)
 		var select2 = document.createElement("select");
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
-		select2.setAttribute("onchange","javascript:setweight(this," + count + ")");
-		select2.onchange = function(){setweight(select2,count)};	
+		select2.setAttribute("label",count);
+		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")");
+		select2.onchange = function(){setweight(select2,select2.label)};	
 		
 		var textfield1 = document.createElement("input");
 		textfield1.setAttribute("id","pch["+count+"]");
@@ -83,24 +82,25 @@ function setnumber(obj,line)
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","sumweight["+count+"]");
 		textfield2.setAttribute("name","sumweight["+count+"]");
+		textfield2.setAttribute("label",count);
 		textfield2.setAttribute("size","15");
-		textfield2.setAttribute("onchange","javascript:setnumber(this," + count + ")");
-		textfield2.onchange = function(){setnumber(textfield2,count)};
+		textfield2.setAttribute("onchange","javascript:setnumber(this," + textfield2.label + ")");
+		textfield2.onchange = function(){setnumber(textfield2,textfield2.label)};
 		
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","memo["+count+"]");
 		textfield3.setAttribute("name","memo["+count+"]");
 		textfield3.setAttribute("size","20");
 
-		var textfield4 = document.createElement("input");
-		textfield4.setAttribute("id","weight["+count+"]");
-		textfield4.setAttribute("name","weight["+count+"]");
-		textfield4.type = "hidden";
-		
 		var textfield5 = document.createElement("input");
-		textfield5.setAttribute("id","number["+count+"]");
-		textfield5.setAttribute("name","number["+count+"]");
+		textfield5.setAttribute("id","weight["+count+"]");
+		textfield5.setAttribute("name","weight["+count+"]");
 		textfield5.type = "hidden";
+		
+		var textfield4 = document.createElement("input");
+		textfield4.setAttribute("id","number["+count+"]");
+		textfield4.setAttribute("name","number["+count+"]");
+		textfield4.type = "hidden";
 			
 		var orginpro=document.getElementById("product[0]");
 		var orginspe=document.getElementById("specification[0]");
@@ -265,7 +265,7 @@ function setnumber(obj,line)
 			<th>填写重量(T)</th>
 			<th>备注</th>
 			<th style="display:none">袋数</th>
-			<th style="display:none">单带重量</th>
+			<th style="display:none">单袋重量</th>
 			
 	  </tr>
      <tr  align="center" bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
@@ -273,7 +273,7 @@ function setnumber(obj,line)
             list="productsList" listValue="name" listKey="id" /></td>
 
        <td><s:select id="specification[0]" name="specification[0]" labelposition="left" multiple="false"
-            list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
+            list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)" label="0"/></td>
 
        <td><s:textfield size="15" id="pch[0]" name="pch[0]" /></td>
        

@@ -33,7 +33,6 @@ function setweight(obj,line)
 	var w = weights[obj.selectedIndex];
 	document.getElementById("weight["+line+"]").value= w;
 	var c = ForDight(accDiv((document.getElementById("sumweight["+line+"]").value),w),3);
-	//alert(c);
 	if(c!=parseInt(c)){
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
@@ -49,7 +48,6 @@ function setnumber(obj,line)
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
 	}else
-	//alert(c);
 	document.getElementById("number["+line+"]").value= n;
 }
 
@@ -74,22 +72,21 @@ function setnumber(obj,line)
 		var select2 = document.createElement("select");
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
-		select2.onchange = function(){setweight(select2,count)};	
+		select2.setAttribute("label",count);
+		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")");
+		select2.onchange = function(){setweight(select2,select2.label)};	
 		
 		var select3 = document.createElement("select");
 		select3.setAttribute("id","pch["+count+"]");
 		select3.setAttribute("name","pch["+count+"]");
-			
-	/*	var textfield2 = document.createElement("input");
-		textfield2.setAttribute("id","number["+count+"]");
-		textfield2.setAttribute("name","number["+count+"]");*/
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sumweight["+count+"]");
 		textfield3.setAttribute("name","sumweight["+count+"]");
 		textfield3.setAttribute("size","15");
-		textfield3.setAttribute("onchange","javascript:setnumber(this," + count + ")");
-		textfield3.onchange = function(){setnumber(textfield3,count)};
+		textfield3.setAttribute("label",count);
+		textfield3.setAttribute("onchange","javascript:setnumber(this," + textfield3.label + ")");
+		textfield3.onchange = function(){setnumber(textfield3,textfield3.label)};
 
 		var textfield4 = document.createElement("input");
 		textfield4.setAttribute("id","weight["+count+"]");
@@ -126,8 +123,8 @@ function setnumber(obj,line)
 		td2.appendChild(select2);
 		td3.appendChild(select3);
 		td4.appendChild(textfield3);
-		td5.appendChild(textfield4);
-		td6.appendChild(textfield5);
+		td5.appendChild(textfield5);
+		td6.appendChild(textfield4);
 
 		select2.onchange(select2,count);
 		textfield3.onchange(textfield3,count);
