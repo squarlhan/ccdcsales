@@ -14,7 +14,6 @@
 <script language="javascript"> 
 function urlpara_modify(cid,cname,ctype,caddress) 
 {
-	//alert("fuck");
     location.href= encodeURI("admincanmanager!modify.action?id="+cid+"&name="+cname+"&address="+caddress+"&type="+ctype); 
 } 
 function confirm_modify(rownum)
