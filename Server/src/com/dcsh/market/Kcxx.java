@@ -58,7 +58,7 @@ public class Kcxx implements java.io.Serializable {
 	@EmbeddedId
 	@AttributeOverrides( {
 			@AttributeOverride(name = "pid", column = @Column(name = "PID", nullable = false)),
-			@AttributeOverride(name = "pch", column = @Column(name = "Pch", nullable = false, length = 9)), 
+			@AttributeOverride(name = "pch", column = @Column(name = "Pch", nullable = false, length = 20)), 
 			@AttributeOverride(name = "cid", column = @Column(name = "CID", nullable = false))})
 	public KcxxId getId() {
 		return this.id;

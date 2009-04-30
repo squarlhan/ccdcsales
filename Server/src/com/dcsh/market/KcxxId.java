@@ -42,7 +42,7 @@ public class KcxxId implements java.io.Serializable {
 		this.cid = cid;
 	}
 
-	@Column(name = "Pch", nullable = false, length = 9)
+	@Column(name = "Pch", nullable = false, length = 20)
 	public String getPch() {
 		return this.pch;
 	}
