@@ -250,12 +250,12 @@ public class entryWareHouseAction implements Preparable{
 		List<Rkmx> temprumxs;
     	
 		Map session = ActionContext.getContext().getSession();
-    	if(session.containsKey("temprumxs")){
-    		temprumxs = (List<Rkmx>) session.get("temprumxs");
-    	}else{
+//    	if(session.containsKey("temprumxs")){
+//    		temprumxs = (List<Rkmx>) session.get("temprumxs");
+//    	}else{
     		temprumxs = new ArrayList();
     		session.put("temprumxs", temprumxs);
-    	}
+//    	}
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			this.newproduct = new Products(this.getProduct().get(i),null);
 			this.newspecification = new Specifications(this.getSpecification().get(i),null,new BigDecimal(0.025),null);
