@@ -102,7 +102,7 @@ public class Chukumx implements java.io.Serializable {
 		this.specifications = specifications;
 	}
 
-	@Column(name = "Pch", nullable = false, length = 10)
+	@Column(name = "Pch", nullable = false, length = 20)
 	public String getPch() {
 		return this.pch;
 	}
