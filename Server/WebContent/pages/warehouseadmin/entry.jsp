@@ -70,11 +70,11 @@ function setnumber(obj,line)
 		var select2 = document.createElement("select");
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
-		select2.setAttribute("label",count);                                                 //原来用count做setweight的参数，执行onchange方法时
-		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")"); //就只改变最后一行（因为是第count行）的“单袋重量”和
-		select2.onchange = function(){setweight(select2,select2.label)};	                 //“袋数”，我们要实现的是改变当前行的数据，将count放
-																							 //入label是记录本行是第几行，用它做参数就避免了上述
-		var textfield1 = document.createElement("input");									 //错误！
+		select2.setAttribute("label",count);                                                
+		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")"); 
+		select2.onchange = function(){setweight(select2,select2.label)};	                 
+																							
+		var textfield1 = document.createElement("input");									
 		textfield1.setAttribute("id","pch["+count+"]");
 		textfield1.setAttribute("name","pch["+count+"]");
 		textfield1.setAttribute("size","15");
@@ -158,9 +158,9 @@ function setnumber(obj,line)
 				alert("请输入第"+(i+1)+"行批号!");
 				return false;
 			}
-			if(pch.value.length!=9)
+			if(pch.value.length>20)
 			{
-				alert("第"+(i+1)+"行批号应为9位!");
+				alert("第"+(i+1)+"行批号不应超过20位!");
 				return false;
 			}
 			if(sum.value.replace(/(^\s*)|(\s*$)/g,"")=="")
@@ -204,9 +204,9 @@ function setnumber(obj,line)
 				alert("请输入第"+(i+1)+"行批号!");
 				return false;
 			}
-			if(pch.value.length!=9)
+			if(pch.value.length>20)
 			{
-				alert("第"+(i+1)+"行批号应为9位!");
+				alert("第"+(i+1)+"行批号不应超过20位!");
 				return false;
 			}
 			if(sum.value.replace(/(^\s*)|(\s*$)/g,"")=="")
