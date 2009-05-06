@@ -76,9 +76,10 @@ function setnumber(obj,line)
 		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")");
 		select2.onchange = function(){setweight(select2,select2.label)};	
 		
-		var select3 = document.createElement("select");
-		select3.setAttribute("id","pch["+count+"]");
-		select3.setAttribute("name","pch["+count+"]");
+		var textfield6 = document.createElement("input");
+		textfield6.setAttribute("id","pch["+count+"]");
+		textfield6.setAttribute("name","pch["+count+"]");
+		textfield6.setAttribute("size","20");
 			
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sumweight["+count+"]");
@@ -113,15 +114,10 @@ function setnumber(obj,line)
 	          opts.text=orginspe.children[j].text;
 	          select2.options.add(opts);
 	          }
-		 for(var k=0;k<orginpch.children.length;k++){
-	          var optp=document.createElement("option");
-	          optp.value=orginpch.children[k].value;
-	          optp.text=orginpch.children[k].text;
-	          select3.options.add(optp);
-	          }
+		
 		td1.appendChild(select1);
 		td2.appendChild(select2);
-		td3.appendChild(select3);
+		td3.appendChild(textfield6);
 		td4.appendChild(textfield3);
 		td5.appendChild(textfield5);
 		td6.appendChild(textfield4);
@@ -162,7 +158,14 @@ function setnumber(obj,line)
 			{
 				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
-			} 
+			}
+
+			var pch =  document.getElementById("pch["+i+"]");
+			if(pch.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+                 alert("请输入第"+(i+1)+"行批号!");
+                 return false;
+			}
 		}
 		if(confirm("确认装车？")){
 			document.myform.action = "cycdeliverywarehouse.action";
@@ -197,6 +200,12 @@ function setnumber(obj,line)
 			{
 				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
+			}
+			var pch =  document.getElementById("pch["+i+"]");
+			if(pch.value.replace(/(^\s*)|(\s*$)/g,"")=="")
+			{
+                 alert("请输入第"+(i+1)+"行批号!");
+                 return false;
 			} 
 		}
 		if(confirm("确认打印？")){
@@ -282,8 +291,7 @@ function setnumber(obj,line)
         <td><s:select id="specification[0]" name="specification[0]" label="请选择产品规格" labelposition="left" multiple="false"
             list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
 
-        <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
-            list="pchList" /></td>
+        <td><s:textfield id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" size="20"/></td>
 		
 		 <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
 		 <!-- 
