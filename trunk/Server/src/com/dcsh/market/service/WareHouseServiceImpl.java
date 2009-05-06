@@ -884,4 +884,19 @@ public class WareHouseServiceImpl implements WareHouseService {
 		
 	    return listreportpmx;
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public void deleteUncheckProduct(int id) {
+
+		List<Rkmx> rkmx = hibernateTemplate.find("from Rkmx where id='"+id+"'");
+	
+		hibernateTemplate.deleteAll(rkmx);
+		
+		List<Kcxx> kcxx = hibernateTemplate.find("from Kcxx where pch='"+rkmx.get(0).getPch()+"'");
+	
+		hibernateTemplate.deleteAll(kcxx);
+	
+	}
 }
