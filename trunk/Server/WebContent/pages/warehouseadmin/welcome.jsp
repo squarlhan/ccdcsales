@@ -19,6 +19,23 @@
 		else
 			return false;
 	}
+
+	function confirm_delete(rownum)
+	{
+		var cf = confirm("确认删除？");
+		if(cf)
+		{
+			var cid = (document.getElementById("cid_"+rownum)).value;
+			urlpara_delete(cid);
+		}
+	}
+
+
+	function urlpara_delete(cid) 
+	{
+	    location.href= encodeURI("cyccheckinwarehouse!delete.action?id="+cid); 
+	} 
+	
 </script>
 </head>
 <body>
@@ -26,16 +43,17 @@
 <table class="list_table"  align="center" width="640">
   <s:form theme="simple" action="cyccheckinwarehouse" onsubmit="return confirmbtn()">
 		<tr bgcolor="#4A708B">
-		    <th width="50">编号</th>
-		    <th width="130">产品名</th>
-		    <th width="151">批号</th>
-			<th width="130">销售类型</th>
-			<th width="130">是否合格</th>
+		    <th>编号</th>
+		    <th>产品名</th>
+		    <th>批号</th>
+			<th>销售类型</th>
+			<th>是否合格</th>
+		    <th>操作</th>
 		</tr>
 		<s:iterator id="result" value="resultList" status="index">		
 			<tr bgcolor='<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>'>
 	           <td align="center">
-					<s:textfield readonly="true" name="resultList[%{#index.index}].Id" value="%{#result.Id}" /> 
+					<s:textfield readonly="true"  id="cid_%{#index.index}" name="resultList[%{#index.index}].Id" value="%{#result.Id}" size="4"/> 
 			   </td>
 			   <td align="center">
 					<s:property value="#result.products.name" />
@@ -48,6 +66,9 @@
 			   </td>
 			   <td align="center">
 					<s:select name="resultList[%{#index.index}].status" multiple="false" list="#{'0':'待检','1':'合格','2':'不合格'}" listKey="key" listValue="value"/>
+			   </td>
+			   <td align="center">
+			   <a href="javascript:confirm_delete(${index.index})">删除</a> 
 			   </td>
 	        </tr>
 	    </s:iterator>
