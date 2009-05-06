@@ -12,6 +12,7 @@ public class checkinWareHouseAction implements Preparable{
 	private static final Logger log = LogManager.getLogManager().getLogger(checkinWareHouseAction.class.getName());
     private WareHouseService service;
     private List<Rkmx> resultList;
+    private int id;
 
     public WareHouseService getService() {
 		return service;
@@ -36,6 +37,16 @@ public class checkinWareHouseAction implements Preparable{
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
 	public checkinWareHouseAction(WareHouseService service) {
     	System.out.println("Enter Constructor");
         this.service = service;
@@ -57,6 +68,13 @@ public class checkinWareHouseAction implements Preparable{
         return "list";
    
     }
+	
+	public String delete()
+	{
+		service.deleteUncheckProduct(this.getId());
+		
+		return "delete_ok";
+	}
 
     public void prepare() throws Exception {
 
