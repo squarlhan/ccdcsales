@@ -201,4 +201,9 @@ public interface WareHouseService {
 	 * @param mydate 日期
 	 */
 	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
+	/**
+	 * 删除待检产品
+	 * @param id 入库明细的id
+	 */
+	void deleteUncheckProduct(int id);
 }
