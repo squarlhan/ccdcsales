@@ -16,6 +16,180 @@
 		document.myform.action = "cycprintwarehouse!print.action";
 		return true;
 	}
+
+//下面开始分页
+ 
+    var perpage = 10;
+	
+	var pchs = new Array(
+		    <s:iterator id="result" value="resultList">
+			    "<s:property value='#result.id.pch'/>",
+		    </s:iterator>
+	    0); 
+	var prds = new Array(
+			<s:iterator id="result" value="resultList">
+				"<s:property value='#result.products.name'/>",
+			</s:iterator>
+		0);
+	var spfs = new Array(
+			<s:iterator id="result" value="resultList">
+				"<s:property value='#result.specifications.displayName'/>",
+			</s:iterator>
+		0);
+	var wgts = new Array(
+			<s:iterator id="result" value="resultList">
+				<s:property value="(#result.number)*(#result.specifications.weight)"/>,
+			</s:iterator>
+		0);
+	var stps = new Array(
+			<s:iterator id="result" value="resultList">
+				"<s:property value='#result.saleTypeName'/>",
+			</s:iterator>
+		0);
+	var stus = new Array(
+			<s:iterator id="result" value="resultList">
+				"<s:property value='#result.statusName'/>",
+			</s:iterator>
+		0);
+
+	function firstpage()
+	{
+		var mytable = document.getElementById("mytable");		
+		while(mytable.rows.length>1){
+			mytable.deleteRow(mytable.rows.length-1);
+		}
+		if(pchs.length<=perpage+1){
+			for(var a=0;a<pchs.length-1;a++){
+				var tr = mytable.insertRow(1);  		        
+				var td1 = tr.insertCell(-1);
+				var td2 = tr.insertCell(-1);
+				var td3 = tr.insertCell(-1);
+				var td4 = tr.insertCell(-1);
+				var td5 = tr.insertCell(-1);
+				var td6 = tr.insertCell(-1);
+				td1.innerHTML = pchs[a];
+				td2.innerHTML = prds[a];
+				td3.innerHTML = spfs[a];
+				td4.innerHTML = wgts[a];
+				td5.innerHTML = stps[a];
+				td6.innerHTML = stus[a];
+			}		
+		}else{
+			for(var a=0;a<perpage;a++){
+				var tr = mytable.insertRow(1);  		        
+				var td1 = tr.insertCell(-1);
+				var td2 = tr.insertCell(-1);
+				var td3 = tr.insertCell(-1);
+				var td4 = tr.insertCell(-1);
+				var td5 = tr.insertCell(-1);
+				var td6 = tr.insertCell(-1);
+				td1.innerHTML = pchs[a];
+				td2.innerHTML = prds[a];
+				td3.innerHTML = spfs[a];
+				td4.innerHTML = wgts[a];
+				td5.innerHTML = stps[a];
+				td6.innerHTML = stus[a];
+			}
+		}		
+		var current = document.getElementById("current");
+		current.value = 1;
+		var sum = document.getElementById("sum");
+		sum.value = Math.ceil((pchs.length-1)/perpage);
+		
+		var last = document.getElementById("last");
+		last.disabled=true;
+		var next = document.getElementById("next");
+		if(sum!=1){
+			next.disabled=false;
+		}else{
+			next.disabled=true;
+		}
+		
+	}
+	function lastpage()
+	{
+		
+		
+	}
+	function nextpage()
+	{
+		var current = document.getElementById("current").value;
+		var sum = document.getElementById("sum").value;
+		var mytable = document.getElementById("mytable");
+		while(mytable.rows.length>1){
+			mytable.deleteRow(mytable.rows.length-1);
+		}
+		var startnum = current*perpage;
+		var stopnum;
+		if(current+1==sum){
+			stopnum = pchs.length-1;
+	    }else{
+	    	stopnum = startnum+10;
+	    }
+		alert(sum);
+	    alert(stopnum);
+		for(var a=startnum;a<stopnum;a++){
+		    var tr = mytable.insertRow(1);  		        
+		    var td1 = tr.insertCell(-1);
+		    var td2 = tr.insertCell(-1);
+		    var td3 = tr.insertCell(-1);
+		    var td4 = tr.insertCell(-1);
+		    var td5 = tr.insertCell(-1);
+		    var td6 = tr.insertCell(-1);
+		    td1.innerHTML = pchs[a];
+		    td2.innerHTML = prds[a];
+		    td3.innerHTML = spfs[a];
+		    td4.innerHTML = wgts[a];
+		    td5.innerHTML = stps[a];
+		    td6.innerHTML = stus[a];
+		}
+		var last = document.getElementById("last");
+		last.disabled=false;
+		document.getElementById("current").value++;
+		var next = document.getElementById("next");
+		if(current+1==sum){
+			next.disabled=true;
+		}else{
+			next.disabled=false;
+		}
+	}
+	function finalpage()
+	{
+		var mytable = document.getElementById("mytable");
+		while(mytable.rows.length>1){
+			mytable.deleteRow(mytable.rows.length-1);
+		}
+		var sum = document.getElementById("sum").value;		
+		if(sum>1){
+			var startnum = (sum-1)*perpage;
+			if(startnum!=0){
+			    for(var a=startnum;a<pchs.length-1;a++){
+				    var tr = mytable.insertRow(1);  		        
+				    var td1 = tr.insertCell(-1);
+				    var td2 = tr.insertCell(-1);
+				    var td3 = tr.insertCell(-1);
+				    var td4 = tr.insertCell(-1);
+				    var td5 = tr.insertCell(-1);
+				    var td6 = tr.insertCell(-1);
+				    td1.innerHTML = pchs[a];
+				    td2.innerHTML = prds[a];
+				    td3.innerHTML = spfs[a];
+				    td4.innerHTML = wgts[a];
+				    td5.innerHTML = stps[a];
+				    td6.innerHTML = stus[a];
+				}
+		    }
+		}
+		document.getElementById("current").value = sum;
+		var last = document.getElementById("last");
+		if(sum!=1){
+			last.disabled=false;
+		}else{
+			last.disabled=true;
+		}
+		var next = document.getElementById("next");
+		next.disabled=true;
+	}
 </script>
 <s:head/>
 </head>
@@ -35,8 +209,7 @@
  </tr>
 </table>
 
-<table class="list_table"  align="center" width="100%" >
- <tr align="center"><td>
+
   
      <table class="list_table"  align="center" width="100%">
 		<tr bgcolor="#4A708B">
@@ -70,9 +243,8 @@
 	        </tr>
 	    </s:iterator>
 	</table>
-  </td></tr>
-<tr align="center"><td>
-     <table class="list_table"  align="center" width="100%">
+
+     <!--<table class="list_table"  align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="20%">批号</th>
 		    <th width="20%">产品名</th>
@@ -104,9 +276,30 @@
 	        </tr>
 	        
 	    </s:iterator>
+	</table>-->
+	<table id="mytable" class="list_table"  align="center" width="100%">
+		<tr bgcolor="#4A708B">
+		    <th width="20%">批号</th>
+		    <th width="20%">产品名</th>
+		    <th width="15%">规格</th>
+		    <th width="10%">重量</th>
+			<th width="10%">销售类型</th>
+			<th width="10%">状态</th>
+		</tr>
 	</table>
-  </td></tr>
-  </table>
+	
+	 <div align="center">
+       <input type="button" id="first" value="第一页" onclick="javascript:firstpage()"/>
+       <input type="button" id="last" value="上一页" onclick="javascript:lastpage()"/>
+       <input type="button" id="next" value="下一页" onclick="javascript:nextpage()"/>
+       <input type="button" id="final" value="最后一页" onclick="javascript:finalpage()"/>
+	       第<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>页 &nbsp;
+	       共<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>页
+	</div>
+
  </s:form>
+ <script language="javascript">
+   firstpage();
+ </script>
 </body>
 </html>
