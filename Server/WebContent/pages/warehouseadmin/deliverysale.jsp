@@ -35,9 +35,13 @@
 		select2.setAttribute("id","specification["+count+"]");
 		select2.setAttribute("name","specification["+count+"]");
 		
-		var select3 = document.createElement("select");
-		select3.setAttribute("id","pch["+count+"]");
-		select3.setAttribute("name","pch["+count+"]");
+		//var select3 = document.createElement("select");
+		//select3.setAttribute("id","pch["+count+"]");
+		//select3.setAttribute("name","pch["+count+"]");
+
+		var textfield1 = document.createElement("input");
+		textfield1.setAttribute("id","pch["+count+"]");
+		textfield1.setAttribute("name","pch["+count+"]");
 			
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("id","number["+count+"]");
@@ -66,7 +70,7 @@
 	          }
 		td1.appendChild(select1);
 		td2.appendChild(select2);
-		td3.appendChild(select3);
+		td3.appendChild(textfield1);
 		td4.appendChild(textfield2);
 
 	}
@@ -178,8 +182,10 @@
         <td><s:select id="specification[0]" name="specification[0]" label="请选择产品规格" labelposition="left" multiple="false"
             list="specificationsList" listValue="displayName" listKey="id" theme="simple"/></td>
 
-        <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
-            list="pchList"  theme="simple"/></td>
+        <!--  <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
+            list="pchList"  theme="simple"/></td>-->
+            
+        <td><s:textfield id="pch[0]" name="pch[0]" label="请填写批号" theme="simple"/></td>
 
         <td><s:textfield id="number[0]" label="请填写袋数" name="number[0]" theme="simple"/></td>
 

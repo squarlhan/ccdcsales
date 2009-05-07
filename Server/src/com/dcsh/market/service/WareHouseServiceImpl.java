@@ -800,8 +800,11 @@ public class WareHouseServiceImpl implements WareHouseService {
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
 			String[] temp = chukumx.getSpecifications().getName().trim().split(" | ");
 			List<Specifications> specification = (List<Specifications>) hibernateTemplate.find("from Specifications where name='"+temp[0].trim()+"' and packType='"+temp[2].trim()+"'");
+			List<Rkmx> orinrkmx = (List<Rkmx>) hibernateTemplate.find("from Rkmx where Pch='"+chukumx.getPch().trim()+"'");
+			byte saletype = orinrkmx.get(0).getSaleType();
+			byte status = orinrkmx.get(0).getStatus();
 			if((product.size()!=0)&&(specification.size()!=0)){
-				Rkmx temprkmx = new Rkmx(rkxx,product.get(0),specification.get(0),chukumx.getPch().trim(),chukumx.getNumber(),(byte)1,(byte)1,null);
+				Rkmx temprkmx = new Rkmx(rkxx,product.get(0),specification.get(0),chukumx.getPch().trim(),chukumx.getNumber(),saletype,status,null);
 			    hibernateTemplate.save(temprkmx);
 			
 			
@@ -812,8 +815,8 @@ public class WareHouseServiceImpl implements WareHouseService {
 				    kcxx = new Kcxx();
 				    kcxx.setId(id);
 				    kcxx.setSpecifications(temprkmx.getSpecifications());
-				    kcxx.setSaleType((byte)1);
-				    kcxx.setStatus((byte)1);
+				    kcxx.setSaleType(saletype);
+				    kcxx.setStatus(status);
 				    kcxx.setNumber(temprkmx.getNumber());
 				    hibernateTemplate.save(kcxx);
 			    } else {
