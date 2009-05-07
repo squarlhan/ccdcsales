@@ -108,8 +108,40 @@
 	}
 	function lastpage()
 	{
-		
-		
+		var current = document.getElementById("current").value;
+		var sum = document.getElementById("sum").value;
+		var mytable = document.getElementById("mytable");
+		while(mytable.rows.length>1){
+			mytable.deleteRow(mytable.rows.length-1);
+		}
+		var startnum = (current-2)*perpage;
+		var stopnum = (current-1)*perpage;	
+		if(current>=2){
+		    for(var a=startnum;a<stopnum;a++){
+		    var tr = mytable.insertRow(1);  		        
+		    var td1 = tr.insertCell(-1);
+		    var td2 = tr.insertCell(-1);
+		    var td3 = tr.insertCell(-1);
+		    var td4 = tr.insertCell(-1);
+		    var td5 = tr.insertCell(-1);
+		    var td6 = tr.insertCell(-1);
+		    td1.innerHTML = pchs[a];
+		    td2.innerHTML = prds[a];
+		    td3.innerHTML = spfs[a];
+		    td4.innerHTML = wgts[a];
+		    td5.innerHTML = stps[a];
+		    td6.innerHTML = stus[a];
+		    }
+		}
+		var next = document.getElementById("next");
+		next.disabled=false;		
+		var last = document.getElementById("last");
+		if(current==2){
+			last.disabled=true;
+		}else{			
+			last.disabled=false;
+		}
+		document.getElementById("current").value--;
 	}
 	function nextpage()
 	{
@@ -121,13 +153,11 @@
 		}
 		var startnum = current*perpage;
 		var stopnum;
-		if(current+1==sum){
+		if(current==sum-1){
 			stopnum = pchs.length-1;
 	    }else{
 	    	stopnum = startnum+10;
 	    }
-		alert(sum);
-	    alert(stopnum);
 		for(var a=startnum;a<stopnum;a++){
 		    var tr = mytable.insertRow(1);  		        
 		    var td1 = tr.insertCell(-1);
@@ -144,14 +174,14 @@
 		    td6.innerHTML = stus[a];
 		}
 		var last = document.getElementById("last");
-		last.disabled=false;
-		document.getElementById("current").value++;
+		last.disabled=false;		
 		var next = document.getElementById("next");
-		if(current+1==sum){
+		if(current==sum-1){
 			next.disabled=true;
-		}else{
+		}else{		
 			next.disabled=false;
 		}
+		document.getElementById("current").value++;
 	}
 	function finalpage()
 	{
