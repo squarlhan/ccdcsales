@@ -99,7 +99,7 @@
 		var last = document.getElementById("last");
 		last.disabled=true;
 		var next = document.getElementById("next");
-		if(sum!=1){
+		if(sum.value!=1){
 			next.disabled=false;
 		}else{
 			next.disabled=true;
@@ -190,26 +190,22 @@
 			mytable.deleteRow(mytable.rows.length-1);
 		}
 		var sum = document.getElementById("sum").value;		
-		if(sum>1){
-			var startnum = (sum-1)*perpage;
-			if(startnum!=0){
-			    for(var a=startnum;a<pchs.length-1;a++){
-				    var tr = mytable.insertRow(1);  		        
-				    var td1 = tr.insertCell(-1);
-				    var td2 = tr.insertCell(-1);
-				    var td3 = tr.insertCell(-1);
-				    var td4 = tr.insertCell(-1);
-				    var td5 = tr.insertCell(-1);
-				    var td6 = tr.insertCell(-1);
-				    td1.innerHTML = pchs[a];
-				    td2.innerHTML = prds[a];
-				    td3.innerHTML = spfs[a];
-				    td4.innerHTML = wgts[a];
-				    td5.innerHTML = stps[a];
-				    td6.innerHTML = stus[a];
-				}
-		    }
-		}
+		var startnum = (sum-1)*perpage;
+		for(var a=startnum;a<pchs.length-1;a++){
+			var tr = mytable.insertRow(1);  		        
+			var td1 = tr.insertCell(-1);
+			var td2 = tr.insertCell(-1);
+			var td3 = tr.insertCell(-1);
+			var td4 = tr.insertCell(-1);
+			var td5 = tr.insertCell(-1);
+			var td6 = tr.insertCell(-1);
+			td1.innerHTML = pchs[a];
+			td2.innerHTML = prds[a];
+			td3.innerHTML = spfs[a];
+			td4.innerHTML = wgts[a];
+			td5.innerHTML = stps[a];
+			td6.innerHTML = stus[a];
+			}	
 		document.getElementById("current").value = sum;
 		var last = document.getElementById("last");
 		if(sum!=1){
