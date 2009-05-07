@@ -161,7 +161,8 @@ public class deliveryWareHouseAction implements Preparable{
     }
 
     
-	public String execute() {		
+	public String execute() {	
+		
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
     	    this.newspecification = new Specifications(this.getSpecification().get(i),null,new BigDecimal(0.025),null);

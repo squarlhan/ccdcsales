@@ -76,9 +76,14 @@ function setnumber(obj,line)
 		select2.setAttribute("onchange","javascript:setweight(this," + select2.label + ")");
 		select2.onchange = function(){setweight(select2,select2.label)};	
 		
-		var select3 = document.createElement("select");
-		select3.setAttribute("id","pch["+count+"]");
-		select3.setAttribute("name","pch["+count+"]");
+		//var select3 = document.createElement("select");
+		//select3.setAttribute("id","pch["+count+"]");
+		//select3.setAttribute("name","pch["+count+"]");
+
+		var textfield2 = document.createElement("input");
+		textfield2.setAttribute("id","pch["+count+"]");
+		textfield2.setAttribute("name","pch["+count+"]");
+		textfield2.setAttribute("size","20");
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sumweight["+count+"]");
@@ -121,7 +126,7 @@ function setnumber(obj,line)
 	          }
 		td1.appendChild(select1);
 		td2.appendChild(select2);
-		td3.appendChild(select3);
+		td3.appendChild(textfield2);
 		td4.appendChild(textfield3);
 		td5.appendChild(textfield5);
 		td6.appendChild(textfield4);
@@ -334,8 +339,10 @@ function setnumber(obj,line)
         <td><s:select id="specification[0]" name="specification[0]" label="请选择产品规格" labelposition="left" multiple="false"
             list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
 
-        <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
-            list="pchList" /></td>
+        <!-- <td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
+            list="pchList" /></td>-->
+            
+         <td><s:textfield size="20"  id="pch[0]" name="pch[0]" label="请填写批号"/></td>
 
          <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
 		 <!-- 
