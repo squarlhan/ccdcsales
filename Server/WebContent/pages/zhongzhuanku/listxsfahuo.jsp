@@ -16,8 +16,6 @@
 <body>
 <h2>销售发货</h2>
 <s:form theme="simple" action="zzkgoxsfahuo.action">
-<table class="list_table" align="center" width="100%" >
- <tr align="center"><td>
   
      <table class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
@@ -43,8 +41,6 @@
 	        </tr>
 	    </s:iterator>
 	</table>
-  </td></tr>
-  </table>
  </s:form>
 </body>
 </html>

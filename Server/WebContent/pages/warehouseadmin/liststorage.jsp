@@ -58,39 +58,27 @@
 		while(mytable.rows.length>1){
 			mytable.deleteRow(mytable.rows.length-1);
 		}
+		var stopnum;
 		if(pchs.length<=perpage+1){
-			for(var a=0;a<pchs.length-1;a++){
-				var tr = mytable.insertRow(1);  		        
-				var td1 = tr.insertCell(-1);
-				var td2 = tr.insertCell(-1);
-				var td3 = tr.insertCell(-1);
-				var td4 = tr.insertCell(-1);
-				var td5 = tr.insertCell(-1);
-				var td6 = tr.insertCell(-1);
-				td1.innerHTML = pchs[a];
-				td2.innerHTML = prds[a];
-				td3.innerHTML = spfs[a];
-				td4.innerHTML = wgts[a];
-				td5.innerHTML = stps[a];
-				td6.innerHTML = stus[a];
-			}		
+			stopnum = pchs.length-1;		
 		}else{
-			for(var a=0;a<perpage;a++){
-				var tr = mytable.insertRow(1);  		        
-				var td1 = tr.insertCell(-1);
-				var td2 = tr.insertCell(-1);
-				var td3 = tr.insertCell(-1);
-				var td4 = tr.insertCell(-1);
-				var td5 = tr.insertCell(-1);
-				var td6 = tr.insertCell(-1);
-				td1.innerHTML = pchs[a];
-				td2.innerHTML = prds[a];
-				td3.innerHTML = spfs[a];
-				td4.innerHTML = wgts[a];
-				td5.innerHTML = stps[a];
-				td6.innerHTML = stus[a];
-			}
-		}		
+			stopnum = perpage;			
+		}	
+		for(var a=0;a<stopnum;a++){
+		    var tr = mytable.insertRow(1);  		        
+		    var td1 = tr.insertCell(-1);
+		    var td2 = tr.insertCell(-1);
+		    var td3 = tr.insertCell(-1);
+		    var td4 = tr.insertCell(-1);
+		    var td5 = tr.insertCell(-1);
+		    var td6 = tr.insertCell(-1);
+		    td1.innerHTML = pchs[a];
+		    td2.innerHTML = prds[a];
+		    td3.innerHTML = spfs[a];
+		    td4.innerHTML = wgts[a];
+		    td5.innerHTML = stps[a];
+		    td6.innerHTML = stus[a];
+		}
 		var current = document.getElementById("current");
 		current.value = 1;
 		var sum = document.getElementById("sum");
@@ -99,10 +87,14 @@
 		var last = document.getElementById("last");
 		last.disabled=true;
 		var next = document.getElementById("next");
-		if(sum.value!=1){
+		if(sum.value>1){
 			next.disabled=false;
 		}else{
 			next.disabled=true;
+		}
+		var myfinal = document.getElementById("final");
+		if(sum.value==0){
+			myfinal.disabled=true;
 		}
 		
 	}
@@ -270,39 +262,6 @@
 	    </s:iterator>
 	</table>
 
-     <!--<table class="list_table"  align="center" width="100%">
-		<tr bgcolor="#4A708B">
-		    <th width="20%">批号</th>
-		    <th width="20%">产品名</th>
-		    <th width="15%">规格</th>
-		    <th width="10%">重量</th>
-			<th width="10%">销售类型</th>
-			<th width="10%">状态</th>
-		</tr>
-		<s:iterator id="result" value="resultList" status="index">		
-			<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-	           <td align="center">
-					<s:property value="#result.id.pch" />
-			   </td>
-			   <td align="center">
-					<s:property value="#result.products.name" />
-			   </td>
-			   <td align="center">
-					<s:property value="#result.specifications.displayName" />
-			   </td>
-			   <td align="center">
-					<s:property value="(#result.number)*(#result.specifications.weight)" />
-			   </td>
-			   <td align="center">
-					<s:property value="#result.saleTypeName" />
-			   </td>
-			   <td align="center">
-					<s:property value="#result.statusName" />
-			   </td>
-	        </tr>
-	        
-	    </s:iterator>
-	</table>-->
 	<table id="mytable" class="list_table"  align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="20%">批号</th>
