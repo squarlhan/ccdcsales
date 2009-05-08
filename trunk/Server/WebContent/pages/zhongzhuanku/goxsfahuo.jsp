@@ -265,6 +265,21 @@ function setnumber(obj,line)
 			</s:iterator>
 		0);
 
+	function createrow(mytable,a)
+	{
+		var tr = mytable.insertRow(1);  		        
+		var td1 = tr.insertCell(-1);
+		var td2 = tr.insertCell(-1);
+		var td3 = tr.insertCell(-1);
+		var td4 = tr.insertCell(-1);
+		var td5 = tr.insertCell(-1);
+		td1.innerHTML = pchs[a];
+		td2.innerHTML = prds[a];
+		td3.innerHTML = spfs[a];
+		td4.innerHTML = wgts[a];
+		td5.innerHTML = stps[a];
+		}
+
 	function firstpage()
 	{
 		var mytable = document.getElementById("mytable");		
@@ -278,17 +293,7 @@ function setnumber(obj,line)
 			stopnum = perpage;			
 		}	
 		for(var a=0;a<stopnum;a++){
-			var tr = mytable.insertRow(1);  		        
-			var td1 = tr.insertCell(-1);
-			var td2 = tr.insertCell(-1);
-			var td3 = tr.insertCell(-1);
-			var td4 = tr.insertCell(-1);
-			var td5 = tr.insertCell(-1);
-			td1.innerHTML = pchs[a];
-			td2.innerHTML = prds[a];
-			td3.innerHTML = spfs[a];
-			td4.innerHTML = wgts[a];
-			td5.innerHTML = stps[a];
+			createrow(mytable,a);
 		}	
 		var current = document.getElementById("current");
 		current.value = 1;
@@ -321,17 +326,7 @@ function setnumber(obj,line)
 		var stopnum = (current-1)*perpage;	
 		if(current>=2){
 		    for(var a=startnum;a<stopnum;a++){
-		    var tr = mytable.insertRow(1);  		        
-		    var td1 = tr.insertCell(-1);
-		    var td2 = tr.insertCell(-1);
-		    var td3 = tr.insertCell(-1);
-		    var td4 = tr.insertCell(-1);
-		    var td5 = tr.insertCell(-1);
-		    td1.innerHTML = pchs[a];
-		    td2.innerHTML = prds[a];
-		    td3.innerHTML = spfs[a];
-		    td4.innerHTML = wgts[a];
-		    td5.innerHTML = stps[a];
+		    	createrow(mytable,a);
 		    }
 		}
 		var next = document.getElementById("next");
@@ -357,20 +352,10 @@ function setnumber(obj,line)
 		if(current==sum-1){
 			stopnum = pchs.length-1;
 	    }else{
-	    	stopnum = startnum+10;
+	    	stopnum = startnum+perpage;
 	    }
 		for(var a=startnum;a<stopnum;a++){
-		    var tr = mytable.insertRow(1);  		        
-		    var td1 = tr.insertCell(-1);
-		    var td2 = tr.insertCell(-1);
-		    var td3 = tr.insertCell(-1);
-		    var td4 = tr.insertCell(-1);
-		    var td5 = tr.insertCell(-1);
-		    td1.innerHTML = pchs[a];
-		    td2.innerHTML = prds[a];
-		    td3.innerHTML = spfs[a];
-		    td4.innerHTML = wgts[a];
-		    td5.innerHTML = stps[a];
+			createrow(mytable,a);
 		}
 		var last = document.getElementById("last");
 		last.disabled=false;		
@@ -391,17 +376,7 @@ function setnumber(obj,line)
 		var sum = document.getElementById("sum").value;		
 		var startnum = (sum-1)*perpage;
 		for(var a=startnum;a<pchs.length-1;a++){
-			var tr = mytable.insertRow(1);  		        
-			var td1 = tr.insertCell(-1);
-			var td2 = tr.insertCell(-1);
-			var td3 = tr.insertCell(-1);
-			var td4 = tr.insertCell(-1);
-			var td5 = tr.insertCell(-1);
-			td1.innerHTML = pchs[a];
-			td2.innerHTML = prds[a];
-			td3.innerHTML = spfs[a];
-			td4.innerHTML = wgts[a];
-			td5.innerHTML = stps[a];
+			createrow(mytable,a);
 			}	
 		document.getElementById("current").value = sum;
 		var last = document.getElementById("last");
