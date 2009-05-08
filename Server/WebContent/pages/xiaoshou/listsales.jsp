@@ -48,6 +48,23 @@
 			</s:iterator>
 		0);
 
+	function createrow(mytable,a)
+	{
+		var tr = mytable.insertRow(1);  		        
+	    var td1 = tr.insertCell(-1);
+	    var td2 = tr.insertCell(-1);
+	    var td3 = tr.insertCell(-1);
+	    var td4 = tr.insertCell(-1);
+	    var td5 = tr.insertCell(-1);
+	    var td6 = tr.insertCell(-1);
+	    td1.innerHTML = caks[a];
+	    td2.innerHTML = pchs[a];
+	    td3.innerHTML = prds[a];
+	    td4.innerHTML = spfs[a];
+	    td5.innerHTML = wgts[a];
+	    td6.innerHTML = cuts[a];
+		}
+
 	function firstpage()
 	{
 		var mytable = document.getElementById("mytable");		
@@ -61,19 +78,7 @@
 			stopnum = perpage;			
 		}	
 		for(var a=0;a<stopnum;a++){
-		    var tr = mytable.insertRow(1);  		        
-		    var td1 = tr.insertCell(-1);
-		    var td2 = tr.insertCell(-1);
-		    var td3 = tr.insertCell(-1);
-		    var td4 = tr.insertCell(-1);
-		    var td5 = tr.insertCell(-1);
-		    var td6 = tr.insertCell(-1);
-		    td1.innerHTML = caks[a];
-		    td2.innerHTML = pchs[a];
-		    td3.innerHTML = prds[a];
-		    td4.innerHTML = spfs[a];
-		    td5.innerHTML = wgts[a];
-		    td6.innerHTML = cuts[a];
+			createrow(mytable,a);
 		    
 		}
 		var current = document.getElementById("current");
@@ -107,19 +112,7 @@
 		var stopnum = (current-1)*perpage;	
 		if(current>=2){
 		    for(var a=startnum;a<stopnum;a++){
-		    var tr = mytable.insertRow(1);  		        
-		    var td1 = tr.insertCell(-1);
-		    var td2 = tr.insertCell(-1);
-		    var td3 = tr.insertCell(-1);
-		    var td4 = tr.insertCell(-1);
-		    var td5 = tr.insertCell(-1);
-		    var td6 = tr.insertCell(-1);
-		    td1.innerHTML = caks[a];
-		    td2.innerHTML = pchs[a];
-		    td3.innerHTML = prds[a];
-		    td4.innerHTML = spfs[a];
-		    td5.innerHTML = wgts[a];
-		    td6.innerHTML = cuts[a];
+		    	createrow(mytable,a);
 		    }
 		}
 		var next = document.getElementById("next");
@@ -145,22 +138,10 @@
 		if(current==sum-1){
 			stopnum = prds.length-1;
 	    }else{
-	    	stopnum = startnum+10;
+	    	stopnum = startnum+perpage;
 	    }
 		for(var a=startnum;a<stopnum;a++){
-		    var tr = mytable.insertRow(1);  		        
-		    var td1 = tr.insertCell(-1);
-		    var td2 = tr.insertCell(-1);
-		    var td3 = tr.insertCell(-1);
-		    var td4 = tr.insertCell(-1);
-		    var td5 = tr.insertCell(-1);
-		    var td6 = tr.insertCell(-1);
-		    td1.innerHTML = caks[a];
-		    td2.innerHTML = pchs[a];
-		    td3.innerHTML = prds[a];
-		    td4.innerHTML = spfs[a];
-		    td5.innerHTML = wgts[a];
-		    td6.innerHTML = cuts[a];
+			createrow(mytable,a);
 		}
 		var last = document.getElementById("last");
 		last.disabled=false;		
@@ -181,19 +162,7 @@
 		var sum = document.getElementById("sum").value;		
 		var startnum = (sum-1)*perpage;
 		for(var a=startnum;a<prds.length-1;a++){
-			var tr = mytable.insertRow(1);  		        
-			var td1 = tr.insertCell(-1);
-			var td2 = tr.insertCell(-1);
-			var td3 = tr.insertCell(-1);
-			var td4 = tr.insertCell(-1);
-			var td5 = tr.insertCell(-1);
-			var td6 = tr.insertCell(-1);
-			td1.innerHTML = caks[a];
-		    td2.innerHTML = pchs[a];
-		    td3.innerHTML = prds[a];
-		    td4.innerHTML = spfs[a];
-		    td5.innerHTML = wgts[a];
-		    td6.innerHTML = cuts[a];
+			createrow(mytable,a);
 			}	
 		document.getElementById("current").value = sum;
 		var last = document.getElementById("last");
