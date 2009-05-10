@@ -54,6 +54,11 @@
 		    <s:iterator id="result" value="resultList">
 			    "<s:property value='#result.pch'/>",
 		    </s:iterator>
+	    0);
+    var wts = new Array(
+		    <s:iterator id="result" value="resultList">
+			    <s:property value="#result.specifications.weight*#result.number"/>,
+		    </s:iterator>
 	    0); 	
 	
 	function createrow(mytable,a)
@@ -65,6 +70,7 @@
 	    var td4 = tr.insertCell(-1);
 	    var td5 = tr.insertCell(-1);
 	    var td6 = tr.insertCell(-1);
+	    var td7 = tr.insertCell(-1);
 	    
 	    var textfield1 = document.createElement("input");
 		textfield1.setAttribute("name","resultList["+a+"].Id");
@@ -114,9 +120,10 @@
 		td1.appendChild(textfield1);
 		td2.innerHTML = prds[a];
 		td3.innerHTML = pchs[a];
-		td4.appendChild(select1);
-		td5.appendChild(select2);
-		td6.appendChild(a1);
+		td4.innerHTML = wts[a];
+		td5.appendChild(select1);
+		td6.appendChild(select2);
+		td7.appendChild(a1);
 	}
 
 	function firstpage()
@@ -238,6 +245,7 @@
 		    <th>编号</th>
 		    <th>产品名</th>
 		    <th>批号</th>
+		    <th>重量(T)</th>
 			<th>销售类型</th>
 			<th>是否合格</th>
 		    <th>操作</th>
