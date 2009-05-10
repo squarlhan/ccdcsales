@@ -261,7 +261,7 @@
        <td><s:textfield id="rew" name="bno" labelposition="top"/></td>
   	</tr>
   </table>
-  <br/><br/>
+  <br/><br/><br/> <br/><br/><br/>
    <table class="list_table" id="mytable" align="center" width="100%" id="tb">
 		<tr bgcolor="#4A708B">
 		    <th width="10%">选择</th>
