@@ -92,13 +92,187 @@ function confirm_add()
 	}else
 		return false;
 }
+
+//下面开始分页
+
+var perpage = 10;
+
+var cids = new Array(
+	    <s:iterator id="result" value="resultList">
+		    <s:property value="#result.Id"/>,
+	    </s:iterator>
+    0);
+var cnames = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.customName'/>",
+		</s:iterator>
+	0);
+var shdzs = new Array(
+	    <s:iterator id="result" value="resultList">
+		    "<s:property value='#result.shdz'/>",
+	    </s:iterator>
+    0);
+var phones = new Array(
+	    <s:iterator id="result" value="resultList">
+		    "<s:property value='#result.phone'/>",
+	    </s:iterator>
+    0); 	
+
+function createrow(mytable,a)
+{
+	var tr = mytable.insertRow(1);  		        
+    var td1 = tr.insertCell(-1);
+    var td2 = tr.insertCell(-1);
+    var td3 = tr.insertCell(-1);
+    var td4 = tr.insertCell(-1);
+    var td5 = tr.insertCell(-1);
+    
+    var textfield1 = document.createElement("input");
+	textfield1.setAttribute("name","id_"+a);
+	textfield1.setAttribute("id","id_"+a);
+	textfield1.setAttribute("size","5");
+	textfield1.setAttribute("readonly","true");
+	textfield1.value = cids[a];
+
+	 var textfield2 = document.createElement("input");
+	 textfield2.setAttribute("name","customName_"+a);
+	 textfield2.setAttribute("id","customName_"+a);
+	 textfield2.setAttribute("size","25");
+	 textfield2.value = cnames[a];
+
+	 var textfield3 = document.createElement("input");
+	 textfield3.setAttribute("name","shdz_"+a);
+	 textfield3.setAttribute("id","shdz_"+a);
+	 textfield3.setAttribute("size","15");
+	 textfield3.value = shdzs[a];
+
+	 var textfield4 = document.createElement("input");
+	 textfield4.setAttribute("name","phone_"+a);
+	 textfield4.setAttribute("id","phone_"+a);
+	 textfield4.setAttribute("size","12");
+	 textfield4.value = phones[a];
+
+	td1.appendChild(textfield1);
+	td2.appendChild(textfield2);
+	td3.appendChild(textfield3);
+	td4.appendChild(textfield4);
+	td5.innerHTML = "<a href='javascript:confirm_modify("+a+")'>修改</a>&nbsp;<a href='javascript:confirm_delete("+a+")'>删除</a> ";
+}
+function firstpage()
+{
+	var mytable = document.getElementById("mytable");		
+	while(mytable.rows.length>1){
+		mytable.deleteRow(mytable.rows.length-1);
+	}
+	var stopnum;
+	if(cids.length<=perpage+1){
+		stopnum = cids.length-1;		
+	}else{
+		stopnum = perpage;			
+	}	
+	for(var a=0;a<stopnum;a++){
+		createrow(mytable,a);
+	}
+	var current = document.getElementById("current");
+	current.value = 1;
+	var sum = document.getElementById("sum");
+	sum.value = Math.ceil((cids.length-1)/perpage);
+	
+	var last = document.getElementById("last");
+	last.disabled=true;
+	var next = document.getElementById("next");
+	if(sum.value>1){
+		next.disabled=false;
+	}else{
+		next.disabled=true;
+	}
+	var myfinal = document.getElementById("final");
+	if(sum.value==0){
+		myfinal.disabled=true;
+	}
+	
+}
+function lastpage()
+{
+	var current = document.getElementById("current").value;
+	var sum = document.getElementById("sum").value;
+	var mytable = document.getElementById("mytable");
+	while(mytable.rows.length>1){
+		mytable.deleteRow(mytable.rows.length-1);
+	}
+	var startnum = (current-2)*perpage;
+	var stopnum = (current-1)*perpage;	
+	if(current>=2){
+	    for(var a=startnum;a<stopnum;a++){
+	    	createrow(mytable,a);
+	    }
+	}
+	var next = document.getElementById("next");
+	next.disabled=false;		
+	var last = document.getElementById("last");
+	if(current==2){
+		last.disabled=true;
+	}else{			
+		last.disabled=false;
+	}
+	document.getElementById("current").value--;
+}
+function nextpage()
+{
+	var current = document.getElementById("current").value;
+	var sum = document.getElementById("sum").value;
+	var mytable = document.getElementById("mytable");
+	while(mytable.rows.length>1){
+		mytable.deleteRow(mytable.rows.length-1);
+	}
+	var startnum = current*perpage;
+	var stopnum;
+	if(current==sum-1){
+		stopnum = cids.length-1;
+    }else{
+    	stopnum = startnum+perpage;
+    }
+	for(var a=startnum;a<stopnum;a++){
+		createrow(mytable,a);
+	}
+	var last = document.getElementById("last");
+	last.disabled=false;		
+	var next = document.getElementById("next");
+	if(current==sum-1){
+		next.disabled=true;
+	}else{		
+		next.disabled=false;
+	}
+	document.getElementById("current").value++;
+}
+function finalpage()
+{
+	var mytable = document.getElementById("mytable");
+	while(mytable.rows.length>1){
+		mytable.deleteRow(mytable.rows.length-1);
+	}
+	var sum = document.getElementById("sum").value;		
+	var startnum = (sum-1)*perpage;
+	for(var a=startnum;a<cids.length-1;a++){
+		createrow(mytable,a);
+		}	
+	document.getElementById("current").value = sum;
+	var last = document.getElementById("last");
+	if(sum!=1){
+		last.disabled=false;
+	}else{
+		last.disabled=true;
+	}
+	var next = document.getElementById("next");
+	next.disabled=true;
+}
 </script>
 </head>
 <body>
 <h2 align="center">客户管理</h2>
 
   <s:form id="myform" name="myform" action="admincustommanager" theme="simple">
-  	<table class="list_table" id="tb" align="center" width="640">
+  	<table class="list_table" id="mytable" align="center" width="640">
 		<tr bgcolor="#4A708B">
 		    <th width="8%">客户ID</th>
 		    <th width="12%">客户名</th>
@@ -106,31 +280,21 @@ function confirm_add()
 		    <th width="15%">手机号</th>
 		    <th width="30%">操作</th>
 		</tr>
-		<s:iterator id="result" value="resultList" status="index">	
-     	<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-   
-        <td><s:textfield size = "5" readonly="true" value="%{#result.id}" id="id_%{#index.index}" name="id_%{#index.index}"/></td>
-
-        <td><s:textfield size = "10" id="customName_%{#index.index}" value="%{#result.customName}" name="customName_%{#index.index}"/></td>
-        
-         <td><s:textfield size = "25" id="shdz_%{#index.index}" value="%{#result.shdz}" name="shdz_%{#index.index}"/></td>
-        
-        <td><s:textfield size = "12" id="phone_%{#index.index}" value="%{#result.phone}" name="phone_%{#index.index}"/></td>
-         
-        <td align="center" width="">
-        	<a href="javascript:confirm_modify(${index.index})">修改</a>
-        	&nbsp; 
-        	<a href="javascript:confirm_delete(${index.index})">删除</a> 
-        </td>
-      </tr>
-      </s:iterator>
-
 	  </table>
+	   <div align="center">
+           <input type="button" id="first" value="第一页" onclick="javascript:firstpage()"/>
+           <input type="button" id="last" value="上一页" onclick="javascript:lastpage()"/>
+           <input type="button" id="next" value="下一页" onclick="javascript:nextpage()"/>
+           <input type="button" id="final" value="最后一页" onclick="javascript:finalpage()"/>
+	                 第<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>页 &nbsp;
+	                 共<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>页
+	    </div>
+	    <br/>
 </s:form>
 <s:form theme="simple" onsubmit="return confirm_add()">	  
 		 <table class="list_table" align="center">
 		 	<tr>
-		 	<td><label>登录名:</label></td>
+		 	<td><label>客户名:</label></td>
 	        <td><s:textfield id="newname" name="newname"/></td>
 	      </tr>
 	      <tr>
@@ -150,5 +314,8 @@ function confirm_add()
 	      
 		</table>
   </s:form>
+  <script language="javascript">
+   firstpage();
+ </script>
 </body>
 </html>
