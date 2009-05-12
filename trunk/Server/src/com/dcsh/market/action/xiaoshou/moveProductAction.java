@@ -30,7 +30,7 @@ public class moveProductAction implements Preparable {
 	
 	private Date mydate;
 	private String bno;
-	private int custom;
+	private int customer;
 	private String orgin;
 	private String aim;
 	private Integer aimcanku;
@@ -77,7 +77,7 @@ public class moveProductAction implements Preparable {
 	        
 	        this.getYikusigns().add(new Yxyikusign(null,(byte)0,null,new Date()));//状态，负责人，签字时间待定;多个签名待定
 	        
-	        Custom newcustom = new Custom(this.getCustom());
+	        Custom newcustom = new Custom(this.getCustomer());
 	        Canku newcanku = new Canku(this.getAimcanku(),null,(byte)0); 
 	        
 	        PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
@@ -109,7 +109,7 @@ public class moveProductAction implements Preparable {
 			case 3:delivertypeName="自提";break;
 			case 4:delivertypeName="其他";break;
 			}
-			Custom custom = service.getCustomerById(this.getCustom());
+			Custom custom = service.getCustomerById(this.getCustomer());
 			customerName = custom.getCustomName();
 		
 			aimCangKu=service.getCangkuById(aimcanku).getName();
@@ -142,12 +142,13 @@ public void setBno(String bno) {
 	this.bno = bno;
 }
 
-public int getCustom() {
-	return custom;
+
+public int getCustomer() {
+	return customer;
 }
 
-public void setCustom(int custom) {
-	this.custom = custom;
+public void setCustomer(int customer) {
+	this.customer = customer;
 }
 
 public String getOrgin() {
