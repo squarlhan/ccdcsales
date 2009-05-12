@@ -85,21 +85,21 @@
 		textfield1.setAttribute("name","pch_"+a);
 		textfield1.setAttribute("id","pch_"+a);
 		textfield1.setAttribute("size","10");
-		textfield1.setAttribute("readonly","true");
+		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = pchs[a];
 
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("name","pname_"+a);
 		textfield2.setAttribute("id","pname_"+a);
 		textfield2.setAttribute("size","15");
-		textfield2.setAttribute("readonly","true");
+		textfield2.onfocus=function(){textfield2.blur();};
 		textfield2.value = prds[a];
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("name","spname_"+a);
 		textfield3.setAttribute("id","spname_"+a);
 		textfield3.setAttribute("size","15");
-		textfield3.setAttribute("readonly","true");
+		textfield3.onfocus=function(){textfield3.blur();};
 		textfield3.value = spfs[a];
 
 		var textfield4 = document.createElement("input");

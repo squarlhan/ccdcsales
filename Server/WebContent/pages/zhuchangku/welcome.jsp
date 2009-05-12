@@ -91,33 +91,33 @@
 		textfield1.setAttribute("name","resultList["+a+"].Id");
 		textfield1.setAttribute("id","resultList["+a+"].Id");
 		textfield1.setAttribute("size","10");
-		textfield1.setAttribute("readonly","true");
+		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = bnos[a];
 
 		var textfield2 = document.createElement("input");
 		textfield2.setAttribute("name","resultList["+a+"].products.name");
 		textfield2.setAttribute("id","resultList["+a+"].products.name");
 		textfield2.setAttribute("size","15");
-		textfield2.setAttribute("readonly","true");
+		textfield2.onfocus=function(){textfield2.blur();};
 		textfield2.value = prds[a];
 
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("name","resultList["+a+"].pch");
 		textfield3.setAttribute("id","resultList["+a+"].pch");
 		textfield3.setAttribute("size","10");
-		textfield3.setAttribute("readonly","true");
+		textfield3.onfocus=function(){textfield3.blur();};
 		textfield3.value = pchs[a];
 
 		var textfield4 = document.createElement("input");
 		textfield4.setAttribute("name","resultList["+a+"].specifications.name");
 		textfield4.setAttribute("id","resultList["+a+"].specifications.name");
 		textfield4.setAttribute("size","10");
-		textfield4.setAttribute("readonly","true");
+		textfield4.onfocus=function(){textfield4.blur();};
 		textfield4.value = spfs[a];
 
 		var textfield5 = document.createElement("input");
 		textfield5.setAttribute("size","10");
-		textfield5.setAttribute("readonly","true");
+		textfield5.onfocus=function(){textfield5.blur();};
 		textfield5.value = wgts[a];
 
 		var textfield6 = document.createElement("input");
