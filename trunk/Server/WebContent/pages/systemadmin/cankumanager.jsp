@@ -110,7 +110,7 @@ function createrow(mytable,a)
 	textfield1.setAttribute("name","cid_"+a);
 	textfield1.setAttribute("id","cid_"+a);
 	textfield1.setAttribute("size","10");
-	textfield1.setAttribute("readonly","true");
+	textfield1.onfocus=function(){textfield1.blur();};
 	textfield1.value = cids[a];
 
 	 var textfield2 = document.createElement("input");
@@ -123,7 +123,7 @@ function createrow(mytable,a)
 	 textfield3.setAttribute("name","ctypeName_"+a);
 	 textfield3.setAttribute("id","ctypeName_"+a);
 	 textfield3.setAttribute("size","10");
-	 textfield3.setAttribute("readonly","true");
+	 textfield3.onfocus=function(){textfield3.blur();};
 	 textfield3.value = types[a];
 
 	 var select1 = document.createElement("select");
