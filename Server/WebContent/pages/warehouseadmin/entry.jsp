@@ -28,23 +28,23 @@ function setweight(obj,line)
 {
 	var w = weights[obj.selectedIndex];
 	document.getElementById("weight["+line+"]").value= w;
-	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w);
-	if(c!=parseInt(c)){
+	var c = accDiv((document.getElementById("sumweight["+line+"]").value),w).toFixed(4);
+	if(c!=parseInt(c).toFixed(4)){
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
 	}else
-	document.getElementById("number["+line+"]").value= c;
+	document.getElementById("number["+line+"]").value= parseInt(c);
 }
 
 function setnumber(obj,line)
 {
 	var w = document.getElementById("weight["+line+"]").value;
-	var n = accDiv(obj.value,w);
-	if(n!=parseInt(n)){
+	var n =accDiv(obj.value,w).toFixed(4);
+	if(n!=parseInt(n).toFixed(4)){
 		document.getElementById("number["+line+"]").value=0;
 	 	alert("请重新填写重量"); 
 	}else
-	document.getElementById("number["+line+"]").value= n;
+	document.getElementById("number["+line+"]").value= parseInt(n);
 }
 
     var count = 0; 
