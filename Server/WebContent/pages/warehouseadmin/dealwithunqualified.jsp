@@ -503,7 +503,6 @@ function setnumber(obj,line)
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
        <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
        <s:submit value="出库"></s:submit>
-       <s:reset value="取消"/>
 	</div>
   </s:form>
   <script language="javascript">
