@@ -286,9 +286,6 @@
 				<td align="center">
 					<s:submit disabled="flag" value="产品入库" />
 				</td>
-				<td align="center">
-					<s:reset value="重置" />
-				</td>
 			</tr></table>
 	    
 	     
