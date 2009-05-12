@@ -26,17 +26,17 @@
 		if(lost.replace(/(^\s*)|(\s*$)/g,"")=="")
 		{
 			alert("请填写损耗数量");
-			return;
+			return false;
 		}
 		if(isNaN(lost))
 		{
 			alert("只允许输入数字！");
-			return;
+			return false;
 		}
 		if(confirm("确认损耗？"))
 		{
 			urlpara(pch,pid,spid,lost);
-			return;
+			return true;
 		}
 	}
 
