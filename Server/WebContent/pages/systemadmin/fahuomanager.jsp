@@ -84,7 +84,7 @@ function createrow(mytable,a)
     var textfield1 = document.createElement("input");
 	textfield1.setAttribute("name","id_"+a);
 	textfield1.setAttribute("id","id_"+a);
-	textfield1.setAttribute("readonly","true");
+	textfield1.onfocus=function(){textfield1.blur();};
 	textfield1.value = pids[a];
 
 	 var textfield2 = document.createElement("input");

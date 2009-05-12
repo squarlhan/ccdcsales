@@ -131,7 +131,7 @@ function createrow(mytable,a)
 	textfield1.setAttribute("name","id_"+a);
 	textfield1.setAttribute("id","id_"+a);
 	textfield1.setAttribute("size","5");
-	textfield1.setAttribute("readonly","true");
+	textfield1.onfocus=function(){textfield1.blur();};
 	textfield1.value = cids[a];
 
 	 var textfield2 = document.createElement("input");
