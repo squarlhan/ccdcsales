@@ -76,7 +76,7 @@
 		textfield1.setAttribute("name","resultList["+a+"].Id");
 		textfield1.setAttribute("id","cid_"+a);
 		textfield1.setAttribute("size","10");
-		textfield1.setAttribute("readonly","true");
+		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = cids[a];
 
 		var select1 = document.createElement("select");
@@ -264,9 +264,6 @@
 	     <tr>
 				<td align="center">
 					<s:submit disabled="flag" value="检查产品入库" />
-				</td>
-				<td align="center">
-					<s:reset value="重置" />
 				</td>
 			</tr>
 			</table>
