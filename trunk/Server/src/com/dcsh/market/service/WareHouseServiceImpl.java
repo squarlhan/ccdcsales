@@ -792,6 +792,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional
 	public void doentryChuYunchu(List<Chukumx> chukumxes, Rkxx rkxx) {
 	
 		rkxx.setRkfzr((Users)hibernateTemplate.get(Users.class, rkxx.getRkfzr().getId()));
