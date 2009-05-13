@@ -91,8 +91,7 @@ public class checkinProductsAction implements Preparable{
     	    	if(this.getChecked().get(i)!=null)
     	    		chukumxs.add(this.getResultList().get(i));
     	   
-    	    }
-    	    
+    	    }    
     	    
             service.doentryChuYunchu(chukumxs,rkxx);
             return "list";
