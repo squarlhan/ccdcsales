@@ -31,11 +31,25 @@
 			alert("编号应不超过14位");
 			return false;
 		}
+		//下面检测是不是选择了产品
+		var a = false;
+		var t = document.getElementById("mytable").rows.length;
+		for(var i=0;i<t-1;i++)
+		{
+			var check = document.getElementById("checked["+i+"]").checked;
+			a = a || check;
+		}
+		if(a==false)
+		{
+			alert("请选择入库产品！");return false;
+		}
+		//检测结束
 		if(confirm("确认产品入库？"))
 			return true;
 		else
 			return false;
 	}
+
 
 	//下面开始分页
 	 
