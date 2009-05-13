@@ -8,43 +8,30 @@
     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd"   
     default-autowire="autodetect"> 
-
-
-	<!-- 实例化所有服务类   -->
-	<bean id="adminService"
-		class="com.dcsh.market.service.AdminServiceImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
-	</bean>
-	<bean id="mywareHouseService"
-		class="com.dcsh.market.service.WareHouseServiceImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
-	</bean>
-	<bean id="XiaoShouService"
-		class="com.dcsh.market.service.XiaoshouServiceImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
-	</bean>
-	<bean id="ZhongZhuanKuService"
-		class="com.dcsh.market.service.ZhongZhuanKuServiceImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
-	</bean>
-	<bean id="myZhuChangKuService"
-		class="com.dcsh.market.service.ZhuChangKuServiceImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" /> 
-	</bean>
-	
-
 	
 	<!-- AOP配置 -->
-	<bean id="testAdvice" class="com.dcsh.market.service.AOPTest"/>
+	<bean id="aopAdvice" class="com.dcsh.market.service.AOPService"/>
 	<aop:config>   
-        <aop:aspect id="TestAspect" ref="testAdvice">   
-            <aop:pointcut id="adminServicepc"  
-                expression="execution(* com.dcsh.market.service.AdminServiceImpl.listStorage(..))" />
-            <!--  <aop:before pointcut-ref="adminService" method="doBefore"/>   -->
-                <aop:after-returning pointcut-ref="adminServicepc" returning="retVal" method="doAfter"/> 
-           <!-- <aop:around pointcut-ref="adminService" method="doAround"/>    -->
-           <!-- <aop:after-throwing pointcut-ref="adminService" method="doThrowing" throwing="ex"/>    -->
+        <aop:aspect id="XSyikuAspect" ref="aopAdvice">   
+            <aop:pointcut id="xsyikupc"  
+                expression="execution(* com.dcsh.market.service.XiaoshouServiceImpl.doYiku(..)) and args(xsyikuxx)" />
+            <aop:after-returning pointcut-ref="xsyikupc" method="doAfterxsyiku"/> 
+        </aop:aspect>
+        <aop:aspect id="XSfahuoAspect" ref="aopAdvice">   
+            <aop:pointcut id="xsfahuopc"  
+                expression="execution(* com.dcsh.market.service.XiaoshouServiceImpl.doXsfahuo(..)) and args(xsfahuoxx)" />
+            <aop:after-returning pointcut-ref="xsfahuopc" method="doAfterxsfahuo"/> 
+        </aop:aspect>
+        <aop:aspect id="ZhuangcheAspect" ref="aopAdvice">   
+            <aop:pointcut id="zhuangchepc"  
+                expression="execution(* com.dcsh.market.service.*Impl.doDeliveryWareHouse(..)) and args(chuku)" />
+            <aop:after-returning pointcut-ref="zhuangchepc" method="doAfterchuku"/> 
         </aop:aspect>   
+        <aop:aspect id="DaohuoAspect" ref="aopAdvice">   
+            <aop:pointcut id="daohuopc"  
+                expression="execution(* com.dcsh.market.service.*Impl.doentry*(..,..)) and args(chukumxes,rkxx)" />
+            <aop:after-returning pointcut-ref="daohuopc" method="doAfterdaohuo"/> 
+        </aop:aspect> 
     </aop:config>   
 	 
 </beans>
