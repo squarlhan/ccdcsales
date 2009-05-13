@@ -83,11 +83,11 @@ public class checkinProductsAction implements Preparable{
     	}
     	else{
     	    Rkxx rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),new Users(this.getRkfzr()),this.getBno().trim(),new Date());
-    	    
+
     	    List<Chukumx> chukumxs = new ArrayList<Chukumx>();
-    	    for(int i=0;i<this.getResultList().size();i++)
+    	    for(int i=0;i<=this.getResultList().size()-1;i++)
     	    {
-    	    	if(this.getChecked().get(i))
+    	    	if(this.getChecked().get(i)!=null)
     	    		chukumxs.add(this.getResultList().get(i));
     	   
     	    }
