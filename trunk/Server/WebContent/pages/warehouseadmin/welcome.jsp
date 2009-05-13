@@ -81,8 +81,10 @@ function xiaoshuo(arg1,arg2){
 	
 	function createrow(mytable,a)
 	{
-		if(a>=10)a=a%10;
-		var tr = mytable.insertRow(1);  		        
+		var t;
+		if(a>=perpage)t=a%perpage;
+		else t=a;
+		var tr = mytable.insertRow(t+1);  		        
 	    var td1 = tr.insertCell(-1);
 	    var td2 = tr.insertCell(-1);
 	    var td3 = tr.insertCell(-1);
@@ -92,15 +94,14 @@ function xiaoshuo(arg1,arg2){
 	    var td7 = tr.insertCell(-1);
 	    
 	    var textfield1 = document.createElement("input");
-		textfield1.setAttribute("name","resultList["+a+"].Id");
-		textfield1.setAttribute("id","cid_"+a);
+		textfield1.setAttribute("name","resultList["+t+"].Id");
+		textfield1.setAttribute("id","cid_"+t);
 		textfield1.setAttribute("size","10");
 		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = cids[a];
-		textfield1.onfocus=function(){textfield1.blur()};
 
 		var select1 = document.createElement("select");
-		select1.setAttribute("name","resultList["+a+"].saleType");
+		select1.setAttribute("name","resultList["+t+"].saleType");
 		var option1 = document.createElement("option");
 		var option2 = document.createElement("option");
 		var option3 = document.createElement("option");
@@ -119,7 +120,7 @@ function xiaoshuo(arg1,arg2){
 		select1.options.add(option4);
 		
 		var select2 = document.createElement("select");
-		select2.setAttribute("name","resultList["+a+"].status");
+		select2.setAttribute("name","resultList["+t+"].status");
 		var option5 = document.createElement("option");
 		var option6 = document.createElement("option");
 		var option7 = document.createElement("option");
@@ -134,7 +135,7 @@ function xiaoshuo(arg1,arg2){
 		select2.options.add(option7);
 		
 		var a1 = document.createElement("a");
-		a1.setAttribute("href","javascript:confirm_delete("+a+")");
+		a1.setAttribute("href","javascript:confirm_delete("+t+")");
 		a1.innerHTML = "删除";
 		
 		td1.appendChild(textfield1);
@@ -144,6 +145,7 @@ function xiaoshuo(arg1,arg2){
 		td5.appendChild(select1);
 		td6.appendChild(select2);
 		td7.appendChild(a1);
+	//	alert(t);
 	}
 
 	function firstpage()
