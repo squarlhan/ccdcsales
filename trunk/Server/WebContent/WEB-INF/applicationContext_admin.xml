@@ -115,37 +115,4 @@
 		<constructor-arg ref="adminService"/>
 	</bean>
 	
-	<!-- AOP测试 -->
-	<bean id="testAdvice" class="com.dcsh.market.service.AOPtest"/>
-	<bean id="testAdvice2" class="com.dcsh.market.service.AOPTest2"/>
-	<aop:config>   
-        <aop:aspect id="TestAspect" ref="testAdvice2">   
-            <aop:pointcut id="adminServicepc"  
-                expression="execution(* com.dcsh.market.service.AdminServiceImpl.listStorage(..))" />
-            <!--  <aop:before pointcut-ref="adminService" method="doBefore"/>   -->
-                <aop:after-returning pointcut-ref="adminServicepc" returning="retVal" method="doAfter"/> 
-           <!-- <aop:around pointcut-ref="adminService" method="doAround"/>    -->
-           <!-- <aop:after-throwing pointcut-ref="adminService" method="doThrowing" throwing="ex"/>    -->
-        </aop:aspect>   
-    </aop:config>   
-	 
-	<!-- AOP切入点引入：在哪个方法上切入 --><!--  
-	<bean id="testPointcutAdvisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
-	  <property name="mappedName">
-	    <value>listStorage</value>
-	  </property>
-	  <property name="advice">
-	    <ref bean="testAdvice"/>
-	  </property>
-	</bean>-->
-	<!-- AOP代理引入：在哪个类上引入 --><!-- 
-	<bean id="AOPadminService" class="org.springframework.aop.framework.ProxyFactoryBean">
-	  <property name="proxyInterfaces">
-	    <value>com.dcsh.market.service.AdminService</value>
-	  </property>
-	  <property name="interceptorNames">
-	    <list><value>testPointcutAdvisor</value></list>
-	  </property>
-	  <property name="target" ref="adminService"/>
-	</bean>-->
 </beans>
