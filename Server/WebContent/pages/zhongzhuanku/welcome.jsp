@@ -31,6 +31,19 @@
 			alert("编号应不超过14位");
 			return false;
 		}
+		//下面检测是不是选择了产品
+		var a = false;
+		var t = document.getElementById("mytable").rows.length;
+		for(var i=0;i<t-1;i++)
+		{
+			var check = document.getElementById("checked["+i+"]").checked;
+			a = a || check;
+		}
+		if(a==false)
+		{
+			alert("请选择入库产品！");return false;
+		}
+		//检测结束
 		if(confirm("确认产品入库？"))
 			return true;
 		else
@@ -74,8 +87,10 @@
 
 	function createrow(mytable,a)
 	{
-		if(a>=10)a=a%10;
-		var tr = mytable.insertRow(1);  		        
+		var t;
+		if(a>=perpage)t=a%perpage;
+		else t=a;
+		var tr = mytable.insertRow(t+1);  		        
 	    var td1 = tr.insertCell(-1);
 	    var td2 = tr.insertCell(-1);
 	    var td3 = tr.insertCell(-1);
@@ -86,34 +101,34 @@
 
 	    var checkbox1 = document.createElement("input");
 	    checkbox1.type="checkbox";
-	    checkbox1.setAttribute("name","checked["+a+"]");
-	    checkbox1.setAttribute("id","checked["+a+"]");
+	    checkbox1.setAttribute("name","checked["+t+"]");
+	    checkbox1.setAttribute("id","checked["+t+"]");
 	    checkbox1.checked = false;
 	    
 	    var textfield1 = document.createElement("input");
-		textfield1.setAttribute("name","resultList["+a+"].Id");
-		textfield1.setAttribute("id","resultList["+a+"].Id");
+		textfield1.setAttribute("name","resultList["+t+"].Id");
+		textfield1.setAttribute("id","resultList["+t+"].Id");
 		textfield1.setAttribute("size","10");
 		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = bnos[a];
 
 		var textfield2 = document.createElement("input");
-		textfield2.setAttribute("name","resultList["+a+"].products.name");
-		textfield2.setAttribute("id","resultList["+a+"].products.name");
+		textfield2.setAttribute("name","resultList["+t+"].products.name");
+		textfield2.setAttribute("id","resultList["+t+"].products.name");
 		textfield2.setAttribute("size","15");
 		textfield2.onfocus=function(){textfield2.blur();};
 		textfield2.value = prds[a];
 
 		var textfield3 = document.createElement("input");
-		textfield3.setAttribute("name","resultList["+a+"].pch");
-		textfield3.setAttribute("id","resultList["+a+"].pch");
+		textfield3.setAttribute("name","resultList["+t+"].pch");
+		textfield3.setAttribute("id","resultList["+t+"].pch");
 		textfield3.setAttribute("size","10");
 		textfield3.onfocus=function(){textfield3.blur();};
 		textfield3.value = pchs[a];
 
 		var textfield4 = document.createElement("input");
-		textfield4.setAttribute("name","resultList["+a+"].specifications.name");
-		textfield4.setAttribute("id","resultList["+a+"].specifications.name");
+		textfield4.setAttribute("name","resultList["+t+"].specifications.name");
+		textfield4.setAttribute("id","resultList["+t+"].specifications.name");
 		textfield4.setAttribute("size","10");
 		textfield4.onfocus=function(){textfield4.blur();};
 		textfield4.value = spfs[a];
@@ -124,8 +139,8 @@
 		textfield5.value = wgts[a];
 
 		var textfield6 = document.createElement("input");
-		textfield6.setAttribute("name","resultList["+a+"].number");
-		textfield6.setAttribute("id","resultList["+a+"].number");
+		textfield6.setAttribute("name","resultList["+t+"].number");
+		textfield6.setAttribute("id","resultList["+t+"].number");
 		textfield6.setAttribute("size","0");
 		textfield6.setAttribute("readonly","true");
 		textfield6.value = nums[a];
@@ -138,6 +153,7 @@
 		td5.appendChild(textfield4);
 		td6.appendChild(textfield5);
 		td7.appendChild(textfield6);
+		//alert(t);
 	}
 
 	function firstpage()
