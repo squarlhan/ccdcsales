@@ -74,7 +74,10 @@ var pnames = new Array(
 
 function createrow(mytable,a)
 {
-	var tr = mytable.insertRow(1);  		        
+	var t;
+	if(a>=perpage)t=a%perpage;
+	else t=a;
+	var tr = mytable.insertRow(t+1);  		        
     var td1 = tr.insertCell(-1);
     var td2 = tr.insertCell(-1);
     var td3 = tr.insertCell(-1);
