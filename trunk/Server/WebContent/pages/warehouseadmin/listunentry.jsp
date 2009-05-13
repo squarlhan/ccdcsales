@@ -14,8 +14,8 @@
 <script language = "javascript" >
 	function check()
 	{
-		var ele = document.getElementById("wer")
-		var ele2 = document.getElementById("rew")
+		var ele = document.getElementById("wer");
+		var ele2 = document.getElementById("rew");
 		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 			alert("请输入负责人");
