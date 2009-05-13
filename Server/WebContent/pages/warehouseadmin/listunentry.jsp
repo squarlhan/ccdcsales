@@ -74,7 +74,7 @@
 
 	function createrow(mytable,a)
 	{
-		if(a>=10)a=a-10;
+		if(a>=10)a=a%10;
 		var tr = mytable.insertRow(1);  		        
 	    var td1 = tr.insertCell(-1);
 	    var td2 = tr.insertCell(-1);
