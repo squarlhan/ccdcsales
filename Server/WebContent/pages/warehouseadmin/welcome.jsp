@@ -11,6 +11,24 @@
 @import "/Server/css/css.css";
 </style>
 <script language = "javascript" >
+function xiaoshuo(arg1,arg2){
+	alert("arg1: "+arg1);
+    var t,t0,t1,r1;
+    try
+    {
+    	t0=arg1.toString().split(".")[0];
+        t1=arg1.toString().split(".")[1];
+    }catch(e){}
+    alert("t1: "+t1);
+    if(t1.length<=arg2)
+    with(Math){
+        r1=arg1;
+    }else{
+        t=t1.substring(0,3);
+        r1=Number(t0+"."+t);
+    }
+    alert("r1: "+r1);
+}
 	function confirmbtn()
 	{
 		var cf = confirm("确认入库？");
@@ -78,6 +96,7 @@
 		textfield1.setAttribute("size","10");
 		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = cids[a];
+		textfield1.onfocus=function(){textfield1.blur()};
 
 		var select1 = document.createElement("select");
 		select1.setAttribute("name","resultList["+a+"].saleType");
