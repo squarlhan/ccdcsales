@@ -74,6 +74,7 @@
 
 	function createrow(mytable,a)
 	{
+		if(a>=10)a=a-10;
 		var tr = mytable.insertRow(1);  		        
 	    var td1 = tr.insertCell(-1);
 	    var td2 = tr.insertCell(-1);
@@ -87,6 +88,7 @@
 	    checkbox1.type="checkbox";
 	    checkbox1.setAttribute("name","checked["+a+"]");
 	    checkbox1.setAttribute("id","checked["+a+"]");
+	    checkbox1.checked = false;
 	    
 	    var textfield1 = document.createElement("input");
 		textfield1.setAttribute("name","resultList["+a+"].Id");

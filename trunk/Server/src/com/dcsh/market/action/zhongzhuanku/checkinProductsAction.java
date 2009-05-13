@@ -74,7 +74,7 @@ public class checkinProductsAction implements Preparable{
     	    List<Chukumx> chukumxs = new ArrayList<Chukumx>();
     	    for(int i=0;i<this.getResultList().size();i++)
     	    {
-    	    	if(this.getChecked().get(i))
+    	    	if(this.getChecked().get(i)!=null)
     	    		chukumxs.add(this.getResultList().get(i));
     	 
     	    }
