@@ -122,7 +122,7 @@
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("name","resultList["+t+"].pch");
 		textfield3.setAttribute("id","resultList["+t+"].pch");
-		textfield3.setAttribute("size","10");
+		textfield3.setAttribute("size","20");
 		textfield3.onfocus=function(){textfield3.blur();};
 		textfield3.value = pchs[a];
 
