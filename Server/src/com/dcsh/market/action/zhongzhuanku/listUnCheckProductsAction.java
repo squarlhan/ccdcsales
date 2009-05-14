@@ -34,17 +34,12 @@ public class listUnCheckProductsAction implements Preparable{
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
     	List<ResourceGrantedAuthorityImpl> list = 
     		auth.getGrantedAuthorityResource(ResourceType.CANKU);
-    	for(ResourceGrantedAuthorityImpl resource: list){
-    		System.out.println(resource.getType());
-    		System.out.println(resource.getResource());
-    	}
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
     	if(user.size()==0){
     		this.setFlag(true);
     		return "input";
     	}
     	else{
-    		System.out.println("zhongzhuanuser: "+user.get(0).getCanku().getId());
     		this.resultList = service.listUnCheckProducts(user.get(0).getCanku().getId());
     		if(resultList.size()==0)
     			this.setFlag(true);
