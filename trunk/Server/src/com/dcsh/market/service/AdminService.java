@@ -12,6 +12,8 @@ import com.dcsh.market.Products;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.ReportPmx;
 import com.dcsh.market.Rkmx;
+import com.dcsh.market.Smmdingyue;
+import com.dcsh.market.Smmdy;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.UserGroup;
 import com.dcsh.market.UserGroupPriv;
@@ -162,4 +164,15 @@ public interface AdminService {
 	 * @return
 	 */
 	void saveUserpriv(List<Boolean> cankupriv,List<Boolean> prdpriv,int userId);
+	/**
+	 * 获取短信订阅列表
+	 * @param user 传入的用户
+	 * @return
+	 */
+	List<Smmdy> loadSmmdybyuser(Users user);
+	/**
+	 * 更新短信订阅信息
+	 * @param sdys 传入的信息
+	 */
+	void updateSmmdy(List<Smmdingyue> sdys);
 }

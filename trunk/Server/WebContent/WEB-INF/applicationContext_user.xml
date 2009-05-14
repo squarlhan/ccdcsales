@@ -26,5 +26,8 @@
 	    class="com.dcsh.market.action.user.updateUserAction">
 	    <constructor-arg ref="adminService"/>
 	</bean>
-
+    <bean id="goSmmdyAction" scope="prototype"
+		class="com.dcsh.market.action.user.goSmmdyAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
 </beans>

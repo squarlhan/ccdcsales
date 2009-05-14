@@ -51,6 +51,7 @@
 	    <pattern>/login.jsp</pattern>
 	    <pattern>/exception.jsp</pattern>
 	    <pattern>/Users.jsp</pattern>
+	    <pattern>/subscribe.jsp</pattern>
 	    
 		<pattern>/pages/warehouseadmin/login.jsp</pattern>
 		<pattern>/pages/zhuchangku/login.jsp</pattern>
@@ -64,6 +65,7 @@
 		
 		<pattern>/usergoUser.action</pattern>
 		<pattern>/userupdateUser.action</pattern>
+		<pattern>/usergosmmdy.action</pattern>
 		
 		<pattern>/pages/systemadmin/adminlogout.action</pattern>
 		<pattern>/pages/warehouseadmin/cyclogout.action</pattern>

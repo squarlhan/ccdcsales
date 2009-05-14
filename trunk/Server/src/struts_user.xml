@@ -17,7 +17,10 @@
                <result>/Users.jsp</result>
                <result name="success">/Users.jsp</result>
         </action>
-        
+         <action name="usergosmmdy" method="execute" class="goSmmdyAction">
+            <result name="go">/subscribe.jsp</result>
+        	<result name="error">/exception.jsp</result>
+        </action>
 </package>
 
 	
