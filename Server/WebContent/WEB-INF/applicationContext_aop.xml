@@ -10,7 +10,10 @@
     default-autowire="autodetect"> 
 	
 	<!-- AOP配置 -->
-	<bean id="aopAdvice" class="com.dcsh.market.service.AOPService"/>
+	<bean id="aopAdvice" class="com.dcsh.market.service.AOPService">
+	    <property name="hibernateTemplate" ref="hibernateTemplate" /> 
+	</bean>
+	
 	<aop:config>   
         <aop:aspect id="XSyikuAspect" ref="aopAdvice">   
             <aop:pointcut id="xsyikupc"  

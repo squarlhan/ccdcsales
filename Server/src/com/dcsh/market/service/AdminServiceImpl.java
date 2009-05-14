@@ -20,6 +20,8 @@ import com.dcsh.market.ReportCmx;
 import com.dcsh.market.ReportPmx;
 import com.dcsh.market.Reportxx;
 import com.dcsh.market.Rkmx;
+import com.dcsh.market.Smmdingyue;
+import com.dcsh.market.Smmdy;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.UserGroup;
 import com.dcsh.market.UserGroupPriv;
@@ -826,6 +828,24 @@ public class AdminServiceImpl implements AdminService {
 			if(prdpriv.get(j))
 				
 				hibernateTemplate.save(new UserPriv(user,"prd:"+products.get(j).getId(),1));
+		
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Smmdy> loadSmmdybyuser(Users user){
+		List<Smmdy> result = new ArrayList();
+		List<Smmdingyue> temp = (List<Smmdingyue>)hibernateTemplate.find("from Smmdingyue where user.id="+String.valueOf(user.getId()));
+		for(Smmdingyue sdy:temp){
+			Smmdy smmdy = new Smmdy(sdy);
+			result.add(smmdy);
+		}
+		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public void updateSmmdy(List<Smmdingyue> sdys){
 		
 	}
 }

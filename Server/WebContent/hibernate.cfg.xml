@@ -6,8 +6,8 @@
     <session-factory>
         <property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
         <property name="connection.password">jboss</property>
-        <property name="show_sql">true</property>
-        <property name="connection.url">jdbc:sqlserver://192.168.4.4:1433;databaseName=test</property>
+        <property name="show_sql">false</property>
+        <property name="connection.url">jdbc:sqlserver://localhost\sqlexpress:1433;databaseName=test</property>
         <property name="connection.username">jboss</property>
         <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
 		<!--  
@@ -37,5 +37,6 @@
         <mapping class="com.dcsh.market.XSfahuomx" />
         <mapping class="com.dcsh.market.XSfahuoxx" />
         <mapping class="com.dcsh.market.Fahuo" />
+        <mapping class="com.dcsh.market.Smmdingyue" />
     </session-factory>
 </hibernate-configuration>

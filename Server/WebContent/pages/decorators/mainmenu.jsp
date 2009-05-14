@@ -18,6 +18,7 @@
       <tr align="left"><td><li><s:a href="xslogin.action">销售中心功能</s:a></li></td></tr>
       <tr align="left"><td><li><s:a href="adminloginsystemAdmin.action">管理员功能</s:a></li></td></tr>
       <tr align="left"><td><li><s:a href="usergoUser.action">用户设置</s:a></li></td></tr>
+      <tr align="left"><td><li><s:a href="usergosmmdy.action">短信订阅</s:a></li></td></tr>
       <tr align="left"><td><li><s:a href="/Server/logout">退出登陆</s:a></li></td></tr>
     </table>
   </body>
