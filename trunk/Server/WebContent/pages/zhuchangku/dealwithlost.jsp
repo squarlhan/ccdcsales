@@ -84,7 +84,7 @@
 	    var textfield1 = document.createElement("input");
 		textfield1.setAttribute("name","pch_"+a);
 		textfield1.setAttribute("id","pch_"+a);
-		textfield1.setAttribute("size","10");
+		textfield1.setAttribute("size","20");
 		textfield1.onfocus=function(){textfield1.blur();};
 		textfield1.value = pchs[a];
 
