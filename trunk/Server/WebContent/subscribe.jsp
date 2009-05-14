@@ -22,6 +22,70 @@ function confirm_update()
 	}
 	return false;
 }
+
+//设置checkbox是否勾上
+var xsyk1s = new Array(
+	<s:iterator id="result" value="resultList">
+		"<s:property value='#result.xsyk1'/>",
+	</s:iterator>
+	0);
+var xsyk2s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.xsyk2'/>",
+		</s:iterator>
+		0);
+var xsyk3s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.xsyk3'/>",
+		</s:iterator>
+		0);
+var xsfh1s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.xsfh1'/>",
+		</s:iterator>
+		0);
+var xsfh2s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.xsfh2'/>",
+		</s:iterator>
+		0);
+var cycyk1s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.cycyk1'/>",
+		</s:iterator>
+		0);
+var cycyk2s = new Array(
+		<s:iterator id="result" value="resultList">
+			"<s:property value='#result.cycyk2'/>",
+		</s:iterator>
+		0);
+function setcheck()
+{
+	for(var a=0;a<xsyk1s.length-1;a++){
+    	var xsyk1 = document.getElementById("xsyk1["+a+"]");
+    	var xsyk2 = document.getElementById("xsyk2["+a+"]");
+    	var xsyk3 = document.getElementById("xsyk3["+a+"]");
+    	var xsfh1 = document.getElementById("xsfh1["+a+"]");
+    	var xsfh2 = document.getElementById("xsfh2["+a+"]");
+    	var cycyk1 = document.getElementById("cycyk1["+a+"]");
+    	var cycyk2 = document.getElementById("cycyk2["+a+"]");
+    	
+    	if(xsyk1s[a]=="true"){xsyk1.checked="checked";}
+    	else {xsyk1.checked=null;}
+    	if(xsyk2s[a]=="true"){xsyk2.checked="checked";}
+    	else {xsyk2.checked=null;}
+    	if(xsyk3s[a]=="true"){xsyk3.checked="checked";}
+    	else {xsyk3.checked=null;}
+    	if(xsfh1s[a]=="true"){xsfh1.checked="checked";}
+    	else {xsfh1.checked=null;}
+    	if(xsfh2s[a]=="true"){xsfh2.checked="checked";}
+    	else {xsfh2.checked=null;}
+    	if(cycyk1s[a]=="true"){cycyk1.checked="checked";}
+    	else {cycyk1.checked=null;}
+    	if(cycyk2s[a]=="true"){cycyk2.checked="checked";}
+    	else {cycyk2.checked=null;}
+    }
+}
 </script>
 </head>
 <body>
@@ -43,19 +107,19 @@ function confirm_update()
    
         <td><s:property value="#result.smm.product.name"/></td>
 
-        <td><s:checkbox name="xsyk1[%{#index.index}]" id="xsyk1[%{#index.index}]" value="result[%{#index.index}].xsyk1"/></td>
+        <td><s:checkbox name="xsyk1[%{#index.index}]" id="xsyk1[%{#index.index}]"/></td>
         
-        <td><s:checkbox name="xsyk2[%{#index.index}]" id="xsyk2[%{#index.index}]" value="result[%{#index.index}].xsyk2"/></td>
+        <td><s:checkbox name="xsyk2[%{#index.index}]" id="xsyk2[%{#index.index}]"/></td>
          
-        <td><s:checkbox name="xsyk3[%{#index.index}]" id="xsyk3[%{#index.index}]" value="result[%{#index.index}].xsyk3"/></td>
+        <td><s:checkbox name="xsyk3[%{#index.index}]" id="xsyk3[%{#index.index}]"/></td>
         	
-        <td><s:checkbox name="xsfh1[%{#index.index}]" id="xsfh1[%{#index.index}]" value="result[%{#index.index}].xsfh1"/></td>
+        <td><s:checkbox name="xsfh1[%{#index.index}]" id="xsfh1[%{#index.index}]"/></td>
         
-        <td><s:checkbox name="xsfh2[%{#index.index}]" id="xsfh2[%{#index.index}]" value="result[%{#index.index}].xsfh2"/></td>
+        <td><s:checkbox name="xsfh2[%{#index.index}]" id="xsfh2[%{#index.index}]"/></td>
         
-        <td><s:checkbox name="cycyk1[%{#index.index}]" id="cycyk1[%{#index.index}]" value="result[%{#index.index}].cycyk1"/></td>
+        <td><s:checkbox name="cycyk1[%{#index.index}]" id="cycyk1[%{#index.index}]"/></td>
         
-        <td><s:checkbox name="cycyk2[%{#index.index}]" id="cycyk2[%{#index.index}]" value="result[%{#index.index}].cycyk2"/></td>
+        <td><s:checkbox name="cycyk2[%{#index.index}]" id="cycyk2[%{#index.index}]"/></td>
       </tr>
       </s:iterator>
 	</table>
@@ -68,5 +132,8 @@ function confirm_update()
 	<td width="80" align="center"> <s:reset value="取消"
 		theme="simple" /></td></tr></table>
 </s:form>
+<script language="javascript">
+    setcheck();
+</script>
 </body>
 </html>
