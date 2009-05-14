@@ -35,9 +35,7 @@ public class listUnentryProductAction implements Preparable{
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
     	List<ResourceGrantedAuthorityImpl> list = 
     		auth.getGrantedAuthorityResource(ResourceType.CANKU);
-    	for(ResourceGrantedAuthorityImpl resource: list){
-    	
-    	}
+
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	if(user.size()==0){
     		this.setFlag(true);
