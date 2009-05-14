@@ -50,7 +50,7 @@ public class adminShowUserprivAction implements Preparable {
         		if(string.contains("canku")&&Integer.parseInt(string.substring(string.indexOf(":")+1))==this.getCankus().get(i).getId())
         		{
         			this.getCankupriv().add(true);
-        			System.out.println("true");
+        	//		System.out.println("true");
         			bool = false;
         			break;
         		}
@@ -59,7 +59,7 @@ public class adminShowUserprivAction implements Preparable {
         	if(bool)
         	{       		
     			  this.getCankupriv().add(false);
-    	     	  System.out.println("false");
+    	     //	  System.out.println("false");
         	}
         	
         }
