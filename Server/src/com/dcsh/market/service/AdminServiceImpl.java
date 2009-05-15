@@ -847,5 +847,18 @@ public class AdminServiceImpl implements AdminService {
 	@Transactional
 	public void updateSmmdy(List<Smmdingyue> sdys){
 		
+		for(int i=0;i<sdys.size();i++){
+			List<Smmdingyue> tempsmmdy = (List<Smmdingyue>) hibernateTemplate.find("from Smmdingyue where user.id="+String .valueOf(sdys.get(i).getUser().getId())+" and product.id="+
+				String.valueOf(sdys.get(i).getProduct().getId()));
+		tempsmmdy.get(0).setXsyk1(sdys.get(i).getXsyk1());
+		tempsmmdy.get(0).setXsyk2(sdys.get(i).getXsyk2());
+		tempsmmdy.get(0).setXsyk3(sdys.get(i).getXsyk3());
+		tempsmmdy.get(0).setXsfh1(sdys.get(i).getXsfh1());
+		tempsmmdy.get(0).setXsfh2(sdys.get(i).getXsfh2());
+		tempsmmdy.get(0).setCycyk1(sdys.get(i).getCycyk1());
+		tempsmmdy.get(0).setCycyk2(sdys.get(i).getCycyk2());
+		hibernateTemplate.save(tempsmmdy.get(0));
+		}
+		
 	}
 }
