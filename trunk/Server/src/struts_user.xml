@@ -21,6 +21,9 @@
             <result name="go">/subscribe.jsp</result>
         	<result name="error">/exception.jsp</result>
         </action>
+          <action name="usermodifydy" method="execute" class="modifyDyAction">
+            <result name="save_dy">/subscribe.jsp</result>
+        </action>
 </package>
 
 	
