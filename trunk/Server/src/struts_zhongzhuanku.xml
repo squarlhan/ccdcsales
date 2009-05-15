@@ -7,6 +7,23 @@
     <package name="zhongzhuanku" extends="struts-default">
         
         <!-- 中转库 -->
+        <global-results>
+			<result name="exception">/exception.jsp</result>
+			<result name="error">/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+			<exception-mapping exception="java.sql.SQLException" result="exception"/>			
+			<exception-mapping exception="com.microsoft.sqlserver.jdbc.SQLServerException" result="exception"/>
+			<exception-mapping exception="java.lang.NullPointerException" result="exception"/>
+         </global-exception-mappings>
+        <action name="adminloginsystemAdmin" method="execute" class="loginsystemAdminAction">
+               <result>/pages/systemadmin/login.jsp</result>
+               <result name="success" type="chain">adminliststorage</result>
+               <result name="input">/pages/systemadmin/login.jsp</result>
+        </action>
+        
+        
      <action name="zzkgetreport" method="execute" class="zzkgetreportAction">
                <result>/pages/zhongzhuanku/report_zzk.jsp</result>
                <result name="list">/pages/zhongzhuanku/report_zzk.jsp</result>
