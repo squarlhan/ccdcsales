@@ -30,4 +30,8 @@
 		class="com.dcsh.market.action.user.goSmmdyAction">
 		<constructor-arg ref="adminService"/>
 	</bean>
+	 <bean id="modifyDyAction" scope="prototype"
+		class="com.dcsh.market.action.user.modifyDyAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
 </beans>
