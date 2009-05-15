@@ -84,13 +84,13 @@ public class adminspemanagerAction implements Preparable {
 	
 	        this.service = service;
 	    }
-	public String execute() {
+	public String execute() throws Exception {
    
         this.resultList = service.getAllSpecifications();
       
         return "list";
     }
-	public String modify(){
+	public String modify() throws Exception{
 	
 		specifications = new Specifications();
 		specifications.setId(Integer.valueOf(this.getId().trim()));
@@ -100,14 +100,14 @@ public class adminspemanagerAction implements Preparable {
 	    service.updateSpecification(specifications);
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 
 		specifications = new Specifications();
 		specifications.setId(Integer.valueOf(this.getId().trim()));
 		service.delSpecification(specifications);
 		return "delete";
 	}
-	public String add(){
+	public String add() throws Exception{
 	
 		specifications = new Specifications();
 		specifications.setName(newsname.trim());

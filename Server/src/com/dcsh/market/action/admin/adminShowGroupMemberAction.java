@@ -57,7 +57,7 @@ public class adminShowGroupMemberAction implements Preparable {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public String execute() {		
+	public String execute()  throws Exception{		
 
     	Map session = ActionContext.getContext().getSession();
     	session.put("groupId", groupId);

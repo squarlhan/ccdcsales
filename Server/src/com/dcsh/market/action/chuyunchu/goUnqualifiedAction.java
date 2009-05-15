@@ -32,7 +32,7 @@ public class goUnqualifiedAction implements Preparable{
     }
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     
     	Set<Products> proset = new HashSet();
     	Set<Specifications> speset = new HashSet();

@@ -246,7 +246,7 @@ public class entryWareHouseAction implements Preparable{
 
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception{
 		List<Rkmx> temprumxs;
     	
 		Map session = ActionContext.getContext().getSession();
@@ -276,7 +276,7 @@ public class entryWareHouseAction implements Preparable{
         return print();
     }
 
-	public String print(){
+	public String print() throws Exception{
 
 		resultList=new ArrayList();
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 

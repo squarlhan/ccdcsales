@@ -44,7 +44,7 @@ public class listCangkuAction implements Preparable {
 
 
 
-	public String execute() {
+	public String execute() throws Exception {
 
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 	    List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.CANKU);

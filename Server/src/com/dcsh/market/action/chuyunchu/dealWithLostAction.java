@@ -158,7 +158,7 @@ public class dealWithLostAction implements Preparable{
     }
 
     
-	public String execute() {
+	public String execute() throws Exception {
     	
     	this.newproduct = new Products(Integer.valueOf(this.getPid()),null);
     	this.newspecification = new Specifications(Integer.valueOf(this.getSpid()),null,new BigDecimal(0.025),null);

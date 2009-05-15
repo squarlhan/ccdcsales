@@ -43,7 +43,7 @@ public class PrintWarehouseAction implements Preparable{
 	}
 
 
-	public String execute() {
+	public String execute() throws Exception {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		if(this.date==null)
 		{

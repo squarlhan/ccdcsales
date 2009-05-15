@@ -32,7 +32,7 @@ public class listStorageAction implements Preparable {
 	     this.service = service;
      }
 	 
-	 public String execute() {
+	 public String execute() throws Exception {
 
 		 PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 	     List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.PRD);

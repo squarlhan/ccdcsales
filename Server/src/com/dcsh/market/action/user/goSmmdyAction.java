@@ -47,7 +47,7 @@ public class goSmmdyAction implements Preparable {
 		this.flag = flag;
 	}
 
-	public String execute() {
+	public String execute() throws Exception {
 
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil
 				.getLoginAuthentication();

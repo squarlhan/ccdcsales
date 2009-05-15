@@ -33,7 +33,7 @@ public class getReportAction implements Preparable {
 	}
     
     @SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     	Canku canku = new Canku();
     	Map session = ActionContext.getContext().getSession();
         canku= ((List<CankuPriv>) session.get("tempuser")).get(0).getCanku();     	

@@ -90,7 +90,7 @@ public class adminGroupManagerAction implements Preparable {
         this.service = service;
     }
 	
-	public String execute() {
+	public String execute()  throws Exception{
 
     	this.resultList = service.getAllGroups();
 
@@ -98,15 +98,15 @@ public class adminGroupManagerAction implements Preparable {
 
     }
 	
-    public String modify(){
+    public String modify() throws Exception{
     	service.updateUserGroup(new UserGroup(Integer.valueOf(this.getId().trim()),this.getName().trim(),this.getDescription().trim()));
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 		service.delUserGroup(new UserGroup(Integer.valueOf(this.getId().trim())));
 		return "delete";
 	}
-	public String add(){
+	public String add() throws Exception{
 		service.addUserGroup(new UserGroup(this.getNewuname().trim(),this.getNewudes().trim()));
 		return "add";
 	}

@@ -128,7 +128,7 @@ public class dealWithUnqualifiedAction implements Preparable{
 
     
 	@SuppressWarnings("unchecked")
-	public String execute() {   
+	public String execute() throws Exception {   
 
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);

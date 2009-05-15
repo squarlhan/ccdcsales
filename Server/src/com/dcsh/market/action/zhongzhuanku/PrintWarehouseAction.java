@@ -36,14 +36,14 @@ public class PrintWarehouseAction implements Preparable{
 		this.mydate = mydate;
 	}
 
-	public String execute() {   
+	public String execute() throws Exception {   
     	
             return print();
   
     }
     
 	@SuppressWarnings("unchecked")
-	public String print()
+	public String print() throws Exception
 	{
 		Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");

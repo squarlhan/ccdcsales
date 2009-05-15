@@ -54,25 +54,25 @@ public class productsManagerAction implements Preparable{
 	 
 	        this.service = service;
 	    }
-	public String execute() {
+	public String execute() throws Exception {
     	
         this.resultList = service.getAllProducts();
      
         return "list";
     
     }
-	public String modify(){
+	public String modify() throws Exception{
 		products = new Products(Integer.valueOf(this.getId().trim()), this.getName().trim());
 	    service.updateProduct(products);
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 		products = new Products();
 		products.setId(Integer.valueOf(this.getId().trim()));
 		service.delProduct(products);
 		return "delete";
 	}
-	public String add(){
+	public String add() throws Exception{
 		products = new Products();
 		products.setName(newpname.trim());
 		service.addProduct(products);

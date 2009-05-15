@@ -60,7 +60,7 @@ public class checkinProductsAction implements Preparable{
 		this.service = service;
 	}
 
-    public String execute() {
+    public String execute() throws Exception {
 
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");

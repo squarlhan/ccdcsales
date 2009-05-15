@@ -156,7 +156,7 @@ public class deliveryWareHouseAction implements Preparable{
 
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
 		
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
@@ -182,7 +182,7 @@ public class deliveryWareHouseAction implements Preparable{
    		return "ok";
         
     }
-	public String yiku() {
+	public String yiku() throws Exception {
 
     	for(int i=0;i<=this.getProduct().size()-1;i++){
     	    this.newproduct = new Products(this.getProduct().get(i),null);
@@ -219,7 +219,7 @@ public class deliveryWareHouseAction implements Preparable{
         
     }
 	
-	public String sale() {
+	public String sale() throws Exception {
 
 		int salecangku = 11;//销售仓库id 11
 
@@ -256,7 +256,7 @@ public class deliveryWareHouseAction implements Preparable{
         
     	return "unequal";
     }
-	public String printfh(){
+	public String printfh() throws Exception{
 
 		resultList=new ArrayList();
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 

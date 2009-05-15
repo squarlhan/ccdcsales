@@ -23,7 +23,7 @@ public class adminSaveUserprivAction implements Preparable {
         this.service = service;
     }
     @SuppressWarnings("unchecked")
-	public String execute() 
+	public String execute()  throws Exception
     {
     	Map session = ActionContext.getContext().getSession();
     	if(session.containsKey("userId"))

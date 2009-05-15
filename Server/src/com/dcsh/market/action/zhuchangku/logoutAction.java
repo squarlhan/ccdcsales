@@ -12,7 +12,7 @@ public class logoutAction implements Preparable{
     public logoutAction() {
     }
 
-	public String execute() {
+	public String execute() throws Exception {
 
         Map session = ActionContext.getContext().getSession();
         session.put("zhuchanguser", null);

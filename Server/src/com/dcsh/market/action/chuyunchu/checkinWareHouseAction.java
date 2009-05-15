@@ -53,7 +53,7 @@ public class checkinWareHouseAction implements Preparable{
     }
 
 
-	public String execute() {
+	public String execute() throws Exception {
     
     	for (Iterator it = resultList.iterator();it.hasNext();) {
     		Rkmx r = (Rkmx)it.next();
@@ -69,7 +69,7 @@ public class checkinWareHouseAction implements Preparable{
    
     }
 	
-	public String delete()
+	public String delete() throws Exception
 	{
 		service.deleteUncheckProduct(this.getId());
 		

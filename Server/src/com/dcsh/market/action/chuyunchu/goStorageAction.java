@@ -17,7 +17,7 @@ public class goStorageAction implements Preparable{
         this.service = service;
     }
     
-	public String execute() {
+	public String execute() throws Exception {
     
         this.cankusList = service.getAllCankus();
     
