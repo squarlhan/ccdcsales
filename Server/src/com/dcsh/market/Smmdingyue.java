@@ -44,11 +44,39 @@ public class Smmdingyue implements java.io.Serializable {
 		this.cycyk1 = cycyk1;
 		this.cycyk2 = cycyk2;
 	}
+	public Smmdingyue(Users user, Products product, byte xsyk1, byte xsyk2,
+			byte xsyk3, byte xsfh1, byte xsfh2, byte cycyk1, byte cycyk2) {
+		super();
+		this.user = user;
+		this.product = product;
+		this.xsyk1 = xsyk1;
+		this.xsyk2 = xsyk2;
+		this.xsyk3 = xsyk3;
+		this.xsfh1 = xsfh1;
+		this.xsfh2 = xsfh2;
+		this.cycyk1 = cycyk1;
+		this.cycyk2 = cycyk2;
+	}
 	public Smmdingyue(int id, Users user, Canku canku, Products product, byte xsyk1,
 			byte xsyk2, byte xsyk3, byte xsfh1, byte xsfh2, byte cycyk1,
 			byte cycyk2) {
 		super();
 		this.id = id;
+		this.user = user;
+		this.canku = canku;
+		this.product = product;
+		this.xsyk1 = xsyk1;
+		this.xsyk2 = xsyk2;
+		this.xsyk3 = xsyk3;
+		this.xsfh1 = xsfh1;
+		this.xsfh2 = xsfh2;
+		this.cycyk1 = cycyk1;
+		this.cycyk2 = cycyk2;
+	}
+	public Smmdingyue(Users user, Canku canku, Products product, byte xsyk1,
+			byte xsyk2, byte xsyk3, byte xsfh1, byte xsfh2, byte cycyk1,
+			byte cycyk2) {
+		super();
 		this.user = user;
 		this.canku = canku;
 		this.product = product;
