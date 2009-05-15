@@ -6,6 +6,17 @@
 
     <package name="chuyunchu" extends="struts-default">
 <!-- 储运处 -->
+        <global-results>
+			<result name="exception">/exception.jsp</result>
+			<result name="error">/exception.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+			<exception-mapping exception="java.sql.SQLException" result="exception"/>			
+			<exception-mapping exception="com.microsoft.sqlserver.jdbc.SQLServerException" result="exception"/>
+			<exception-mapping exception="java.lang.NullPointerException" result="exception"/>
+         </global-exception-mappings>
+         
         <action name="cyccheckinproducts" method="execute" class="cyccheckinProductsAction">
             <result>/pages/warehouseadmin/listunentry.jsp</result>
             <result name="list" type="redirect-action">cyclistunentryProducts</result>
