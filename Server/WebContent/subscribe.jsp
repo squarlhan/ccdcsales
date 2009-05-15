@@ -18,6 +18,7 @@ function confirm_update()
 	var cf = confirm("确认修改？");
 	if(cf)
 	{
+		document.myform.action = "usermodifydy.action";
         return true;
 	}
 	return false;
@@ -90,7 +91,7 @@ function setcheck()
 </head>
 <body>
 <h2>短信订阅设置页面</h2>
-<s:form  onsubmit="return confirm_update()" theme="simple">
+<s:form id="myform" onsubmit="return confirm_update()" theme="simple">
 <table class="list_table" width="100%" align="center" style="margin-left:0">
     <tr bgcolor="#4A708B">
 		<th width="10%">产品名称</th>
@@ -126,7 +127,7 @@ function setcheck()
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="更改" theme="simple" action="userupdateUser"/>
+	<td width="80" align="center"><s:submit value="更改" theme="simple"/>
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"
