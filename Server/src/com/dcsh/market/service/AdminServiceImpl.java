@@ -850,6 +850,7 @@ public class AdminServiceImpl implements AdminService {
 		for(int i=0;i<sdys.size();i++){
 			List<Smmdingyue> tempsmmdy = (List<Smmdingyue>) hibernateTemplate.find("from Smmdingyue where user.id="+String .valueOf(sdys.get(i).getUser().getId())+" and product.id="+
 				String.valueOf(sdys.get(i).getProduct().getId()));
+		if(tempsmmdy.size()>0){	
 		tempsmmdy.get(0).setXsyk1(sdys.get(i).getXsyk1());
 		tempsmmdy.get(0).setXsyk2(sdys.get(i).getXsyk2());
 		tempsmmdy.get(0).setXsyk3(sdys.get(i).getXsyk3());
@@ -858,6 +859,9 @@ public class AdminServiceImpl implements AdminService {
 		tempsmmdy.get(0).setCycyk1(sdys.get(i).getCycyk1());
 		tempsmmdy.get(0).setCycyk2(sdys.get(i).getCycyk2());
 		hibernateTemplate.save(tempsmmdy.get(0));
+		}
+		else
+			hibernateTemplate.save(sdys.get(i));
 		}
 		
 	}
