@@ -103,7 +103,7 @@ public class allEntryWareHouseAction implements Preparable{
 
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
 
     	
     	Map session = ActionContext.getContext().getSession();

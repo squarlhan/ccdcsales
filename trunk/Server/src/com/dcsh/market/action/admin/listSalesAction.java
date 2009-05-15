@@ -22,7 +22,7 @@ public class listSalesAction implements Preparable{
         this.service = service;
     }
 
-	public String execute() {
+	public String execute() throws Exception {
 
     	Date today = new Date();
     	this.cmxList = service.listSales(today, today);
@@ -30,7 +30,7 @@ public class listSalesAction implements Preparable{
         return "list";
     }
 	
-	public String listBetween() {
+	public String listBetween() throws Exception {
     	System.out.println("Enter Excute");
     	this.cmxList = service.listSales(begindate, enddate);
     	this.listchukumx = service.listSalesmx(begindate, enddate);

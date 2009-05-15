@@ -61,7 +61,7 @@ public class moveProductAction implements Preparable {
 	        this.service = service;
 		}
 	 
- public String execute() 
+ public String execute()  throws Exception
  
         {      
 	        
@@ -89,7 +89,7 @@ public class moveProductAction implements Preparable {
 	        return print();
         }
  
- public String print(){
+ public String print() throws Exception{
 	
 		
 			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’");  

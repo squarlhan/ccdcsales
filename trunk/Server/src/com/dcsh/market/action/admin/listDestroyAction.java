@@ -21,14 +21,14 @@ public class listDestroyAction implements Preparable{
         this.service = service;
     }
 
-	public String execute() {
+	public String execute() throws Exception {
     	Date today = new Date();
     	this.cmxList = service.listDestroy(today, today);
     	this.listchukumx = service.listDestroymx(today, today);
         return "list";
     }
 	
-	public String listBetween() {
+	public String listBetween() throws Exception {
 
     	this.cmxList = service.listDestroy(begindate, enddate);
     	this.listchukumx = service.listDestroymx(begindate, enddate);

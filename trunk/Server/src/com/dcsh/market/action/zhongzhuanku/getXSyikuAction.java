@@ -20,7 +20,7 @@ public class getXSyikuAction implements Preparable{
         this.service = service;
     }
     
-	public String execute() {
+	public String execute() throws Exception {
     
     	Map session = ActionContext.getContext().getSession();
         this.xsyklist = service.getXSyikumx(((List<CankuPriv>)session.get("zhongzhuanuser")).get(0).getCanku());

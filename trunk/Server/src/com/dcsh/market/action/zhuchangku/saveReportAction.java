@@ -25,7 +25,7 @@ public class saveReportAction implements Preparable {
         this.service = service;
 	}
     @SuppressWarnings("unchecked")
-	public String execute() 
+	public String execute()  throws Exception
     {
     	List<ReportCmx> reportcmxlist =  new ArrayList<ReportCmx>();
     	List<ReportPmx> reportpmxlist = new ArrayList<ReportPmx>();

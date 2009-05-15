@@ -30,7 +30,7 @@ public class SearchDayReportAction implements Preparable {
 	}
 
 	@SuppressWarnings("unchecked")
-	public String execute() 
+	public String execute()  throws Exception
 	{
 		Canku canku = new Canku();
     	Map session = ActionContext.getContext().getSession();

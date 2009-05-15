@@ -21,7 +21,7 @@ public class getXSfahuoAction implements Preparable{
     }
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     	Map session = ActionContext.getContext().getSession();
         this.xsfhlist = service.getXSfahuomx(((List<CankuPriv>)session.get("tempuser")).get(0).getCanku());
         System.out.println(xsfhlist);

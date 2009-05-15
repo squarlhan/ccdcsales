@@ -17,7 +17,7 @@ public class adminUserpriManagerAction implements Preparable{
         this.service = service;
     }
 	
-	public String execute() {    
+	public String execute() throws Exception {    
         this.resultList = service.getAllUsers();        
         return "show";
       

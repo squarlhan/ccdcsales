@@ -112,7 +112,7 @@ public class adminUserManagerAction implements Preparable {
         this.service = service;
     }
 	
-	public String execute() {
+	public String execute() throws Exception {
     
         this.resultList = service.getAllUsers();
      
@@ -120,17 +120,17 @@ public class adminUserManagerAction implements Preparable {
       
     }
 	
-    public String modify(){
+    public String modify() throws Exception{
     
 	    service.updateUser(new Users(Integer.valueOf(this.getId()),this.getName().trim(),this.getPassword().trim().getBytes(),this.getDescription().trim(),this.getPhone().trim()));
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 			
 		service.delUser(new Users(Integer.valueOf(this.getId())));
 		return "delete";
 	}
-	public String add(){	
+	public String add() throws Exception{	
 		service.addUser(new Users(this.getNewuname().trim(),this.getNewupass().trim().getBytes(),this.getNewudes().trim(),this.getNewuphone().trim()));
 		return "add";
 	}

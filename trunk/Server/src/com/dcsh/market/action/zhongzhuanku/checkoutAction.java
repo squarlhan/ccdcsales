@@ -53,7 +53,7 @@ public class checkoutAction implements Preparable{
 		this.resultList = resultList;
 	}
 
-	public String execute() {
+	public String execute() throws Exception {
 
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
@@ -66,7 +66,7 @@ public class checkoutAction implements Preparable{
         
     }
 
-	public String getInfoByDate(){
+	public String getInfoByDate() throws Exception{
 	
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");

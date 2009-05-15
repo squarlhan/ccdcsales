@@ -160,7 +160,7 @@ public class dealWithLostAction implements Preparable{
     }
 
     
-	public String execute() {
+	public String execute() throws Exception {
 
     	
     	this.newproduct = new Products(Integer.valueOf(this.getPid()),null);

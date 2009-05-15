@@ -56,25 +56,25 @@ public class adminfahuomanagerAction implements Preparable{
 	   
 	        this.service = service;
 	    }
-	public String execute() {
+	public String execute()  throws Exception{
    
         this.resultList = service.getAllFahuos();
      
         return "list";
     }
-	public String modify(){
+	public String modify() throws Exception{
 		fahuo = new Fahuo(Integer.valueOf(this.getId().trim()), this.getName().trim());
 	    service.updateFahuo(fahuo);
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 	
 		fahuo = new Fahuo();
 		fahuo.setId(Integer.valueOf(this.getId().trim()));
 		service.delFahuo(fahuo);
 		return "delete";
 	}
-	public String add(){
+	public String add() throws Exception{
 		fahuo = new Fahuo();
 		fahuo.setName(newfname.trim());
 		service.addFahuo(fahuo);

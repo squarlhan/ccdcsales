@@ -34,7 +34,7 @@ public class goUserAction implements Preparable {
 		this.phone = phone;
 	}
 
-	public String execute() {
+	public String execute() throws Exception {
 	
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil.getLoginAuthentication();
 		this.username = auth.getPrincipal().getName();

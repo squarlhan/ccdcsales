@@ -49,7 +49,7 @@ public class adminGroupPriManagerAction implements Preparable{
         this.service = service;
     }
 	
-	public String execute() {
+	public String execute() throws Exception {
 
 
     	this.urlGPrivList = service.getgrouppriv();
@@ -57,7 +57,7 @@ public class adminGroupPriManagerAction implements Preparable{
         return "list";
 
     }
-	public String reset(){
+	public String reset() throws Exception{
 	
 		service.setgrouppriv(Integer.valueOf(this.getGid().trim()), Integer.valueOf(this.getSelectvalue().trim()));
 		return "reset";

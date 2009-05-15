@@ -84,7 +84,7 @@ public class admincanmanagerAction implements Preparable{
 	    	System.out.println("Enter Constructor");
 	        this.service = service;
 	    }
-	public String execute() {
+	public String execute() throws Exception{
 		byte type;
 		int id;
 		String name = null;
@@ -119,7 +119,7 @@ public class admincanmanagerAction implements Preparable{
         return "list";
    
     }
-	public String modify(){
+	public String modify() throws Exception{
 		
 		canku = new Canku();
 
@@ -131,14 +131,14 @@ public class admincanmanagerAction implements Preparable{
 	    service.updateCanku(canku);
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 
 		canku = new Canku();
 		canku.setId(Integer.valueOf(this.getId().trim()));
 		service.delCanku(canku);
 		return "delete";
 	}
-	public String add(){
+	public String add() throws Exception{
 		canku = new Canku();
 		canku.setName(newcname.trim());
 		canku.setAddress(newcaddr.trim());

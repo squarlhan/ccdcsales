@@ -40,7 +40,7 @@ public class listStorageAction implements Preparable{
 	}
 
 	@SuppressWarnings("unchecked")
-	public String execute1() {
+	public String execute1()  throws Exception{
 		
 		if(this.date==null)
 			this.date = new Date();
@@ -62,7 +62,7 @@ public class listStorageAction implements Preparable{
 
 	
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
 
     	this.resultList = service.listStorage(0,new Date());
     	List<Canku> tempcankus = service.getAllCankus();

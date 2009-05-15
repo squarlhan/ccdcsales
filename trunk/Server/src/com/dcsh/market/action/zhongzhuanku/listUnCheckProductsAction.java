@@ -28,7 +28,7 @@ public class listUnCheckProductsAction implements Preparable{
 
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
 
     	Map session = ActionContext.getContext().getSession();
     	PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();

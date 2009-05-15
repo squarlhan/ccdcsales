@@ -54,7 +54,7 @@ public class checkoutAction implements Preparable{
 	}
 
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
     	if(user.size()==0){
@@ -69,7 +69,7 @@ public class checkoutAction implements Preparable{
     }
 
 	@SuppressWarnings("unchecked")
-	public String getInfoByDate(){
+	public String getInfoByDate() throws Exception{
 
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");

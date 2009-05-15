@@ -37,7 +37,7 @@ public class goXSyikuAction implements Preparable{
     }
     
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
 
     	Set<String> pchset = new HashSet();
     	Map session = ActionContext.getContext().getSession();

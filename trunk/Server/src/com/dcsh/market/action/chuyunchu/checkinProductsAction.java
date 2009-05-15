@@ -73,7 +73,7 @@ public class checkinProductsAction implements Preparable{
 	}
 
     @SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     
     	Map session = ActionContext.getContext().getSession();
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");

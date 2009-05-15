@@ -56,7 +56,7 @@ public class updateUserAction implements Preparable {
 		this.repassword = repassword;
 	}
 
-	public String execute() {
+	public String execute() throws Exception {
 
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil.getLoginAuthentication();
 		Users user = auth.getPrincipal();

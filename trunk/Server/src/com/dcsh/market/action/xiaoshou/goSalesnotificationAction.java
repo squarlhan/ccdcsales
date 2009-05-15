@@ -39,7 +39,7 @@ public class goSalesnotificationAction implements Preparable {
 		this.service = service;
 	}
 
-	public String execute() {
+	public String execute() throws Exception {
 
 		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil
 				.getLoginAuthentication();

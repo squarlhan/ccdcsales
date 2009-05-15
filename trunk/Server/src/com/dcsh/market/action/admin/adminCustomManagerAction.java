@@ -101,25 +101,25 @@ public class adminCustomManagerAction implements Preparable {
         this.service = service;
     }
 	
-	public String execute() {
+	public String execute()  throws Exception{
     
         this.resultList = service.getAllCustoms();
      
         return "list";
       
     }
-	public String modify(){
+	public String modify() throws Exception{
     
 	    service.updateCustom(new Custom((Integer.valueOf(this.getId())),this.getCustomName().trim(),this.getShdz().trim(),this.getPhone().trim()));
 		return "modify";
 	}
-	public String delete(){
+	public String delete() throws Exception{
 		
 		service.delCustom(new Custom(Integer.valueOf(this.getId())));
 		return "delete";
 	}
 	
-	public String add(){
+	public String add() throws Exception{
 	
 		service.addCustom(new Custom(this.getNewname().trim(),this.getNewshdz().trim(),this.getNewuphone().trim()));
 		return "add";

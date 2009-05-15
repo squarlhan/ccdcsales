@@ -31,7 +31,7 @@ public class adminShowUserprivAction implements Preparable {
     }
     
     @SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     	
         this.cankus = service.getAllCankus();
         this.products = service.getAllProducts();    

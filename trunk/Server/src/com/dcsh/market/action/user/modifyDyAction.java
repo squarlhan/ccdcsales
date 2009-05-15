@@ -27,7 +27,7 @@ public class modifyDyAction implements Preparable {
 		this.service = service;
 	}
 	
-	public String execute() 
+	public String execute()  throws Exception
 	{
 		for(int i=0;i<this.getXsyk1().size();i++){
 			

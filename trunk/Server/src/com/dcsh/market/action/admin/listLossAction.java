@@ -21,14 +21,14 @@ public class listLossAction implements Preparable{
         this.service = service;
     }
 
-	public String execute() {
+	public String execute() throws Exception {
     	Date today = new Date();
     	this.cmxList = service.listLoss(today, today);
     	this.listchukumx = service.listLossmx(today, today);
         return "list";
     }
 	
-	public String listBetween() {
+	public String listBetween() throws Exception {
     	this.cmxList = service.listLoss(begindate, enddate);
     	this.listchukumx = service.listLossmx(begindate, enddate);
         return "list";

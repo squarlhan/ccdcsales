@@ -13,7 +13,7 @@ public class logoutAction implements Preparable{
     }
 
 	@SuppressWarnings("unchecked")
-	public String execute() {
+	public String execute() throws Exception {
     	System.out.println("Enter Excute");
         Map session = ActionContext.getContext().getSession();
         session.put("tempuser", null);

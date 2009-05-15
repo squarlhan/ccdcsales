@@ -87,7 +87,7 @@ public class salesNotificationAction implements Preparable {
 	        this.service = service;
 		}
 	 
-	 public String execute()
+	 public String execute() throws Exception
 	 {    
 		 this.setMynhr(service.loadmynhr().getName());
 		 this.setMyshr(service.loadmyshr().getName());
@@ -113,7 +113,7 @@ public class salesNotificationAction implements Preparable {
 		 return print();
 	 }
 	 
-	 public String print(){
+	 public String print() throws Exception{
 
 			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
 			Date d = new Date(); 
