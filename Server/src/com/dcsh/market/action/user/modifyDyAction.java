@@ -44,9 +44,8 @@ public class modifyDyAction implements Preparable {
 		.getGrantedAuthorityResource(ResourceType.PRD);
 		
 	    this.smmdy = new ArrayList<Smmdingyue>();
+	    if(plist.size()>0){
 		for(int i=0;i<this.getXsyk1().size();i++){
-			
-			System.out.println(this.getXsyk1().get(i));
 			
 			smmdy.add(new Smmdingyue(auth.getPrincipal(),
 					(Products)plist.get(i).getResource(),
@@ -60,6 +59,8 @@ public class modifyDyAction implements Preparable {
 		}
 		this.service.updateSmmdy(smmdy);
 		return "save_dy";
+		}else
+			return "error_";
 	}
 	
 	public List<Boolean> getXsyk1() {
