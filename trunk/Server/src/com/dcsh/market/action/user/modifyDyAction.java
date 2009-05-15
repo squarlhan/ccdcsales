@@ -1,10 +1,17 @@
 package com.dcsh.market.action.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import com.dcsh.market.Products;
+import com.dcsh.market.Smmdingyue;
 import com.dcsh.market.Smmdy;
+import com.dcsh.market.priv.PrivAuthenticationImpl;
+import com.dcsh.market.priv.PrivUtil;
+import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
+import com.dcsh.market.priv.ResourceType;
 import com.dcsh.market.service.AdminService;
 import com.opensymphony.xwork2.Preparable;
 
@@ -21,6 +28,7 @@ public class modifyDyAction implements Preparable {
 	private List<Boolean> xsfh2;
 	private List<Boolean> cycyk1;
 	private List<Boolean> cycyk2;
+	private List<Smmdingyue> smmdy;
 	
 	public modifyDyAction(AdminService service) {
 
@@ -29,10 +37,28 @@ public class modifyDyAction implements Preparable {
 	
 	public String execute()  throws Exception
 	{
+		PrivAuthenticationImpl auth = (PrivAuthenticationImpl) PrivUtil
+		.getLoginAuthentication();
+		
+		List<ResourceGrantedAuthorityImpl> plist = auth
+		.getGrantedAuthorityResource(ResourceType.PRD);
+		
+	    this.smmdy = new ArrayList<Smmdingyue>();
 		for(int i=0;i<this.getXsyk1().size();i++){
 			
 			System.out.println(this.getXsyk1().get(i));
+			
+			smmdy.add(new Smmdingyue(auth.getPrincipal(),
+					(Products)plist.get(i).getResource(),
+					this.getXsyk1().get(i)==true?(byte)1:(byte)0,
+					this.getXsyk2().get(i)==true?(byte)1:(byte)0,
+					this.getXsyk3().get(i)==true?(byte)1:(byte)0,
+					this.getXsfh1().get(i)==true?(byte)1:(byte)0,
+					this.getXsfh2().get(i)==true?(byte)1:(byte)0,
+					this.getCycyk1().get(i)==true?(byte)1:(byte)0,
+					this.getCycyk2().get(i)==true?(byte)1:(byte)0));
 		}
+		this.service.updateSmmdy(smmdy);
 		return "save_dy";
 	}
 	
@@ -90,6 +116,14 @@ public class modifyDyAction implements Preparable {
 
 	public void setCycyk2(List<Boolean> cycyk2) {
 		this.cycyk2 = cycyk2;
+	}
+
+	public List<Smmdingyue> getSmmdy() {
+		return smmdy;
+	}
+
+	public void setSmmdy(List<Smmdingyue> smmdy) {
+		this.smmdy = smmdy;
 	}
 
 	@Override
