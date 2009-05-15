@@ -21,7 +21,7 @@ public class goSmmdyAction implements Preparable {
 	private static final Logger log = LogManager.getLogManager().getLogger(
 			goSmmdyAction.class.getName());
 	private List<Smmdy> resultList;
-	private String flag;
+	private boolean flag;
 	private AdminService service;
 
 	public goSmmdyAction(AdminService service) {
@@ -37,11 +37,11 @@ public class goSmmdyAction implements Preparable {
 		this.resultList = resultList;
 	}
 
-	public String getFlag() {
+	public boolean getFlag() {
 		return flag;
 	}
 
-	public void setFlag(String flag) {
+	public void setFlag(boolean flag) {
 		this.flag = flag;
 	}
 
@@ -55,10 +55,10 @@ public class goSmmdyAction implements Preparable {
 				.getGrantedAuthorityResource(ResourceType.CANKU);
 		List<ResourceGrantedAuthorityImpl> plist = auth
 				.getGrantedAuthorityResource(ResourceType.PRD);
-		flag = "display:none";
+		flag = false;
 		for (ResourceGrantedAuthorityImpl canku : clist) {
 			if (((Canku) canku.getResource()).getType() == (byte) 0)
-				flag = "";
+				flag = true;
 		}
 		if (plist.size() > 0) {
 			for (ResourceGrantedAuthorityImpl prd : plist) {
