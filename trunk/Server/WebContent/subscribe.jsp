@@ -87,12 +87,28 @@ function setcheck()
     	else {cycyk2.checked=null;}
     }
 }
+var flag = new Array("<s:property value='flag'/>",0); 
+
+function checkauth()
+{
+	if(flag[0]=="false")
+		{
+	        var rows = document.getElementById("tb").rows;  
+	        for(var i=0;i<rows.length;i++)
+		        {
+	        	    rows[i].cells[6].style.display = "none";
+	        	    rows[i].cells[7].style.display = "none";
+		        }
+	       
+	    }
+}
+
 </script>
 </head>
 <body>
 <h2>短信订阅设置页面</h2>
 <s:form id="myform" onsubmit="return confirm_update()" theme="simple">
-<table class="list_table" width="100%" align="center" style="margin-left:0">
+<table class="list_table" id="tb" width="100%" align="center" style="margin-left:0">
     <tr bgcolor="#4A708B">
 		<th width="10%">产品名称</th>
 		<th width="12%">销售移库单</th>
@@ -135,6 +151,7 @@ function setcheck()
 </s:form>
 <script language="javascript">
     setcheck();
+    checkauth();
 </script>
 </body>
 </html>
