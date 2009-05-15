@@ -2,7 +2,6 @@ package com.dcsh.market.action.user;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -15,7 +14,6 @@ import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
 import com.dcsh.market.priv.ResourceType;
 import com.dcsh.market.service.AdminService;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
 
 public class goSmmdyAction implements Preparable {
@@ -88,7 +86,8 @@ public class goSmmdyAction implements Preparable {
 						}
 					}
 				}
-				resultList.add(new Smmdy(smmdy));
+				Smmdy smmdy11 = new Smmdy(smmdy);
+				resultList.add(smmdy11);
 			}
 			return "go";
 		} else
