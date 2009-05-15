@@ -66,6 +66,7 @@
 		<pattern>/usergoUser.action</pattern>
 		<pattern>/userupdateUser.action</pattern>
 		<pattern>/usergosmmdy.action</pattern>
+		<pattern>/usermodifydy.action</pattern>
 		
 		<pattern>/pages/systemadmin/adminlogout.action</pattern>
 		<pattern>/pages/warehouseadmin/cyclogout.action</pattern>
