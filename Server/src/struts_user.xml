@@ -38,6 +38,7 @@
         </action>
           <action name="usermodifydy" method="execute" class="modifyDyAction">
             <result name="save_dy" type="redirect-action">usergosmmdy</result>
+            <result name="error_">/exception.jsp</result>
         </action>
 </package>
 
