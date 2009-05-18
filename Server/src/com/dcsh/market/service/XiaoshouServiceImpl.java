@@ -293,5 +293,27 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		}
 		return listchuku;
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<XSyikumx> getXSyikumx(Users zbr){
+		List<XSyikumx> result = hibernateTemplate.find("from XSyikumx where status = 0 and xsyikuxx.zbr.id ="+String.valueOf(zbr.getId()));
+		return result;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<XSfahuomx> getXSfahuomx(Users zbr){
+		List<XSfahuomx> result = hibernateTemplate.find("from XSfahuomx where status = 0 and xsfahuoxx.zdr.id ="+String.valueOf(zbr.getId()));
+		return result;
+	}
+	@Override
+	@Transactional
+	public void delXSyikumx(int id){
+		hibernateTemplate.delete(hibernateTemplate.get(XSyikumx.class, id));
+	}
+	@Override
+	@Transactional
+    public void delXSfahuomx(int id){
+		hibernateTemplate.delete(hibernateTemplate.get(XSfahuomx.class, id));
+	}
 
 }

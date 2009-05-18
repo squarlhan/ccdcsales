@@ -18,7 +18,9 @@ import com.dcsh.market.Products;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
+import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSfahuoxx;
+import com.dcsh.market.XSyikumx;
 import com.dcsh.market.XSyikuxx;
 
 
@@ -45,6 +47,22 @@ public interface XiaoshouService {
 	Custom getCustomerById(Integer customerId);
 	Users loadmyshr();
     Users loadmynhr();
+    
+    /**
+     * 取得某计划员销售移库和销售发货明细
+     * @param zbr
+     * @return
+     */
+    List<XSyikumx> getXSyikumx(Users zbr);
+    List<XSfahuomx> getXSfahuomx(Users zbr);
+    
+    /**
+     * 删除某计划员销售移库和销售发货明细
+     * @param id
+     * @return
+     */
+    void delXSyikumx(int id);
+    void delXSfahuomx(int id);
     
     /**
      * 获得销售总量和明细

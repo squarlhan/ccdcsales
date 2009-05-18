@@ -47,4 +47,12 @@
 	    class="com.dcsh.market.action.ajaxaction.GetCustomersAction">
 	    <constructor-arg ref="XiaoShouService"/>
 	</bean>
+	<bean id="listxsfhAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.listxsfhAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
+	<bean id="listxsykAction" scope="prototype"
+	    class="com.dcsh.market.action.xiaoshou.listxsykAction">
+	    <constructor-arg ref="XiaoShouService"/>
+	</bean>
 </beans>
