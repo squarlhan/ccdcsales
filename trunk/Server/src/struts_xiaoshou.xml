@@ -60,6 +60,16 @@
             <!-- <result name="sale_save" type="redirect-action">xsliststorage</result> -->
             <result name="print">/pages/xiaoshou/printsalesnotification.jsp</result>
         </action>
+        <action name="xslistxsfh" method="execute" class="listxsfhAction">
+            <result>/pages/xiaoshou/listfahuo.jsp</result>
+            <result name="showfh">/pages/xiaoshou/listfahuo.jsp</result>
+            <result name="delfh" type="redirect-action">xslistxsfh</result>
+        </action>
+        <action name="xslistxsyk" method="execute" class="listxsykAction">
+            <result>/pages/xiaoshou/listyiku.jsp</result>
+            <result name="showyk">/pages/xiaoshou/listyiku.jsp</result>
+            <result name="delyk" type="redirect-action">xslistxsyk</result>
+        </action>
         
 </package>
 	
