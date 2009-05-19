@@ -44,6 +44,7 @@
 	    <pattern>/pages/xiaoshou/printmoveprconfirm.jsp</pattern>
 	    <pattern>/xsmoveproduct!print.action </pattern>
 	    <pattern>/xsmoveproduct.action</pattern>
+	    <pattern>/pages/xiaoshou/customers.jsp</pattern>
 	</excludes>
 	<decorator name="main" page="maindecorator.jsp">
 	    <pattern>/index.jsp</pattern>
