@@ -87,20 +87,14 @@ function setcheck()
     	else {cycyk2.checked=null;}
     }
 }
-var flag = new Array("<s:property value='flag'/>",0); 
-
 function checkauth()
 {
-	if(flag[0]=="false")
-		{
 	        var rows = document.getElementById("tb").rows;  
 	        for(var i=0;i<rows.length;i++)
 		        {
 	        	    rows[i].cells[6].style.display = "none";
 	        	    rows[i].cells[7].style.display = "none";
-		        }
-	       
-	    }
+		        }      
 }
 
 </script>
