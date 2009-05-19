@@ -1,0 +1,41 @@
+http://ant.apache.org/antlibs/svn/index.html
+
+Example:
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Server" default="redeploy" basedir=".">
+	<description>
+		重新在Jboss中部署Server程序，实现的方法是touch应用程序中的
+		根中的web.xml
+    </description>
+	<!-- 设置属性，需要根据自己的路径进行修改  -->
+	<property name="src" location="src" />
+	<property name="build" location="build/classes" />
+	<property name="jboss"
+		location="E:\Dcsh\jboss-5.0.0.GA\server\default\deploy\Server.war" />
+
+	<target name="compile" description="compile the source ">
+		<javac srcdir="${src}" destdir="${build}" />
+	</target>
+
+	<target name="copy" depends="compile">
+		<copy todir="${jboss}/WEB-INF/classes">
+			<fileset dir="${build}" >
+				<include name="**/*.xml" />
+				<include name="**/*.class" />
+			</fileset>
+		</copy>
+
+		<copy todir="${jboss}">
+			<fileset dir="./WebContent">
+				<include name="**/*.xml" />
+				<include name="**/*.jsp" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="redeploy" depends="copy">
+		<touch file="${jboss}/WEB-INF/web.xml" />
+	</target>
+
+</project>
