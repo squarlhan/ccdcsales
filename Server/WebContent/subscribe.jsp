@@ -115,7 +115,7 @@ function checkauth()
 		<th width="13%">销售移库装车</th>
 		<th width="13%">销售移库入库</th>
 		<th width="12%">销售发货单</th>
-		<th width="13%">销售发货入库</th>
+		<th width="13%">销售发货装车</th>
 		<th width="13%">储运移库装车</th>
 		<th width="13%">储运移库入库</th>
 	</tr>
