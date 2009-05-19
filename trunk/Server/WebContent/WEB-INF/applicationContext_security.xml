@@ -9,7 +9,7 @@
 		<form-login login-page='/login.jsp' default-target-url='/index.jsp'
 			always-use-default-target='true' />
 		<logout logout-url="/logout" logout-success-url="/login.jsp"/>
-		<intercept-url pattern='/login.jsp*' filters='none'/>
+		<intercept-url pattern='/login*' filters='none'/>
 		<intercept-url pattern='/images/*' filters='none'/>	
 		<intercept-url pattern='/css/*' filters='none'/>
 		<intercept-url pattern='/xsgetcustomers.action' filters='none'/>
