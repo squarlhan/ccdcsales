@@ -12,9 +12,9 @@
 @import "/Server/css/css.css";
 </style>
 <script language="javascript"> 
-function urlpara_modify(sid,sname,sweight,spack) 
+function urlpara_modify(sid,sname,sweight,spack,sismerge) 
 {
-    location.href= "adminspemanager!modify.action?id="+sid+"&name="+sname+"&weight="+sweight+"&packtype="+spack; 
+    location.href= "adminspemanager!modify.action?id="+sid+"&name="+sname+"&weight="+sweight+"&packtype="+spack+"&ismerge="+sismerge; 
 } 
 function confirm_modify(rownum)
 {
@@ -25,6 +25,7 @@ function confirm_modify(rownum)
 		var sname = (document.getElementById("sname_"+rownum)).value;
 		var sweight = (document.getElementById("sweight_"+rownum)).value;
 		var spack = (document.getElementById("spackType_"+rownum)).value;
+		var sismerge = (document.getElementById("reset_"+rownum)).value;
 		if(sname.replace(/(^\s*)|(\s*$)/g,"") == "")
 			alert("规格名不能为空 ");
 		else
@@ -37,7 +38,7 @@ function confirm_modify(rownum)
 					if(spack.replace(/(^\s*)|(\s*$)/g,"") == "")
 						alert("包装方式不能为空");
 					else
-						urlpara_modify(sid,sname,sweight,spack);
+						urlpara_modify(sid,sname,sweight,spack,sismerge);
 	}
 }
 function urlpara_delete(sid) 
@@ -92,24 +93,29 @@ var perpage = 10;
 
 var sids = new Array(
 	    <s:iterator id="result" value="resultList">
-		    <s:property value="#result.id"/>,
+		    <s:property value="#result.spf.id"/>,
 	    </s:iterator>
     0);
 var snames = new Array(
 		<s:iterator id="result" value="resultList">
-			"<s:property value='#result.name'/>",
+			"<s:property value='#result.spf.name'/>",
 		</s:iterator>
 	0);
 var wts = new Array(
 	    <s:iterator id="result" value="resultList">
-		    <s:property value="#result.weight"/>,
+		    <s:property value="#result.spf.weight"/>,
 	    </s:iterator>
     0);
 var types = new Array(
 		<s:iterator id="result" value="resultList">
-			"<s:property value='#result.packType'/>",
+			"<s:property value='#result.spf.packType'/>",
 		</s:iterator>
 	0);
+var isms = new Array(
+		<s:iterator id="result" value="resultList">
+		   "<s:property value='#result.ismerge'/>",
+	</s:iterator>
+0);
 
 function createrow(mytable,a)
 {
@@ -122,37 +128,53 @@ function createrow(mytable,a)
     var td3 = tr.insertCell(-1);
     var td4 = tr.insertCell(-1);
     var td5 = tr.insertCell(-1);
+    var td6 = tr.insertCell(-1);
+    var td7 = tr.insertCell(-1);
     
     var textfield1 = document.createElement("input");
-	textfield1.setAttribute("name","sid_"+a);
-	textfield1.setAttribute("id","sid_"+a);
-	textfield1.setAttribute("size","10");
+	textfield1.setAttribute("name","sid_"+t);
+	textfield1.setAttribute("id","sid_"+t);
+	textfield1.setAttribute("size","5");
 	textfield1.onfocus=function(){textfield1.blur();};
 	textfield1.value = sids[a];
 
 	 var textfield2 = document.createElement("input");
-	 textfield2.setAttribute("name","sname_"+a);
-	 textfield2.setAttribute("id","sname_"+a);
+	 textfield2.setAttribute("name","sname_"+t);
+	 textfield2.setAttribute("id","sname_"+t);
 	 textfield2.setAttribute("size","10");
 	 textfield2.value = snames[a];
 
 	 var textfield3 = document.createElement("input");
-	 textfield3.setAttribute("name","sweight_"+a);
-	 textfield3.setAttribute("id","sweight_"+a);
+	 textfield3.setAttribute("name","sweight_"+t);
+	 textfield3.setAttribute("id","sweight_"+t);
 	 textfield3.setAttribute("size","10");
 	 textfield3.value = wts[a];
 
 	 var textfield4 = document.createElement("input");
-	 textfield4.setAttribute("name","spackType_"+a);
-	 textfield4.setAttribute("id","spackType_"+a);
+	 textfield4.setAttribute("name","spackType_"+t);
+	 textfield4.setAttribute("id","spackType_"+t);
 	 textfield4.setAttribute("size","16");
 	 textfield4.value = types[a];
+
+	 var select1 = document.createElement("select");
+		select1.setAttribute("name","reset_"+t);
+		select1.setAttribute("id","reset_"+t);
+		var option1 = document.createElement("option");
+		var option2 = document.createElement("option");
+		option1.value = "0";
+		option1.text = "不可";
+		option2.value = "1";
+		option2.text = "可以";
+		select1.options.add(option1);
+		select1.options.add(option2);
 
 	td1.appendChild(textfield1);
 	td2.appendChild(textfield2);
 	td3.appendChild(textfield3);
 	td4.appendChild(textfield4);
-	td5.innerHTML = "<a href='javascript:confirm_modify("+a+")'>修改</a>&nbsp;<a href='javascript:confirm_delete("+a+")'>删除</a> ";
+	td5.innerHTML = isms[a];
+	td6.appendChild(select1);
+	td7.innerHTML = "<a href='javascript:confirm_modify("+t+")'>修改</a>&nbsp;<a href='javascript:confirm_delete("+t+")'>删除</a> ";
 }
 function firstpage()
 {
@@ -271,11 +293,13 @@ function finalpage()
   <s:form id="myform" name="myform" action="adminspemanager" theme="simple">
   	<table  class="list_table" id="mytable" align="center" width="640">
 		<tr bgcolor="#4A708B">
-		    <th width="80">规格标识</th>
-		    <th width="80">规格名称</th>
+		    <th width="80">标识</th>
+		    <th width="80">名称</th>
 		    <th width="80">重量</th>
 		    <th width="80">包装方式</th>
-		    <th width="200">执行操作</th>
+		    <th width="80">微调</th>
+		    <th width="80">选择微调</th>
+		    <th width="200">操作</th>
 		</tr>
      </table>
       <div align="center">
@@ -302,6 +326,15 @@ function finalpage()
 	      <tr>
 	      	<td><label>包装方式:</label></td>
 	        <td><s:textfield id="newswrapp" name="newswrapp"/></td>
+	      </tr>
+	      <tr>
+	      	<td><label>是否可以微调:</label></td>
+	        <td>
+	          <select id="newismerge" name="newismerge">
+	         		<option value="0">不可</option>
+	         		<option value="1">可以</option>
+	          </select>
+	        </td>
 	      </tr>
 	      <tr>
 	        <td><label></label></td>
