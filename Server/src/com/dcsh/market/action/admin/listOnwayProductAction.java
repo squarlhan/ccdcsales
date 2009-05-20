@@ -44,8 +44,14 @@ public class listOnwayProductAction implements Preparable{
     		}
     	}
 		cangkusList.add(0, new Canku(0,"全部",(byte)0));
-		cangkusList1 = new ArrayList();
-		cangkusList1.addAll(cangkusList);
+		cangkusList1 = service.getAllCankus();
+		for(Iterator it = cangkusList1.iterator();it.hasNext();){
+    		Canku tmpck = (Canku)it.next();
+    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
+    			it.remove();
+    		}
+    	}
+		cangkusList1.add(0, new Canku(0,"全部",(byte)0));
     	this.resultList = service.listOnwayProducts(0,0);
         return "listonway";  
     }
@@ -59,8 +65,14 @@ public class listOnwayProductAction implements Preparable{
     		}
     	}
 		cangkusList.add(0, new Canku(0,"全部",(byte)0));
-		cangkusList1 = new ArrayList();
-		cangkusList1.addAll(cangkusList);
+		cangkusList1 = service.getAllCankus();
+		for(Iterator it = cangkusList1.iterator();it.hasNext();){
+    		Canku tmpck = (Canku)it.next();
+    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
+    			it.remove();
+    		}
+    	}
+		cangkusList1.add(0, new Canku(0,"全部",(byte)0));
     	this.resultList = service.listOnwayProducts(this.getOrg(),this.getAim());
         return "listonway";  
     }
