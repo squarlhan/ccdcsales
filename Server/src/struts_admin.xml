@@ -138,11 +138,23 @@
             <result>/pages/systemadmin/liststorage.jsp</result>
         	<result name="print">/pages/systemadmin/printwarehouse.jsp</result>
         </action>
-        
+
+        <action name="admincfrmanager" method="execute" class="cfrmanagerAction">
+        	   <result>/pages/systemadmin/cfrmanager.jsp</result>
+               <result name="show">/pages/systemadmin/cfrmanager.jsp</result>
+        </action>
+        <action name="adminshowcfr" method="execute" class="adminshowcfrAction">
+               <result name="show">/pages/systemadmin/showcfr.jsp</result>
+        </action>
+        <action name="adminsavecfr" method="execute" class="adminsavecfrAction">
+        	<result name="save_cfr" type="redirect-action">admincfrmanager</result>
+        </action>
+
         <action name="adminlistonwayProducts" method="execute" class="adminlistonwayProductsAction">
             <result >/pages/systemadmin/listzaitu.jsp</result>
             <result name="listonway" >/pages/systemadmin/listzaitu.jsp</result>
         </action>
+
 </package>
 
 	
