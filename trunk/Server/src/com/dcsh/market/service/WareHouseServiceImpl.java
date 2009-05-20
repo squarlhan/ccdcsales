@@ -712,6 +712,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		
 		return list;
 	}
+	@SuppressWarnings("unchecked")
 	public List<ReportPmx> listWarehouseOther(int ckid,Date date){
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(date);
@@ -902,5 +903,58 @@ public class WareHouseServiceImpl implements WareHouseService {
 	
 		hibernateTemplate.deleteAll(kcxx);
 	
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ReportPmx> getFPmx(Canku canku){
+		List<ReportPmx> list = new ArrayList<ReportPmx>();
+		/*
+		 * 当日入库产品类别psort
+		 * 得到入库明细中的	当日该仓库	的入库明细listrkmx
+		 */
+		List<Canku> gckList = hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
+		for(int i=0;i<gckList.size();i++){
+			List<Products> pkucun = hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+gckList.get(i).getId());
+			for(int j=0;j<pkucun.size();j++){
+				List<Kcxx> listkcxx =new ArrayList();
+				listkcxx = hibernateTemplate.find("from Kcxx as kc where kc.products.id="+pkucun.get(j).getId()+" and kc.id.cid="+gckList.get(i).getId());
+				BigDecimal total_kcwt = new BigDecimal(0);
+				BigDecimal tmp = new BigDecimal(0);
+				for(int i3=0;i3<listkcxx.size();i3++){
+					tmp=new BigDecimal(0);
+					tmp=(listkcxx.get(i3).getSpecifications().getWeight()).multiply
+						(new BigDecimal(listkcxx.get(i3).getNumber()));
+				
+					total_kcwt = total_kcwt.add(tmp);
+				}
+				list.add(new ReportPmx(new Reportxx(), gckList.get(i), pkucun.get(j), new BigDecimal(0), new BigDecimal(0), total_kcwt, new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),new BigDecimal(0)));
+			}
+			
+		}
+		
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReportPmx>listFReport(int ckid,Date date){
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(date);
+	    List<Canku> gckList = hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+ckid);
+	    List<ReportPmx> listrpmx = new ArrayList();
+	    for(int i=0;i<gckList.size();i++){
+	    	List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+gckList.get(i).getId()
+					+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
+	    	if(listrpxx.size()==0){
+		    }
+		    else
+		    {
+		    	List<ReportPmx> listrpmxTemp = hibernateTemplate.find("from ReportPmx as rp where rp.rxxid = "+listrpxx.get(0).getId());
+		    	for(int j=0;j<listrpmxTemp.size();j++)
+		    		listrpmx.add(listrpmxTemp.get(j));
+		    }
+	    }
+	    return listrpmx;
+	    
+	    
 	}
 }
