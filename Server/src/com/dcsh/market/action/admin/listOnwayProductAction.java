@@ -39,7 +39,7 @@ public class listOnwayProductAction implements Preparable{
 		cangkusList = service.getAllCankus();
 		for(Iterator it = cangkusList.iterator();it.hasNext();){
     		Canku tmpck = (Canku)it.next();
-    		if(tmpck.getType()==(byte)6){
+    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
     			it.remove();
     		}
     	}
@@ -47,7 +47,7 @@ public class listOnwayProductAction implements Preparable{
 		cangkusList1 = service.getAllCankus();
 		for(Iterator it = cangkusList1.iterator();it.hasNext();){
     		Canku tmpck = (Canku)it.next();
-    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
+    		if(tmpck.getType()==(byte)6){
     			it.remove();
     		}
     	}
@@ -60,7 +60,7 @@ public class listOnwayProductAction implements Preparable{
 		cangkusList = service.getAllCankus();
 		for(Iterator it = cangkusList.iterator();it.hasNext();){
     		Canku tmpck = (Canku)it.next();
-    		if(tmpck.getType()==(byte)6){
+    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
     			it.remove();
     		}
     	}
@@ -68,7 +68,7 @@ public class listOnwayProductAction implements Preparable{
 		cangkusList1 = service.getAllCankus();
 		for(Iterator it = cangkusList1.iterator();it.hasNext();){
     		Canku tmpck = (Canku)it.next();
-    		if((tmpck.getType()==(byte)6)||(tmpck.getType()==(byte)1)){
+    		if(tmpck.getType()==(byte)6){
     			it.remove();
     		}
     	}
