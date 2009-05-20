@@ -207,6 +207,12 @@ public interface WareHouseService {
 	 */
 	void deleteUncheckProduct(int id);
 	/**
+	 * 列出从这个仓库发出的在途货物
+	 * @param cankuid
+	 * @return
+	 */
+	List<Chukumx> listOnwayProducts(int cankuid);
+	/**
 	 * 查询当日工厂库的库存量
 	 * @param canku
 	 * @return

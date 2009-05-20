@@ -114,5 +114,8 @@
 		class="com.dcsh.market.action.admin.PrintWarehouseAction">
 		<constructor-arg ref="adminService"/>
 	</bean>
-	
+	<bean id="adminlistonwayProductsAction" scope="prototype"
+		class="com.dcsh.market.action.admin.listOnwayProductAction">
+		<constructor-arg ref="adminService" />
+	</bean> 
 </beans>

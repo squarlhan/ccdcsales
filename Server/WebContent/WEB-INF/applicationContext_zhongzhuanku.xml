@@ -107,4 +107,8 @@
 		class="com.dcsh.market.action.zhongzhuanku.PrintWarehouseAction">
 		<constructor-arg ref="ZhongZhuanKuService" />
 	</bean>
+	<bean id="zzklistonwayProductsAction" scope="prototype"
+		class="com.dcsh.market.action.zhongzhuanku.listOnwayProductAction">
+		<constructor-arg ref="ZhongZhuanKuService" />
+	</bean> 
 </beans>

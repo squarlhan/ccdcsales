@@ -183,5 +183,9 @@
             <result name="input">/pages/warehouseadmin/welcome.jsp</result>
             <result name="print">/pages/warehouseadmin/printwarehouse.jsp</result>
         </action>
+        <action name="cyclistonwayProducts" method="execute" class="listonwayProductsAction">
+            <result >/pages/warehouseadmin/listzaitu.jsp</result>
+            <result name="listonway" >/pages/warehouseadmin/listzaitu.jsp</result>
+        </action>
     </package>
   </struts>

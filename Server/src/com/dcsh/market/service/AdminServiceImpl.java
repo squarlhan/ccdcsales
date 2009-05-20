@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
@@ -864,5 +865,23 @@ public class AdminServiceImpl implements AdminService {
 			hibernateTemplate.save(sdys.get(i));
 		}
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Chukumx> listOnwayProducts(int org, int aim) {
+
+		List<Chukumx> result = new ArrayList<Chukumx>();
+		
+		if((org!=0)&&(aim!=0)){
+			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "+String.valueOf(org)+" and chuku.cankuByRkId.id ="+String.valueOf(aim));
+		}else if((org!=0)&&(aim==0)){
+			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "+String.valueOf(org));
+		}else if((org==0)&&(aim!=0)){
+			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByRkId.id = "+String.valueOf(aim));
+		}else{
+			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0");
+		}
+		return result;
 	}
 }

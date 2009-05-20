@@ -175,4 +175,11 @@ public interface AdminService {
 	 * @param sdys 传入的信息
 	 */
 	void updateSmmdy(List<Smmdingyue> sdys);
+	/**
+	 * 列出在途产品信息
+	 * @param org 源仓库id
+	 * @param aim 目标库id
+	 * @return
+	 */
+	List<Chukumx> listOnwayProducts(int org, int aim);
 }

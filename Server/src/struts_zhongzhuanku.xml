@@ -125,6 +125,10 @@
             <result name="input">/pages/zhongzhuanku/welcome.jsp</result>
             <result name="print">/pages/zhongzhuanku/printwarehouse.jsp</result>
         </action>
+        <action name="zzklistonwayProducts" method="execute" class="zzklistonwayProductsAction">
+            <result >/pages/zhongzhuanku/listzaitu.jsp</result>
+            <result name="listonway" >/pages/zhongzhuanku/listzaitu.jsp</result>
+        </action>
 </package>
 	
 </struts>

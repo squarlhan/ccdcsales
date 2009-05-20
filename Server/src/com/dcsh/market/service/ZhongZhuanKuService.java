@@ -181,4 +181,10 @@ public interface ZhongZhuanKuService {
 	 * @param mydate 日期
 	 */
 	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
+	/**
+	 * 列出从这个仓库发出的在途货物
+	 * @param cankuid
+	 * @return
+	 */
+	List<Chukumx> listOnwayProducts(int cankuid);
 }
