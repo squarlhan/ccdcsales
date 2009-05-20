@@ -206,4 +206,17 @@ public interface WareHouseService {
 	 * @param id 入库明细的id
 	 */
 	void deleteUncheckProduct(int id);
+	/**
+	 * 查询当日工厂库的库存量
+	 * @param canku
+	 * @return
+	 */
+	List<ReportPmx> getFPmx(Canku canku);
+	/**
+	 * 查询工厂仓库的Report
+	 * @param ckid
+	 * @param date
+	 * @return
+	 */
+	List<ReportPmx>listFReport(int ckid,Date date);
 }
