@@ -114,8 +114,24 @@
 		class="com.dcsh.market.action.admin.PrintWarehouseAction">
 		<constructor-arg ref="adminService"/>
 	</bean>
+
+	<bean id="cfrmanagerAction" scope="prototype"
+		class="com.dcsh.market.action.admin.admincfrManagerAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="adminshowcfrAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminShowCFRAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	<bean id="adminsavecfrAction" scope="prototype"
+		class="com.dcsh.market.action.admin.adminSaveCFRAction">
+		<constructor-arg ref="adminService"/>
+	</bean>
+	
+
 	<bean id="adminlistonwayProductsAction" scope="prototype"
 		class="com.dcsh.market.action.admin.listOnwayProductAction">
 		<constructor-arg ref="adminService" />
 	</bean> 
+
 </beans>
