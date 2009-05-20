@@ -93,7 +93,7 @@ public class AOPService {
 			for (UserPriv up : ups) {
 				Set<UserGroup> ugs = up.getUser().getGroup();
 				for (UserGroup ug : ugs) {
-					if (ug.getName().indexOf("销售") != -1)
+					if (ug.getName().indexOf("营销") != -1)
 						result.add(up.getUser());
 				}
 			}
