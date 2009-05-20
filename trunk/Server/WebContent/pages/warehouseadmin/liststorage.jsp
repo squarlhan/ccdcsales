@@ -231,6 +231,27 @@
 	    </s:iterator>
 	</table>
 
+	<table class="list_table"  align="center" width="100%">
+		<tr bgcolor="#4A708B">
+			<th width="30%">工厂仓库名</th>
+		    <th width="30%">产品名</th>
+		    <th width="30%">产品重量</th>
+		</tr>
+		<s:iterator id="result" value="fpList" status="index">		
+			<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+	           <td align="center">
+					<s:property value="#result.ckid.name" />
+			   </td>
+	           <td align="center">
+					<s:property value="#result.prdid.name" />
+			   </td>
+			   <td align="center">
+					<s:property value="#result.kct" />
+			   </td>
+	        </tr>
+	    </s:iterator>
+	</table>
+
 	<table id="mytable" class="list_table"  align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="20%">批号</th>
