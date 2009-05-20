@@ -872,15 +872,28 @@ public class AdminServiceImpl implements AdminService {
 	public List<Chukumx> listOnwayProducts(int org, int aim) {
 
 		List<Chukumx> result = new ArrayList<Chukumx>();
-		
-		if((org!=0)&&(aim!=0)){
-			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "+String.valueOf(org)+" and chuku.cankuByRkId.id ="+String.valueOf(aim));
-		}else if((org!=0)&&(aim==0)){
-			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "+String.valueOf(org));
-		}else if((org==0)&&(aim!=0)){
-			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0 and chuku.cankuByRkId.id = "+String.valueOf(aim));
-		}else{
-			result = (List<Chukumx>)hibernateTemplate.find("from Chukumx where Status=0");
+
+		if ((org != 0) && (aim != 0)) {
+			result = (List<Chukumx>) hibernateTemplate
+					.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "
+							+ String.valueOf(org)
+							+ " and chuku.cankuByRkId.id ="
+							+ String.valueOf(aim));
+		} else if ((org != 0) && (aim == 0)) {
+			result = (List<Chukumx>) hibernateTemplate
+					.find("from Chukumx where Status=0 and chuku.cankuByCankuId.id = "
+							+ String.valueOf(org)
+							+ " and chuku.cankuByRkId.type!=3 and chuku.cankuByRkId.type!=4 and chuku.cankuByRkId.type!=5");
+		} else if ((org == 0) && (aim != 0)) {
+			result = (List<Chukumx>) hibernateTemplate
+					.find("from Chukumx where Status=0 and chuku.cankuByRkId.id = "
+							+ String.valueOf(aim)
+							+ " and chuku.cankuByCankuId.type!=3 and chuku.cankuByCankuId.type!=4 and chuku.cankuByCankuId.type!=5 and chuku.cankuByCankuId.type!=6");
+		} else {
+			result = (List<Chukumx>) hibernateTemplate
+					.find("from Chukumx where Status=0 "
+							+" and chuku.cankuByCankuId.type!=3 and chuku.cankuByCankuId.type!=4 and chuku.cankuByCankuId.type!=5 and chuku.cankuByCankuId.type!=6 "
+							+" and chuku.cankuByRkId.type!=3 and chuku.cankuByRkId.type!=4 and chuku.cankuByRkId.type!=5");
 		}
 		return result;
 	}

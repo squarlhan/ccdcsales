@@ -910,7 +910,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	public List<Chukumx> listOnwayProducts(int cankuid) {
 		List<Chuku> chukus = new ArrayList<Chuku>();
 		List<Chukumx> result = new ArrayList<Chukumx>();
-		chukus = (List<Chuku>)hibernateTemplate.find("from Chuku where cankuByCankuId="+String.valueOf(cankuid));
+		chukus = (List<Chuku>)hibernateTemplate.find("from Chuku where cankuByCankuId="+String.valueOf(cankuid)+" and cankuByRkId.type!=3 and cankuByRkId.type!=4 and cankuByRkId.type!=5");
 		for(Chuku chuku:chukus){
 			result.addAll((List<Chukumx>)hibernateTemplate.find("from Chukumx where chuku="+String.valueOf(chuku.getId())+"and Status=0"));
 		}
