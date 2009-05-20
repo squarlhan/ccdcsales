@@ -42,6 +42,9 @@ public class Specifications implements java.io.Serializable {
 	@Column(name="PackType", nullable = false, length = 50)
 	private String packType;
 	
+	@Column(name="ismerge", nullable = true, length = 1)
+	private byte ismerge;
+	
 	
 //	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "specifications")
 //	private Set<Kcxx> kcxxes = new HashSet<Kcxx>(0);
@@ -58,6 +61,21 @@ public class Specifications implements java.io.Serializable {
 		this.name = name;
 		this.weight = weight;
 		this.packType = packType;
+	}
+	
+	public Specifications(int id, String name, BigDecimal weight, String packType, byte ismerge) {
+		this.id = id;
+		this.name = name;
+		this.weight = weight;
+		this.packType = packType;
+		this.ismerge = ismerge;
+	}
+	
+	public Specifications(String name, BigDecimal weight, String packType, byte ismerge) {
+		this.name = name;
+		this.weight = weight;
+		this.packType = packType;
+		this.ismerge = ismerge;
 	}
 
 	public Specifications(String name, BigDecimal weight) {
@@ -172,6 +190,14 @@ public class Specifications implements java.io.Serializable {
 //		this.products = products;
 //	}
 	
+	public byte getIsmerge() {
+		return ismerge;
+	}
+
+	public void setIsmerge(byte ismerge) {
+		this.ismerge = ismerge;
+	}
+
 	public String getDisplayName(){
 		return name + " | " + packType;
 	}

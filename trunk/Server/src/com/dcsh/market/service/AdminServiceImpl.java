@@ -156,6 +156,7 @@ public class AdminServiceImpl implements AdminService {
 		temp.setName(specification.getName());
 		temp.setPackType(specification.getPackType());
 		temp.setWeight(specification.getWeight());
+		temp.setIsmerge(specification.getIsmerge());
 		hibernateTemplate.update(temp);
 	}
 
