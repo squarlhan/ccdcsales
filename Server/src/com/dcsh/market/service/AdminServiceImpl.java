@@ -28,6 +28,7 @@ import com.dcsh.market.UserGroup;
 import com.dcsh.market.UserGroupPriv;
 import com.dcsh.market.UserPriv;
 import com.dcsh.market.Users;
+import com.dcsh.market.cycrelgck;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.priv.URLGPriv;
 
@@ -866,6 +867,58 @@ public class AdminServiceImpl implements AdminService {
 		}
 		
 	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Canku> getAllCYC() {
+		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type=0");	
+		return cankus;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public List<Canku> getAllF(){
+		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type=6");	
+		return cankus;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public boolean adjcfr(int cycid,int fid){
+		List<cycrelgck> gckList = hibernateTemplate.find("from cycrelgck as crg where crg.cyc.id = "+cycid+" and crg.gck.id = "+fid);
+		if(gckList.size()>0)
+			return true;
+		else
+			return false;
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Canku> getCankuById(int id){
+		return hibernateTemplate.find("from Canku where id="+id);
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	@Transactional
+	public void savecfr(List<Boolean> cankupriv,int cycId){
+		List<cycrelgck> gckList = 
+			hibernateTemplate.find("from cycrelgck as crg where crg.cyc.id = '"+cycId+"'");
+			
+			hibernateTemplate.deleteAll(gckList);
+			List<Canku> cankus = this.getAllF();
+			List<Products> products =
+				(List<Products>)hibernateTemplate.find("from Products");
+			Canku cyc = this.getCankuById(cycId).get(0);
+			for(int i=0;i<cankupriv.size();i++){
+			
+				if(cankupriv.get(i)){
+					hibernateTemplate.save(new cycrelgck(cyc,cankus.get(i)));
+				}
+			}					
+					
+	}
+
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -897,4 +950,5 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
+
 }
