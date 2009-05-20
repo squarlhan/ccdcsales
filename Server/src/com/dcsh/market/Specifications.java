@@ -42,7 +42,7 @@ public class Specifications implements java.io.Serializable {
 	@Column(name="PackType", nullable = false, length = 50)
 	private String packType;
 	
-	@Column(name="ismerge", nullable = true, length = 1)
+	@Column(name="ismerge", nullable = false, length = 1)
 	private byte ismerge;
 	
 	
