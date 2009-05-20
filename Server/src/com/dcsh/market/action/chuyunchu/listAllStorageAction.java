@@ -86,7 +86,7 @@ public class listAllStorageAction implements Preparable{
     			switch(resultListTemp.get(i).getSaleType())
     			{
     				
-    				case 0: result.setSaleTypeName("");
+    				case 0: result.setSaleTypeName("-");
     				result.setId(resultListTemp.get(i).getId());
     				result.setProducts(resultListTemp.get(i).getProducts());
     				result.setSpecifications(resultListTemp.get(i).getSpecifications());
@@ -135,7 +135,7 @@ public class listAllStorageAction implements Preparable{
     				case 2:result.setStatusName("²»ºÏ¸ñ");break;
     				}
     				resultList.add(i,result);break;
-    				case 4: result.setSaleTypeName("");
+    				case 4: result.setSaleTypeName("-");
     				result.setId(resultListTemp.get(i).getId());
     				result.setProducts(resultListTemp.get(i).getProducts());
     				result.setSpecifications(resultListTemp.get(i).getSpecifications());
