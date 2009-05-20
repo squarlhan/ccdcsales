@@ -175,6 +175,37 @@ public interface AdminService {
 	 * @param sdys 传入的信息
 	 */
 	void updateSmmdy(List<Smmdingyue> sdys);
+
+	/**
+	 * 储运处和工厂关联中得到所有的储运处
+	 * @return
+	 */
+	List<Canku> getAllCYC();
+	/**
+	 * 储运处和工厂关联中得到所有的工厂
+	 * @return
+	 */
+	List<Canku> getAllF();
+	/**
+	 * 判断储运处和工厂对应关系
+	 * @param cycid
+	 * @param fid
+	 * @return
+	 */
+	boolean adjcfr(int cycid,int fid);
+	/**
+	 * 保存储运处和工厂对应关系
+	 * @param cankupriv
+	 * @param cycId
+	 */
+	void savecfr(List<Boolean> cankupriv,int cycId);
+	/**
+	 * 通过id获得仓库信息
+	 * @param id
+	 * @return
+	 */
+	List<Canku> getCankuById(int id);
+
 	/**
 	 * 列出在途产品信息
 	 * @param org 源仓库id
@@ -182,4 +213,5 @@ public interface AdminService {
 	 * @return
 	 */
 	List<Chukumx> listOnwayProducts(int org, int aim);
+
 }
