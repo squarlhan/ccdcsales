@@ -25,6 +25,8 @@ public class listAllStorageAction implements Preparable{
     private Integer canku;
     private List<ReportPmx> pmxListTemp;
     private List<ReportPmx> pmxList;
+    private List<ReportPmx> fpListTemp;
+    private List<ReportPmx> fpList;
     private Date mydate;
     private boolean flag;
     private String printcanku;
@@ -157,6 +159,7 @@ public class listAllStorageAction implements Preparable{
     			mydate = new Date();
         	
         		this.pmxListTemp = service.getDayReportPmx(user.get(0).getCanku(), mydate);
+        		this.fpList = service.getFPmx(user.get(0).getCanku());
     		}else{
     			Date nowdate = new Date();
     			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -164,8 +167,10 @@ public class listAllStorageAction implements Preparable{
     			String datestr =bartDateFormat.format(mydate);
     			if((nowdatestr.equals(datestr))==true){
     				this.pmxListTemp = service.getDayReportPmx(user.get(0).getCanku(), mydate);
+    				this.fpList = service.getFPmx(user.get(0).getCanku());
     			}else{
     				this.pmxListTemp = service.listWarehouseOther(user.get(0).getCanku().getId(), mydate);
+    				this.fpList = service.listFReport(user.get(0).getCanku().getId(), mydate);
     			}
     			
     		}
@@ -228,4 +233,12 @@ public class listAllStorageAction implements Preparable{
 	public void prepare() throws Exception {
 
     }
+
+	public void setFpList(List<ReportPmx> fpList) {
+		this.fpList = fpList;
+	}
+
+	public List<ReportPmx> getFpList() {
+		return fpList;
+	}
 }
