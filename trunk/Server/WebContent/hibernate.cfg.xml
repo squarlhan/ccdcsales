@@ -38,5 +38,6 @@
         <mapping class="com.dcsh.market.XSfahuoxx" />
         <mapping class="com.dcsh.market.Fahuo" />
         <mapping class="com.dcsh.market.Smmdingyue" />
+        <mapping class="com.dcsh.market.cycrelgck" />
     </session-factory>
 </hibernate-configuration>
