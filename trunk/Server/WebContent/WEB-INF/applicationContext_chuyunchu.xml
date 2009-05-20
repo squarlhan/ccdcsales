@@ -163,4 +163,8 @@
 		class="com.dcsh.market.action.chuyunchu.PrintWarehouseAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean>
+	<bean id="listonwayProductsAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.listOnwayProductAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
 </beans>

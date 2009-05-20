@@ -13,6 +13,7 @@
     <table align="center" width="100%" id="nav">
       <tr align="center"><td><li><s:a href="/Server/index.jsp">返回主页</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="adminliststorage.action">库存查看</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="adminlistonwayProducts.action">在途产品查看</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="adminlistsales.action">销售查看</s:a></li></td></tr>     
       <tr align="center"><td><li><s:a href="adminlistdestroy.action">销毁查看</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="adminlistloss.action">损耗查看</s:a></li></td></tr>

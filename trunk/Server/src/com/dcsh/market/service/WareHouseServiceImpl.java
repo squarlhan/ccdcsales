@@ -904,6 +904,19 @@ public class WareHouseServiceImpl implements WareHouseService {
 		hibernateTemplate.deleteAll(kcxx);
 	
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Chukumx> listOnwayProducts(int cankuid) {
+		List<Chuku> chukus = new ArrayList<Chuku>();
+		List<Chukumx> result = new ArrayList<Chukumx>();
+		chukus = (List<Chuku>)hibernateTemplate.find("from Chuku where cankuByCankuId="+String.valueOf(cankuid));
+		for(Chuku chuku:chukus){
+			result.addAll((List<Chukumx>)hibernateTemplate.find("from Chukumx where chuku="+String.valueOf(chuku.getId())+"and Status=0"));
+		}
+		return result;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<ReportPmx> getFPmx(Canku canku){

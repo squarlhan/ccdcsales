@@ -41,15 +41,21 @@ public class gomoveProductAction implements Preparable {
 				.getLoginAuthentication();
 		List<ResourceGrantedAuthorityImpl> list = auth
 				.getGrantedAuthorityResource(ResourceType.PRD);
+		List<ResourceGrantedAuthorityImpl> clist = auth
+		.getGrantedAuthorityResource(ResourceType.CANKU);
 
 		List<Products> plist = new ArrayList();
 		for (ResourceGrantedAuthorityImpl res : list) {
 			plist.add((Products) res.getResource());
 		}
+		List<Canku> cclist = new ArrayList();
+		for (ResourceGrantedAuthorityImpl res : clist) {
+			cclist.add((Canku) res.getResource());
+		}
 		this.setMydate(new Date());
 		this.setFahuoList(service.getAllFahuos());
 		this.setCustomList(service.getAllCustom());
-		this.setCankuList(service.getAllCankus());
+		this.setCankuList(cclist);
 		this.setProductList(plist);
 		this.setSpecificationList(service.getAllSpecificationList());
 		return "list";

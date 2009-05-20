@@ -135,15 +135,19 @@ function createrow(mytable,a)
 		var option1 = document.createElement("option");
 		var option2 = document.createElement("option");
 		var option3 = document.createElement("option");
+		var option4 = document.createElement("option");
 		option1.value = "0";
 		option1.text = "储运处";
 		option2.value = "1";
 		option2.text = "驻厂库";
 		option3.value = "2";
 		option3.text = "中转库";
+		option4.value = "6";
+		option4.text = "工厂库";
 		select1.options.add(option1);
 		select1.options.add(option2);
 		select1.options.add(option3);
+		select1.options.add(option4);
 	 
 	 var textfield4 = document.createElement("input");
 	 textfield4.setAttribute("name","caddress_"+a);
@@ -306,6 +310,7 @@ function finalpage()
 	         		<option value="0">储运处</option>
 	         		<option value="1">驻广库</option>
 	         		<option value="2">中转库</option>
+	         		<option value="6">工厂库</option>
 	         	</select>
          	</td>
 	      </tr>

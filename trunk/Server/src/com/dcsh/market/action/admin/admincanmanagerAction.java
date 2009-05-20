@@ -104,7 +104,10 @@ public class admincanmanagerAction implements Preparable{
         			if(type==2)
         				typeName="中转库";
         			else
-        				typeName="未知";
+        				if(type==6)
+        					typeName="工厂库";
+        				else
+        					typeName="未知";
         	address = resultListTemp.get(i).getAddress();
         	result.setAddress(address);
         	id=resultListTemp.get(i).getId();
