@@ -14,8 +14,10 @@
 <body>
 <h2>请选择该用户的权限</h2>
   <s:form theme="simple" action="adminsaveuserpriv" >
-<table  class="list_table" align="left" width="100%">
-        <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><TD align="right"><s:submit value="确定" /></TD></tr>
+<table>
+<tr>
+<td>
+<table class="list_table" align="left" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="25%">仓库名称</th>
 		    <th width="25%">仓库名称</th>
@@ -27,7 +29,7 @@
                  <tr bgcolor="#ffffff"> 
             </s:if> 
 
-            <td width="25%" align="center">
+            <td width="25%" align="left">
                 <s:property value="#result.name" />             
                 <s:checkbox name="cankupriv[%{#index.index}]" theme="simple" value="cankupriv.get(#index.getIndex())"/>
 				</td> 
@@ -36,7 +38,10 @@
             </s:if> 			
 	    </s:iterator>
   </table> 
-  <br> <br> <br> <br> <br> <br> <br><br> <br> <br><br><br> <br> <br>
+</td>
+</tr>
+<tr>
+<td>
   <table class="list_table" align="left" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="25%">产品名称</th>
@@ -49,7 +54,7 @@
                  <tr bgcolor="#ffffff"> 
             </s:if> 
 
-            <td width="25%" align="center">
+            <td width="25%" align="left">
                 <s:property value="#productsresult.name" />             
                 <s:checkbox name="prdpriv[%{#index.index}]" theme="simple" value="prdpriv.get(#index.getIndex())"/>
 				</td> 
@@ -58,7 +63,10 @@
             </s:if> 			
 	    </s:iterator>
   </table>
- 
+ </td>
+ </tr>
+ <tr><TD align="center"><s:submit value="确定" /></TD></tr>
+ </table>
  </s:form>
 </body>
 </html>
