@@ -64,8 +64,14 @@ public class WareHouseServiceImpl implements WareHouseService {
 		// 对应于入库信息，逐条的更改库存信息。
 		for (Rkmx rkmx : rkmxs) {
 			rkmx.setRkxx(rkxx);
-			rkmx.setProducts((Products)hibernateTemplate.load(Products.class, rkmx.getProducts().getId()));
+			rkmx.setProducts((Products)hibernateTemplate.load(Products.class, rkmx.getProducts().getId()));			
+			if (rkmx.getSpecifications().getId() != 0)
 			rkmx.setSpecifications((Specifications)hibernateTemplate.get(Specifications.class, rkmx.getSpecifications().getId()));
+			else{
+				List<Specifications> s = hibernateTemplate.find("from Specifications where name = '液体' and packType = '大罐'");
+			    if(s.size()>0)rkmx.setSpecifications(s.get(0));
+			}
+			
 			hibernateTemplate.save(rkmx);
 			
 			KcxxId id = new KcxxId(rkmx.getProducts().getId(), rkmx.getPch(),
@@ -115,9 +121,15 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 		for (Chukumx ckmx : ckmxs) {
 			ckmx.setChuku(ck);
-			ckmx.setProducts((Products)hibernateTemplate.load(Products.class, ckmx.getProducts().getId()));
-			ckmx.setSpecifications((Specifications)hibernateTemplate.load(Specifications.class, ckmx.getSpecifications().getId()));
-			ckmx.setStatus((byte)0);
+			ckmx.setProducts((Products) hibernateTemplate.load(Products.class,
+					ckmx.getProducts().getId()));
+			if (ckmx.getSpecifications().getId() != 0)
+				ckmx.setSpecifications((Specifications) hibernateTemplate.load(Specifications.class, ckmx.getSpecifications().getId()));
+			else{
+				List<Specifications> s = hibernateTemplate.find("from Specifications where name = '液体' and packType = '大罐'");
+			    if(s.size()>0)ckmx.setSpecifications(s.get(0));
+			}
+			ckmx.setStatus((byte) 0);
 			hibernateTemplate.save(ckmx);
 			hibernateTemplate.flush();
 			
@@ -971,5 +983,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    return listrpmx;
 	    
 	    
+	}
+	
+	public List<Canku> getGckbycyc(Canku canku){
+		return (List<Canku>)hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
 	}
 }

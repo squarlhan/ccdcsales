@@ -187,5 +187,13 @@
             <result >/pages/warehouseadmin/listzaitu.jsp</result>
             <result name="listonway" >/pages/warehouseadmin/listzaitu.jsp</result>
         </action>
+        <action name="cycgoentryyeti" method="execute" class="goentryyetiAction">
+            <result>/pages/warehouseadmin/entryyeti.jsp</result>
+            <result name="show">/pages/warehouseadmin/entryyeti.jsp</result>
+        </action>
+         <action name="cycgoentrygck" method="execute" class="goentrygckAction">
+            <result>/pages/warehouseadmin/entrygck.jsp</result>
+            <result name="show">/pages/warehouseadmin/entrygck.jsp</result>
+        </action>
     </package>
   </struts>

@@ -225,4 +225,10 @@ public interface WareHouseService {
 	 * @return
 	 */
 	List<ReportPmx>listFReport(int ckid,Date date);
+	/**
+	 * 根据储运处获得所管辖的工厂库
+	 * @param canku
+	 * @return
+	 */
+	List<Canku> getGckbycyc(Canku canku);
 }
