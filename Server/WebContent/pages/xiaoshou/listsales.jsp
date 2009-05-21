@@ -12,6 +12,7 @@
 @import "/Server/css/css.css";
 </style>
 <script language="javascript">
+   
 
 //下面开始分页
  
@@ -47,6 +48,11 @@
 				"<s:property value='#result.chuku.custom.customName'/>",
 			</s:iterator>
 		0);
+	var tims = new Array(
+			<s:iterator id="result" value="listchukumx">
+				"<s:date format='yyyy-MM-dd' name='#result.chuku.cksj'/>",
+			</s:iterator>
+		0);
 
 	function createrow(mytable,a)
 	{
@@ -57,12 +63,14 @@
 	    var td4 = tr.insertCell(-1);
 	    var td5 = tr.insertCell(-1);
 	    var td6 = tr.insertCell(-1);
+	    var td7 = tr.insertCell(-1);
 	    td1.innerHTML = caks[a];
 	    td2.innerHTML = pchs[a];
 	    td3.innerHTML = prds[a];
 	    td4.innerHTML = spfs[a];
 	    td5.innerHTML = wgts[a];
 	    td6.innerHTML = cuts[a];
+	    td7.innerHTML = tims[a];
 		}
 
 	function firstpage()
@@ -220,6 +228,7 @@
 		    <th width="10%">规格</th>
 		    <th width="5%">重量</th>
 			<th width="25%">去向</th>
+			<th width="10%">时间</th>
 		</tr>
 	</table>
 	<div align="center">
