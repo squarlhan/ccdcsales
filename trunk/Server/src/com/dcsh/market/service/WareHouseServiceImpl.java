@@ -746,9 +746,10 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	@Override
 	@Transactional
-	public void resetXsykxxStatus(int index){
+	public void resetXsykxxStatus(int index, int num){
 		XSyikumx temp = (XSyikumx)hibernateTemplate.get(XSyikumx.class, index);
 		temp.setStatus((byte)1);
+		temp.setNumber(num);
 		hibernateTemplate.update(temp);
 	}
 
@@ -773,9 +774,10 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	@Override
 	@Transactional
-	public void resetXsfhxxStatus(int index){
+	public void resetXsfhxxStatus(int index, int num){
 		XSfahuomx temp = (XSfahuomx)hibernateTemplate.get(XSfahuomx.class, index);
 		temp.setStatus((byte)1);
+		temp.setNumber(num);
 		hibernateTemplate.update(temp);
     }
 

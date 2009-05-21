@@ -14,7 +14,7 @@
 <script language="javascript"> 
 function urlpara_modify(sid,sname,sweight,spack,sismerge) 
 {
-    location.href= "adminspemanager!modify.action?id="+sid+"&name="+sname+"&weight="+sweight+"&packtype="+spack+"&ismerge="+sismerge; 
+    location.href= encodeURI("adminspemanager!modify.action?id="+sid+"&name="+sname+"&weight="+sweight+"&packtype="+spack+"&ismerge="+sismerge); 
 } 
 function confirm_modify(rownum)
 {

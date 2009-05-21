@@ -169,8 +169,8 @@ public interface WareHouseService {
      * 更改移库信息和发货信息状态为已完成 status=1
      * @param index
      */
-    void resetXsykxxStatus(int index);
-    void resetXsfhxxStatus(int index);
+    void resetXsykxxStatus(int index, int num);
+    void resetXsfhxxStatus(int index, int num);
 
     /**
      * 获得仓库信息

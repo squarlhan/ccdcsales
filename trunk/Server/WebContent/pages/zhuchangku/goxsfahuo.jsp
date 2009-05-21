@@ -169,9 +169,10 @@ function setnumber(obj,line)
 			}
 		}
 		var tnum = 0;
+		var ismerge = document.getElementById("ismerge").value
 		for(i=0;i<=count;i++)
 			tnum += Number(document.getElementById("number["+i+"]").value);
-		if(tnum!=Number(document.getElementById("tnumber").value))
+		if(tnum!=Number(document.getElementById("tnumber").value)&&ismerge==0)
 		{
 			alert("数量不符");
 			tnum=0;
@@ -462,6 +463,11 @@ function setnumber(obj,line)
   	       <td><s:textfield name="bno" theme="simple" size="15"></s:textfield>
   	       </td>
   	</tr>
+  	<tr style="display:none">
+  	    <td><s:textfield id="ismerge" name="ismerge" value="%{xsfhmx.specification.ismerge}" label="微调"/></td>
+  	    <td><s:textfield name="index" id="index" value="%{index}" label="发货明细的id"/><td>
+        <td><s:textfield name="tnumber" id="tnumber" value="%{xsfhmx.number}" label="发货明细的数量"/><td>
+    </tr>
   </table>
   	<table id="tb" class="list_table"  align="center" width="100%">
   	
@@ -494,8 +500,6 @@ function setnumber(obj,line)
        
 		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
       </tr>
-      <tr style="display:none"><td><s:textfield name="index" value="%{index}"></s:textfield><td></tr>
-      <tr style="display:none"><td><s:textfield name="tnumber" value="%{xsfhmx.number}"></s:textfield><td></tr>
      </table>
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
        <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>
