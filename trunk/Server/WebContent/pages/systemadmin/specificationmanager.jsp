@@ -153,7 +153,7 @@ function createrow(mytable,a)
 	 var textfield4 = document.createElement("input");
 	 textfield4.setAttribute("name","spackType_"+t);
 	 textfield4.setAttribute("id","spackType_"+t);
-	 textfield4.setAttribute("size","16");
+	 textfield4.setAttribute("size","10");
 	 textfield4.value = types[a];
 
 	 var select1 = document.createElement("select");

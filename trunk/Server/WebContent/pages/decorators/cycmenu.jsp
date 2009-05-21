@@ -19,6 +19,8 @@
       <tr align="center"><td><li><s:a href="cyclistallstorage!getInfoByDate.action">查看库存</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cyclistonwayProducts.action">在途产品查看</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgoentry.action">产成品入库单</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgoentryyeti.action">液体产品入库单</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgoentrygck.action">工厂库入库单</s:a></li></td></tr>
       <!--  <tr align="center"><td><li><s:a href="cycgocycdelivery.action">装车到储运处</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgozckdelivery.action">装车到驻厂库</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgozzkdelivery.action">装车到中转库</s:a></li></td></tr>

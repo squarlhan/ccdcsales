@@ -167,4 +167,12 @@
 		class="com.dcsh.market.action.chuyunchu.listOnwayProductAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean> 
+	<bean id="goentryyetiAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goEntryyetiAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	<bean id="goentrygckAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goEntrygckAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
 </beans>

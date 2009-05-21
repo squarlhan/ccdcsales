@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
+import com.dcsh.market.Chukumx;
 import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.Rkmx;
@@ -34,6 +36,7 @@ public class entryWareHouseAction implements Preparable{
     private int canku;
     private List<Products> productsList;
     private List<Specifications> specificationsList;
+    private List<Integer> orgin;
     private List<Integer> product;
     private List<Integer> specification;
     private List<String> pch;
@@ -66,6 +69,16 @@ public class entryWareHouseAction implements Preparable{
 
 	public void setService(WareHouseService service) {
 		this.service = service;
+	}
+
+
+	public List<Integer> getOrgin() {
+		return orgin;
+	}
+
+
+	public void setOrgin(List<Integer> orgin) {
+		this.orgin = orgin;
 	}
 
 
@@ -273,7 +286,52 @@ public class entryWareHouseAction implements Preparable{
         		new Date(),
         		this.getRkmxes());
         service.doEntryWareHouse(rkxx);
+        if(this.getOrgin()!=null){
+        	SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyMMdd"); 
+    		Date d = new Date(); 
+    		for(int a=0;a<=this.getOrgin().size()-1;a++){
+    		    String cbno= bartDateFormat.format(d)+this.getOrgin().get(a); 
+        	    Chuku chuku = new Chuku();
+        	    chuku.setBno(cbno);
+        	    chuku.setCankuByCankuId(new Canku(this.getOrgin().get(a),null,(byte)6));
+        	    chuku.setCankuByRkId(user.get(0).getCanku());
+        	    chuku.setCksj(d);
+        	    chuku.setUsers(user.get(0).getUser());
+        	    Chukumx chukumx = new Chukumx();
+        	    chukumx.setChuku(chuku);
+        	    chukumx.setNumber(this.getNumber().get(a));
+        	    chukumx.setPch("zzzzzzzzz");
+        	    chukumx.setProducts(new Products(this.getProduct().get(a),null));
+        	    chukumx.setSpecifications(new Specifications(0,"液体",null,"大罐"));
+        	    chukumx.setStatus((byte)1);
+        	    chuku.getChukumxes().add(chukumx);
+        	    service.doDeliveryWareHouse(chuku);
+        	}
+        }
         return print();
+    }
+	
+	public String execute1() throws Exception{
+    	
+		Map session = ActionContext.getContext().getSession();
+        List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
+
+		for(int i=0;i<=this.getProduct().size()-1;i++){
+			this.newproduct = new Products(this.getProduct().get(i),null);
+			this.newspecification = new Specifications(0,"液体",null,"大罐");
+			this.rkmx = 
+	    		new Rkmx(null,newproduct,newspecification,"zzzzzzzzz",this.getNumber().get(i),(byte)0,(byte)0,this.getMemo().get(i).trim());
+			 this.rkxx = new Rkxx(new Canku(this.getOrgin().get(i),null,(byte)6),
+					    user.get(0).getUser(),
+		        		new Users(this.getRkfzr()),
+		        		this.getBno().trim(),
+		        		new Date(),
+		        		this.getRkmxes());
+			 rkxx.getRkmxes().add(rkmx);
+			 service.doEntryWareHouse(rkxx);
+		}
+        
+        return "ok";
     }
 
 	public String print() throws Exception{
