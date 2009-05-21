@@ -401,34 +401,30 @@ function setnumber(obj,line)
 <body>
 <h2>储运处产成品装车明细</h2>
 <s:form theme="simple">
-     <table class="list_table"  align="center" width="100%">
+     <table class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th width="25%">产品名</th>
-		    <th width="15%">数量</th>
-		    <th width="15%">重量(T)</th>
+		    <th width="25%">产品名</th>		    
+		    <th width="15%">重量</th>
 		    <th width="15%">规格</th>
-		    <th width="15%">编号</th>
 		    <th width="15%">客户</th>
+		    <th width="15%">备注</th>
 		</tr>
 		<s:iterator id="result" value="xsfhmx" status="index">		
 			<tr bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
 	           <td align="center">
 					<s:property value="#result.product.name" />
 			   </td>
-			   <td align="center">
-					<s:property value="#result.number" />
-			   </td>
-			   <td align="center">
+			    <td align="center">
 					<s:property value="(#result.number)*(#result.specification.weight)" />
 			   </td>
 			   <td align="center">
 					<s:property value="#result.specification.displayName" />
 			   </td>
 			   <td align="center">
-					<s:property value="#result.xsfahuoxx.bno" />
+					<s:property value="#result.xsfahuoxx.customer.customName" />
 			   </td>
 			   <td align="center">
-					<s:property value="#result.xsfahuoxx.customer.customName" />
+					<s:property value="#result.xsfahuoxx.memo" />
 			   </td>
 	        </tr>
 	    </s:iterator>
