@@ -172,15 +172,17 @@ function setnumber(obj,line)
 			}
 		}
 		var tnum = 0;
+		var ismerge = document.getElementById("ismerge").value
 		for(i=0;i<=count;i++)
 			tnum += Number(document.getElementById("number["+i+"]").value);
-		if(tnum!=Number(document.getElementById("tnumber").value))
+		if(tnum!=Number(document.getElementById("tnumber").value)&&ismerge==0)
 		{
 			alert("数量不符");
 			tnum=0;
 			return false;
 		}
 		if(confirm("确认装车？")){
+			//alert("确认装车!!!");
 			document.myform.action = "cycdeliverywarehouse!sale.action";
 			return true;
 		}
@@ -217,9 +219,10 @@ function setnumber(obj,line)
 			}
 		}
 		var tnum = 0;
+		var ismerge = document.getElementById("ismerge").value
 		for(i=0;i<=count;i++)
 			tnum += Number(document.getElementById("number["+i+"]").value);
-		if(tnum!=Number(document.getElementById("tnumber").value))
+		if(tnum!=Number(document.getElementById("tnumber").value)&&ismerge==0)
 		{
 			alert("数量不符");
 			tnum=0;
@@ -458,11 +461,14 @@ function setnumber(obj,line)
   	       <td><s:text name="客户："/></td>
   	       <td><s:select id="custom" name="custom" label="客户" labelposition="left" multiple="false"
             list="customList" listValue="customName" listKey="id" /></td>
-  	       <td><s:text name="编号："></s:text>
-  	       </td>
-  	       <td><s:textfield name="bno" theme="simple" size="15"></s:textfield>
-  	       </td>
+  	       <td><s:text name="编号："></s:text></td>
+  	       <td><s:textfield name="bno" theme="simple" size="15"></s:textfield></td>
   	</tr>
+  	<tr style="display:none">
+  	    <td><s:textfield id="ismerge" name="ismerge" value="%{xsfhmx.specification.ismerge}" label="微调"/></td>
+  	    <td><s:textfield name="index" id="index" value="%{index}" label="发货明细的id"/><td>
+        <td><s:textfield name="tnumber" id="tnumber" value="%{xsfhmx.number}" label="发货明细的数量"/><td>
+    </tr>
   </table>
   	<table class="list_table"  id="tb" align="center" width="100%">
   	
@@ -481,22 +487,17 @@ function setnumber(obj,line)
 
         <td><s:select id="specification[0]" name="specification[0]" label="请选择产品规格" labelposition="left" multiple="false"
             list="specificationsList" listValue="displayName" listKey="id" onchange="javascript:setweight(this,0)"/></td>
-
-        <!--<td><s:select id="pch[0]" name="pch[0]" label="请填写批号" labelposition="left" multiple="false"
-            list="pchList" /></td>-->
             
          <td><s:textfield size="20"  id="pch[0]" name="pch[0]" label="请填写批号"/></td>
 
          <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
-		 <!-- 
-        <td><s:textfield id="number[0]" label="请填写袋数" name="number[0]"/></td>
-		 -->
+	
 		<td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
        
-		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>
+		<td style="display:none"><s:textfield id="weight[0]" name="weight[0]" label="单重"/></td>		
+		
       </tr>
-      <tr style="display:none"><td><s:textfield name="index" value="%{index}"></s:textfield><td></tr>
-      <tr style="display:none"><td><s:textfield name="tnumber" value="%{xsfhmx.number}"></s:textfield><td></tr>
+      
      </table>
      <div align="center">
        <input type="button" name="addone" value="新加一条" onclick="insertRecord()"/>
