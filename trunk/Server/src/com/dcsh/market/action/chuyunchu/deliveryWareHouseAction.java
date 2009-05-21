@@ -48,6 +48,7 @@ public class deliveryWareHouseAction implements Preparable{
     private EntryPrintInfo epi;
     private String printCankuaim;
     private String printCustom;
+    private int ismerge;
     
 	public List<EntryPrintInfo> getResultList() {
 		return resultList;
@@ -96,6 +97,16 @@ public class deliveryWareHouseAction implements Preparable{
 	public void setNewspecification(Specifications newspecification) {
 		this.newspecification = newspecification;
 	}
+
+	public int getIsmerge() {
+		return ismerge;
+	}
+
+
+	public void setIsmerge(int ismerge) {
+		this.ismerge = ismerge;
+	}
+
 
 	public int getIndex() {
 		return index;
@@ -231,9 +242,9 @@ public class deliveryWareHouseAction implements Preparable{
           for(int i=0;i<this.getNumber().size();i++){
         	  tmp+=this.getNumber().get(i);
           }
-    	if(tmp==this.getTnumber()){
-    		service.doDeliveryWareHouse(chuku);
-    		service.resetXsykxxStatus(index);
+          if((tmp==this.getTnumber())||(0!=this.getIsmerge())){
+        	service.doDeliveryWareHouse(chuku);
+    		service.resetXsykxxStatus(index, tmp);
     		return printxsyk();
     	}
         
@@ -287,11 +298,13 @@ public class deliveryWareHouseAction implements Preparable{
           for(int i=0;i<this.getNumber().size();i++){
         	  tmp+=this.getNumber().get(i);
           }
-    	if(tmp==this.getTnumber()){
+    	if((tmp==this.getTnumber())||(0!=this.getIsmerge())){
+    		//System.out.println("Ismerge"+this.getIsmerge());
     		service.doDeliveryWareHouse(chuku);
-    		service.resetXsfhxxStatus(index);
+    		service.resetXsfhxxStatus(index, tmp);
     		return printfh();
     	}
+    	
         
     	return "unequal";
     }

@@ -48,9 +48,20 @@ public class deliveryWareHouseAction implements Preparable{
     private String printCustom;
     private EntryPrintInfo epi;
     private List<BigDecimal> sumweight;
+    private int ismerge;
 
 	public List<EntryPrintInfo> getResultList() {
 		return resultList;
+	}
+
+
+	public int getIsmerge() {
+		return ismerge;
+	}
+
+
+	public void setIsmerge(int ismerge) {
+		this.ismerge = ismerge;
 	}
 
 
@@ -201,9 +212,9 @@ public class deliveryWareHouseAction implements Preparable{
           for(int i=0;i<this.getNumber().size();i++){
         	  tmp+=this.getNumber().get(i);
           }
-    	if(tmp==this.getTnumber()){
+          if((tmp==this.getTnumber())||(0!=this.getIsmerge())){
     		service.doDeliveryWareHouse(chuku);
-    		service.resetXsykxxStatus(index);
+    		service.resetXsykxxStatus(index, tmp);
     		return printxsyk();
     	}
         
@@ -256,9 +267,9 @@ public class deliveryWareHouseAction implements Preparable{
           for(int i=0;i<this.getNumber().size();i++){
         	  tmp+=this.getNumber().get(i);
           }
-    	if(tmp==this.getTnumber()){
+          if((tmp==this.getTnumber())||(0!=this.getIsmerge())){
     		service.doDeliveryWareHouse(chuku);
-    		service.resetXsfhxxStatus(index);
+    		service.resetXsfhxxStatus(index, tmp);
     		return printfh();
     	}
         
