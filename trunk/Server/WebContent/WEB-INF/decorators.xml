@@ -27,6 +27,9 @@
 	    
 	    <pattern>/zckprintwarehouse.action</pattern>
 	    <pattern>/zckprintwarehouse!print.action</pattern>
+	    <pattern>/pages/zhuchangku/printentry.jsp</pattern>
+	    <pattern>/zckentrywarehouse!print.action </pattern>	   
+	    <pattern>/zckentrywarehouse.action </pattern>
 
 
 	    <pattern>/zzkprintwarehouse.action</pattern>

@@ -984,7 +984,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    
 	    
 	}
-	
+	@Override
 	public List<Canku> getGckbycyc(Canku canku){
 		return (List<Canku>)hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
 	}

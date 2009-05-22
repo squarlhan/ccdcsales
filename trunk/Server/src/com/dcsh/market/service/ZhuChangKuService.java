@@ -178,5 +178,7 @@ public interface ZhuChangKuService {
 	 * @param mydate ÈÕÆÚ
 	 */
 	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
+	
+	void doEntryWareHouse(Rkxx rkxx);
 }
 

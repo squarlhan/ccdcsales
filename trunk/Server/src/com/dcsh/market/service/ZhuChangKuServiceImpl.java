@@ -744,5 +744,45 @@ private HibernateTemplate hibernateTemplate;
 		
 	    return listreportpmx;
 	}
+	@Override
+	@Transactional
+	public void doEntryWareHouse(Rkxx rkxx) {
+		rkxx.setCanku((Canku)hibernateTemplate.load(Canku.class, rkxx.getCanku().getId()));
+		rkxx.setRkczy((Users)hibernateTemplate.load(Users.class, rkxx.getRkczy().getId()));
+		rkxx.setRkfzr((Users)hibernateTemplate.load(Users.class, rkxx.getRkfzr().getId()));
+	
+		hibernateTemplate.save(rkxx);
+		Set<Rkmx> rkmxs = rkxx.getRkmxes();
+	
+		// 对应于入库信息，逐条的更改库存信息。
+		for (Rkmx rkmx : rkmxs) {
+			rkmx.setRkxx(rkxx);
+			rkmx.setProducts((Products)hibernateTemplate.load(Products.class, rkmx.getProducts().getId()));			
+			if (rkmx.getSpecifications().getId() != 0)
+			rkmx.setSpecifications((Specifications)hibernateTemplate.get(Specifications.class, rkmx.getSpecifications().getId()));
+			else{
+				List<Specifications> s = hibernateTemplate.find("from Specifications where name = '液体' and packType = '大罐'");
+			    if(s.size()>0)rkmx.setSpecifications(s.get(0));
+			}
+			
+			hibernateTemplate.save(rkmx);
+			
+			KcxxId id = new KcxxId(rkmx.getProducts().getId(), rkmx.getPch(),
+					rkxx.getCanku().getId());
+			Kcxx kcxx = (Kcxx) hibernateTemplate.get(Kcxx.class, id);
+			if (kcxx == null) {
+				kcxx = new Kcxx();
+				kcxx.setId(id);
+				kcxx.setSpecifications(rkmx.getSpecifications());
+				kcxx.setNumber(rkmx.getNumber());
+				kcxx.setSaleType((byte)1);
+				kcxx.setStatus((byte)1);
+				hibernateTemplate.save(kcxx);
+			} else {
+				kcxx.entryNumber(rkmx.getNumber());
+				hibernateTemplate.update(kcxx);
+			}
+		}
+	}
 }
 

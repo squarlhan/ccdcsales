@@ -130,6 +130,15 @@
             <result name="input">/pages/zhuchangku/welcome.jsp</result>
             <result name="print">/pages/zhuchangku/printwarehouse.jsp</result>
         </action>
+        <action name="zckentrywarehouse" method="execute" class="zckentrywareHouseAction">
+            <result type="redirect-action">zcklistuncheckProducts</result>
+            <result  name="ok" type="redirect-action">zcklistuncheckProducts</result>
+            <result name="print">/pages/zhuchangku/printentry.jsp</result>
+        </action>
+        <action name="zckgoentry" method="execute" class="zckgoentryAction">
+            <result>/pages/zhuchangku/entry.jsp</result>
+            <result name="show">/pages/zhuchangku/entry.jsp</result>
+        </action>
 </package>
 	
 	
