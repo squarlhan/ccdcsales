@@ -94,4 +94,12 @@
 		class="com.dcsh.market.action.zhuchangku.PrintWarehouseAction">
 		<constructor-arg ref="myZhuChangKuService" />
 	</bean>
+	<bean id="zckentrywareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.entryWareHouseAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean> 
+	<bean id="zckgoentryAction" scope="prototype"
+		class="com.dcsh.market.action.zhuchangku.goEntryAction">
+		<constructor-arg ref="myZhuChangKuService" />
+	</bean> 
 </beans>
