@@ -329,9 +329,9 @@
 <s:form id="myform" theme="simple">
   <table align="center" width="80%" border="0" class="list_table"> 
  <tr>
-    <td><s:text name="选择时间:"/></td>      
+    <td><s:text name="日期:"/></td>      
 	<td><s:datetimepicker theme="simple" name="date" label="选择报表日期" toggleType="explode"/></td>      
-	<td><s:text name="选择仓库:"/></td>
+	<td><s:text name="仓库:"/></td>
 	<td><s:select  theme="simple" name="canku" label="选择仓库名" labelposition="left" multiple="false" 
             list="cangkusList" listKey="id" listValue="name"/>
     </td>
