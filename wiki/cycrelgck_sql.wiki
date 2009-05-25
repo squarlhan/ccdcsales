@@ -1,0 +1,28 @@
+#labels Phase-Implementation,Featured
+USE [test]
+GO
+/****** 对象:  Table [dbo].[cycrelgck]    脚本日期: 05/25/2009 15:31:53 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[cycrelgck](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[cyc] [int] NOT NULL,
+	[gck] [int] NOT NULL,
+ CONSTRAINT [PK_cycrelgck] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[cycrelgck]  WITH CHECK ADD  CONSTRAINT [FK_cycrelgck_Canku] FOREIGN KEY([cyc])
+REFERENCES [dbo].[Canku] ([ID])
+GO
+ALTER TABLE [dbo].[cycrelgck] CHECK CONSTRAINT [FK_cycrelgck_Canku]
+GO
+ALTER TABLE [dbo].[cycrelgck]  WITH CHECK ADD  CONSTRAINT [FK_cycrelgck_Canku1] FOREIGN KEY([gck])
+REFERENCES [dbo].[Canku] ([ID])
+GO
+ALTER TABLE [dbo].[cycrelgck] CHECK CONSTRAINT [FK_cycrelgck_Canku1]
