@@ -984,8 +984,32 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    
 	    
 	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Canku> getCYCgck(Integer cangkuId){
+		List<Canku> gckList = hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+cangkuId);
+		return gckList;
+	}
+	
+	public List<KcxxCheck> getAllCheckProducts(Canku canku){
+		List<KcxxCheck> result = new ArrayList();
+		List<Kcxx> tempresult = new ArrayList();
+		tempresult = (List<Kcxx>)hibernateTemplate.find("from Kcxx where cid ="+ canku.getId());
+		for(Kcxx kcxx:tempresult){
+			String cankuname=this.getCangkuById(kcxx.getId().getCid()).getName();
+			if(kcxx.getSaleType()==1)result.add(new KcxxCheck("内销",cankuname,kcxx));
+			else if(kcxx.getSaleType()==2)result.add(new KcxxCheck("定向",cankuname,kcxx));
+			else if(kcxx.getSaleType()==3)result.add(new KcxxCheck("外销",cankuname,kcxx));
+			else result.add(new KcxxCheck("未定",cankuname,kcxx));
+		}
+		return result;
+	}
+
 	@Override
 	public List<Canku> getGckbycyc(Canku canku){
 		return (List<Canku>)hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
 	}
+
 }
