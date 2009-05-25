@@ -129,7 +129,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 				List<Specifications> s = hibernateTemplate.find("from Specifications where name = 'ÒºÌå' and packType = '´ó¹Þ'");
 			    if(s.size()>0)ckmx.setSpecifications(s.get(0));
 			}
-			ckmx.setStatus((byte) 0);
+			ckmx.setStatus((byte) 1);
 			hibernateTemplate.save(ckmx);
 			hibernateTemplate.flush();
 			

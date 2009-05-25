@@ -31,12 +31,13 @@ public class entryWareHouseAction implements Preparable{
 	private Rkmx rkmx;
     private Products newproduct;
     private Specifications newspecification;
-    private int rkfzr;
+    private String rkfzr;
     private String bno;
     private int canku;
     private List<Products> productsList;
     private List<Specifications> specificationsList;
-    private List<Integer> orgin;
+    private String orgin;
+    private List<Integer> orgins;
     private List<Integer> product;
     private List<Integer> specification;
     private List<String> pch;
@@ -72,13 +73,23 @@ public class entryWareHouseAction implements Preparable{
 	}
 
 
-	public List<Integer> getOrgin() {
+	public String getOrgin() {
 		return orgin;
 	}
 
 
-	public void setOrgin(List<Integer> orgin) {
+	public void setOrgin(String orgin) {
 		this.orgin = orgin;
+	}
+
+
+	public List<Integer> getOrgins() {
+		return orgins;
+	}
+
+
+	public void setOrgins(List<Integer> orgins) {
+		this.orgins = orgins;
 	}
 
 
@@ -122,12 +133,12 @@ public class entryWareHouseAction implements Preparable{
 	}
 
 
-	public int getRkfzr() {
+	public String getRkfzr() {
 		return rkfzr;
 	}
 
 
-	public void setRkfzr(int rkfzr) {
+	public void setRkfzr(String rkfzr) {
 		this.rkfzr = rkfzr;
 	}
 
@@ -269,6 +280,9 @@ public class entryWareHouseAction implements Preparable{
     		temprumxs = new ArrayList();
     		session.put("temprumxs", temprumxs);
 //    	}
+    		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyMMdd"); 
+    		Date d = new Date(); 
+    		String cbno= bartDateFormat.format(d)+this.getOrgin(); 
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			this.newproduct = new Products(this.getProduct().get(i),null);
 			this.newspecification = new Specifications(this.getSpecification().get(i),null,new BigDecimal(0.025),null);
@@ -281,19 +295,18 @@ public class entryWareHouseAction implements Preparable{
     	this.rkmxes.addAll(temprumxs);
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
         this.rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),
-        		new Users(this.getRkfzr()),
-        		this.getBno().trim(),
+        		new Users(this.getRkfzr()==null?Integer.valueOf("3"):Integer.valueOf(this.getRkfzr())),
+        		this.getBno()==null?cbno:this.getBno().trim(),
         		new Date(),
         		this.getRkmxes());
         service.doEntryWareHouse(rkxx);
-        if(this.getOrgin()!=null){
-        	SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyMMdd"); 
-    		Date d = new Date(); 
-    		for(int a=0;a<=this.getOrgin().size()-1;a++){
-    		    String cbno= bartDateFormat.format(d)+this.getOrgin().get(a); 
+        if(this.getOrgins()!= null){
+        	
+    		for(int a=0;a<=this.getNumber().size()-1;a++){
+    		    
         	    Chuku chuku = new Chuku();
         	    chuku.setBno(cbno);
-        	    chuku.setCankuByCankuId(new Canku(this.getOrgin().get(a),null,(byte)6));
+        	    chuku.setCankuByCankuId(new Canku(this.getOrgins().get(a),null,(byte)6));
         	    chuku.setCankuByRkId(user.get(0).getCanku());
         	    chuku.setCksj(d);
         	    chuku.setUsers(user.get(0).getUser());
@@ -315,22 +328,22 @@ public class entryWareHouseAction implements Preparable{
     	
 		Map session = ActionContext.getContext().getSession();
         List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
-
+        SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyMMdd"); 
+		Date d = new Date(); 
+        this.rkxx = new Rkxx(new Canku(Integer.valueOf(this.getOrgin()),null,(byte)6),
+			    user.get(0).getUser(),
+        		new Users(3),
+        		bartDateFormat.format(d)+this.getOrgin(),
+        		new Date(),
+        		this.getRkmxes());
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			this.newproduct = new Products(this.getProduct().get(i),null);
 			this.newspecification = new Specifications(0,"ÒºÌå",null,"´ó¹Þ");
 			this.rkmx = 
 	    		new Rkmx(null,newproduct,newspecification,"zzzzzzzzz",this.getNumber().get(i),(byte)0,(byte)0,this.getMemo().get(i).trim());
-			 this.rkxx = new Rkxx(new Canku(this.getOrgin().get(i),null,(byte)6),
-					    user.get(0).getUser(),
-		        		new Users(this.getRkfzr()),
-		        		this.getBno().trim(),
-		        		new Date(),
-		        		this.getRkmxes());
-			 rkxx.getRkmxes().add(rkmx);
-			 service.doEntryWareHouse(rkxx);
-		}
-        
+			rkxx.getRkmxes().add(rkmx);			
+		}       
+		 service.doEntryWareHouse(rkxx);
         return "ok";
     }
 

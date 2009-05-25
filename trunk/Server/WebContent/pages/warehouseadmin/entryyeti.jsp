@@ -65,8 +65,8 @@ function setnumber(obj,line)
 		var td8 = tr.insertCell(-1);
 
 		var select0 = document.createElement("select");
-		select0.setAttribute("id","orgin["+count+"]");
-		select0.setAttribute("name","orgin["+count+"]");
+		select0.setAttribute("id","orgins["+count+"]");
+		select0.setAttribute("name","orgins["+count+"]");
 		
 		var select1 = document.createElement("select");
 		select1.setAttribute("id","product["+count+"]");
@@ -107,7 +107,7 @@ function setnumber(obj,line)
 		textfield4.setAttribute("name","number["+count+"]");
 		textfield4.type = "hidden";
 
-		var orginorg=document.getElementById("orgin[0]");	
+		var orginorg=document.getElementById("orgins[0]");	
 		var orginpro=document.getElementById("product[0]");
 		var orginspe=document.getElementById("specification[0]");
 		for(var i=0;i<orginorg.children.length;i++){
@@ -282,7 +282,7 @@ function setnumber(obj,line)
 			
 	  </tr>
      <tr  align="center" bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:select id="orgin[0]" name="orgin[0]" labelposition="left" multiple="false"
+       <td><s:select id="orgins[0]" name="orgins[0]" labelposition="left" multiple="false"
             list="orginsList" listValue="name" listKey="id" /></td>
        
        <td><s:select id="product[0]" name="product[0]" labelposition="left" multiple="false"
