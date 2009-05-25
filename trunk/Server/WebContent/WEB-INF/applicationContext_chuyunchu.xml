@@ -167,6 +167,26 @@
 		class="com.dcsh.market.action.chuyunchu.listOnwayProductAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean> 
+
+	
+	<bean id="gocyctestAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goTestAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="deliverytestAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.deliveryTestAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+	
+	<bean id="gocyccjAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.goCJAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="deliverycjAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.deliveryCJAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean> 
+
 	<bean id="goentryyetiAction" scope="prototype"
 		class="com.dcsh.market.action.chuyunchu.goEntryyetiAction">
 		<constructor-arg ref="mywareHouseService" />
@@ -175,4 +195,5 @@
 		class="com.dcsh.market.action.chuyunchu.goEntrygckAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean> 
+
 </beans>
