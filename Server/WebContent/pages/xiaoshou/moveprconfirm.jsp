@@ -332,7 +332,7 @@ function setnumber(obj,line)
          </select></td>   
          <td align="left"><s:text name="到货仓库:"/></td>
          <td align="left"><s:select id="aimcanku" name="aimcanku" multiple="false" label="选择目标仓库"
-            list="cankuList" listValue="name" listKey="id" /></td>      
+            list="cankuList2" listValue="name" listKey="id" /></td>      
       </tr>
       
        <tr>

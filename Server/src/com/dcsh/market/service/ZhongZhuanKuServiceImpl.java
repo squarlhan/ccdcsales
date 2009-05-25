@@ -58,7 +58,7 @@ private HibernateTemplate hibernateTemplate;
 		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku");	
     	for(Iterator it = cankus.iterator();it.hasNext();){
     		Canku tmpck = (Canku)it.next();
-    		if((tmpck.getType()==(byte)3)||(tmpck.getType()==(byte)4)||(tmpck.getType()==(byte)5)){
+    		if((tmpck.getType()==(byte)7)||(tmpck.getType()==(byte)8)||(tmpck.getType()==(byte)3)||(tmpck.getType()==(byte)4)||(tmpck.getType()==(byte)5)){
     			it.remove();
     		}
     	}

@@ -25,6 +25,7 @@ public class gomoveProductAction implements Preparable {
 	private XiaoshouService service;
 
 	private List<Canku> cankuList;
+	private List<Canku> cankuList2;
 	private List<Products> productList;
 	private List<Specifications> specificationList;
 	private List<Custom> customList;
@@ -52,6 +53,7 @@ public class gomoveProductAction implements Preparable {
 		for (ResourceGrantedAuthorityImpl res : clist) {
 			cclist.add((Canku) res.getResource());
 		}
+		this.setCankuList2(service.getAllCankus());
 		this.setMydate(new Date());
 		this.setFahuoList(service.getAllFahuos());
 		this.setCustomList(service.getAllCustom());
@@ -67,6 +69,14 @@ public class gomoveProductAction implements Preparable {
 
 	public void setCankuList(List<Canku> cankuList) {
 		this.cankuList = cankuList;
+	}
+	
+	public List<Canku> getCankuList2() {
+		return cankuList2;
+	}
+
+	public void setCankuList2(List<Canku> cankuList2) {
+		this.cankuList2 = cankuList2;
 	}
 
 	public List<Products> getProductList() {
