@@ -1,5 +1,6 @@
 package com.dcsh.market.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,6 +36,11 @@ public class AOPService {
 
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
+	}
+	
+	public static float round(float f){
+		int i = (int)(f*1000);
+		return (float)i/1000;
 	}
 
 	/**
@@ -169,8 +175,8 @@ public class AOPService {
 		for (Chukumx mx : chuku.getChukumxes()) {
 			String content = "规格为" + mx.getSpecifications().getDisplayName()
 					+ "的" + mx.getProducts().getName()
-					+ mx.getSpecifications().getWeight().floatValue()
-					* mx.getNumber() + "吨从"
+					+ round(mx.getSpecifications().getWeight().floatValue()
+					* mx.getNumber()) + "吨从"
 					+ chuku.getCankuByCankuId().getName() + "移库到"
 					+ chuku.getCankuByRkId().getName() + "，已装车";
 			Set<Users> users = new HashSet();
@@ -196,8 +202,8 @@ public class AOPService {
 		for (Chukumx mx : chuku.getChukumxes()) {
 			String content = "规格为" + mx.getSpecifications().getDisplayName()
 					+ "的" + mx.getProducts().getName()
-					+ mx.getSpecifications().getWeight().floatValue()
-					* mx.getNumber() + "吨从"
+					+ round(mx.getSpecifications().getWeight().floatValue()
+					* mx.getNumber()) + "吨从"
 					+ chuku.getCankuByCankuId().getName() + "销售到"
 					+ chuku.getCustom().getCustomName() + "，已装车";
 			Set<Users> users = new HashSet();
@@ -226,8 +232,8 @@ public class AOPService {
 			mx = (Chukumx) hibernateTemplate.get(Chukumx.class, mx.getId());
 			String content = "规格为" + mx.getSpecifications().getDisplayName()
 					+ "的" + mx.getProducts().getName()
-					+ mx.getSpecifications().getWeight().floatValue()
-					* mx.getNumber() + "吨从"
+					+ round(mx.getSpecifications().getWeight().floatValue()
+					* mx.getNumber()) + "吨从"
 					+ mx.getChuku().getCankuByCankuId().getName() + "移库到"
 					+ mx.getChuku().getCankuByRkId().getName() + "，已到货";
 			Set<Users> users = new HashSet();
@@ -257,8 +263,8 @@ public class AOPService {
 		for (XSyikumx mx : xsyikuxx.getXsyikumxes()) {
 			String content = "计划规格为" + mx.getSpecification().getDisplayName()
 					+ "的" + mx.getProduct().getName()
-					+ mx.getSpecification().getWeight().floatValue()
-					* mx.getNumber() + "吨从" + mx.getCanku().getName() + "移库到"
+					+ round(mx.getSpecification().getWeight().floatValue()
+					* mx.getNumber()) + "吨从" + mx.getCanku().getName() + "移库到"
 					+ xsyikuxx.getAimcanku().getName();
 			Set<Users> users = new HashSet();
 			users.addAll(this.getusersbycanku(mx.getCanku()));
@@ -287,8 +293,8 @@ public class AOPService {
 		for (XSfahuomx mx : xsfahuoxx.getXsfahuomxes()) {
 			String content = "计划规格为" + mx.getSpecification().getDisplayName()
 					+ "的" + mx.getProduct().getName()
-					+ mx.getSpecification().getWeight().floatValue()
-					* mx.getNumber() + "吨从" + mx.getCanku().getName() + "销售给"
+					+ round(mx.getSpecification().getWeight().floatValue()
+					* mx.getNumber()) + "吨从" + mx.getCanku().getName() + "销售给"
 					+ xsfahuoxx.getCustomer().getCustomName();
 			Set<Users> users = new HashSet();
 			users.addAll(this.getusersbycanku(mx.getCanku()));
@@ -350,5 +356,5 @@ public class AOPService {
         default: break;
         }
 	}
-
+	
 }

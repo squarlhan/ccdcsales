@@ -1,5 +1,6 @@
 package com.dcsh.market.service;
 
+import java.math.BigDecimal;
 import java.util.regex.Pattern;
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -32,6 +33,7 @@ public class Regtry {
 		   pinyin = PinyinHelper.toHanyuPinyinStringArray(cc,opf);	
 		   result+=pinyin[0];
 		}
+		
 
 	}
 

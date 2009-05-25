@@ -42,7 +42,7 @@
 
 	//下面开始分页
 	 
-    var perpage = 10;
+    var perpage = 20;
 
     var pchs = new Array(
 		    <s:iterator id="result" value="resultList">

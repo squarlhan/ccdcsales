@@ -49,12 +49,7 @@ function setnumber(obj,line)
 		var td2 = tr.insertCell(-1);
 		var td3 = tr.insertCell(-1);
 		var td4 = tr.insertCell(-1);
-		var td5 = tr.insertCell(-1);
-		var td6 = tr.insertCell(-1);
-
-		var select0 = document.createElement("select");
-		select0.setAttribute("id","orgin["+count+"]");
-		select0.setAttribute("name","orgin["+count+"]");                 
+		var td5 = tr.insertCell(-1);   
 																							
 		var select1 = document.createElement("select");
 		select1.setAttribute("id","product["+count+"]");
@@ -64,14 +59,14 @@ function setnumber(obj,line)
 		textfield2.setAttribute("id","sumweight["+count+"]");
 		textfield2.setAttribute("name","sumweight["+count+"]");
 		textfield2.setAttribute("label",count);
-		textfield2.setAttribute("size","5");
+		textfield2.setAttribute("size","15");
 		textfield2.setAttribute("onchange","javascript:setnumber(this," + textfield2.label + ")");
 		textfield2.onchange = function(){setnumber(textfield2,textfield2.label)};
 		
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","memo["+count+"]");
 		textfield3.setAttribute("name","memo["+count+"]");
-		textfield3.setAttribute("size","15");
+		textfield3.setAttribute("size","25");
 
 		var textfield5 = document.createElement("input");
 		textfield5.setAttribute("id","weight["+count+"]");
@@ -82,16 +77,9 @@ function setnumber(obj,line)
 		textfield4.setAttribute("id","number["+count+"]");
 		textfield4.setAttribute("name","number["+count+"]");
 		textfield4.type = "hidden";
-
-		var orginorg=document.getElementById("orgin[0]");	
+	
 		var orginpro=document.getElementById("product[0]");
 		var orginspe=document.getElementById("specification[0]");
-		for(var i=0;i<orginorg.children.length;i++){
-	          var opt=document.createElement("option");
-	          opt.value=orginorg.children[i].value;
-	          opt.text=orginorg.children[i].text;
-	          select0.options.add(opt);
-	          }
 		 for(var i=0;i<orginpro.children.length;i++){
 	          var opt=document.createElement("option");
 	          opt.value=orginpro.children[i].value;
@@ -99,12 +87,11 @@ function setnumber(obj,line)
 	          select1.options.add(opt);
 	          }
 
-		td1.appendChild(select0);
-		td2.appendChild(select1);
-		td3.appendChild(textfield2);
-		td4.appendChild(textfield3);
-		td5.appendChild(textfield4);
-		td6.appendChild(textfield5);
+		td1.appendChild(select1);
+		td2.appendChild(textfield2);
+		td3.appendChild(textfield3);
+		td4.appendChild(textfield4);
+		td5.appendChild(textfield5);
 		textfield2.onchange(textfield2,count);
 
 	}
@@ -117,18 +104,6 @@ function setnumber(obj,line)
 	}
 	function checkRKNull()
 	{
-		var ele = document.getElementById("wer");
-		var ele2 = document.getElementById("rew")
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入负责人!");
-		  return false;
-		}
-		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入编号!");
-		  return false;
-		}
 		for(i=0;i<=count;i++)
 		{	
 			var sum = document.getElementById("sumweight["+i+"]");
@@ -150,41 +125,7 @@ function setnumber(obj,line)
 		else
 			return false;
 	}
-	function checkPrintNull()
-	{
-		var ele = document.getElementById("wer");
-		var ele2 = document.getElementById("rew")
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入负责人!");
-		  return false;
-		}
-		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入编号!");
-		  return false;
-		}
-		for(i=0;i<=count;i++)
-		{	
-			var sum = document.getElementById("sumweight["+i+"]");
-			if(sum.value.replace(/(^\s*)|(\s*$)/g,"")=="")
-			{
-				alert("请输入第"+(i+1)+"行重量!");
-				return false;
-			}
-			if(isNaN(sum.value))
-			{
-				alert("第"+(i+1)+"行重量应为数字！");
-				return false;
-			} 
-		}
-		if(confirm("确认打印操作？")){
-			document.myform.action = "cycentrywarehouse!print.action";
-			return true;
-		}
-		else
-			return false;
-	}
+	
 	function   previewPrint(){   
 		  WB.ExecWB(7,1)   
 		  }   
@@ -200,18 +141,14 @@ function setnumber(obj,line)
 <h2>工厂库液体产品入库单</h2>
   <s:form id="myform"  theme="simple" target="_blank">
   <table class="list_table"  align="center" width="100%" id="tb0">
-  	<tr bgcolor="#4A708B">
-  		<th>负责人</th>
-		<th>编号</th>
-  	</tr>
   	<tr>
-  		<td><s:textfield id="wer" name="rkfzr" labelposition="top"/></td>
-       <td><s:textfield id="rew" name="bno" labelposition="top"/></td>
+  	   <td>请选择入库的工厂库：</td>
+       <td><s:select id="orgin" name="orgin" labelposition="left" multiple="false"
+            list="orginsList" listValue="name" listKey="id" /></td>
   	</tr>
   </table>
      <table class="list_table"  align="center" width="100%" id="tb">
        <tr bgcolor="#4A708B">
-            <th>工厂库</th>
 		    <th>选择产品</th>
 			<th>填写重量(T)</th>
 			<th>备注</th>
@@ -220,15 +157,13 @@ function setnumber(obj,line)
 			
 	  </tr>
      <tr  align="center" bgcolor="<s:if test="#index.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:select id="orgin[0]" name="orgin[0]" labelposition="left" multiple="false"
-            list="orginsList" listValue="name" listKey="id" /></td>
             
        <td><s:select id="product[0]" name="product[0]" labelposition="left" multiple="false"
             list="productsList" listValue="name" listKey="id" /></td>
        
-       <td><s:textfield size="5"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
+       <td><s:textfield size="15"  id="sumweight[0]" name="sumweight[0]" onchange="javascript:setnumber(this,0)"/></td>
        
-       <td><s:textfield size="15"  id="memo[0]" name="memo[0]" /></td>
+       <td><s:textfield size="25"  id="memo[0]" name="memo[0]" /></td>
        
        <td style="display:none"><s:textfield id="number[0]" name="number[0]" label="入库数目"/></td>
        
@@ -242,7 +177,6 @@ function setnumber(obj,line)
     <input type="button" name="dele" value="删除" onclick="deleteRecord(tb)"/>   
     <input value="入库"  type="submit" name="Submit" onclick="return checkRKNull()"/>
     <s:reset value="取消" theme="simple"/>
-    <input value="打印表单"  type="submit" name="Submit" onclick="return checkPrintNull()"/>
  </td>
  </tr>
   </table>

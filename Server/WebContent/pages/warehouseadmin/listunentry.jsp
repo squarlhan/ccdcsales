@@ -53,7 +53,7 @@
 
 	//下面开始分页
 	 
-    var perpage = 10;
+    var perpage = 15;
 
     var bnos = new Array(
 		    <s:iterator id="result" value="resultList">
