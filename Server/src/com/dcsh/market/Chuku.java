@@ -33,6 +33,7 @@ public class Chuku implements java.io.Serializable {
 	private Custom custom;
 	private String bno;
 	private Date cksj;
+	private String memo;
 	
 	private Set<Chukumx> chukumxes = new HashSet<Chukumx>(0);
 
@@ -80,6 +81,19 @@ public class Chuku implements java.io.Serializable {
 		this.bno = bno;
 		this.cksj = cksj;
 		this.chukumxes = chukumxes;
+	}
+	
+	public Chuku(Canku cankuByCankuId, Canku cankuByRkId, Users users,
+			Custom custom, String bno, Date cksj, Set<Chukumx> chukumxes,String memo) {
+
+		this.cankuByCankuId = cankuByCankuId;
+		this.cankuByRkId = cankuByRkId;
+		this.users = users;
+		this.custom = custom;
+		this.bno = bno;
+		this.cksj = cksj;
+		this.chukumxes = chukumxes;
+		this.memo = memo;
 	}
 	
 
@@ -163,6 +177,15 @@ public class Chuku implements java.io.Serializable {
 
 	public void setChukumxes(Set<Chukumx> chukumxes) {
 		this.chukumxes = chukumxes;
+	}
+	
+	@Column(name = "memo", length = 100)
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
 }
