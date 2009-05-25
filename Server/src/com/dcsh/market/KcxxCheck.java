@@ -3,6 +3,7 @@ package com.dcsh.market;
 public class KcxxCheck extends Kcxx {
 	private String saleTypeName;
 	private String statusName;
+	private String cankuName;
 	
 	public KcxxCheck() {
 		super();
@@ -12,6 +13,12 @@ public class KcxxCheck extends Kcxx {
 		super(kcxx.getId(),kcxx.getSpecifications(),kcxx.getProducts(),
 				kcxx.getNumber(),kcxx.getSaleType(),kcxx.getStatus(),kcxx.getMemo());
 		this.saleTypeName = saleTypeName;
+	}
+	public KcxxCheck(String saleTypeName,String cankuName, Kcxx kcxx) {
+		super(kcxx.getId(),kcxx.getSpecifications(),kcxx.getProducts(),
+				kcxx.getNumber(),kcxx.getSaleType(),kcxx.getStatus(),kcxx.getMemo());
+		this.saleTypeName = saleTypeName;
+		this.cankuName = cankuName;
 	}
 
 	public KcxxCheck(String saleTypeName, String statusName) {
@@ -34,6 +41,14 @@ public class KcxxCheck extends Kcxx {
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
+	}
+
+	public void setCankuName(String cankuName) {
+		this.cankuName = cankuName;
+	}
+
+	public String getCankuName() {
+		return cankuName;
 	}
 	
 }
