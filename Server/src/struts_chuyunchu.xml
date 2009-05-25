@@ -187,6 +187,36 @@
             <result >/pages/warehouseadmin/listzaitu.jsp</result>
             <result name="listonway" >/pages/warehouseadmin/listzaitu.jsp</result>
         </action>
+
+        
+        <action name="cycgotest" method="execute" class="gocyctestAction">
+            <result>/pages/warehouseadmin/gotest.jsp</result>
+            <result name="show">/pages/warehouseadmin/gotest.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycdeliverytest" method="execute" class="deliverytestAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result name="ok" type="redirect-action">cyclistuncheckProducts</result>
+            <result name="unequal">/pages/warehouseadmin/err01.jsp</result>
+            <result name="print">/pages/warehouseadmin/printdeliveryTest.jsp</result>
+            <result name="printxsyk">/pages/warehouseadmin/printxsyk.jsp</result>
+            <result name="printfh">/pages/warehouseadmin/printfh.jsp</result>
+        </action>
+        
+        <action name="cycgocj" method="execute" class="gocyccjAction">
+            <result>/pages/warehouseadmin/gocj.jsp</result>
+            <result name="show">/pages/warehouseadmin/gocj.jsp</result>
+            <result name="index">/index.jsp</result>
+        </action>
+        <action name="cycdeliverycj" method="execute" class="deliverycjAction">
+            <result type="redirect-action">cyclistuncheckProducts</result>
+            <result name="ok" type="redirect-action">cyclistuncheckProducts</result>
+            <result name="unequal">/pages/warehouseadmin/err01.jsp</result>
+            <result name="print">/pages/warehouseadmin/printdeliveryCJ.jsp</result>
+            <result name="printxsyk">/pages/warehouseadmin/printxsyk.jsp</result>
+            <result name="printfh">/pages/warehouseadmin/printfh.jsp</result>
+        </action>
+
         <action name="cycgoentryyeti" method="execute" class="goentryyetiAction">
             <result>/pages/warehouseadmin/entryyeti.jsp</result>
             <result name="show">/pages/warehouseadmin/entryyeti.jsp</result>
@@ -195,5 +225,6 @@
             <result>/pages/warehouseadmin/entrygck.jsp</result>
             <result name="show">/pages/warehouseadmin/entrygck.jsp</result>
         </action>
+
     </package>
   </struts>
