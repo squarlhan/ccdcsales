@@ -16,18 +16,21 @@
 
 <h3>请选择仓库:</h3>
  <s:form>
- <table >
+ <table class="list_table">
  
  <s:iterator id="cangku" value="cangkulist" status="index">
  
-  <tr>
- <td width="30%">&nbsp;</td>
+ <s:if test="#index.getIndex()%2==0||#index.first"> 
+                 <tr bgcolor="#ffffff"> 
+            </s:if>
  <td align="center" width="30%"> 
                  <a href="<s:url action="zzkselectcangku"><s:param name="cangkuId" value="#cangku.id"/>
                  </s:url>"><s:property value="#cangku.name" />
 				 </a></td> 
  
- </tr>
+  <s:if test="#index.getIndex()%2==1||#index.last"> 
+                 <tr> 
+            </s:if> 
  
  </s:iterator>
  
