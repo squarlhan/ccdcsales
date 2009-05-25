@@ -35,6 +35,12 @@
 	    <pattern>/zzkprintwarehouse.action</pattern>
 	    <pattern>/zzkprintwarehouse!print.action</pattern>
 	    
+	    <pattern>/cycdeliverytest.action</pattern>
+	    <pattern>/cycdeliverytest!print.action</pattern>
+
+	    <pattern>/cycdeliverycj.action</pattern>
+	    <pattern>/cycdeliverycj!print.action</pattern>
+	    
 	    <pattern>/zckdeliverywarehouse!printfh.action </pattern>
 	    <pattern>/zckdeliverywarehouse!sale.action </pattern>
 	    <pattern>/zzkdeliverywarehouse!printfh.action </pattern>
