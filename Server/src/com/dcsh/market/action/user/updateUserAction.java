@@ -63,7 +63,7 @@ public class updateUserAction implements Preparable {
 		user.setPhone(this.getPhone().trim());
 		if(this.getNewpassword().trim().equals(this.getRepassword().trim()))
 			user.setPassword(this.getNewpassword().trim().getBytes());
-		service.updateUser(user);
+		service.updateUser(user, 0);
 		return "success";
 	}
 
