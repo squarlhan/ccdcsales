@@ -189,12 +189,6 @@ function setnumber(obj,line)
 				alert("第"+(i+1)+"行重量应为数字！");
 				return false;
 			}
-			var pch =  document.getElementById("pch["+i+"]");
-			if(pch.value.replace(/(^\s*)|(\s*$)/g,"")=="")
-			{
-                 alert("请输入第"+(i+1)+"行批号!");
-                 return false;
-			} 
 		}
 		if(confirm("确认打印？")){
 			document.myform.action = "cycdeliverycj!print.action";
@@ -411,7 +405,7 @@ function setnumber(obj,line)
    <tr>
            <td><s:text name="请填写备注"></s:text>
   	       </td>
-  	       <td colspan="3"><s:textfield name="memo" theme="simple" size="80"></s:textfield>
+  	       <td colspan="3"><s:textfield name="memo" theme="simple" size="70"></s:textfield>
   	       </td>
   	</tr>
   </table>
