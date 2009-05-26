@@ -251,14 +251,10 @@ function setnumber(obj,line)
 		var td1 = tr.insertCell(-1);
 		var td2 = tr.insertCell(-1);
 		var td3 = tr.insertCell(-1);
-		var td4 = tr.insertCell(-1);
-		var td5 = tr.insertCell(-1);
 		td0.innerHTML = cankunames[a];
-		td1.innerHTML = pchs[a];
-		td2.innerHTML = prds[a];
-		td3.innerHTML = spfs[a];
-		td4.innerHTML = wgts[a];
-		td5.innerHTML = stps[a];
+		td1.innerHTML = prds[a];
+		td2.innerHTML = spfs[a];
+		td3.innerHTML = wgts[a];
 		}
 
 	function firstpage()
@@ -378,12 +374,10 @@ function setnumber(obj,line)
 
     <table id="mytable" class="list_table"  align="center" width="640">
 		<tr bgcolor="#4A708B">
-			<th width="20%">车间名</th>
-		    <th width="20%">产品批次号</th>
+			<th width="20%">工厂库</th>
 	        <th width="15%">产品名</th>
 	        <th width="15%">规格</th>
 	        <th width="10%">重量(T)</th>
-	        <th width="10%">销售类型</th>
 		</tr>
 	</table>
 	
@@ -417,7 +411,7 @@ function setnumber(obj,line)
    <tr>
            <td><s:text name="请填写备注"></s:text>
   	       </td>
-  	       <td colspan="3"><s:textfield name="memo" theme="simple" size="30"></s:textfield>
+  	       <td colspan="3"><s:textfield name="memo" theme="simple" size="80"></s:textfield>
   	       </td>
   	</tr>
   </table>

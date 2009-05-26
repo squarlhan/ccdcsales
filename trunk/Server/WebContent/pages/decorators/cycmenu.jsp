@@ -21,9 +21,9 @@
       <tr align="center"><td><li><s:a href="cycgoentry.action">产成品入库单</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgoentryyeti.action">液体产品入库单</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgoentrygck.action">工厂库入库单</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="cycgocycdelivery.action">液体产品移库</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="cycgocj.action">车间使用液体产品</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="cycgotest.action">实验使用液体产品</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgocycdelivery.action">液体产品调拨用</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgocj.action">液体产品车间用</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgotest.action">液体产品实验用</s:a></li></td></tr>
       <!--  <tr align="center"><td><li><s:a href="cycgocycdelivery.action">装车到储运处</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgozckdelivery.action">装车到驻厂库</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgozzkdelivery.action">装车到中转库</s:a></li></td></tr>

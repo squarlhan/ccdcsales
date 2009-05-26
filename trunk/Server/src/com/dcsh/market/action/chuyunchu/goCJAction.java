@@ -48,11 +48,9 @@ public class goCJAction implements Preparable{
             this.specificationsList = new ArrayList();
             this.pchList = new ArrayList();
             this.customList = service.getAllCustom();
-            System.out.println("cankusList.size()="+cankusList.size());
             resultList=new ArrayList();
             for(int i=0;i<cankusList.size();i++){
             	resultListTemp=service.getAllCheckProducts(cankusList.get(i));
-            	System.out.println("resultListTemp.size()"+i+"="+resultListTemp.size());
             	for(int j=0;j<resultListTemp.size();j++){
             	this.resultList.add(resultListTemp.get(j));
             	}
