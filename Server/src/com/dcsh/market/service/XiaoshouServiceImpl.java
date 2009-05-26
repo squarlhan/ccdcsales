@@ -31,12 +31,17 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<XSKcxx> listStorageByPrd(List<Products> productList){
+	public List<XSKcxx> listStorageByPrd(List<Products> productList, List<Canku> cankuList){
 		List<XSKcxx> result = new ArrayList();
+		List<Integer> cids = new ArrayList();
+		for(Canku canku:cankuList){
+			cids.add(canku.getId());
+		}
 		for(Products product:productList){
-		List<Integer> cids = (List<Integer>) hibernateTemplate
-					.find("select distinct id.cid from Kcxx as kc where kc.id.pid = "
-							+ String.valueOf(product.getId()));
+//		List<Integer> cids = (List<Integer>) hibernateTemplate
+//					.find("select distinct id.cid from Kcxx as kc where kc.id.pid = "
+//							+ String.valueOf(product.getId()));
+		
 			for (Integer cid : cids) {
 				List<Specifications> spes = (List<Specifications>) hibernateTemplate
 						.find("select distinct specifications from Kcxx as kc where kc.id.pid = "
