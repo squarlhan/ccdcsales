@@ -235,7 +235,7 @@ public class deliveryTestAction implements Preparable{
           }
     	if(tmp==this.getTnumber()){
     		service.doDeliveryWareHouse(chuku);
-    		service.resetXsykxxStatus(index);
+    		service.resetXsykxxStatus(index,this.getTnumber());
     		return printxsyk();
     	}
         
@@ -291,7 +291,7 @@ public class deliveryTestAction implements Preparable{
           }
     	if(tmp==this.getTnumber()){
     		service.doDeliveryWareHouse(chuku);
-    		service.resetXsfhxxStatus(index);
+    		service.resetXsfhxxStatus(index,this.getTnumber());
     		return printfh();
     	}
         
