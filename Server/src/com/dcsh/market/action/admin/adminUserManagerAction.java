@@ -122,7 +122,10 @@ public class adminUserManagerAction implements Preparable {
 	
     public String modify() throws Exception{
     
-	    service.updateUser(new Users(Integer.valueOf(this.getId()),this.getName().trim(),this.getPassword().trim().getBytes(),this.getDescription().trim(),this.getPhone().trim()));
+    	if(this.getName().trim().equals(this.getPassword().trim())){
+    		service.updateUser(new Users(Integer.valueOf(this.getId()),this.getName().trim(),this.getPassword().trim().getBytes(),this.getDescription().trim(),this.getPhone().trim()), 0);
+    	}
+	    service.updateUser(new Users(Integer.valueOf(this.getId()),this.getName().trim(),this.getPassword().trim().getBytes(),this.getDescription().trim(),this.getPhone().trim()), 1);
 		return "modify";
 	}
 	public String delete() throws Exception{

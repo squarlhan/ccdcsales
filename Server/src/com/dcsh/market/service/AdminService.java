@@ -62,7 +62,7 @@ public interface AdminService {
 	List<Users> getAllUsers();
 	void delUser(Users user);
 	void addUser(Users user);
-	void updateUser(Users user);
+	void updateUser(Users user, int flag);
 	/**
 	 * 登陆获取用户
 	 * @param username 用户名

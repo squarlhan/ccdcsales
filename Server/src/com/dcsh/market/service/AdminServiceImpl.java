@@ -409,11 +409,14 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	@Transactional
-	public void updateUser(Users user) {
+	public void updateUser(Users user, int flag) {
 		
 		Users temp = (Users) hibernateTemplate.load(Users.class, user.getId());
 		temp.setName(user.getName());
-		temp.setPassword(temp.getPassword());
+		System.out.println("psdd0:"+temp.getPassword().toString());
+		System.out.println("psdd0.5:"+temp.getName().getBytes().toString());
+		if(flag==0)temp.setPassword(user.getPassword());
+		else temp.setPassword(temp.getPassword());
 		temp.setPhone(user.getPhone());
 		temp.setDescription(user.getDescription());
 		hibernateTemplate.update(temp);
