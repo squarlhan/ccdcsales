@@ -57,6 +57,7 @@ public interface AdminService {
 	void updateCanku(Canku canku);
 	/**
 	 * 用户相关的增删改查
+	 * flag==0的时候，密码才改变
 	 * @return
 	 */
 	List<Users> getAllUsers();
