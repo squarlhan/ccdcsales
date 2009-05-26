@@ -31,7 +31,7 @@ public interface XiaoshouService {
 	 * @param pid ²úÆ·µÄid
 	 * @return
 	 */
-	List<XSKcxx> listStorageByPrd(List<Products> productList);
+	List<XSKcxx> listStorageByPrd(List<Products> productList, List<Canku> cankuList);
 
 	List<Fahuo> getAllFahuos();
 	List<Custom> getAllCustom();

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import com.dcsh.market.Canku;
 import com.dcsh.market.Products;
 import com.dcsh.market.XSKcxx;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
@@ -36,12 +38,17 @@ public class listStorageAction implements Preparable {
 
 		 PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 	     List<ResourceGrantedAuthorityImpl> list = auth.getGrantedAuthorityResource(ResourceType.PRD);
+	     List<ResourceGrantedAuthorityImpl> list2 = auth.getGrantedAuthorityResource(ResourceType.CANKU);
 		 if(list.size() > 0){
 	     List<Products> plist = new ArrayList();
+	     List<Canku> clist = new ArrayList();
 			for (ResourceGrantedAuthorityImpl res : list) {
 				plist.add((Products) res.getResource());
 			}
-			resultList = service.listStorageByPrd(plist);
+			for (ResourceGrantedAuthorityImpl res : list2) {
+				clist.add((Canku) res.getResource());
+			}
+			resultList = service.listStorageByPrd(plist, clist);
 
 			return "list";
 	     }else return "index";

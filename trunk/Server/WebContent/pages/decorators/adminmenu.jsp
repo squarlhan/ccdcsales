@@ -27,7 +27,7 @@
       <tr align="center"><td><li><s:a href="admingetallgroups.action">组员设置管理</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="admingroupprimanager.action">组权限分配管理</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="adminuserprimanager.action">用户权限分配管理</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="admincfrmanager.action">储运处与工厂对应关系管理</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="admincfrmanager.action">储运-工厂关系管理</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="/Server/logout">退出登陆</s:a></td></tr>
     </table>
   </body>
