@@ -413,7 +413,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		Users temp = (Users) hibernateTemplate.load(Users.class, user.getId());
 		temp.setName(user.getName());
-		temp.setPassword(user.getPassword());
+		temp.setPassword(temp.getPassword());
 		temp.setPhone(user.getPhone());
 		temp.setDescription(user.getDescription());
 		hibernateTemplate.update(temp);
