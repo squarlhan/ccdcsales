@@ -27,7 +27,7 @@ public class UserAndGroupAccessDecisionManager implements AccessDecisionManager 
 		dm.put(FilterInvocation.class, new FilterInvocationDecisionManager());
 	}
 	
-	@Override
+
 	public void decide(Authentication authentication, Object object,
 			ConfigAttributeDefinition config) throws AccessDeniedException,
 			InsufficientAuthenticationException {
@@ -41,14 +41,13 @@ public class UserAndGroupAccessDecisionManager implements AccessDecisionManager 
 
 	}
 
-	@Override
+	
 	public boolean supports(ConfigAttribute attribute) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
 	public boolean supports(Class clazz) {
 		return dm.get(clazz) != null;
 		//return PrivResource.class.isAssignableFrom(clazz);
@@ -81,13 +80,13 @@ class FilterInvocationDecisionManager implements AccessDecisionManager{
 		
 	}
 	
-	@Override
+	
 	public boolean supports(ConfigAttribute attribute) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	@Override
+	
 	public boolean supports(Class clazz) {
 		return FilterInvocation.class.isAssignableFrom(clazz);
 	}

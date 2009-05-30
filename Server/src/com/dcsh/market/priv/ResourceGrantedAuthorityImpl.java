@@ -33,12 +33,12 @@ public class ResourceGrantedAuthorityImpl implements GrantedAuthority {
 		this.resource = resource;
 	}
 
-	@Override
+	
 	public String getAuthority() {
 		return null;
 	}
 
-	@Override
+	
 	public int compareTo(Object o) {
 		if (o != null && o instanceof ResourceGrantedAuthorityImpl) {
 			ResourceGrantedAuthorityImpl attr = (ResourceGrantedAuthorityImpl) o;

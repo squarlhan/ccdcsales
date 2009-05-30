@@ -217,8 +217,6 @@ public class PrivAuthenticationImpl implements Authentication {
         return sb.toString();
     }
 
-
-	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
