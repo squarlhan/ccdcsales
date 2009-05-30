@@ -24,7 +24,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 			
-	<tx:annotation-driven/>
+	<tx:annotation-driven transaction-manager="transactionManager" order="0"/>
 	
 	<import resource="applicationContext_admin.xml"/>
 	<import resource="applicationContext_chuyunchu.xml"/>
