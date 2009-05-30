@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.Products;
 import com.dcsh.market.Smmdingyue;
-import com.dcsh.market.Smmdy;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;

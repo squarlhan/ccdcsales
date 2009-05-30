@@ -1,6 +1,5 @@
 package com.dcsh.market.priv;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,11 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
 import org.hibernate.metadata.ClassMetadata;
@@ -20,16 +16,11 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.security.Authentication;
 import org.springframework.security.AuthenticationException;
-import org.springframework.security.AuthenticationManager;
 import org.springframework.security.BadCredentialsException;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
 import org.springframework.security.providers.AuthenticationProvider;
-import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.security.userdetails.UsernameNotFoundException;
 
 import com.dcsh.market.Users;
-import com.dcsh.market.action.admin.listStorageAction;
 
 /**
  * 用来从数据库中读取身份信息的类
@@ -37,7 +28,10 @@ import com.dcsh.market.action.admin.listStorageAction;
  *
  */
 public class UserAndGroupAuthenticationImpl implements AuthenticationProvider {
-	private static final Logger log = LogManager.getLogManager().getLogger(UserAndGroupAuthenticationImpl.class.getName());
+	private static Logger log = null;
+	static{
+		log = Logger.getLogger(UserAndGroupAuthenticationImpl.class.getName());
+	}
 
 	private HibernateTemplate hibernateTemplate;
 	

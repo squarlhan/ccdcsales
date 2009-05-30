@@ -3,15 +3,12 @@ package com.dcsh.market.priv;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import org.springframework.security.Authentication;
 import org.springframework.security.GrantedAuthority;
 import org.springframework.security.providers.AbstractAuthenticationToken;
 
-import com.dcsh.market.Canku;
 import com.dcsh.market.Users;
 
 /**

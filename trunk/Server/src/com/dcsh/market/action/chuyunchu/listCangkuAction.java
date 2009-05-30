@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
+import com.dcsh.market.Canku;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
 import com.dcsh.market.priv.ResourceType;
 import com.dcsh.market.service.WareHouseService;
 import com.opensymphony.xwork2.Preparable;
-import com.dcsh.market.Canku;
 
 public class listCangkuAction implements Preparable {
 

@@ -1,7 +1,6 @@
 package com.dcsh.market.priv;
 
 import com.dcsh.market.UserGroup;
-import com.dcsh.market.Users;
 
 public class URLGPriv {
 

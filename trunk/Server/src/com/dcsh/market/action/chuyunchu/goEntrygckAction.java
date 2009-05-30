@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
 import com.dcsh.market.Products;
-import com.dcsh.market.Specifications;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;

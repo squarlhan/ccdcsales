@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+import com.dcsh.market.Canku;
 import com.dcsh.market.priv.CankuPriv;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.service.ZhuChangKuService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
-import com.dcsh.market.Canku;;
 
 public class selectCangkuAction implements Preparable {
 

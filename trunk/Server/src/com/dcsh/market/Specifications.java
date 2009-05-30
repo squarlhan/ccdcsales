@@ -3,17 +3,12 @@ package com.dcsh.market;
 // Generated 2009-3-2 20:48:10 by Hibernate Tools 3.2.2.GA
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.AccessType;

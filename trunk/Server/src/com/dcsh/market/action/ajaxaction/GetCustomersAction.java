@@ -1,6 +1,5 @@
 package com.dcsh.market.action.ajaxaction;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 
 import com.dcsh.market.Custom;
 import com.dcsh.market.service.XiaoshouService;
-import com.dcsh.market.service.XiaoshouServiceImpl;
 import com.opensymphony.xwork2.Action;
 
 public class GetCustomersAction implements Action{

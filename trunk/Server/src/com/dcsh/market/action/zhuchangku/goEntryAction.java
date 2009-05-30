@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
 import com.dcsh.market.Products;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
