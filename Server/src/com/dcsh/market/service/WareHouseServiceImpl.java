@@ -52,7 +52,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	 * com.dcsh.market.service.WareHouseService#entryWarehouse(com.dcsh.market
 	 * .Rkxx)
 	 */
-	@Override
+	 
 	@Transactional
 
 	public void doEntryWareHouse(Rkxx rkxx) {
@@ -96,7 +96,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	 * 出库包含两种业务：移库和销售出库。 今后可能需要拆分这两个业务。
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void doDeliveryWareHouse(Chuku ck) {
 		
@@ -155,7 +155,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Kcxx> listWarehouse(int ckid) {
 
 		return hibernateTemplate.find("from Kcxx where cid ="+ String.valueOf(ckid));
@@ -574,7 +574,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	}
 	
-	@Override
+	 
 	public List<KcxxCheck> getValiProducts(Canku canku) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -589,7 +589,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	@Override
+	 
 	public List<KcxxCheck> getallCheckedProducts(Canku canku) {
 		
 		List<KcxxCheck> result = new ArrayList();
@@ -605,7 +605,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	@Override
+	 
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSfahuomx xsfhmx) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -622,7 +622,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	@Override
+	 
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSyikumx xsykmx) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -639,7 +639,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	
 
-	@Override
+	 
 	public List<Kcxx> getUnqualifiedProducts(Canku canku) {
 
 		List<Kcxx> result = new ArrayList();
@@ -649,7 +649,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	}	
 	
-	@Override
+	 
 	public List<Kcxx> getAllProducts(Canku canku) {
 
 		List<Kcxx> result = new ArrayList();
@@ -659,7 +659,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	}	
 	
-	@Override
+	 
 	@Transactional
 	public List<KcxxCheck> getNxProducts(Canku canku) {
 
@@ -746,19 +746,19 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    		return listrpmx;
 	    }
 	}
-	@Override
+	 
 	public List<Custom> getAllCustom(){
 		return (List<Custom>) hibernateTemplate.find("from Custom");
 	}
 
-	@Override
+	 
 	@Transactional
 	public List<XSyikumx> getXSyikumx(Canku canku){
 		List<XSyikumx> result = new ArrayList<XSyikumx>();
 		result = hibernateTemplate.find("from XSyikumx as mx where mx.canku = "+canku.getId()+" and mx.status = 0");
 		return result;
 	}
-	@Override
+	 
 	@Transactional
 	public void resetXsykxxStatus(int index, int num){
 		XSyikumx temp = (XSyikumx)hibernateTemplate.get(XSyikumx.class, index);
@@ -768,7 +768,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public Canku getCangkuById(Integer cangkuId) {
 		
@@ -777,7 +777,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return canku;
 	}		
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<XSfahuomx> getXSfahuomx(Canku canku){
 		List<XSfahuomx> result = new ArrayList<XSfahuomx>();
@@ -786,7 +786,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	
 
-	@Override
+	 
 	@Transactional
 	public void resetXsfhxxStatus(int index, int num){
 		XSfahuomx temp = (XSfahuomx)hibernateTemplate.get(XSfahuomx.class, index);
@@ -796,7 +796,7 @@ public class WareHouseServiceImpl implements WareHouseService {
     }
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Chukumx> listUnentryProducts(int cankuid) {
 		List<Chuku> chukus = new ArrayList<Chuku>();
 		List<Chukumx> result = new ArrayList<Chukumx>();
@@ -808,7 +808,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void doentryChuYunchu(List<Chukumx> chukumxes, Rkxx rkxx) {
 	
@@ -892,7 +892,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(mydate);
@@ -907,7 +907,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void deleteUncheckProduct(int id) {
 
@@ -922,7 +922,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Chukumx> listOnwayProducts(int cankuid) {
 		List<Chuku> chukus = new ArrayList<Chuku>();
 		List<Chukumx> result = new ArrayList<Chukumx>();
@@ -1009,7 +1009,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 	}
 
-	@Override
+	 
 	public List<Canku> getGckbycyc(Canku canku){
 		return (List<Canku>)hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
 	}
