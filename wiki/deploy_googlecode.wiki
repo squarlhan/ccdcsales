@@ -1,0 +1,79 @@
+#summary One-sentence summary of this page.
+
+= 自动部署脚本=
+
+'
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Server" default="redeploy" basedir=".">
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" />
+	<description>
+		重新在Jboss中部署Server程序，实现的方法是touch应用程序中的
+		根中的web.xml
+    </description>
+	<!-- 设置属性，需要根据自己的路径进行修改  -->
+	<property name="src" location="Server/src" />
+	<property name="build" location="Server/build/classes" />
+	<property name="web" location="Server/WebContent" />
+	<property name="jboss"
+		location="D:/OpenTools/jboss-5.0.0.GA/server/default/deploy/Server.war" />
+
+
+	<target name="copy" depends="compile">
+		<copy todir="${jboss}/WEB-INF/classes">
+			<fileset dir="${build}" >
+				<include name="**/*.xml" />
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${src}">
+				<include name="*.xml"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${jboss}">
+			<fileset dir="${web}">				
+				<include name="**/*.xml" />
+				<include name="**/*.jsp" />
+				<include name="**/*.css" />
+				<include name="**/*.js" />
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="redeploy" depends="copy">
+		<touch file="${jboss}/WEB-INF/web.xml" />
+	</target>
+
+	<target name="compile" depends="checkout">
+		<javac srcdir="${src}" destdir="${build}">
+					<classpath>
+				<fileset dir="Server/WebContent/WEB-INF/lib">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="D:/Project/大成/Code/devlib">
+					<include name="**/*.jar" />
+				</fileset>
+				
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="checkout">
+		<svn>
+			<checkout url="http://ccdcsales.googlecode.com/svn/trunk/" destPath="."/>
+		</svn>
+	</target>
+		
+
+</project>
+
+'
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
