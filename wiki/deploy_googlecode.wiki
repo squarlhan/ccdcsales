@@ -6,6 +6,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Server" default="redeploy" basedir=".">
 	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" />
+	
+	<!--支持AOP的程序 -->
+	<property name="build.compiler" value="org.aspectj.tools.ant.taskdefs.Ajc11CompilerAdapter" />
+
+ 	<property name="ajc" value="org.aspectj.tools.ant.taskdefs.Ajc11CompilerAdapter"/>
+
 	<description>
 		重新在Jboss中部署Server程序，实现的方法是touch应用程序中的
 		根中的web.xml
@@ -25,7 +31,7 @@
 				<include name="**/*.class" />
 			</fileset>
 			<fileset dir="${src}">
-				<include name="*.xml"/>
+				<include name="**/*.xml"/>
 			</fileset>
 		</copy>
 
@@ -46,17 +52,37 @@
 	</target>
 
 	<target name="compile" depends="checkout">
-		<javac srcdir="${src}" destdir="${build}">
-					<classpath>
+  <!--depends="checkout"  com/dcsh/market/service/	-->	
+		<javac srcdir="${src}" excludes="com/dcsh/market/service/*Impl.java" destdir="${build}" source="1.5">
+    <compilerarg line="-XnotReweavable"/>
+    			<classpath>
+				<path location="${build}"/>
 				<fileset dir="Server/WebContent/WEB-INF/lib">
-					<include name="**/*.jar" />
+					<include name="*.jar" />
 				</fileset>
 				<fileset dir="D:/Project/大成/Code/devlib">
-					<include name="**/*.jar" />
+					<include name="*.jar" />
 				</fileset>
 				
 			</classpath>
 		</javac>
+			
+	<javac srcdir="${src}" includes="com/dcsh/market/service/*Impl.java" destdir="${build}" source="1.5">
+			<classpath>
+				<path location="${build}"/>
+				<fileset dir="Server/WebContent/WEB-INF/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="D:/Project/大成/Code/devlib">
+					<include name="*.jar" />
+				</fileset>
+				
+			</classpath>
+  </javac>
+
+
+
+
 	</target>
 
 	<target name="checkout">
@@ -71,9 +97,14 @@
 '
 
 
-= Details =
+= 技术细节 =
+开始的时候不能工作是因为使用了AspectJ作为AOP的实现，AspectJ需要在编译的字节码里面添加特殊的代码。
+还有一个小问题：
+   使用AspectJ之后，@Override不能正常编译，现在的ServiceImpl代码中删除了所有的@Override的Annotation。估计和AsjectJ的版本有关系，使用的AspectJ版本为1.5.3。
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= 使用方式 =
+桌面上有一个部署的快捷方式，此快捷方式调用 ant运行 E:\Dcsh\ANT_AUTO下的脚本build.xml自动部署。所作的工作如下：
+  #下载代码
+  #使用AspectJ编译器编译
+  #Copy编译好的文件到JBoss目录下
+  #Touch项目部署目录下的web.xml，使JBoss自动从部署项目。
