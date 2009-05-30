@@ -126,7 +126,6 @@ public class modifyDyAction implements Preparable {
 		this.smmdy = smmdy;
 	}
 
-	@Override
 	public void prepare() throws Exception {
 
 	}
