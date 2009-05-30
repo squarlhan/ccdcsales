@@ -52,7 +52,6 @@ public class UserAndGroupAuthenticationImpl implements AuthenticationProvider {
 	 *   作为传入参数。
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public Authentication authenticate(Authentication auth)
 			throws AuthenticationException {
 
