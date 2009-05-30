@@ -1,6 +1,5 @@
 package com.dcsh.market.action.ajaxaction;
 
-import com.dcsh.market.service.XiaoshouService;
 import com.opensymphony.xwork2.Action;
 
 public class TestAjaxAction implements Action{

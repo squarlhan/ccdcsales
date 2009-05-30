@@ -10,9 +10,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
+
 import com.dcsh.market.Canku;
-import com.dcsh.market.Chuku;
-import com.dcsh.market.Chukumx;
 import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.Rkmx;

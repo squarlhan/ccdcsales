@@ -4,12 +4,6 @@ package com.dcsh.market.service;
 import java.util.Date;
 import java.util.List;
 
-import com.dcsh.market.Products;
-import com.dcsh.market.XSKcxx;
-
-
-import java.util.List;
-
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
@@ -18,6 +12,7 @@ import com.dcsh.market.Products;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
+import com.dcsh.market.XSKcxx;
 import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSfahuoxx;
 import com.dcsh.market.XSyikumx;

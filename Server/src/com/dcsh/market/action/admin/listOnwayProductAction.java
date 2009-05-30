@@ -1,22 +1,13 @@
 package com.dcsh.market.action.admin;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chukumx;
-import com.dcsh.market.Rkmx;
-import com.dcsh.market.priv.CankuPriv;
-import com.dcsh.market.priv.PrivAuthenticationImpl;
-import com.dcsh.market.priv.PrivUtil;
-import com.dcsh.market.priv.ResourceGrantedAuthorityImpl;
-import com.dcsh.market.priv.ResourceType;
 import com.dcsh.market.service.AdminService;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.Preparable;
 
 public class listOnwayProductAction implements Preparable{

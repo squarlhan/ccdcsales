@@ -1,17 +1,18 @@
 package com.dcsh.market.service;
 
 
-import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.dcsh.market.Canku;
-import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
@@ -67,7 +68,9 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.delete(hibernateTemplate.load(Products.class, product.getId()));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
+	@Transactional(readOnly=true)
 	public List<Products> getAllProducts() {
 		return hibernateTemplate.find("from Products");
 	}
@@ -420,10 +423,11 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.update(temp);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	@Transactional
 	public List<UserGroup> getAllGroups(){
-		return hibernateTemplate.find("from UserGroup");
+		return (List<UserGroup>)hibernateTemplate.find("from UserGroup");
 	}
 	
 	@Override

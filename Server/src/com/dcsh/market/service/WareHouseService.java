@@ -12,20 +12,15 @@ import com.dcsh.market.Custom;
 import com.dcsh.market.Kcxx;
 import com.dcsh.market.KcxxCheck;
 import com.dcsh.market.Products;
-import com.dcsh.market.Reportxx;
+import com.dcsh.market.ReportCmx;
+import com.dcsh.market.ReportPmx;
 import com.dcsh.market.Rkmx;
 import com.dcsh.market.Rkxx;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSyikumx;
-
-import com.dcsh.market.ReportCmx;
-import com.dcsh.market.ReportPmx;
-import com.dcsh.market.Reportxx;
 import com.dcsh.market.priv.CankuPriv;
-
-import java.util.Date;
 
 /**
  * @author Administrator

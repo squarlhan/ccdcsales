@@ -1,5 +1,9 @@
 package com.dcsh.market.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -7,10 +11,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.dcsh.market.Canku;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.ReportPmx;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 public class MyQuartzJob extends QuartzJobBean {
 	
