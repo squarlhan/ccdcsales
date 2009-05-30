@@ -111,4 +111,12 @@
 		class="com.dcsh.market.action.zhongzhuanku.listOnwayProductAction">
 		<constructor-arg ref="ZhongZhuanKuService" />
 	</bean> 
+	<bean id="zzkentrywareHouseAction" scope="prototype"
+		class="com.dcsh.market.action.zhongzhuanku.entryWareHouseAction">
+		<constructor-arg ref="ZhongZhuanKuService" />
+	</bean> 
+	<bean id="zzkgoentryAction" scope="prototype"
+		class="com.dcsh.market.action.zhongzhuanku.goEntryAction">
+		<constructor-arg ref="ZhongZhuanKuService" />
+	</bean> 
 </beans>

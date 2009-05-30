@@ -129,6 +129,15 @@
             <result >/pages/zhongzhuanku/listzaitu.jsp</result>
             <result name="listonway" >/pages/zhongzhuanku/listzaitu.jsp</result>
         </action>
+        <action name="zzkentrywarehouse" method="execute" class="zzkentrywareHouseAction">
+            <result type="redirect-action">zzklistuncheckProducts</result>
+            <result  name="ok" type="redirect-action">zzklistuncheckProducts</result>
+            <result name="print">/pages/zhongzhuanku/printentry.jsp</result>
+        </action>
+        <action name="zzkgoentry" method="execute" class="zzkgoentryAction">
+            <result>/pages/zhongzhuanku/entry.jsp</result>
+            <result name="show">/pages/zhongzhuanku/entry.jsp</result>
+        </action>
 </package>
 	
 </struts>
