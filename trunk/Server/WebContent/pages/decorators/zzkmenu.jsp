@@ -17,6 +17,7 @@
       <tr align="center"><td><li><s:a href="zzklistuncheckProducts.action">未到货产品</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzklistallstorage!getInfoByDate.action">查看库存</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzklistonwayProducts.action">在途产品查看</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="zzkgoentry.action">产成品入库单</s:a></li></td></tr>
       <!--  <tr align="center"><td><li><s:a href="zzkgodelivery.action">移库</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="zzkgosaledelivery.action">销售</s:a></li></td></tr>-->
       <tr align="center"><td><li><s:a href="zzkgetreport.action">日报单</s:a></li></td></tr>

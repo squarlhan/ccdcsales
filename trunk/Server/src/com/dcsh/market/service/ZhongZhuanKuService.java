@@ -187,4 +187,6 @@ public interface ZhongZhuanKuService {
 	 * @return
 	 */
 	List<Chukumx> listOnwayProducts(int cankuid);
+	
+	void doEntryWareHouse(Rkxx rkxx);
 }
