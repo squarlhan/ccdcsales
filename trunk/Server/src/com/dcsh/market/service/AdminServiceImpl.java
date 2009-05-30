@@ -45,7 +45,7 @@ public class AdminServiceImpl implements AdminService {
 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 		this.hibernateTemplate = hibernateTemplate;
 	}
-	@Override
+	 
 	@Transactional
 	public void addProduct(Products product) {
 		
@@ -57,7 +57,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	@Override
+	 
 	@Transactional
 	public void delProduct(Products product) {
 		
@@ -69,13 +69,13 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional(readOnly=true)
 	public List<Products> getAllProducts() {
 		return hibernateTemplate.find("from Products");
 	}
 
-	@Override
+	 
 	@Transactional
 	public void updateProduct(Products product) {
 	
@@ -84,7 +84,7 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.update(temp);
 	}
 
-	@Override
+	 
 	@Transactional
 	public void addCanku(Canku canku) {
 		//
@@ -96,13 +96,13 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
-	@Override
+	 
 	@Transactional
 	public void addSpecification(Specifications specification) {
 		hibernateTemplate.save(specification);
 	}
 
-	@Override
+	 
 	@Transactional
 	public void delCanku(Canku canku) {
 		// 
@@ -113,7 +113,7 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.delete(hibernateTemplate.load(Canku.class, canku.getId()));
 	}
 
-	@Override
+	 
 	@Transactional
 	public void delSpecification(Specifications specification) {
 		// 
@@ -121,7 +121,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Canku> getAllCankus() {
 		
 		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku");	
@@ -134,13 +134,13 @@ public class AdminServiceImpl implements AdminService {
 		return cankus;		
 	}
 
-	@Override
+	 
 	public List<Specifications> getAllSpecifications() {
 		
 		return hibernateTemplate.find("from Specifications");
 	}
 
-	@Override
+	 
 	@Transactional
 	public void updateCanku(Canku canku) {
 		// 
@@ -151,7 +151,7 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.update(temp);
 	}
 
-	@Override
+	 
 	@Transactional
 	public void updateSpecification(Specifications specification) {
 		// 
@@ -164,7 +164,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<CankuPriv> loginAdmin(String username, byte[] Password) {
 		
 		List<CankuPriv> adminp = new ArrayList();
@@ -190,7 +190,7 @@ public class AdminServiceImpl implements AdminService {
 		else return null;
 	}
 	
-	@Override
+	 
 	@Transactional
 	public List<ReportPmx> listStorage(int cankuid,Date date){
 		
@@ -384,7 +384,7 @@ public class AdminServiceImpl implements AdminService {
 		return list;
 	}
 
-	@Override
+	 
 	@Transactional
 	public void addUser(Users user) {
 		// 
@@ -397,20 +397,20 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
-	@Override
+	 
 	@Transactional
 	public void delUser(Users user) {
 		// 
 		hibernateTemplate.delete(hibernateTemplate.load(Users.class, user.getId()));
 	}
 
-	@Override
+	 
 	public List<Users> getAllUsers() {
 		
 		return hibernateTemplate.find("from Users");
 	}
 
-	@Override
+	 
 	@Transactional
 	public void updateUser(Users user, int flag) {
 		
@@ -424,18 +424,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<UserGroup> getAllGroups(){
 		return (List<UserGroup>)hibernateTemplate.find("from UserGroup");
 	}
 	
-	@Override
+	 
 	@Transactional
 	public void delUserGroup(UserGroup usergroup){
 		hibernateTemplate.delete(hibernateTemplate.load(UserGroup.class, usergroup.getId()));
 	}
-	@Override
+	 
 	@Transactional
 	public void  addUserGroup(UserGroup usergroup){
 		if(hibernateTemplate.find("from UserGroup where name ='"+ String.valueOf(usergroup.getName())+"'").size()==0){
@@ -445,7 +445,7 @@ public class AdminServiceImpl implements AdminService {
 			throw new IllegalArgumentException("该产品已有！");
 		}
 	}
-	@Override
+	 
 	@Transactional
 	public void updateUserGroup(UserGroup usergroup){
 	
@@ -460,7 +460,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<Boolean> getSelectedUserlist(int groupId) {
 		UserGroup group = new UserGroup();
@@ -486,7 +486,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void saveGroupMember(List<Boolean> isgroupmember,Integer groupId) {
 		
@@ -512,7 +512,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	@Override
+	 
 	public List<URLGPriv> getgrouppriv(){
 		List<URLGPriv> result = new ArrayList();
 		List<UserGroup> groups = hibernateTemplate.find("from UserGroup");
@@ -540,7 +540,7 @@ public class AdminServiceImpl implements AdminService {
 		return result;
 	}
 	
-	@Override
+	 
 	@Transactional
 	public void setgrouppriv(int gid, int res){
 		UserGroupPriv newgpriv = new UserGroupPriv();
@@ -563,7 +563,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-	@Override
+	 
 	@Transactional
 	public List<ReportCmx> listSales(Date begindate,Date enddate){
 		List<ReportCmx> list = new ArrayList<ReportCmx>();
@@ -602,7 +602,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return list;
 	}
-	@Override
+	 
 	@Transactional
 	public List<Chukumx> listSalesmx(Date begindate,Date enddate){
 		List<Chukumx> listchuku = new ArrayList<Chukumx>();
@@ -622,7 +622,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return listchuku;
 	}
-	@Override
+	 
 	@Transactional
 	public List<ReportCmx> listDestroy(Date begindate,Date enddate){
 		List<ReportCmx> list = new ArrayList<ReportCmx>();
@@ -662,7 +662,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return list;
 	}
-	@Override
+	 
 	@Transactional
 	public List<Chukumx> listDestroymx(Date begindate,Date enddate){
 		List<Chukumx> listchuku = new ArrayList<Chukumx>();
@@ -682,7 +682,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return listchuku;
 	}
-	@Override
+	 
 	@Transactional
 	public List<ReportCmx> listLoss(Date begindate,Date enddate){
 		List<ReportCmx> list = new ArrayList<ReportCmx>();
@@ -721,7 +721,7 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return list;
 	}
-	@Override
+	 
 	@Transactional
 	public List<Chukumx> listLossmx(Date begindate,Date enddate){
 		List<Chukumx> listchuku = new ArrayList<Chukumx>();
@@ -740,18 +740,18 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return listchuku;
 	}
-	@Override
+	 
 	@Transactional
 	public List<Custom> getAllCustoms(){
 		return hibernateTemplate.find("from Custom");
 	}
 	
-	@Override
+	 
 	@Transactional
 	public void delCustom(Custom custom){
 		hibernateTemplate.delete(hibernateTemplate.load(Custom.class, custom.getId()));
 	}
-	@Override
+	 
 	@Transactional
 	public void addCustom(Custom custom){
 		if(hibernateTemplate.find("from Custom where customName ='"+ String.valueOf(custom.getCustomName())+"'").size()==0){
@@ -761,7 +761,7 @@ public class AdminServiceImpl implements AdminService {
 			throw new IllegalArgumentException("该客户已有！");
 		}
 	}
-	@Override
+	 
 	@Transactional
 	public void updateCustom(Custom custom){
 		Custom temp = (Custom) hibernateTemplate.get(Custom.class, custom.getId());
@@ -771,7 +771,7 @@ public class AdminServiceImpl implements AdminService {
 		hibernateTemplate.update(temp);
 	}
 	
-	@Override
+	 
 	@Transactional
 	public void addFahuo(Fahuo fahuo) {
 		
@@ -783,20 +783,20 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
-	@Override
+	 
 	@Transactional
 	public void delFahuo(Fahuo fahuo) {
 		
 		hibernateTemplate.delete(hibernateTemplate.load(Fahuo.class, fahuo.getId()));
 	}
 
-	@Override
+	 
 	public List<Fahuo> getAllFahuos() {
 		// TODO Auto-generated method stub
 		return hibernateTemplate.find("from Fahuo");
 	}
 
-	@Override
+	 
 	@Transactional
 	public void updateFahuo(Fahuo fahuo) {
 	
@@ -806,14 +806,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<UserPriv> getuserprivByUserId(int userid){
 	    
 		return hibernateTemplate.find("from UserPriv where user.id ='"+userid+"'"); 
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void saveUserpriv(List<Boolean> cankupriv, List<Boolean> prdpriv,
 			int userId) {
@@ -839,7 +839,7 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Smmdy> loadSmmdybyuser(Users user){
 		List<Smmdy> result = new ArrayList();
 		List<Smmdingyue> temp = (List<Smmdingyue>)hibernateTemplate.find("from Smmdingyue where user.id="+String.valueOf(user.getId()));
@@ -851,7 +851,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void updateSmmdy(List<Smmdingyue> sdys){
 		
@@ -876,21 +876,21 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<Canku> getAllCYC() {
 		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type=0");	
 		return cankus;
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<Canku> getAllF(){
 		List<Canku> cankus = (List<Canku>)hibernateTemplate.find("from Canku where type=6");	
 		return cankus;
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public boolean adjcfr(int cycid,int fid){
 		List<cycrelgck> gckList = hibernateTemplate.find("from cycrelgck as crg where crg.cyc.id = "+cycid+" and crg.gck.id = "+fid);
@@ -905,7 +905,7 @@ public class AdminServiceImpl implements AdminService {
 		return hibernateTemplate.find("from Canku where id="+id);
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void savecfr(List<Boolean> cankupriv,int cycId){
 		List<cycrelgck> gckList = 
@@ -927,7 +927,7 @@ public class AdminServiceImpl implements AdminService {
 
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Chukumx> listOnwayProducts(int org, int aim) {
 
 		List<Chukumx> result = new ArrayList<Chukumx>();

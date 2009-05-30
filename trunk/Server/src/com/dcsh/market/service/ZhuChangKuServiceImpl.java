@@ -66,7 +66,7 @@ private HibernateTemplate hibernateTemplate;
     	}
 		return cankus;	
 	}
-	@Override
+	 
 	public List<KcxxCheck> getValiProducts(Canku canku) {
 		// TODO Auto-generated method stub
 		List<KcxxCheck> result = new ArrayList();
@@ -83,7 +83,7 @@ private HibernateTemplate hibernateTemplate;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Chukumx> listUnCheckProducts(int ckid) {
 		// TODO Auto-generated method stub
 		List<Chuku> chukus = new ArrayList();
@@ -318,7 +318,7 @@ private HibernateTemplate hibernateTemplate;
 		return list;
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Kcxx> listZhuChangKuAll(int ckid) {
 	
 		List<Kcxx> list = hibernateTemplate.find("from Kcxx where cid ="+ String.valueOf(ckid));
@@ -347,7 +347,7 @@ private HibernateTemplate hibernateTemplate;
 	}
 
 
-	@Override
+	 
 	@Transactional
 	public void doentryZhuchangku(List<Chukumx> chukumxes,Rkxx rkxx){
 		ArrayList<Rkmx> rkmx = new ArrayList();
@@ -395,7 +395,7 @@ private HibernateTemplate hibernateTemplate;
 
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void doDeliveryWareHouse(Chuku ck) {
 	
@@ -612,7 +612,7 @@ private HibernateTemplate hibernateTemplate;
 
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public Canku getCangkuById(Integer cangkuId) {
 		
@@ -621,7 +621,7 @@ private HibernateTemplate hibernateTemplate;
 		return canku;
 	}
 
-	@Override
+	 
 	public List<Kcxx> getAllProducts(Canku canku) {
 		// TODO Auto-generated method stub
 		List<Kcxx> result = new ArrayList();
@@ -631,18 +631,18 @@ private HibernateTemplate hibernateTemplate;
 
 	}	
 
-	@Override
+	 
 	public List<Custom> getAllCustom(){
 		return (List<Custom>) hibernateTemplate.find("from Custom");
 	}
-	@Override
+	 
 	@Transactional
 	public List<XSyikumx> getXSyikumx(Canku canku){
 		List<XSyikumx> result = new ArrayList<XSyikumx>();
 		result = hibernateTemplate.find("from XSyikumx as mx where mx.canku = "+canku.getId()+" and mx.status = 0");
 		return result;
 	}
-	@Override
+	 
 	@Transactional
 	public void resetXsykxxStatus(int index, int num){
 		XSyikumx temp = (XSyikumx)hibernateTemplate.get(XSyikumx.class, index);
@@ -652,7 +652,7 @@ private HibernateTemplate hibernateTemplate;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public List<XSfahuomx> getXSfahuomx(Canku canku){
 		List<XSfahuomx> result = new ArrayList<XSfahuomx>();
@@ -661,7 +661,7 @@ private HibernateTemplate hibernateTemplate;
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public void resetXsfhxxStatus(int index, int num){
 		XSfahuomx temp = (XSfahuomx)hibernateTemplate.get(XSfahuomx.class, index);
@@ -669,7 +669,7 @@ private HibernateTemplate hibernateTemplate;
 		temp.setNumber(num);
 		hibernateTemplate.update(temp);
     }
-	@Override
+	 
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSfahuomx xsfhmx) {
 		// TODO Auto-generated method stub
 		List<KcxxCheck> result = new ArrayList();
@@ -684,7 +684,7 @@ private HibernateTemplate hibernateTemplate;
 		return result;
 
 	}
-	@Override
+	 
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSyikumx xsykmx) {
 		// TODO Auto-generated method stub
 		List<KcxxCheck> result = new ArrayList();
@@ -733,7 +733,7 @@ private HibernateTemplate hibernateTemplate;
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(mydate);
@@ -746,7 +746,7 @@ private HibernateTemplate hibernateTemplate;
 		
 	    return listreportpmx;
 	}
-	@Override
+	 
 	@Transactional
 	public void doEntryWareHouse(Rkxx rkxx) {
 		rkxx.setCanku((Canku)hibernateTemplate.load(Canku.class, rkxx.getCanku().getId()));

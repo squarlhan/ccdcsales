@@ -32,7 +32,7 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 	
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<XSKcxx> listStorageByPrd(List<Products> productList, List<Canku> cankuList){
 		List<XSKcxx> result = new ArrayList();
 		List<Integer> cids = new ArrayList();
@@ -139,12 +139,12 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<Fahuo> getAllFahuos(){
 		return (List<Fahuo>) hibernateTemplate.find("from Fahuo");
 	}
 
-	@Override
+	 
 	@Transactional
 	public void doYiku(XSyikuxx xsyikuxx) {
 		
@@ -175,7 +175,7 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		}
 	}
 
-	@Override
+	 
 	@Transactional
 	public void doXsfahuo(XSfahuoxx xsfahuoxx) {
 		
@@ -214,7 +214,7 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	@Transactional
 	public Canku getCangkuById(Integer cangkuId) {
 		
@@ -227,17 +227,17 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		List<Custom> customerList = hibernateTemplate.find("from Custom where id='"+customerId+"'");
 		return customerList.get(0);
 	}
-	@Override
+	 
 	public Users loadmyshr(){
 		return (Users) hibernateTemplate.get(Users.class, 9);
 	}
 	
-	@Override
+	 
     public Users loadmynhr(){
 		return  (Users) hibernateTemplate.get(Users.class, 10);
     }
 	
-	@Override
+	 
 	@Transactional
 	public List<ReportCmx> listSales(List<Products> products,Date begindate,Date enddate){
 		List<ReportCmx> list = new ArrayList<ReportCmx>();
@@ -276,7 +276,7 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		}
 		return list;
 	}
-	@Override
+	 
 	@Transactional
 	public List<Chukumx> listSalesmx(List<Products> products,Date begindate,Date enddate){
 		List<Chukumx> listchuku = new ArrayList<Chukumx>();
@@ -301,23 +301,23 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 		return listchuku;
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<XSyikumx> getXSyikumx(Users zbr){
 		List<XSyikumx> result = hibernateTemplate.find("from XSyikumx where status = 0 and xsyikuxx.zbr.id ="+String.valueOf(zbr.getId()));
 		return result;
 	}
 	@SuppressWarnings("unchecked")
-	@Override
+	 
 	public List<XSfahuomx> getXSfahuomx(Users zbr){
 		List<XSfahuomx> result = hibernateTemplate.find("from XSfahuomx where status = 0 and xsfahuoxx.zdr.id ="+String.valueOf(zbr.getId()));
 		return result;
 	}
-	@Override
+	 
 	@Transactional
 	public void delXSyikumx(int id){
 		hibernateTemplate.delete(hibernateTemplate.get(XSyikumx.class, id));
 	}
-	@Override
+	 
 	@Transactional
     public void delXSfahuomx(int id){
 		hibernateTemplate.delete(hibernateTemplate.get(XSfahuomx.class, id));
