@@ -30,7 +30,7 @@
 	<bean id="cronReportTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="reportJob" />
 		<property name="cronExpression">
-			<value>0 0 12,23 * * ?</value>
+			<value>0 0 23,12 * * ?</value>
 		</property>
 	</bean>
 

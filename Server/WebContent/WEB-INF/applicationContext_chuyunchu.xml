@@ -92,6 +92,10 @@
 	    class="com.dcsh.market.action.chuyunchu.getReportAction">
 	    <constructor-arg ref="mywareHouseService"/>
 	</bean>
+	<bean id="getreportYetiAction" scope="prototype"
+	    class="com.dcsh.market.action.chuyunchu.getReportYetiAction">
+	    <constructor-arg ref="mywareHouseService"/>
+	</bean>
 
 
     <bean id="savereportAction" scope="prototype"
@@ -157,6 +161,10 @@
 	</bean>
    <bean id="cycsearchDayReportAction" scope="prototype"
 		class="com.dcsh.market.action.chuyunchu.SearchDayReportAction">
+		<constructor-arg ref="mywareHouseService" />
+	</bean>
+	<bean id="cycsearchDayReportYetiAction" scope="prototype"
+		class="com.dcsh.market.action.chuyunchu.SearchDayReportYetiAction">
 		<constructor-arg ref="mywareHouseService" />
 	</bean>
 	 <bean id="cycprintWarehouseAction" scope="prototype"
