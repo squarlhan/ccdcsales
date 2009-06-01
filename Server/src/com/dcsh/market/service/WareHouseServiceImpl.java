@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -276,7 +277,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	public List<ReportPmx> getDayReportPmx(Canku canku,Date date){
 
 		List<ReportPmx> list = new ArrayList<ReportPmx>();
-		/*
+		/**
 		 * 当日入库产品类别psort
 		 * 得到入库明细中的	当日该仓库	的入库明细listrkmx
 		 */
@@ -355,7 +356,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 				}
 			}
 		
-			/*
+			/**
 			 * 查询当日只有出库且无库存的产品种类
 			 */
 			for(int i4=0;i4<pchuku.size();i4++){
@@ -364,7 +365,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 			}
 			
 			
-			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt));
+			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));//TODO
 		}
 		
 
@@ -404,11 +405,153 @@ public class WareHouseServiceImpl implements WareHouseService {
 				}
 				
 				
-				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt));
+				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));//TODO
 			}
 		}
 
 		return list;
+	}
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ReportPmx> getDayReportPmx_yeti(Canku canku,Date date)
+	{
+		List<ReportPmx> list = new ArrayList<ReportPmx>();
+		/*
+		 * 当日入库产品类别psort
+		 * 得到入库明细中的	当日该仓库	的入库明细listrkmx
+		 */
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(date);
+		
+		List<Rkmx> listrkmx = hibernateTemplate.find("from Rkmx as rk where rk.rkxx.canku = "+canku.getId()
+				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'");
+		
+		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId()
+				+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'");
+		
+//		List<Products> pchuku = hibernateTemplate.find("select distinct products from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId()
+//				+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'");
+		List<Canku> listgck = hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
+		List<Rkmx> listgckrkmx = new ArrayList();//工厂库入库明细
+		List<Kcxx> listgckkc = new ArrayList();//工厂库库存
+		Set<Products> pgck_set = new HashSet();//工厂库产品
+		List<Products> pgck = new ArrayList();//工厂库产品
+		List<Chukumx> listcjck = new ArrayList();//车间用出库
+		
+		
+		List<Kcxx> listkcxx =new ArrayList();
+		BigDecimal total_kcwt = new BigDecimal(0);
+		BigDecimal total_rkwt = new BigDecimal(0);
+		BigDecimal total_ckwt = new BigDecimal(0);
+		BigDecimal nxt = new BigDecimal(0);
+		BigDecimal wxt = new BigDecimal(0);
+		BigDecimal djt = new BigDecimal(0);
+		BigDecimal dxt = new BigDecimal(0);
+		BigDecimal bhgt = new BigDecimal(0);
+		BigDecimal tmp = new BigDecimal(0);
+		BigDecimal total_ct = new BigDecimal(0);//产量
+		BigDecimal total_gqt = new BigDecimal(0);//灌区量
+		BigDecimal total_cjt = new BigDecimal(0);//车间用
+		
+		for(int i=0;i<listgck.size();i++)
+		{
+			listgckrkmx.addAll((List<Rkmx>)hibernateTemplate.find("from Rkmx as rk where rk.rkxx.canku = "+listgck.get(i).getId()
+				+" and convert(varchar(10),rk.rkxx.rksj,120) = '"+datestr+"'"));
+			listgckkc.addAll(hibernateTemplate.find("from Kcxx as kc where kc.id.cid = "+listgck.get(i).getId()));
+			pgck_set.addAll(hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+listgck.get(i).getId()));
+			listcjck.addAll(hibernateTemplate.find("from Chukumx as ckmx where ckmx.chuku.cankuByCankuId = "+listgck.get(i).getId()+
+					                               " and ckmx.chuku.cankuByRkId = "+this.getCangkuByType(7).get(0).getId()));
+		}
+		pgck.addAll(pgck_set);
+		for(int j=0;j<pgck.size();j++)
+		{
+			total_ct = new BigDecimal(0);
+		    total_gqt = new BigDecimal(0);
+		    total_cjt = new BigDecimal(0);
+		    total_rkwt = new BigDecimal(0);
+			total_ckwt = new BigDecimal(0);
+			total_kcwt = new BigDecimal(0);
+			nxt = new BigDecimal(0);
+			wxt = new BigDecimal(0);
+			djt = new BigDecimal(0);
+			dxt = new BigDecimal(0);
+			bhgt = new BigDecimal(0);
+			
+		    for(int k=0;k<listgckrkmx.size();k++)//产量
+		    {
+		    	if(listgckrkmx.get(k).getProducts().getId()== pgck.get(j).getId()){
+		    		total_ct = total_ct.add(listgckrkmx.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
+		    				listgckrkmx.get(k).getNumber())));
+		    		System.out.println("equal   "+listgckrkmx.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
+		    				listgckrkmx.get(k).getNumber()))+"   "+total_ct);
+		    	}
+		    	else System.out.println(listgckrkmx.get(k).getProducts().getId()+"***"+pgck.get(j).getId());
+		    }
+		    for(int k=0;k<listgckkc.size();k++)//灌区量
+		    {
+		    	if(listgckkc.get(k).getProducts().getId()== pgck.get(j).getId()){
+		    		total_gqt = total_gqt.add(listgckkc.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
+		    				listgckkc.get(k).getNumber())));
+		    	}
+		    }
+		    for(int k=0;k<listcjck.size();k++)//车间用
+		    {
+		    	if(listcjck.get(k).getProducts().getId()== pgck.get(j).getId()){
+		    		total_cjt = total_cjt.add(listcjck.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
+		    				listcjck.get(k).getNumber())));
+		    	}
+		    }
+			//入库明细总重
+			for(int i1=0;i1<listrkmx.size();i1++){
+				
+				if(listrkmx.get(i1).getProducts().getId()==(pgck.get(j ).getId()))
+				{
+					total_rkwt = total_rkwt.add((listrkmx.get(i1).getSpecifications().getWeight()).multiply(new BigDecimal(listrkmx.get(i1).getNumber())));
+				}
+			}
+			//日销量
+			for(int i2=0;i2<listchuku.size();i2++){
+				if(listchuku.get(i2).getProducts().getId()==(pgck).get(j).getId())
+				{		
+					total_ckwt = total_ckwt.add((listchuku.get(i2).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i2).getNumber())));
+				}
+				else
+				System.out.println();
+			}
+		
+			//内销.外销.待检.定向--库存
+			listkcxx.clear();
+			listkcxx = hibernateTemplate.find("from Kcxx as kc where kc.products.id="+ pgck.get(j).getId()+" and kc.id.cid="+canku.getId());
+			for(int i3=0;i3<listkcxx.size();i3++){
+				tmp=new BigDecimal(0);
+				tmp=(listkcxx.get(i3).getSpecifications().getWeight()).multiply
+					(new BigDecimal(listkcxx.get(i3).getNumber()));
+			
+				total_kcwt = total_kcwt.add(tmp);
+				switch(listkcxx.get(i3).getSaleType())
+				{
+					case 1:nxt=nxt.add(tmp);break;//内销
+					case 3:wxt=wxt.add(tmp);break;//外销
+					case 0:djt=djt.add(tmp);break;//待检
+					case 2:dxt=dxt.add(tmp);break;//定向
+					case 4:bhgt=bhgt.add(tmp);break;//不合格
+				}
+			}
+		
+//			/**
+//			 * 查询当日只有出库且无库存的产品种类
+//			 */
+//			for(int i4=0;i4<pchuku.size();i4++){
+//				if(pchuku.get(i4).getId()==( pgck.get(j).getId()))
+//					pchuku.remove(i4);
+//			}
+//			
+			
+			list.add(new ReportPmx(new Reportxx(), canku, pgck.get(j), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,total_ct,total_gqt,total_cjt));
+		    
+		}
+		return list;
+		
 	}
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -430,6 +573,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 		BigDecimal total_ckwt = new BigDecimal(0);
 		for(int i=0;i<schuku;i++){
+			total_ckwt = new BigDecimal(0);
 			total_ckwt = total_ckwt.add((listchuku.get(i).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i).getNumber())));
 			list.add(new ReportCmx(i, new Reportxx(), canku , listchuku.get(i).getProducts(), listchuku.get(i).getChuku().getCankuByRkId(), total_ckwt));
 			
@@ -438,6 +582,65 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<ReportCmx> getDayReportCmx_yeti(Canku canku,Date date){
+		
+		List<ReportCmx> list = new ArrayList();
+		
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(date);
+	    
+		/*
+		 * 得到出库明细中的	当日该仓库	的出库明细listchuku
+		 */
+
+		List<Chukumx> listchuku = hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+canku.getId()
+				+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'");
+		
+		List<Canku> listgck = hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
+		Set<Products> pgck_set = new HashSet();//工厂库产品
+		List<Products> pgck = new ArrayList();//工厂库产品
+		for(int i=0;i<listgck.size();i++)
+		{
+			pgck_set.addAll(hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+listgck.get(i).getId()));
+		    listchuku.addAll(hibernateTemplate.find("from Chukumx as ck where ck.chuku.cankuByCankuId = "+listgck.get(i).getId()
+		    		+" and convert(varchar(10),ck.chuku.cksj,120) = '"+datestr+"'")); 
+		}
+		int schuku = listchuku.size();
+		pgck.addAll(pgck_set);
+		
+		
+		BigDecimal total_ckwt = new BigDecimal(0);
+		for(int i=0;i<schuku;i++){
+			for(int j=0;j<pgck.size();j++)
+			{
+				if(listchuku.get(i).getProducts().getId()==pgck.get(j).getId()){
+					total_ckwt = new BigDecimal(0);
+					total_ckwt = total_ckwt.add((listchuku.get(i).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i).getNumber())));
+					ReportCmx tempcmx = new ReportCmx(i, new Reportxx(), canku , listchuku.get(i).getProducts(), listchuku.get(i).getChuku().getCankuByRkId(), total_ckwt);
+					
+					switch(listchuku.get(i).getChuku().getCankuByRkId().getType())
+					{
+					case 8:tempcmx.setMemo("实验用："+listchuku.get(i).getChuku().getMemo().trim());break;
+					case 7:tempcmx.setMemo("源厂库："+listchuku.get(i).getChuku().getCankuByCankuId().getName()+"("+listchuku.get(i).getChuku().getMemo().trim()+")");break;
+					case 4:tempcmx.setMemo("损耗");break;
+					case 5:tempcmx.setMemo("销毁");break;
+					case 3:tempcmx.setMemo("销售给："+listchuku.get(i).getChuku().getCustom().getCustomName());break;
+					default:tempcmx.setMemo("移库/调拨到："+listchuku.get(i).getChuku().getCankuByRkId().getName());
+					}
+					
+					
+				//	tempcmx.setMemo("memo"+i);
+					list.add(tempcmx);
+					System.out.println(tempcmx.getMemo()+"**"+i);
+				}
+			}
+			
+		}
+
+		return list;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Transactional
@@ -502,7 +705,6 @@ public class WareHouseServiceImpl implements WareHouseService {
 			tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
 			tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
 			tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3)); 		
-			
 			hibernateTemplate.save(tempreportpmx);
 					
 		}
@@ -529,7 +731,6 @@ public class WareHouseServiceImpl implements WareHouseService {
 				tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
 				tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
 				tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3)); 
-		
 				
 				hibernateTemplate.save(tempreportpmx);
 						
@@ -574,7 +775,148 @@ public class WareHouseServiceImpl implements WareHouseService {
 
 	}
 	
-	 
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public void saveDayReportxx_yeti(List<ReportCmx> reportcmxlist,
+			List<ReportPmx> reportpmxlist,Users users, String bno, Date today,int cankuid) {
+		//判断数据库中是否存在当天的日报
+		SimpleDateFormat bartDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+	    String datetemp =bartDateFormat1.format(today);
+		List<Reportxx> isreportxxexist = hibernateTemplate.find("from Reportxx as rx where rx.ckid='"
+				+cankuid+"' and "+"convert(varchar(10),rx.date,120) = '"+datetemp+"'"+" and rx.bno like 'yeti%'");
+
+		List<Canku> cankulist= hibernateTemplate.find("from Canku as ck where ck.id = '"+cankuid+"'");//从数据库中读取该仓库信息
+
+		Canku canku = new Canku();
+		canku = cankulist.get(0);
+		
+		Reportxx tempreportxx = new Reportxx();
+		tempreportxx.setBno(bno);
+		tempreportxx.setDate(today);
+		tempreportxx.setCkid(canku);
+		tempreportxx.setReporter(users);
+	
+		//判断数据库中是否存在改天的日报，如果不存在则保存当天的日报信息，如果存在则更新已存在的日报信息（根据时间和仓库来查）
+		if(isreportxxexist.size()==0){
+			
+			hibernateTemplate.save(tempreportxx);//存reportxx
+			
+		}		
+		
+		else
+		{
+		
+			tempreportxx.setId(isreportxxexist.get(0).getId());
+				
+			hibernateTemplate.merge(tempreportxx);
+		}
+
+	
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(tempreportxx.getDate());
+	    
+	     
+	     List<Reportxx> tempreportxx_data= hibernateTemplate.find("from Reportxx as rx where " +
+	    		"convert(varchar(10),rx.date,120) = '"+datestr+"'"+" and rx.ckid='"+cankuid+"'"+" and rx.bno like 'yeti%'");//取reportxx
+  
+	    tempreportxx.setId(tempreportxx_data.get(0).getId());//取出当天的reportxx.id只有一行数据时适用
+		
+	    if(isreportxxexist.size()==0){
+	    
+	    //存储ReportPmx
+		for(int i=0;i<reportpmxlist.size();i++)
+		{
+			ReportPmx tempreportpmx = new ReportPmx();
+			tempreportpmx.setRxxid(tempreportxx);
+			tempreportpmx.setCkid(canku);
+			tempreportpmx.setCkt(reportpmxlist.get(i).getCkt().setScale(3));
+			tempreportpmx.setDjt(reportpmxlist.get(i).getDjt().setScale(3));
+			tempreportpmx.setDxt(reportpmxlist.get(i).getDxt().setScale(3));
+			tempreportpmx.setKct(reportpmxlist.get(i).getKct().setScale(3));
+			tempreportpmx.setNxt(reportpmxlist.get(i).getNxt().setScale(3));
+			tempreportpmx.setPrdid(reportpmxlist.get(i).getPrdid());
+			tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
+			tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
+			tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3));
+			tempreportpmx.setCt(reportpmxlist.get(i).getCt().setScale(3));
+			tempreportpmx.setGqt(reportpmxlist.get(i).getGqt().setScale(3));
+			tempreportpmx.setCjt(reportpmxlist.get(i).getCjt().setScale(3)); 
+			hibernateTemplate.save(tempreportpmx);
+					
+		}
+	    }
+	    else
+	    {
+	
+	    	List<ReportPmx> temp = hibernateTemplate.find("from ReportPmx as rpmx where rpmx.rxxid.id='"+isreportxxexist.get(0).getId()+"'");
+
+	    	hibernateTemplate.deleteAll(temp);
+	    	
+	
+	    	for(int i=0;i<reportpmxlist.size();i++)
+			{
+				ReportPmx tempreportpmx = new ReportPmx();
+				tempreportpmx.setRxxid(tempreportxx);
+				tempreportpmx.setCkid(canku);
+				tempreportpmx.setCkt(reportpmxlist.get(i).getCkt().setScale(3));
+				tempreportpmx.setDjt(reportpmxlist.get(i).getDjt().setScale(3));
+				tempreportpmx.setDxt(reportpmxlist.get(i).getDxt().setScale(3));
+				tempreportpmx.setKct(reportpmxlist.get(i).getKct().setScale(3));
+				tempreportpmx.setNxt(reportpmxlist.get(i).getNxt().setScale(3));
+				tempreportpmx.setPrdid(reportpmxlist.get(i).getPrdid());
+				tempreportpmx.setRkt(reportpmxlist.get(i).getRkt().setScale(3));
+				tempreportpmx.setWxt(reportpmxlist.get(i).getWxt().setScale(3));
+				tempreportpmx.setBhgt(reportpmxlist.get(i).getBhgt().setScale(3)); 
+				tempreportpmx.setCt(reportpmxlist.get(i).getCt().setScale(3));
+				tempreportpmx.setGqt(reportpmxlist.get(i).getGqt().setScale(3));
+				tempreportpmx.setCjt(reportpmxlist.get(i).getCjt().setScale(3)); 
+				
+				hibernateTemplate.save(tempreportpmx);
+						
+			}
+	    }
+	    if(isreportxxexist.size()==0){
+		//存储ReportCmx
+		for(int i=0;i<reportcmxlist.size();i++)
+		{
+			ReportCmx tempreportcmx = new ReportCmx();
+			tempreportcmx.setRxxid(tempreportxx);
+			tempreportcmx.setCkid(canku);
+			tempreportcmx.setCkt(reportcmxlist.get(i).getCkt().setScale(3)); 
+			tempreportcmx.setPrdid(reportcmxlist.get(i).getPrdid());
+			tempreportcmx.setRkid(reportcmxlist.get(i).getRkid());
+			tempreportcmx.setMemo(reportcmxlist.get(i).getMemo());
+			hibernateTemplate.saveOrUpdate(tempreportcmx);
+		}
+
+	}
+
+	
+	    else
+	    {
+            
+	    	List<ReportCmx> temp = hibernateTemplate.find("from ReportCmx as rcmx where rcmx.rxxid.id='"+isreportxxexist.get(0).getId()+"'");
+
+	    	hibernateTemplate.deleteAll(temp);
+	    	
+	    	for(int i=0;i<reportcmxlist.size();i++)
+			{
+				ReportCmx tempreportcmx = new ReportCmx();
+				tempreportcmx.setRxxid(tempreportxx);
+				tempreportcmx.setCkid(canku);
+				tempreportcmx.setCkt(reportcmxlist.get(i).getCkt().setScale(3)); 
+				tempreportcmx.setPrdid(reportcmxlist.get(i).getPrdid());
+				tempreportcmx.setRkid(reportcmxlist.get(i).getRkid());
+				tempreportcmx.setMemo(reportcmxlist.get(i).getMemo());
+				
+				hibernateTemplate.save(tempreportcmx);
+			}
+	    }
+
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<KcxxCheck> getValiProducts(Canku canku) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -589,7 +931,8 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	 
+	@SuppressWarnings("unchecked")
+
 	public List<KcxxCheck> getallCheckedProducts(Canku canku) {
 		
 		List<KcxxCheck> result = new ArrayList();
@@ -605,7 +948,8 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	 
+	@SuppressWarnings("unchecked")
+
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSfahuomx xsfhmx) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -622,7 +966,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}
-	 
+
+	@SuppressWarnings("unchecked")
+
 	public List<KcxxCheck> getCheckedProducts(Canku canku,XSyikumx xsykmx) {
 
 		List<KcxxCheck> result = new ArrayList();
@@ -639,7 +985,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	
 
-	 
+
+	@SuppressWarnings("unchecked")
+
 	public List<Kcxx> getUnqualifiedProducts(Canku canku) {
 
 		List<Kcxx> result = new ArrayList();
@@ -648,8 +996,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}	
-	
-	 
+
+	@SuppressWarnings("unchecked")
+
 	public List<Kcxx> getAllProducts(Canku canku) {
 
 		List<Kcxx> result = new ArrayList();
@@ -658,8 +1007,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 
 	}	
-	
-	 
+
+	@SuppressWarnings("unchecked")
+
 	@Transactional
 	public List<KcxxCheck> getNxProducts(Canku canku) {
 
@@ -746,12 +1096,16 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    		return listrpmx;
 	    }
 	}
-	 
+
+	@SuppressWarnings("unchecked")
+
 	public List<Custom> getAllCustom(){
 		return (List<Custom>) hibernateTemplate.find("from Custom");
 	}
 
-	 
+
+	@SuppressWarnings("unchecked")
+
 	@Transactional
 	public List<XSyikumx> getXSyikumx(Canku canku){
 		List<XSyikumx> result = new ArrayList<XSyikumx>();
@@ -890,15 +1244,42 @@ public class WareHouseServiceImpl implements WareHouseService {
 		
 	    return listreportcmx;
 	}
-
 	@SuppressWarnings("unchecked")
-	 
+
+	public List<ReportCmx> searchDayReportCmx_yeti(Date mydate,Canku canku) {
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(mydate);
+	    
+	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'"+" and rp.bno like 'yeti%'");
+	    if(listrpxx.size()==0)
+	    	return null;
+	        	
+	    List<ReportCmx> listreportcmx = hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(0).getId());
+		
+	    return listreportcmx;
+	}
+	@SuppressWarnings("unchecked")
 	public List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String datestr =bartDateFormat.format(mydate);
 	    
 	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
 				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
+	    if(listrpxx.size()==0)
+	    	return null;
+	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
+		
+	    return listreportpmx;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReportPmx> searchDayReportPmx_yeti(Date mydate,Canku canku) {
+		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    String datestr =bartDateFormat.format(mydate);
+	    
+	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'"+" and rp.bno like 'yeti%'");
 	    if(listrpxx.size()==0)
 	    	return null;
 	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
@@ -956,7 +1337,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 				
 					total_kcwt = total_kcwt.add(tmp);
 				}
-				list.add(new ReportPmx(new Reportxx(), gckList.get(i), pkucun.get(j), new BigDecimal(0), new BigDecimal(0), total_kcwt, new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),new BigDecimal(0)));
+				list.add(new ReportPmx(new Reportxx(), gckList.get(i), pkucun.get(j), new BigDecimal(0), new BigDecimal(0), total_kcwt, new BigDecimal(0), new BigDecimal(0), new BigDecimal(0), new BigDecimal(0),new BigDecimal(0),new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));
 			}
 			
 		}
@@ -995,6 +1376,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return gckList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<KcxxCheck> getAllCheckProducts(Canku canku){
 		List<KcxxCheck> result = new ArrayList();
 		List<Kcxx> tempresult = new ArrayList();
@@ -1009,7 +1391,9 @@ public class WareHouseServiceImpl implements WareHouseService {
 		return result;
 	}
 
-	 
+
+	@SuppressWarnings("unchecked")
+
 	public List<Canku> getGckbycyc(Canku canku){
 		return (List<Canku>)hibernateTemplate.find("select distinct gck from cycrelgck as crg where crg.cyc.id = "+canku.getId());
 	}
