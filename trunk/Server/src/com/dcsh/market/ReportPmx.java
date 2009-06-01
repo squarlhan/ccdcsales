@@ -27,6 +27,9 @@ public class ReportPmx implements java.io.Serializable {
 	private BigDecimal djt;
 	private BigDecimal dxt;
 	private BigDecimal bhgt;
+	private BigDecimal ct;
+	private BigDecimal gqt;
+	private BigDecimal cjt;
 	
 	public ReportPmx() {
 		
@@ -34,7 +37,7 @@ public class ReportPmx implements java.io.Serializable {
 	
 	public ReportPmx(int id, Reportxx rxxid, Canku ckid, Products prdid,
 			BigDecimal rkt, BigDecimal ckt, BigDecimal kct, BigDecimal nxt,
-			BigDecimal wxt, BigDecimal djt, BigDecimal dxt, BigDecimal bhgt) {
+			BigDecimal wxt, BigDecimal djt, BigDecimal dxt, BigDecimal bhgt,BigDecimal ct,BigDecimal gqt) {
 		this.id = id ;
 		this.rxxid = rxxid;
 		this.ckid = ckid;
@@ -47,13 +50,15 @@ public class ReportPmx implements java.io.Serializable {
 		this.djt = djt;
 		this.dxt = dxt;
 		this.bhgt = bhgt;
+		this.ct = ct;
+		this.gqt = gqt;
 	}
 	
     
 	
 	public ReportPmx(Reportxx rxxid, Canku ckid, Products prdid,
 			BigDecimal rkt, BigDecimal ckt, BigDecimal kct, BigDecimal nxt,
-			BigDecimal wxt, BigDecimal djt, BigDecimal dxt, BigDecimal bhgt) {
+			BigDecimal wxt, BigDecimal djt, BigDecimal dxt, BigDecimal bhgt,BigDecimal ct,BigDecimal gqt,BigDecimal cjt) {
 		super();
 		this.rxxid = rxxid;
 		this.ckid = ckid;
@@ -66,6 +71,9 @@ public class ReportPmx implements java.io.Serializable {
 		this.djt = djt;
 		this.dxt = dxt;
 		this.bhgt = bhgt;
+		this.ct = ct;
+		this.gqt = gqt;
+		this.cjt = cjt;
 	}
 
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -184,6 +192,26 @@ public class ReportPmx implements java.io.Serializable {
 	public void setBhgt(BigDecimal bhgt) {
 		this.bhgt = bhgt;
 	}
-	
-	
+	@Column(name = "Ct")
+	public BigDecimal getCt()
+	{
+		return ct;
+	}
+	public void setCt(BigDecimal ct){
+		this.ct = ct;
+	}
+	@Column(name = "Gqt")
+	public BigDecimal getGqt(){
+		return gqt;
+	}
+	public void setGqt(BigDecimal gqt){
+		this.gqt = gqt;
+	}
+	@Column(name = "Cjt")
+	public BigDecimal getCjt(){
+		return cjt;
+	}
+	public void setCjt(BigDecimal cjt){
+		this.cjt =  cjt;
+	}
 }
