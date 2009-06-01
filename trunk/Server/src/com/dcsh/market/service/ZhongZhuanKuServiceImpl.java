@@ -244,7 +244,7 @@ private HibernateTemplate hibernateTemplate;
 			}
 			
 			
-			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt));
+			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,null,null,null));//TODO
 		}
 		
 		
@@ -290,7 +290,7 @@ private HibernateTemplate hibernateTemplate;
 				}
 				
 				
-				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt));
+				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,null,null,null));//TODO
 			}
 		}
 		
@@ -612,6 +612,7 @@ private HibernateTemplate hibernateTemplate;
 
 		BigDecimal total_ckwt = new BigDecimal(0);
 		for(int i=0;i<schuku;i++){
+			total_ckwt = new BigDecimal(0);
 			total_ckwt = total_ckwt.add((listchuku.get(i).getSpecifications().getWeight()).multiply(new BigDecimal(listchuku.get(i).getNumber())));
 			list.add(new ReportCmx(i, new Reportxx(), canku , listchuku.get(i).getProducts(), listchuku.get(i).getChuku().getCankuByRkId(), total_ckwt));
 			

@@ -258,7 +258,7 @@ public class AdminServiceImpl implements AdminService {
 	    			}
 	    			list.add(new ReportPmx(new Reportxx(),new Canku(),productall.get(i),
 	    					total_rkwt,total_ckwt,total_kcwt,nxt,
-	    					wxt,djt,dxt,bhgt));
+	    					wxt,djt,dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));
 	    		}
 	    	
 	    	}
@@ -378,7 +378,7 @@ public class AdminServiceImpl implements AdminService {
 				if(pchuku.get(i4).getId()==(pkucun.get(i).getId()))
 					pchuku.remove(i4);
 			}
-			list.add(new ReportPmx(new Reportxx(),new Canku(), pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt));
+			list.add(new ReportPmx(new Reportxx(),new Canku(), pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));
 		}
 		
 		return list;

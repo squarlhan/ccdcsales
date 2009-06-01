@@ -114,8 +114,9 @@ public interface WareHouseService {
 	 * @param date 所查日期
 	 */
 	List<ReportPmx> getDayReportPmx(Canku canku,Date date);
+	List<ReportPmx> getDayReportPmx_yeti(Canku canku,Date date);
 	List<ReportCmx> getDayReportCmx(Canku canku,Date date);
-	
+	List<ReportCmx> getDayReportCmx_yeti(Canku canku,Date date);
 /**
  * 保存日报信息到数据库中
  * @param reportcmxlist 仓库明细列表
@@ -126,6 +127,8 @@ public interface WareHouseService {
  * @param cankuid       仓库id
  */
     void saveDayReportxx(List<ReportCmx> reportcmxlist,List<ReportPmx> reportpmxlist,
+    		Users users, String bno,Date today,int cankuid);
+    void saveDayReportxx_yeti(List<ReportCmx> reportcmxlist,List<ReportPmx> reportpmxlist,
     		Users users, String bno,Date today,int cankuid);
     /**
      * 查出库表信息
@@ -191,11 +194,13 @@ public interface WareHouseService {
 	 * @param mydate 日期
 	 */
 	List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku);
+	List<ReportPmx> searchDayReportPmx_yeti(Date mydate,Canku canku);
 	/**
 	 * 查询特定日期的日报信息
 	 * @param mydate 日期
 	 */
 	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
+	List<ReportCmx> searchDayReportCmx_yeti(Date mydate,Canku canku);
 	/**
 	 * 删除待检产品
 	 * @param id 入库明细的id
