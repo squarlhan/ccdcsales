@@ -300,7 +300,7 @@ public class entryWareHouseAction implements Preparable{
         		this.getBno()==null?cbno:this.getBno().trim(),
         		new Date(),
         		this.getRkmxes());
-        service.doEntryWareHouse(rkxx);
+        
         if(this.getOrgins()!= null){
         	
     		for(int a=0;a<=this.getNumber().size()-1;a++){
@@ -322,6 +322,7 @@ public class entryWareHouseAction implements Preparable{
         	    service.doDeliveryWareHouse(chuku);
         	}
         }
+        service.doEntryWareHouse(rkxx);
         return print();
     }
 	
