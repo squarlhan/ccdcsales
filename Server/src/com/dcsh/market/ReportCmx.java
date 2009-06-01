@@ -22,6 +22,7 @@ public class ReportCmx implements java.io.Serializable {
 	private Products prdid;//产品ID
 	private Canku rkid;//入库的ID
 	private BigDecimal ckt;//总量
+	private String memo;//备注
 	
 	public ReportCmx(){
 		
@@ -107,5 +108,13 @@ public class ReportCmx implements java.io.Serializable {
 
 	public void setCkt(BigDecimal ckt) {
 		this.ckt = ckt;
+	}
+	@Column(name = "Memo", length=50)
+	public String getMemo()
+	{
+		return memo;
+	}
+	public void setMemo(String memo){
+		this.memo = memo;
 	}
 }
