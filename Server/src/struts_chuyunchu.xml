@@ -101,6 +101,10 @@
                <result>/pages/warehouseadmin/report_new.jsp</result>
                <result name="list">/pages/warehouseadmin/report_new.jsp</result>
         </action>
+         <action name="cycgetreportyeti" method="execute" class="getreportYetiAction">
+               <result>/pages/warehouseadmin/report_yeti.jsp</result>
+               <result name="list_yeti">/pages/warehouseadmin/report_yeti.jsp</result>
+        </action>
 
         <action name="cycsavereport" method="execute" class="savereportAction">
                <result>/pages/warehouseadmin/report_new.jsp</result>
@@ -178,6 +182,11 @@
         <action name="cycsearchdayreport" method="execute" class="cycsearchDayReportAction">
             <result>/pages/warehouseadmin/report_new.jsp</result>
             <result name="show_report">/pages/warehouseadmin/report_new.jsp</result>
+        </action>
+        
+         <action name="cycsearchdayreport_yeti" method="execute" class="cycsearchDayReportYetiAction">
+            <result>/pages/warehouseadmin/report_yeti.jsp</result>
+            <result name="show_report_yeti">/pages/warehouseadmin/report_yeti.jsp</result>
         </action>
         <action name="cycprintwarehouse" method="execute" class="cycprintWarehouseAction">
             <result name="input">/pages/warehouseadmin/welcome.jsp</result>
