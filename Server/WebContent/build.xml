@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project name="Server" default="redeploy" basedir=".">
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml"></typedef>
+	<!--支持AOP的程序 --> 
+    <property name="build.compiler" value="org.aspectj.tools.ant.taskdefs.Ajc11CompilerAdapter"></property>
+    <property name="ajc" value="org.aspectj.tools.ant.taskdefs.Ajc11CompilerAdapter"></property>
+	<description>重新在Jboss中部署Server程序，实现的方法是touch应用程序中的 根中的web.xml </description>
+	
+	<!-- 设置属性，需要根据自己的路径进行修改 --> 
+    <property name="src" location="Server/src"></property>
+    <property name="build" location="Server/build/classes"></property>
+    <property name="web" location="Server/WebContent"></property>
+	<!-- 下面根据实际情况改 -->
+    <property name="jboss" location="E:/Dcsh/jboss-5.0.0.GA/server/default/deploy/Server.war" /> 
+	
+	<target name="copy" depends="compile">
+		<copy todir="${jboss}/WEB-INF/classes">
+			<fileset dir="${build}">
+				<include name="**/*.xml"></include>
+					<include name="**/*.class"></include>
+			</fileset>
+			<fileset dir="${src}">
+				<include name="**/*.xml"></include>
+			</fileset>
+		</copy>
+		
+		<copy todir="${jboss}">
+			<fileset dir="${web}">
+				<include name="**/*.xml"></include>
+				<include name="**/*.jsp"></include>
+				<include name="**/*.css"></include>
+				<include name="**/*.js"></include>
+				<include name="**/*.jar"></include>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="redeploy" depends="copy">
+		<touch file="${jboss}/WEB-INF/web.xml"></touch>
+	</target>
+	
+	<target name="compile" depends="checkout">
+		<!--depends="checkout" com/dcsh/market/service/ --> 
+        <javac srcdir="${src}" excludes="com/dcsh/market/service/*Impl.java" destdir="${build}" source="1.5">
+        	<compilerarg line="-XnotReweavable"></compilerarg>
+        	<classpath>
+        		<path location="${build}"></path>
+        		<fileset dir="Server/WebContent/WEB-INF/lib">
+        			<include name="*.jar"></include>
+        		</fileset>
+        		
+        		<!-- 下面根据实际情况改 -->
+        		<fileset dir="E:\Dcsh\devlib">
+        			<include name="*.jar"></include>
+        		</fileset>
+            </classpath>
+        </javac>
+		
+		<javac srcdir="${src}" includes="com/dcsh/market/service/*Impl.java" destdir="${build}" source="1.5">
+			<classpath>
+				<path location="${build}"></path>
+				<fileset dir="Server/WebContent/WEB-INF/lib">
+					<include name="*.jar"></include>
+				</fileset>
+				
+				<!-- 下面根据实际情况改 -->
+				<fileset dir="E:\Dcsh\devlib">
+					<include name="*.jar"></include>
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="checkout">
+		<svn>
+			<checkout url="http://ccdcsales.googlecode.com/svn/trunk/" destPath="."></checkout>
+		</svn>
+	</target>
+
+</project>

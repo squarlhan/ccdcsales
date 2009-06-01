@@ -1,0 +1,78 @@
+TD {
+	FONT-SIZE: 12px; FONT-FAMILY: "宋体"
+}
+.table1 {
+	BORDER-RIGHT: #cfe9f8 1px solid; BORDER-TOP: #cfe9f8 1px solid; BORDER-LEFT: #cfe9f8 1px solid; BORDER-BOTTOM: #cfe9f8 1px solid; BACKGROUND-COLOR: #f4f9ff
+}
+.bak {
+	BACKGROUND-IMAGE: url(/images/DCOAimg_01.gif)
+}
+.button {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: url(/images/button.gif); BORDER-LEFT: 0px solid; WIDTH: 98px; COLOR: #ffffff; PADDING-TOP: 3px; BORDER-BOTTOM: 0px solid; FONT-FAMILY: "宋体"; HEIGHT: 22px; TEXT-ALIGN: center
+}
+.button2 {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: url(/images/button2.gif); BORDER-LEFT: 0px solid; WIDTH: 158px; COLOR: #2875b5; PADDING-TOP: 3px; BORDER-BOTTOM: 0px solid; FONT-FAMILY: "宋体"; HEIGHT: 22px; TEXT-ALIGN: center
+}
+.button3 {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; MARGIN-TOP: 4px; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: url(/images/button3.gif); MARGIN-BOTTOM: 3px; BORDER-LEFT: 0px solid; WIDTH: 68px; COLOR: #2875b5; PADDING-TOP: 3px; BORDER-BOTTOM: 0px solid; FONT-FAMILY: "宋体"; HEIGHT: 19px; TEXT-ALIGN: center
+}
+.button4 {
+	BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; MARGIN-TOP: 4px; FONT-WEIGHT: bold; FONT-SIZE: 12px; BACKGROUND: url(../images/button3.gif); MARGIN-BOTTOM: 3px; BORDER-LEFT: 0px solid; WIDTH: 68px; COLOR: #fd8200; PADDING-TOP: 3px; BORDER-BOTTOM: 0px solid; FONT-FAMILY: "宋体"; HEIGHT: 19px; TEXT-ALIGN: center
+}
+.td1 {
+	BORDER-TOP: #cfe9f8 1px solid; BORDER-LEFT: #71b8ff 2px solid; BORDER-BOTTOM: #71b8ff 1px solid
+}
+.caidan {
+	WIDTH: 160px; PADDING-TOP: 5px; POSITION: relative
+}
+.caidan LI {
+	MARGIN-TOP: 5px; FONT-SIZE: 12px; LIST-STYLE-IMAGE: url(/images/DCOAimg_06.gif); WIDTH: 160px; COLOR: #3673ab; BORDER-BOTTOM: #ffffff 1px dotted; FONT-FAMILY: "宋体"; HEIGHT: 20px
+}
+.tab {
+	BORDER-RIGHT: #5691c3 1px solid; BORDER-TOP: #5691c3 1px solid; BORDER-LEFT: #5691c3 1px solid
+}
+.tabl {
+	BORDER-RIGHT: #5691c3 1px solid; BORDER-TOP: #5691c3 1px solid; BORDER-LEFT: #5691c3 1px solid; BORDER-BOTTOM: #5691c3 1px solid
+}
+.tt {
+	FONT-SIZE: 12px; COLOR: #4b91da; FONT-FAMILY: "宋体"
+}
+.ttt {
+	FONT-WEIGHT: bolder; FONT-SIZE: 12px; COLOR: #3276b5; FONT-FAMILY: "宋体"
+}
+.fontcolor {
+	FONT-WEIGHT: bolder; FONT-SIZE: 12px; COLOR: #008700; FONT-FAMILY: "宋体"
+}
+.fontcolor INPUT {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; BORDER-LEFT: #ffffff 1px solid; WIDTH: 60px; BORDER-BOTTOM: #ffffff 1px solid; BACKGROUND-COLOR: #dfe0e5
+}
+.fontcolor2 {
+	FONT-SIZE: 12px; COLOR: #ffffff; FONT-FAMILY: "宋体"; TEXT-ALIGN: center
+}
+.inp {
+	MARGIN-TOP: 2px; MARGIN-BOTTOM: 2px; WIDTH: 80px; HEIGHT: 18px
+}
+.se {
+	MARGIN-TOP: 2px; MARGIN-BOTTOM: 3px; WIDTH: 80px
+}
+.t {
+	PADDING-LEFT: 10px; COLOR: #f84800; LINE-HEIGHT: 25px
+}
+.tr {
+	LINE-HEIGHT: 30px; PADDING-TOP: 15px
+}
+.trr {
+	BORDER-RIGHT: #8cb8e4 2px outset; BORDER-TOP: #8cb8e4 2px outset; BORDER-LEFT: #8cb8e4 2px outset; COLOR: #306fa4; LINE-HEIGHT: 25px; BORDER-BOTTOM: #8cb8e4 2px outset; BACKGROUND-COLOR: #cde6ff; TEXT-ALIGN: center
+}
+.trrr {
+	BORDER-RIGHT: #8cb8e4 2px outset; BORDER-TOP: #8cb8e4 2px outset; BORDER-LEFT: #8cb8e4 2px outset; COLOR: #ffffff; LINE-HEIGHT: 25px; BORDER-BOTTOM: #8cb8e4 2px outset; BACKGROUND-COLOR: #94b6f2; TEXT-ALIGN: center
+}
+.oa_list A {
+	COLOR: #085db0; TEXT-DECORATION: none
+}
+.oa_list A:hover {
+	COLOR: #085db0; TEXT-DECORATION: underline
+}
+.oa_solid {
+	BORDER-BOTTOM: #dcdcdc 1px solid
+}
