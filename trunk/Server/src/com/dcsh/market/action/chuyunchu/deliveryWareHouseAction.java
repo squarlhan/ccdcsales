@@ -50,6 +50,7 @@ public class deliveryWareHouseAction implements Preparable{
     private String printCankuaim;
     private String printCustom;
     private int ismerge;
+    private String printorgin;
     
 	public List<EntryPrintInfo> getResultList() {
 		return resultList;
@@ -167,6 +168,16 @@ public class deliveryWareHouseAction implements Preparable{
 	}
 
 
+	public String getPrintorgin() {
+		return printorgin;
+	}
+
+
+	public void setPrintorgin(String printorgin) {
+		this.printorgin = printorgin;
+	}
+
+
 	public deliveryWareHouseAction(WareHouseService service) {
     
         this.service = service;
@@ -205,6 +216,9 @@ public class deliveryWareHouseAction implements Preparable{
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 		Date d = new Date(); 
 		setDate(bartDateFormat.format(d)); 
+		Map session = ActionContext.getContext().getSession();
+    	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
+    	this.setPrintorgin(user.get(0).getCanku().getName());
 		this.printCankuaim=service.getCangkuById(cankuaim).getName();
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			List<Products> product = service.getProductNameById(this.getProduct().get(i));
@@ -259,6 +273,9 @@ public class deliveryWareHouseAction implements Preparable{
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 		Date d = new Date(); 
 		setDate(bartDateFormat.format(d)); 
+		Map session = ActionContext.getContext().getSession();
+    	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
+    	this.setPrintorgin(user.get(0).getCanku().getName());
 		printCustom=service.getCustomerById(custom).getCustomName();
 		this.printCankuaim=service.getCangkuById(cankuaim).getName();
 		for(int i=0;i<=this.getProduct().size()-1;i++){
@@ -316,7 +333,9 @@ public class deliveryWareHouseAction implements Preparable{
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 		Date d = new Date(); 
 		setDate(bartDateFormat.format(d)); 
-	
+		Map session = ActionContext.getContext().getSession();
+    	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
+    	this.setPrintorgin(user.get(0).getCanku().getName());
 		printCustom=service.getCustomerById(custom).getCustomName();
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			List<Products> product = service.getProductNameById(this.getProduct().get(i));

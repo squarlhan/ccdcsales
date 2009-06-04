@@ -28,8 +28,8 @@
       <tr align="center"><td><li><s:a href="cycgozckdelivery.action">装车到驻厂库</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgozzkdelivery.action">装车到中转库</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgodelivery.action">装车销售</s:a></li></td></tr>-->
-      <tr align="center"><td><li><s:a href="cycgetreport.action">产成品进销存日报</s:a></li></td></tr>
-      <tr align="center"><td><li><s:a href="cycgetreportyeti.action">液体产成品进销存日报</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgetreport.action">进销存日报</s:a></li></td></tr>
+      <tr align="center"><td><li><s:a href="cycgetreportyeti.action">液体产品日报</s:a></li></td></tr>
 	  <tr align="center"><td><li><s:a href="cycgounqualified.action">不合格产成品处理</s:a></li></td></tr>
 	  <tr align="center"><td><li><s:a href="cycgolost.action">产成品损耗处理</s:a></li></td></tr>
       <tr align="center"><td><li><s:a href="cycgetxsyiku.action">销售移库</s:a></li></td></tr>

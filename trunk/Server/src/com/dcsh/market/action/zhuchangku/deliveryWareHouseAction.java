@@ -26,7 +26,7 @@ import com.opensymphony.xwork2.Preparable;
 public class deliveryWareHouseAction implements Preparable{
 	private static final Logger log = LogManager.getLogManager().getLogger(deliveryWareHouseAction.class.getName());
 	private ZhuChangKuService service;
-	
+	private String printorgin;
 	private int cankuorgin;
 	private int cankuaim;
 	private int users;
@@ -275,7 +275,9 @@ public class deliveryWareHouseAction implements Preparable{
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
 		Date d = new Date(); 
 		setDate(bartDateFormat.format(d)); 
-
+		Map session = ActionContext.getContext().getSession();
+    	List<CankuPriv> user = (List<CankuPriv>)session.get("zhuchanguser");
+    	this.setPrintorgin(user.get(0).getCanku().getName());
 		setPrintCustom(service.getCustomerById(custom).getCustomName());
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			List<Products> product = service.getProductNameById(this.getProduct().get(i));
@@ -287,6 +289,16 @@ public class deliveryWareHouseAction implements Preparable{
 		}
 		return "printfh";
 	}
+
+	public String getPrintorgin() {
+		return printorgin;
+	}
+
+
+	public void setPrintorgin(String printorgin) {
+		this.printorgin = printorgin;
+	}
+
 
 	public int getCankuorgin() {
 		return cankuorgin;

@@ -46,7 +46,7 @@ public class entryWareHouseAction implements Preparable{
 	private Set<Rkmx> rkmxes = new HashSet();
 	private EntryPrintInfo epi;
 	private String date;
-	
+	private String printorgin;
 	private List<EntryPrintInfo> resultList;
 	private Rkxx rkxx;
 	
@@ -251,6 +251,16 @@ public class entryWareHouseAction implements Preparable{
 	}
 
 
+	public String getPrintorgin() {
+		return printorgin;
+	}
+
+
+	public void setPrintorgin(String printorgin) {
+		this.printorgin = printorgin;
+	}
+
+
 	public entryWareHouseAction(ZhongZhuanKuService service) {
 
         this.service = service;
@@ -293,6 +303,9 @@ public class entryWareHouseAction implements Preparable{
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyyƒÍMM‘¬dd»’"); 
 		Date d = new Date(); 
 		date= bartDateFormat.format(d); 
+		Map session = ActionContext.getContext().getSession();
+    	List<CankuPriv> user = (List<CankuPriv>)session.get("zhongzhuanuser");
+    	this.setPrintorgin(user.get(0).getCanku().getName());
 		for(int i=0;i<=this.getProduct().size()-1;i++){
 			List<Products> product = service.getProductNameById(this.getProduct().get(i));
 			List<Specifications> specification = service.getSpecificationNameById(this.getSpecification().get(i));
