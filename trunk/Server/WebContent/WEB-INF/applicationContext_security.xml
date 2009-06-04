@@ -6,9 +6,9 @@
                         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
 
 	<http access-decision-manager-ref="myAccessDecisionManagerBean" auto-config="false">
-		<form-login login-page='/login.jsp' default-target-url='/index.jsp'
+		<form-login login-page='/login.html' default-target-url='/index.jsp'
 			always-use-default-target='true' />
-		<logout logout-url="/logout" logout-success-url="/login.jsp"/>
+		<logout logout-url="/logout" logout-success-url="/login.html"/>
 		<intercept-url pattern='/login*' filters='none'/>
 		<intercept-url pattern='/images/*' filters='none'/>	
 		<intercept-url pattern='/css/*' filters='none'/>
