@@ -20,7 +20,8 @@
 <table class="list_table"  align="center" border="0" width="100%">
  <tr>
      <td><s:text name="请选择日期:"/></td>
-     <td align="left" width="25%"><s:datetimepicker name="mydaterq" label="选择日期" toggleType="explode" theme="simple"/></td>
+     <td align="left" width="25%"><s:datetimepicker name="begindate" label="选择日期" toggleType="explode" theme="simple"/></td>
+     <td align="left" width="25%"><s:datetimepicker name="enddate" label="选择日期" toggleType="explode" theme="simple"/></td>
      <td align="center"><s:submit value="提交"/></td>
 </tr>
 </table>

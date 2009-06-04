@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>储运处产成品装车明细</title>
+<title>储运处液体产成品调拨用</title>
 <style type="text/css" media="all"> 
 
 @import "/Server/css/main.css";
@@ -378,7 +378,7 @@ function setnumber(obj,line)
 </script>
 </head>
 <body>
-<h2>储运处产成品装车明细</h2>
+<h2>储运处液体产成品调拨用</h2>
 <h3>储运处可用产品明细</h3>
 
 
