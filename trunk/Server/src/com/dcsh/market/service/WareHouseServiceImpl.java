@@ -1277,7 +1277,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    listrppmx_end = hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
 	    		+" and convert(varchar(10),rp.rxxid.date,120) = '"+enddatestr+"'");
 	    listprd = hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
-	    		+"and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.rxxid.date,120) <= '"+enddatestr+"'");
+	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'");
 	    }
 	    else
 	    {
@@ -1287,7 +1287,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    	listrppmx_end.addAll(this.getDayReportPmx(canku, new Date()));
 	    	Set<Products> tempprd = new HashSet<Products>();
 	    	tempprd.addAll(hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
-	    		+"and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.rxxid.date,120) <= '"+enddatestr+"'"));
+	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'"));
 	    	for(int i=0;i<this.getDayReportPmx(canku, new Date()).size();i++)
 	    	tempprd.add(this.getDayReportPmx(canku, new Date()).get(i).getPrdid());
 	    	listprd.addAll(tempprd);
