@@ -35,7 +35,7 @@
 		<OBJECT classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 height=0
 			id=WB width=0>
 		</OBJECT>
-		        <h2 align="center" class="STYLE1">装&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</h2>
+		        <h2 align="center" class="STYLE1">产&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;调&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;拨&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;装&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</h2>
    			 <table width="90%" align="center" border="0" cellspacing="0">
    			   <tr>
     			 <td width="50%">
@@ -49,7 +49,7 @@
     			 <table width="90%" align="center" border="0" cellspacing="0">
 				 	<tr>
 				    <td width="50%">
-				    <label class="STYLE3">发货单位：长春大成生化工程开发有限公司</label>
+				    <label class="STYLE3">发货单位：<%=request.getAttribute("printorgin")%></label>
 				 	</td>
 				    <td width="30%">
 				    <label class="STYLE3"><%=request.getAttribute("date") %></label>
@@ -66,7 +66,6 @@
 		        <th width="11%"  scope="col">规格</th>
 			    <th width="14%"  scope="col">包装形式</th>
 			    <th width="17%"  scope="col">吨数</th>
-			    <th width="13%"  scope="col">袋数</th>
 			    <th width="15%"  scope="col">批号</th>
 			</tr>
 			<s:iterator id="result" value="resultList" status="index">		
@@ -82,9 +81,6 @@
 				</td>
 				<td align="center">
 						<s:property value="#result.sum" />
-				</td>
-				<td align="center">
-						<s:property value="#result.number" />
 				</td>
 				<td align="center">
 						<s:property value="#result.pchName" />

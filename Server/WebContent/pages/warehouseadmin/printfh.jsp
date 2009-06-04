@@ -49,7 +49,7 @@
     			 <table width="90%" align="center" border="0" cellspacing="0">
 				 	<tr>
 				    <td width="50%">
-				    <label class="STYLE3">发货单位：长春大成生化工程开发有限公司</label>
+				    <label class="STYLE3">发货单位：<%=request.getAttribute("printorgin")%></label>
 				 	</td>
 				    <td width="30%">
 				    <label class="STYLE3"><%=request.getAttribute("date") %></label>

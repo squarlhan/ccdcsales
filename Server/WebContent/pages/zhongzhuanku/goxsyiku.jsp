@@ -462,9 +462,9 @@ function setnumber(obj,line)
   	       </td>
   	</tr>
   	<tr style="display:none">
-  	    <td><s:textfield id="ismerge" name="ismerge" value="%{xsfhmx.specification.ismerge}" label="微调"/></td>
+  	    <td><s:textfield id="ismerge" name="ismerge" value="%{xsykmx.specification.ismerge}" label="微调"/></td>
   	    <td><s:textfield name="index" id="index" value="%{index}" label="发货明细的id"/><td>
-        <td><s:textfield name="tnumber" id="tnumber" value="%{xsfhmx.number}" label="发货明细的数量"/><td>
+        <td><s:textfield name="tnumber" id="tnumber" value="%{xsykmx.number}" label="发货明细的数量"/><td>
     </tr>
   </table>
   	<table class="list_table" id="tb" align="center" width="100%">

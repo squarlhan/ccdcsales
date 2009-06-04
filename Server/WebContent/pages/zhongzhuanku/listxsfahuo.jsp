@@ -37,7 +37,7 @@
 					<s:property value="#result.specification.displayName" />
 			   </td>
 			   <td align="center">
-			   		<a href="<s:url action="cycgoxsfahuo"><s:param name="index" value="%{#result.id}"/></s:url>">出库</a>
+			   		<a href="<s:url action="zzkgoxsfahuo"><s:param name="index" value="%{#result.id}"/></s:url>">出库</a>
 			   </td>
 			   <td align="center">
 					<s:property value="#result.xsfahuoxx.memo" />
