@@ -1287,7 +1287,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    	listrppmx_end.addAll(this.getDayReportPmx(canku, new Date()));
 	    	Set<Products> tempprd = new HashSet<Products>();
 	    	tempprd.addAll(hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
-	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'"));
+	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) < '"+enddatestr+"'"));
 	    	for(int i=0;i<this.getDayReportPmx(canku, new Date()).size();i++)
 	    	tempprd.add(this.getDayReportPmx(canku, new Date()).get(i).getPrdid());
 	    	listprd.addAll(tempprd);
@@ -1299,28 +1299,27 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    {  		
 	    	for(int i=0;i<listprd.size();i++){
 	    		ReportPmx temp = new ReportPmx();
+	    		temp.setCkt(new BigDecimal(0));
+	    		temp.setRkt(new BigDecimal(0));
 	    		for(int j=0;j<listrppmx.size();j++){
 	    			if(listrppmx.get(j).getPrdid().getId()==listprd.get(i).getId()){
-	    				temp.setPrdid(listrppmx.get(j).getPrdid());
+	    				temp.setPrdid(listrppmx.get(j).getPrdid());    				
 	    				temp.setCkt(temp.getCkt().add(listrppmx.get(j).getCkt()));
-	    				temp.setRkt(temp.getRkt().add(listrppmx.get(j).getRkt()));	    		
+	    				temp.setRkt(temp.getRkt().add(listrppmx.get(j).getRkt()));	
+	    				temp.setBhgt(new BigDecimal(0));
+						temp.setNxt(new BigDecimal(0));
+						temp.setWxt(new BigDecimal(0));
+						temp.setDjt(new BigDecimal(0));
+						temp.setDxt(new BigDecimal(0));
+						temp.setKct(new BigDecimal(0));
 	    				for(int k=0;k<listrppmx_end.size();k++){
-	    					if(listprd.get(i).getId()==listrppmx_end.get(k).getPrdid().getId()){
+	    					if(listprd.get(i).equals(listrppmx_end.get(k).getPrdid())){
 	    						temp.setBhgt(listrppmx_end.get(k).getBhgt());
 	    						temp.setNxt(listrppmx_end.get(k).getNxt());
 	    						temp.setWxt(listrppmx_end.get(k).getWxt());
 	    						temp.setDjt(listrppmx_end.get(k).getDjt());
 	    						temp.setDxt(listrppmx_end.get(k).getDxt());
 	    						temp.setKct(listrppmx_end.get(k).getKct());
-	    					}
-	    					else
-	    					{
-	    						temp.setBhgt(new BigDecimal(0));
-	    						temp.setNxt(new BigDecimal(0));
-	    						temp.setWxt(new BigDecimal(0));
-	    						temp.setDjt(new BigDecimal(0));
-	    						temp.setDxt(new BigDecimal(0));
-	    						temp.setKct(new BigDecimal(0));
 	    					}
 	    				}
 	    			}
