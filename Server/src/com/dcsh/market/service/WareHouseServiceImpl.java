@@ -365,7 +365,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 			}
 			
 			
-			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));//TODO
+			list.add(new ReportPmx(new Reportxx(), canku, pkucun.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));
 		}
 		
 
@@ -405,7 +405,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 				}
 				
 				
-				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));//TODO
+				list.add(new ReportPmx(new Reportxx(), canku, pchuku.get(i), total_rkwt, total_ckwt, total_kcwt, nxt, wxt, djt, dxt,bhgt,new BigDecimal(0),new BigDecimal(0),new BigDecimal(0)));
 			}
 		}
 
@@ -1248,17 +1248,21 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	@SuppressWarnings("unchecked")
 
-	public List<ReportCmx> searchDayReportCmx_yeti(Date mydate,Canku canku) {
+	public List<ReportCmx> searchDayReportCmx_yeti(Date begindate,Date enddate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(mydate);
+		 String begindatestr =bartDateFormat.format(begindate);
+		 String enddatestr =bartDateFormat.format(enddate);
 	    
-	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'"+" and rp.bno like 'yeti%'");
-	    if(listrpxx.size()==0)
-	    	return null;
-	        	
-	    List<ReportCmx> listreportcmx = hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(0).getId());
-		
+		 List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+					+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+
+					"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'"
+					+" and rp.bno like 'yeti%'");
+		    if(listrpxx.size()==0)
+		    	return null;
+		    List<ReportCmx> listreportcmx = new ArrayList();
+		    for(int i=0;i<listrpxx.size();i++){    	
+		    listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
+		    }
 	    return listreportcmx;
 	}
 	@SuppressWarnings("unchecked")
@@ -1277,7 +1281,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    listrppmx_end = hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
 	    		+" and convert(varchar(10),rp.rxxid.date,120) = '"+enddatestr+"'");
 	    listprd = hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
-	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'");
+	    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'");
 	    }
 	    else
 	    {
@@ -1287,7 +1291,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	    	listrppmx_end.addAll(this.getDayReportPmx(canku, new Date()));
 	    	Set<Products> tempprd = new HashSet<Products>();
 	    	tempprd.addAll(hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
-	    		+"and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) < '"+enddatestr+"'"));
+	    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) < '"+enddatestr+"'"));
 	    	for(int i=0;i<this.getDayReportPmx(canku, new Date()).size();i++)
 	    	tempprd.add(this.getDayReportPmx(canku, new Date()).get(i).getPrdid());
 	    	listprd.addAll(tempprd);
@@ -1333,17 +1337,89 @@ public class WareHouseServiceImpl implements WareHouseService {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ReportPmx> searchDayReportPmx_yeti(Date mydate,Canku canku) {
+	public List<ReportPmx> searchDayReportPmx_yeti(Date begindate,Date enddate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(mydate);
+		 String begindatestr =bartDateFormat.format(begindate);
+		    String enddatestr =bartDateFormat.format(enddate);
+		    List<ReportPmx> reportpmxlist_return = new ArrayList();//最终返回的Pmx
+		    List<ReportPmx> listrppmx = new ArrayList();//查询日期区间所有的pmx
+		    List<ReportPmx> listrppmx_end = new ArrayList();//截止日期的pmx
+		    List<Products> listprd = new ArrayList();//所有产品
 	    
-	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'"+" and rp.bno like 'yeti%'");
-	    if(listrpxx.size()==0)
-	    	return null;
-	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
-		
-	    return listreportpmx;
+		    if(enddate.compareTo(new Date())<0){
+			    
+			    listrppmx= hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+						+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+
+						"' and convert(varchar(10),rp.rxxid.date,120) <= '"+enddatestr+"'"
+						+" and rp.rxxid.bno like 'yeti%'");
+			    listrppmx_end = hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+			    		+" and convert(varchar(10),rp.rxxid.date,120) = '"+enddatestr+"'"
+			    		+" and rp.rxxid.bno like 'yeti%'");
+			    listprd = hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
+			    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+
+			    		"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'"
+			    		+" and rpp.rxxid.bno like 'yeti%'");
+			    }
+			    else
+			    {
+			    	listrppmx.addAll(hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+							+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+
+							"' and convert(varchar(10),rp.rxxid.date,120) < '"+enddatestr+"'"
+							+" and rp.rxxid.bno like 'yeti%'"));
+			    	listrppmx.addAll(this.getDayReportPmx_yeti(canku, new Date()));
+			    	listrppmx_end.addAll(this.getDayReportPmx_yeti(canku, new Date()));
+			    	Set<Products> tempprd = new HashSet<Products>();
+			    	tempprd.addAll(hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
+			    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+
+			    		"' and convert(varchar(10),rpp.rxxid.date,120) < '"+enddatestr+"'"
+			    		+" and rpp.rxxid.bno like 'yeti%'"));
+			    	for(int i=0;i<this.getDayReportPmx_yeti(canku, new Date()).size();i++)
+			    	tempprd.add(this.getDayReportPmx_yeti(canku, new Date()).get(i).getPrdid());
+			    	listprd.addAll(tempprd);
+			    }
+			    
+			    if(listprd.size()==0)
+			    	return null;
+			    else
+			    {  		
+			    	for(int i=0;i<listprd.size();i++){
+			    		ReportPmx temp = new ReportPmx();
+			    		temp.setCkt(new BigDecimal(0));
+			    		temp.setRkt(new BigDecimal(0));
+			    		temp.setCjt(new BigDecimal(0));
+			    		temp.setCt(new BigDecimal(0));
+			    		for(int j=0;j<listrppmx.size();j++){
+			    			if(listrppmx.get(j).getPrdid().getId()==listprd.get(i).getId()){
+			    				temp.setPrdid(listrppmx.get(j).getPrdid());    				
+			    				temp.setCkt(temp.getCkt().add(listrppmx.get(j).getCkt()));
+			    				temp.setRkt(temp.getRkt().add(listrppmx.get(j).getRkt()));
+			    				temp.setCjt(temp.getCjt().add(listrppmx.get(j).getCjt()));
+			    				temp.setCt(temp.getCt().add(listrppmx.get(j).getCt()));
+			    				temp.setBhgt(new BigDecimal(0));
+								temp.setNxt(new BigDecimal(0));
+								temp.setWxt(new BigDecimal(0));
+								temp.setDjt(new BigDecimal(0));
+								temp.setDxt(new BigDecimal(0));
+								temp.setKct(new BigDecimal(0));							
+								temp.setGqt(new BigDecimal(0));
+			    				for(int k=0;k<listrppmx_end.size();k++){
+			    					if(listprd.get(i).equals(listrppmx_end.get(k).getPrdid())){
+			    						temp.setBhgt(listrppmx_end.get(k).getBhgt());
+			    						temp.setNxt(listrppmx_end.get(k).getNxt());
+			    						temp.setWxt(listrppmx_end.get(k).getWxt());
+			    						temp.setDjt(listrppmx_end.get(k).getDjt());
+			    						temp.setDxt(listrppmx_end.get(k).getDxt());
+			    						temp.setKct(listrppmx_end.get(k).getKct());
+			    						temp.setGqt(listrppmx_end.get(k).getGqt());
+			    					}
+			    				}
+			    			}
+			    		}
+			    		reportpmxlist_return.add(temp);
+			    	}
+			    	
+			    }
+	    return reportpmxlist_return;
 	}
 
 	@SuppressWarnings("unchecked")
