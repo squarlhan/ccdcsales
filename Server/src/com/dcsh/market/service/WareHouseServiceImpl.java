@@ -482,10 +482,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		    	if(listgckrkmx.get(k).getProducts().getId()== pgck.get(j).getId()){
 		    		total_ct = total_ct.add(listgckrkmx.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
 		    				listgckrkmx.get(k).getNumber())));
-		    		System.out.println("equal   "+listgckrkmx.get(k).getSpecifications().getWeight().multiply(new BigDecimal(
-		    				listgckrkmx.get(k).getNumber()))+"   "+total_ct);
 		    	}
-		    	else System.out.println(listgckrkmx.get(k).getProducts().getId()+"***"+pgck.get(j).getId());
 		    }
 		    for(int k=0;k<listgckkc.size();k++)//灌区量
 		    {
@@ -629,11 +626,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 					case 3:tempcmx.setMemo("销售给："+listchuku.get(i).getChuku().getCustom().getCustomName());break;
 					default:tempcmx.setMemo("移库/调拨到："+listchuku.get(i).getChuku().getCankuByRkId().getName());
 					}
-					
-					
-				//	tempcmx.setMemo("memo"+i);
 					list.add(tempcmx);
-					System.out.println(tempcmx.getMemo()+"**"+i);
 				}
 			}
 			
@@ -1285,10 +1278,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 		    listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
 		    }
 		    if(enddatestr.equals(nowstr))
-		    	{
-		    		listreportcmx.addAll(this.getDayReportCmx_yeti(canku, new Date()));
-		    		System.out.println("hahahah"+this.getDayReportCmx_yeti(canku, new Date()).size());
-		    	}
+	    		listreportcmx.addAll(this.getDayReportCmx_yeti(canku, new Date()));
 		    
 		    
 	    return listreportcmx;
@@ -1298,11 +1288,12 @@ public class WareHouseServiceImpl implements WareHouseService {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String begindatestr =bartDateFormat.format(begindate);
 	    String enddatestr =bartDateFormat.format(enddate);
+	    String nowstr =  bartDateFormat.format(new Date());
 	    List<ReportPmx> reportpmxlist_return = new ArrayList();//最终返回的Pmx
 	    List<ReportPmx> listrppmx = new ArrayList();//查询日期区间所有的pmx
 	    List<ReportPmx> listrppmx_end = new ArrayList();//截止日期的pmx
 	    List<Products> listprd = new ArrayList();//所有产品
-	    if(enddate.compareTo(new Date())<0){
+	    if(!enddatestr.equals(nowstr)){
 	    
 	    listrppmx= hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
 				+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.rxxid.date,120) <= '"+enddatestr+"'");
@@ -1368,13 +1359,14 @@ public class WareHouseServiceImpl implements WareHouseService {
 	public List<ReportPmx> searchDayReportPmx_yeti(Date begindate,Date enddate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		 String begindatestr =bartDateFormat.format(begindate);
-		    String enddatestr =bartDateFormat.format(enddate);
+		 String enddatestr =bartDateFormat.format(enddate);
+		 String nowstr = bartDateFormat.format(new Date());
 		    List<ReportPmx> reportpmxlist_return = new ArrayList();//最终返回的Pmx
 		    List<ReportPmx> listrppmx = new ArrayList();//查询日期区间所有的pmx
 		    List<ReportPmx> listrppmx_end = new ArrayList();//截止日期的pmx
 		    List<Products> listprd = new ArrayList();//所有产品
 	    
-		    if(enddate.compareTo(new Date())<0){
+		    if(!enddatestr.equals(nowstr)){
 			    
 			    listrppmx= hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
 						+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+

@@ -169,12 +169,12 @@ public interface ZhuChangKuService {
 	 * 查询特定日期的日报信息
 	 * @param mydate 日期
 	 */
-	List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku);
+	List<ReportPmx> searchDayReportPmx(Date begindate,Date enddate,Canku canku);
 	/**
 	 * 查询特定日期的日报信息
 	 * @param mydate 日期
 	 */
-	List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku);
+	List<ReportCmx> searchDayReportCmx(Date begindate,Date enddate,Canku canku);
 	
 	void doEntryWareHouse(Rkxx rkxx);
 }
