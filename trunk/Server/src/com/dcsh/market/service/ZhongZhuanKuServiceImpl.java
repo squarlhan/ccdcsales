@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -759,34 +760,106 @@ private HibernateTemplate hibernateTemplate;
 		return specificationName;
 	}
 	@SuppressWarnings("unchecked")
-	public List<ReportCmx> searchDayReportCmx(Date mydate,Canku canku) {
+	public List<ReportCmx> searchDayReportCmx(Date begindate,Date enddate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(mydate);
-	    
-	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
+	    String begindatestr =bartDateFormat.format(begindate);
+	    String enddatestr =bartDateFormat.format(enddate);
+	    String nowstr = bartDateFormat.format(new Date());
+	    List<Reportxx> listrpxx = new ArrayList();
+	    if(enddatestr.equals(nowstr))
+	    {
+	    	listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+	 				+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.date,120) < '"+enddatestr+"'");
+	    }
+	    else
+	    {
+	    	listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+	 				+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'");
+	    }
+	   
 	    if(listrpxx.size()==0)
 	    	return null;
-	        	
-	    List<ReportCmx> listreportcmx = hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(0).getId());
-		
+	    List<ReportCmx> listreportcmx = new ArrayList();
+	    for(int i=0;i<listrpxx.size();i++){    	
+	    	listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
+	    }
+	    if(enddatestr.equals(nowstr))
+	    	listreportcmx.addAll(this.getDayReportCmx(canku, new Date()));
 	    return listreportcmx;
 	}
 
 	@SuppressWarnings("unchecked")
-	 
-	public List<ReportPmx> searchDayReportPmx(Date mydate,Canku canku) {
+	public List<ReportPmx> searchDayReportPmx(Date begindate,Date enddate,Canku canku) {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	    String datestr =bartDateFormat.format(mydate);
+	    String begindatestr =bartDateFormat.format(begindate);
+	    String enddatestr =bartDateFormat.format(enddate);
+	    String nowstr = bartDateFormat.format(new Date());
+	    List<ReportPmx> reportpmxlist_return = new ArrayList();//最终返回的Pmx
+	    List<ReportPmx> listrppmx = new ArrayList();//查询日期区间所有的pmx
+	    List<ReportPmx> listrppmx_end = new ArrayList();//截止日期的pmx
+	    List<Products> listprd = new ArrayList();//所有产品
+	    if(!enddatestr.equals(nowstr)){
 	    
-	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-				+" and convert(varchar(10),rp.date,120) = '"+datestr+"'");
-	    if(listrpxx.size()==0)
+	    listrppmx= hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+				+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.rxxid.date,120) <= '"+enddatestr+"'");
+	    listrppmx_end = hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+	    		+" and convert(varchar(10),rp.rxxid.date,120) = '"+enddatestr+"'");
+	    listprd = hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
+	    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) <= '"+enddatestr+"'");
+	    }
+	    else
+	    {
+	    	listrppmx.addAll(hibernateTemplate.find("from ReportPmx as rp where rp.rxxid.ckid = "+canku.getId()
+					+" and convert(varchar(10),rp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.rxxid.date,120) < '"+enddatestr+"'"));
+	    	listrppmx.addAll(this.getDayReportPmx(canku, new Date()));
+	    	listrppmx_end.addAll(this.getDayReportPmx(canku, new Date()));
+	    	Set<Products> tempprd = new HashSet<Products>();
+	    	tempprd.addAll(hibernateTemplate.find("select distinct prdid from ReportPmx as rpp where rpp.rxxid.ckid = "+canku.getId()
+	    		+" and convert(varchar(10),rpp.rxxid.date,120) >= '"+begindatestr+"' and convert(varchar(10),rpp.rxxid.date,120) < '"+enddatestr+"'"));
+	    	for(int i=0;i<this.getDayReportPmx(canku, new Date()).size();i++)
+	    	tempprd.add(this.getDayReportPmx(canku, new Date()).get(i).getPrdid());
+	    	listprd.addAll(tempprd);
+	    }
+	    
+	    if(listprd.size()==0)
 	    	return null;
-	    List<ReportPmx> listreportpmx = hibernateTemplate.find("from ReportPmx where rxxid = "+listrpxx.get(0).getId());
-		
-	    return listreportpmx;
+	    else
+	    {  		
+	    	for(int i=0;i<listprd.size();i++){
+	    		ReportPmx temp = new ReportPmx();
+	    		temp.setCkt(new BigDecimal(0));
+	    		temp.setRkt(new BigDecimal(0));
+	    		for(int j=0;j<listrppmx.size();j++){
+	    			if(listrppmx.get(j).getPrdid().getId()==listprd.get(i).getId()){
+	    				temp.setPrdid(listrppmx.get(j).getPrdid());    				
+	    				temp.setCkt(temp.getCkt().add(listrppmx.get(j).getCkt()));
+	    				temp.setRkt(temp.getRkt().add(listrppmx.get(j).getRkt()));	
+	    				temp.setBhgt(new BigDecimal(0));
+						temp.setNxt(new BigDecimal(0));
+						temp.setWxt(new BigDecimal(0));
+						temp.setDjt(new BigDecimal(0));
+						temp.setDxt(new BigDecimal(0));
+						temp.setKct(new BigDecimal(0));
+	    				for(int k=0;k<listrppmx_end.size();k++){
+	    					if(listprd.get(i).equals(listrppmx_end.get(k).getPrdid())){
+	    						temp.setBhgt(listrppmx_end.get(k).getBhgt());
+	    						temp.setNxt(listrppmx_end.get(k).getNxt());
+	    						temp.setWxt(listrppmx_end.get(k).getWxt());
+	    						temp.setDjt(listrppmx_end.get(k).getDjt());
+	    						temp.setDxt(listrppmx_end.get(k).getDxt());
+	    						temp.setKct(listrppmx_end.get(k).getKct());
+	    					}
+	    				}
+	    			}
+	    		}
+	    		reportpmxlist_return.add(temp);
+	    	}
+	    	
+	    }
+	   
+	    	return reportpmxlist_return;
 	}
+	
 	@SuppressWarnings("unchecked")
 	 
 	public List<Chukumx> listOnwayProducts(int cankuid) {
