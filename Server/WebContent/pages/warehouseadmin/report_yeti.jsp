@@ -22,7 +22,7 @@
     <td><s:text name="起始日期:"/></td>
     <td align="left" width="25%"><s:datetimepicker name="begindate" label="选择日期" toggleType="explode" theme="simple"/></td>
      <td><s:text name="截止日期:"/></td>
-    <td align="left" width="25%"><s:datetimepicker name="enddate" label="选择日期" toggleType="explode" endDate="today" theme="simple"/></td>
+    <td align="left" width="25%"><s:datetimepicker name="enddate" label="选择日期" toggleType="explode" theme="simple"/></td>
     <td align="center"><s:submit value="提交"/></td>
 </tr>
 </table>
