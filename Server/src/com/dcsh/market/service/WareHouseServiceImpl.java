@@ -460,7 +460,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 			listgckkc.addAll(hibernateTemplate.find("from Kcxx as kc where kc.id.cid = "+listgck.get(i).getId()));
 			pgck_set.addAll(hibernateTemplate.find("select distinct products from Kcxx as kc where kc.id.cid = "+listgck.get(i).getId()));
 			listcjck.addAll(hibernateTemplate.find("from Chukumx as ckmx where ckmx.chuku.cankuByCankuId = "+listgck.get(i).getId()+
-					                               " and ckmx.chuku.cankuByRkId = "+this.getCangkuByType(7).get(0).getId()));
+					                               " and ckmx.chuku.cankuByRkId = "+this.getCangkuByType(7).get(0).getId()+" and convert(varchar(10),ckmx.chuku.cksj,120) = '"+datestr+"'"));
 		}
 		pgck.addAll(pgck_set);
 		for(int j=0;j<pgck.size();j++)
@@ -1235,15 +1235,27 @@ public class WareHouseServiceImpl implements WareHouseService {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String begindatestr =bartDateFormat.format(begindate);
 	    String enddatestr =bartDateFormat.format(enddate);
-	    
-	    List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-				+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'");
+	    String nowstr = bartDateFormat.format(new Date());
+	    List<Reportxx> listrpxx = new ArrayList();
+	    if(enddatestr.equals(nowstr))
+	    {
+	    	listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+	 				+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.date,120) < '"+enddatestr+"'");
+	    }
+	    else
+	    {
+	    	listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+	 				+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'");
+	    }
+	   
 	    if(listrpxx.size()==0)
 	    	return null;
 	    List<ReportCmx> listreportcmx = new ArrayList();
 	    for(int i=0;i<listrpxx.size();i++){    	
-	    listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
+	    	listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
 	    }
+	    if(enddatestr.equals(nowstr))
+	    	listreportcmx.addAll(this.getDayReportCmx(canku, new Date()));
 	    return listreportcmx;
 	}
 	@SuppressWarnings("unchecked")
@@ -1252,17 +1264,33 @@ public class WareHouseServiceImpl implements WareHouseService {
 		SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		 String begindatestr =bartDateFormat.format(begindate);
 		 String enddatestr =bartDateFormat.format(enddate);
-	    
-		 List<Reportxx> listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
-					+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+
-					"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'"
-					+" and rp.bno like 'yeti%'");
+		 String nowstr = bartDateFormat.format(new Date());
+		 List<Reportxx> listrpxx = new ArrayList();
+		 if(enddatestr.equals(nowstr)){
+			 listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+					 	+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+
+					 	"' and convert(varchar(10),rp.date,120) < '"+enddatestr+"'"
+					 	+" and rp.bno like 'yeti%'");
+		  }
+		 else{
+			 listrpxx = hibernateTemplate.find("from Reportxx as rp where rp.ckid = "+canku.getId()
+					 	+" and convert(varchar(10),rp.date,120) >= '"+begindatestr+
+					 	"' and convert(varchar(10),rp.date,120) <= '"+enddatestr+"'"
+					 	+" and rp.bno like 'yeti%'");
+		 }
 		    if(listrpxx.size()==0)
 		    	return null;
 		    List<ReportCmx> listreportcmx = new ArrayList();
 		    for(int i=0;i<listrpxx.size();i++){    	
 		    listreportcmx.addAll(hibernateTemplate.find("from ReportCmx where rxxid = "+listrpxx.get(i).getId()));
 		    }
+		    if(enddatestr.equals(nowstr))
+		    	{
+		    		listreportcmx.addAll(this.getDayReportCmx_yeti(canku, new Date()));
+		    		System.out.println("hahahah"+this.getDayReportCmx_yeti(canku, new Date()).size());
+		    	}
+		    
+		    
 	    return listreportcmx;
 	}
 	@SuppressWarnings("unchecked")
