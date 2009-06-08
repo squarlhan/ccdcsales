@@ -234,6 +234,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 			}else{
 				kcxx.setSaleType(loadrkmx.getSaleType());	
 			}
+			kcxx.setMemo(loadrkmx.getMemo());
 			kcxx.setStatus(loadrkmx.getStatus());
 			kcxxes.add(kcxx);
 			hibernateTemplate.update(kcxx);	
