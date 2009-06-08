@@ -2,6 +2,7 @@
 开始的时候不能工作是因为使用了AspectJ作为AOP的实现，AspectJ需要在编译的字节码里面添加特殊的代码。
 还有一个小问题：
    使用AspectJ之后，@Override不能正常编译，现在的ServiceImpl代码中删除了所有的@Override的Annotation。估计和AsjectJ的版本有关系，使用的AspectJ版本为1.5.3。
+   此问题是由于ＪＤＫ的版本导致的，ＪＤＫ１.５对于@Override方法不能用在接口上。
 
 = 使用方式 =
 桌面上有一个部署的快捷方式，此快捷方式调用 ant运行 E:\Dcsh\ANT_AUTO下的脚本build.xml自动部署。所作的工作如下：
@@ -106,4 +107,3 @@
 </project>
 
 '
-
