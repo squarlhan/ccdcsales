@@ -1,4 +1,4 @@
-alter talbe Chuku alter column memo varchar(80);
+alter table Chuku alter column memo varchar(80);
 
 alter table ReportCmx add Memo varchar(100);
 
