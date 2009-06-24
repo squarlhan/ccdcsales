@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -12,10 +13,12 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
 import com.dcsh.market.Kcxx;
+import com.dcsh.market.KcxxId;
 import com.dcsh.market.Products;
 import com.dcsh.market.ReportCmx;
 import com.dcsh.market.Specifications;
@@ -195,10 +198,9 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 			hibernateTemplate.save(xsfahuomx);
 			hibernateTemplate.flush();
 		}
-		
-		
+				
 	}
-	
+		
 	@SuppressWarnings("unchecked")
 	public List<Products> getProductNameById(int id){
 		List<Products> productName;
@@ -321,6 +323,89 @@ public class XiaoshouServiceImpl implements XiaoshouService {
 	@Transactional
     public void delXSfahuomx(int id){
 		hibernateTemplate.delete(hibernateTemplate.get(XSfahuomx.class, id));
+	}
+	
+	//自动生成出库明细单
+	@SuppressWarnings("unchecked")
+	public Set<Chukumx> autochukumxs(Canku canku, Products products, 
+			Specifications specifications, byte saletype, int sumnum, Chuku chuku){
+		Set<Chukumx> result = new HashSet();
+		List<Kcxx> kcxxs = (List<Kcxx>)hibernateTemplate.find("from Kcxx where id.cid =" + canku.getId()
+				+ " and id.pid =" + products.getId() + " and specifications.id =" + specifications.getId()
+				+ " and saleType =" + saletype);
+		int avi = 0;//记录一共有多少货
+		for(Kcxx kcxx : kcxxs){
+			avi+=kcxx.getNumber();
+		}
+		if (avi >= sumnum) {
+			int i = 0;// 记录一共有几个明细
+			int sum = 0;
+			int aa = sumnum;
+			while (sum < sumnum) {
+				int t = kcxxs.get(i).getNumber();
+				sum += t;
+				i++;
+			}
+			for (int j = 0; j <= i - 1; j++) {
+				if (j != i - 1) {
+					aa -= kcxxs.get(j).getNumber();
+					result.add(new Chukumx(products, chuku, specifications, kcxxs.get(j).getId().getPch(), 
+							kcxxs.get(j).getNumber(), (byte)0));
+					//System.out.println(j + ":" + kcxxs.get(j).getId().getPch().trim()+" : " + kcxxs.get(j).getNumber());
+				} else{
+					result.add(new Chukumx(products, chuku, specifications, kcxxs.get(j).getId().getPch(), 
+							aa, (byte)0));
+					//System.out.println(j + ":" + kcxxs.get(j).getId().getPch().trim()+" : " + aa);
+				}
+			}
+			return result;
+		}else throw new IllegalArgumentException("库存不足！");
+	}
+	
+	@SuppressWarnings("unchecked")
+	 
+	@Transactional
+	public void doDeliveryWareHouse(Chuku ck) {
+		
+		    if(ck.getCankuByRkId().getType()==(byte)4)//损耗
+				
+				ck.setCankuByRkId(((List<Canku>)hibernateTemplate.find("from Canku where type=4")).get(0)); 
+			else if(ck.getCankuByRkId().getType()==(byte)3)//销售
+				ck.setCankuByRkId(((List<Canku>)hibernateTemplate.find("from Canku where type=3")).get(0)); 
+			else
+			ck.setCankuByRkId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByRkId().getId()));//移库
+		
+		
+		ck.setCankuByCankuId((Canku)hibernateTemplate.load(Canku.class, ck.getCankuByCankuId().getId()));
+		ck.setUsers((Users)hibernateTemplate.load(Users.class, ck.getUsers().getId()));
+		ck.setCustom((Custom)hibernateTemplate.get(Custom.class, ck.getCustom().getId()));
+		hibernateTemplate.save(ck);
+		Set<Chukumx> ckmxs = ck.getChukumxes();
+
+		for (Chukumx ckmx : ckmxs) {
+			ckmx.setChuku(ck);
+			ckmx.setProducts((Products)hibernateTemplate.load(Products.class, ckmx.getProducts().getId()));
+			ckmx.setSpecifications((Specifications)hibernateTemplate.load(Specifications.class, ckmx.getSpecifications().getId()));
+			ckmx.setStatus((byte)0);
+			hibernateTemplate.save(ckmx);
+			hibernateTemplate.flush();
+			
+			KcxxId cid = new KcxxId(ckmx.getProducts().getId(), ckmx.getPch(),
+					ck.getCankuByCankuId().getId());
+			Kcxx ckcxx = (Kcxx) hibernateTemplate.get(Kcxx.class, cid);
+			if(ckcxx.getNumber()>ckmx.getNumber()){
+				ckcxx.entryNumber(-ckmx.getNumber());
+				hibernateTemplate.update(ckcxx);
+			}else if(ckcxx.getNumber()==ckmx.getNumber()){
+				hibernateTemplate.delete(ckcxx);
+			}else {
+				System.out.println("库存不足！");
+				throw new IllegalArgumentException("库存不足！");
+			}
+
+			hibernateTemplate.flush();
+		}
+		
 	}
 
 }

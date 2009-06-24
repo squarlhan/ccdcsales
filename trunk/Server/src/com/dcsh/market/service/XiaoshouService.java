@@ -3,8 +3,10 @@ package com.dcsh.market.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
 import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Fahuo;
@@ -67,4 +69,21 @@ public interface XiaoshouService {
      */
 	List<ReportCmx> listSales(List<Products> products,Date begindate,Date enddate);
 	List<Chukumx> listSalesmx(List<Products> products,Date begindate,Date enddate);
+	/**
+	 * 出库单提交到数据库
+	 * @return
+	 */
+	void doDeliveryWareHouse(Chuku chuku);
+	/**
+	 * 自动生成出库明细
+	 * @param canku 出库仓库
+	 * @param products 产品
+	 * @param specifications 规格
+	 * @param saletype 销售类型
+	 * @param sumnum 总量
+	 * @param chuku 出库id
+	 * @return
+	 */
+	Set<Chukumx> autochukumxs(Canku canku, Products products, 
+			Specifications specifications, byte saletype, int sumnum, Chuku chuku);
 }
