@@ -11,6 +11,7 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Products;
 import com.dcsh.market.SalesPrintInfo;
@@ -97,8 +98,9 @@ public class salesNotificationAction implements Preparable {
 				Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
 	        	Products products = new Products(this.getProduct().get(i),null);
 	        	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
+	        	//假设全部从销售出库，status为1
 	        	XSfahuomx tempfahuomx = new XSfahuomx(null,fahuocanku,products,sp,this.getDeli_num().get(i),
-	        			BigDecimal.valueOf(Double.parseDouble(this.getPrice().get(i))),(byte)0);
+	        			BigDecimal.valueOf(Double.parseDouble(this.getPrice().get(i))),(byte)1);
 	        	this.getXsfahuomxs().add(tempfahuomx);
 		  }
 		  
@@ -111,6 +113,18 @@ public class salesNotificationAction implements Preparable {
 				  this.getOrgin(),newcustom,(byte)this.getDelivertype(),(byte)this.getJstype(),
 				  this.getMemo(),tempshr,auth.getPrincipal(),tempnhr,(byte)0,(byte)this.getSaletype(),this.getXsfahuomxs());
 		  service.doXsfahuo(xsfahuoxx);
+		  
+		//下面的代码直接出库
+		  for(XSfahuomx xsfahuomx:xsfahuomxs)
+			{
+				Chuku chuku = new Chuku(xsfahuomx.getCanku(), new Canku(0,null,(byte)3),
+						xsfahuoxx.getZdr(),xsfahuoxx.getCustomer(),xsfahuoxx.getBno(),
+						xsfahuoxx.getFahuosj(), null, xsfahuoxx.getMemo());
+				chuku.setChukumxes(service.autochukumxs(xsfahuomx.getCanku(), xsfahuomx.getProduct(), 
+						xsfahuomx.getSpecification(), xsfahuoxx.getType(), xsfahuomx.getNumber(), chuku));
+				service.doDeliveryWareHouse(chuku);
+			}
+		  
 		 return print();
 	 }
 	 

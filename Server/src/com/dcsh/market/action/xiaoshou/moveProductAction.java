@@ -11,10 +11,12 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
+import com.dcsh.market.Chuku;
 import com.dcsh.market.Custom;
 import com.dcsh.market.Products;
 import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
+import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSyikumx;
 import com.dcsh.market.XSyikuxx;
 import com.dcsh.market.Yxyikusign;
@@ -71,8 +73,9 @@ public class moveProductAction implements Preparable {
 	        	Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
 	        	Products products = new Products(this.getProduct().get(i),null);
 	        	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
+	        	//假设全部从销售移库，status为1
 	        	XSyikumx tempykmx = new XSyikumx(fahuocanku,products,sp,null,
-	        			this.getDeli_num().get(i),(byte)0);
+	        			this.getDeli_num().get(i),(byte)1);
 	        	this.getXsyikumxs().add(tempykmx);
 	        }
 	        
@@ -87,6 +90,18 @@ public class moveProductAction implements Preparable {
 	        		this.getAim(),this.getSendtime(),(byte)this.getDelivertype(),
 	        		this.getMemo(),newcanku,(byte)this.getSaletype(),BigDecimal.valueOf(Double.parseDouble(this.getPrice())),this.getXsyikumxs(),this.getYikusigns());
 	        service.doYiku(xsyikuxx);
+	        
+	      //下面的代码直接移库
+			  for(XSyikumx xsyikumx:xsyikumxs)
+				{
+					Chuku chuku = new Chuku(xsyikumx.getCanku(), xsyikuxx.getAimcanku(),
+							xsyikuxx.getZbr(),xsyikuxx.getCustomer(),xsyikuxx.getBno(),
+							xsyikuxx.getSendtime(), null, xsyikuxx.getMemo());
+					chuku.setChukumxes(service.autochukumxs(xsyikumx.getCanku(), xsyikumx.getProduct(), 
+							xsyikumx.getSpecification(), xsyikuxx.getType(), xsyikumx.getNumber(), chuku));
+					service.doDeliveryWareHouse(chuku);
+				}
+	        
 	        return print();
         }
  
