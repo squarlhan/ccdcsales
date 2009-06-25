@@ -218,6 +218,24 @@ function setnumber(obj,line)
 		else
 			return false;
 	}
+	function confirmCKPrintbtn()
+	{
+        var cst = document.getElementById("customer");
+		
+		if(cst.value==0)
+			{
+			alert("    请填写客户名称\n并在下拉框中选择一个客户！");  
+			return false;
+			}
+		var cf = confirm("确认打印？");
+		if(cf)
+		{
+			document.myform.action="xsmoveproduct!printck.action";
+			return true;
+		}
+		else
+			return false;
+	}
 	var weights = new Array(
 			<s:iterator id="result" value="specificationList">
 				<s:property value="#result.weight"/>,
@@ -292,7 +310,15 @@ function setnumber(obj,line)
 				  xmlHttp.send(null);
 				  xmlHttp.onreadystatechange = (btype!="Firefox")?(xmlHandle):(xmlHandle());
 			}
-
+	function changeCPB()
+	{
+		var isChuku = document.getElementById("isChuku").checked;
+		var cpb = document.getElementById("cpb");
+		if(isChuku==false)
+			cpb.disabled = true;
+		else
+			cpb.disabled = false;
+	}
 </script>
 <s:head/>
 </head>
@@ -354,6 +380,10 @@ function setnumber(obj,line)
          </select></td>
          <td align="left"><s:text name="备注:"/></td>
           <td align="left"><s:textarea name="memo"/></td></tr>
+         <tr>
+         <td align="left"><s:text name="直接出库"/></td>
+         <td align="left"><s:checkbox name="isChuku" id="isChuku" theme="simple" onclick="javascript:changeCPB()"/></td>
+         </tr>
 </table>
 <table  class="list_table" id="tb" align="center" width="80%">
       	<tr bgcolor="#4A708B">
@@ -386,7 +416,8 @@ function setnumber(obj,line)
   		<td align="center">
 			<input value="提交"  type="submit" name="Submit" onclick="return confirmbtn()"/>
 			<s:reset value="重置" />
-			<input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+			<input value="打印确认单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+			<input value="打印出库单"  type="submit" name="Submit" id="cpb" onclick="return confirmPrintCKbtn()"/>
 		</td>
 		</tr>
    </table>
@@ -399,6 +430,7 @@ function setnumber(obj,line)
 	  obj1.onchange(obj1);
   }
   init();
+  changeCPB();
  </script>
 </body>
 </html>
