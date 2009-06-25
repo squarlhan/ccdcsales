@@ -12,7 +12,9 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
+import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
+import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
@@ -25,6 +27,7 @@ import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
 import com.dcsh.market.service.XiaoshouService;
 import com.opensymphony.xwork2.Preparable;
+import com.dcsh.market.EntryPrintInfo;
 
 public class moveProductAction implements Preparable {
 
@@ -53,11 +56,14 @@ public class moveProductAction implements Preparable {
 	private List<BigDecimal> sumweight;
 	private String delivertypeName;
 	private List<SalesPrintInfo> resultList;
+	private List<EntryPrintInfo> resultList_ckd;
 	private String customerName;
 	private String saleTypeName;
 	private SalesPrintInfo spi;
+	private EntryPrintInfo epi;
 	private String date;
 	private String aimCangKu;
+	private Boolean isChuku;
 	
 	 public moveProductAction(XiaoshouService service)
 	    {
@@ -73,9 +79,11 @@ public class moveProductAction implements Preparable {
 	        	Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
 	        	Products products = new Products(this.getProduct().get(i),null);
 	        	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
-	        	//假设全部从销售移库，status为1
+	        	Byte status = (byte)0;//直接出库status为1，否则status为0
+	        	if(this.isChuku)
+	        		status = (byte)1;
 	        	XSyikumx tempykmx = new XSyikumx(fahuocanku,products,sp,null,
-	        			this.getDeli_num().get(i),(byte)1);
+	        			this.getDeli_num().get(i),status);
 	        	this.getXsyikumxs().add(tempykmx);
 	        }
 	        
@@ -92,6 +100,7 @@ public class moveProductAction implements Preparable {
 	        service.doYiku(xsyikuxx);
 	        
 	      //下面的代码直接移库
+	        if(this.isChuku){
 			  for(XSyikumx xsyikumx:xsyikumxs)
 				{
 					Chuku chuku = new Chuku(xsyikumx.getCanku(), xsyikuxx.getAimcanku(),
@@ -101,7 +110,10 @@ public class moveProductAction implements Preparable {
 							xsyikumx.getSpecification(), xsyikuxx.getType(), xsyikumx.getNumber(), chuku));
 					service.doDeliveryWareHouse(chuku);
 				}
-	        
+			  }
+	        else
+	        	System.out.println("Here!!!");
+	        	System.out.println("+++"+this.isChuku);
 	        return print();
         }
  
@@ -141,6 +153,29 @@ public class moveProductAction implements Preparable {
 			return "print";
 		}
  
+ public String printck() throws Exception{
+	 
+	  for(XSyikumx xsyikumx:xsyikumxs){
+		    Chuku chuku = new Chuku(xsyikumx.getCanku(), xsyikuxx.getAimcanku(),
+					xsyikuxx.getZbr(),xsyikuxx.getCustomer(),xsyikuxx.getBno(),
+					xsyikuxx.getSendtime(), null, xsyikuxx.getMemo());
+			List<Chukumx> chukumxs = new ArrayList();
+			chukumxs.addAll(service.autochukumxs(xsyikumx.getCanku(), xsyikumx.getProduct(), 
+					xsyikumx.getSpecification(), xsyikuxx.getType(), xsyikumx.getNumber(), chuku));	
+			
+			for(int i=0;i<chukumxs.size();i++){
+				
+				this.epi = 	    		
+					new EntryPrintInfo(chukumxs.get(i).getProducts().getName(),chukumxs.get(i).getSpecifications().getName(),
+							chukumxs.get(i).getSpecifications().getPackType(),chukumxs.get(i).getNumber(),
+							String.valueOf(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber()),chukumxs.get(i).getPch(),"");
+				resultList_ckd.add(epi);
+			}
+	  }
+	 
+	 return "printckd";
+	 
+ }
 
 	public Date getMydate() {
 	return mydate;
@@ -346,6 +381,22 @@ public void setSaletype(int saletype) {
 
 	public String getAimCangKu() {
 		return aimCangKu;
+	}
+
+	public Boolean getIsChuku() {
+		return isChuku;
+	}
+
+	public void setIsChuku(Boolean isChuku) {
+		this.isChuku = isChuku;
+	}
+
+	public List<EntryPrintInfo> getResultList_ckd() {
+		return resultList_ckd;
+	}
+
+	public void setResultList_ckd(List<EntryPrintInfo> resultList_ckd) {
+		this.resultList_ckd = resultList_ckd;
 	}
 
 }
