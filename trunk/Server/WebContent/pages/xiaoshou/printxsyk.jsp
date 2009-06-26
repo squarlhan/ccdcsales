@@ -52,7 +52,7 @@
 				    <label class="STYLE3">发货单位：<%=request.getAttribute("printorgin")%></label>
 				 	</td>
 				    <td width="30%">
-				    <label class="STYLE3"><%=request.getAttribute("date") %></label>
+				    <label class="STYLE3"><%=request.getAttribute("mydate") %></label>
 				 	</td>
 				    <td width="20%">
 				    <label class="STYLE3">化验单：&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;份</label>
@@ -76,7 +76,7 @@
 			    <th width="13%"  scope="col">袋数</th>
 			    <th width="15%"  scope="col">批号</th>
 			</tr>
-			<s:iterator id="result" value="resultList" status="index">		
+			<s:iterator id="result" value="resultList_ckd" status="index">		
 			<tr>
 				<td align="center">
 						<s:property value="#result.productsName" />

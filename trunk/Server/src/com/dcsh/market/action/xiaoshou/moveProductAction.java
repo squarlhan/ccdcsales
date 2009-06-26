@@ -64,6 +64,9 @@ public class moveProductAction implements Preparable {
 	private String date;
 	private String aimCangKu;
 	private Boolean isChuku;
+    private String printCankuaim;
+    private String printorgin;
+    private String printCustom;
 	
 	 public moveProductAction(XiaoshouService service)
 	    {
@@ -155,6 +158,35 @@ public class moveProductAction implements Preparable {
  
  public String printck() throws Exception{
 	 
+	  this.resultList_ckd=new ArrayList();
+	  Custom custom = service.getCustomerById(this.getCustomer());
+	  this.printCustom = custom.getCustomName();
+	  this.printCankuaim = service.getCangkuById(aimcanku).getName();
+	
+	//  this.printorgin = this.getOrgin();
+	  for(int i=0;i<this.getDeli_canku().size();i++)
+	  this.printorgin += service.getCangkuById(this.getDeli_canku().get(i)).getName();//test TODO
+	  
+	  for(int i=0;i<this.getDeli_canku().size();i++)
+      {
+      	Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
+      	Products products = new Products(this.getProduct().get(i),null);
+      	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
+      	XSyikumx tempykmx = new XSyikumx(fahuocanku,products,sp,null,
+      			this.getDeli_num().get(i),(byte)0);
+      	this.getXsyikumxs().add(tempykmx);
+      }
+	  this.getYikusigns().add(new Yxyikusign(null,(byte)0,null,new Date()));//状态，负责人，签字时间待定;多个签名待定
+      
+      Custom newcustom = new Custom(this.getCustomer());
+      Canku newcanku = new Canku(this.getAimcanku(),null,(byte)0); 
+      
+      PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
+
+      this.xsyikuxx = new XSyikuxx(new Date(),this.getBno(),newcustom,this.getOrgin(),(byte)0,auth.getPrincipal(),
+      		this.getAim(),this.getSendtime(),(byte)this.getDelivertype(),
+      		this.getMemo(),newcanku,(byte)this.getSaletype(),BigDecimal.valueOf(Double.parseDouble(this.getPrice())),this.getXsyikumxs(),this.getYikusigns());
+	  
 	  for(XSyikumx xsyikumx:xsyikumxs){
 		    Chuku chuku = new Chuku(xsyikumx.getCanku(), xsyikuxx.getAimcanku(),
 					xsyikuxx.getZbr(),xsyikuxx.getCustomer(),xsyikuxx.getBno(),
@@ -397,6 +429,30 @@ public void setSaletype(int saletype) {
 
 	public void setResultList_ckd(List<EntryPrintInfo> resultList_ckd) {
 		this.resultList_ckd = resultList_ckd;
+	}
+
+	public String getPrintCankuaim() {
+		return printCankuaim;
+	}
+
+	public void setPrintCankuaim(String printCankuaim) {
+		this.printCankuaim = printCankuaim;
+	}
+
+	public String getPrintorgin() {
+		return printorgin;
+	}
+
+	public void setPrintorgin(String printorgin) {
+		this.printorgin = printorgin;
+	}
+
+	public String getPrintCustom() {
+		return printCustom;
+	}
+
+	public void setPrintCustom(String printCustom) {
+		this.printCustom = printCustom;
 	}
 
 }
