@@ -54,6 +54,7 @@
 	    <pattern>/xssalesnotification.action</pattern>
 	    <pattern>/pages/xiaoshou/printmoveprconfirm.jsp</pattern>
 	    <pattern>/xsmoveproduct!print.action </pattern>
+	    <pattern>/xsmoveproduct!printck.action </pattern>
 	    <pattern>/xsmoveproduct.action</pattern>
 	    <pattern>/pages/xiaoshou/customers.jsp</pattern>
 	</excludes>

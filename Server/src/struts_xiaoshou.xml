@@ -49,6 +49,7 @@
             <result>/pages/xiaoshou/moveprconfirm.jsp</result>
             <result name="save_yiku" type="redirect-action">xsliststorage</result>
             <result name="print">/pages/xiaoshou/printmoveprconfirm.jsp</result>
+            <result name="printckd">/pages/xiaoshou/printxsyk.jsp</result>
         </action>
          <action name="xsgosalesnotification" method="execute" class="xsgosalesnotificationAction">
             <result>/pages/xiaoshou/salesnotification.jsp</result>

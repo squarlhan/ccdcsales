@@ -417,7 +417,7 @@ function setnumber(obj,line)
 			<input value="提交"  type="submit" name="Submit" onclick="return confirmbtn()"/>
 			<s:reset value="重置" />
 			<input value="打印确认单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
-			<input value="打印出库单"  type="submit" name="Submit" id="cpb" onclick="return confirmPrintCKbtn()"/>
+			<input value="打印出库单"  type="submit" name="Submit" id="cpb" onclick="return confirmCKPrintbtn()"/>
 		</td>
 		</tr>
    </table>
