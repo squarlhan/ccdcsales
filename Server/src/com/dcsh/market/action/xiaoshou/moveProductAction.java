@@ -169,17 +169,17 @@ public class moveProductAction implements Preparable {
 	  
 	  for(int i=0;i<this.getDeli_canku().size();i++)
       {
-      	Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
-      	Products products = new Products(this.getProduct().get(i),null);
-      	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
+      	Canku fahuocanku = this.service.getCangkuById(this.getDeli_canku().get(i));//获取仓库信息
+      	Products products = this.service.getProductNameById(this.getProduct().get(i)).get(0); //获取产品信息
+      	Specifications sp = this.service.getSpecificationNameById(this.getSpecification().get(i)).get(0);//获取规格信息
       	XSyikumx tempykmx = new XSyikumx(fahuocanku,products,sp,null,
       			this.getDeli_num().get(i),(byte)0);
       	this.getXsyikumxs().add(tempykmx);
       }
 	  this.getYikusigns().add(new Yxyikusign(null,(byte)0,null,new Date()));//状态，负责人，签字时间待定;多个签名待定
       
-      Custom newcustom = new Custom(this.getCustomer());
-      Canku newcanku = new Canku(this.getAimcanku(),null,(byte)0); 
+      Custom newcustom = this.service.getCustomerById(this.getCustomer());
+      Canku newcanku = this.service.getCangkuById(this.getAimcanku());
       
       PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
 
@@ -200,7 +200,8 @@ public class moveProductAction implements Preparable {
 				this.epi = 	    		
 					new EntryPrintInfo(chukumxs.get(i).getProducts().getName(),chukumxs.get(i).getSpecifications().getName(),
 							chukumxs.get(i).getSpecifications().getPackType(),chukumxs.get(i).getNumber(),
-							String.valueOf(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber()),chukumxs.get(i).getPch(),"");
+							String.valueOf(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber()),
+							chukumxs.get(i).getPch(),chukumxs.get(i).getChuku().getMemo());
 				resultList_ckd.add(epi);
 			}
 	  }

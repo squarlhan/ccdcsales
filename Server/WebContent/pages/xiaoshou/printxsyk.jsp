@@ -35,7 +35,7 @@
 		<OBJECT classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 height=0
 			id=WB width=0>
 		</OBJECT>
-		        <h2 align="center" class="STYLE1">装&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;车&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</h2>
+		        <h2 align="center" class="STYLE1">出&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;库&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;单</h2>
    			 <table width="90%" align="center" border="0" cellspacing="0">
    			   <tr>
     			 <td width="50%">
@@ -103,7 +103,7 @@
                 <label>备注：</label>
                 </td>
                 <td colspan="5">
-                <label></label>
+                <label><%=request.getAttribute("resultList_ckd.get(0).memo")%></label>
                 </td>
             </tr>	
 		  </table>

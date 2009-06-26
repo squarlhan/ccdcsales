@@ -378,11 +378,12 @@ function setnumber(obj,line)
 	          <option value="3">外销</option>
 	          <option value="4">不合格</option>            
          </select></td>
-         <td align="left"><s:text name="备注:"/></td>
-          <td align="left"><s:textarea name="memo"/></td></tr>
-         <tr>
          <td align="left"><s:text name="直接出库"/></td>
          <td align="left"><s:checkbox name="isChuku" id="isChuku" theme="simple" onclick="javascript:changeCPB()"/></td>
+         </tr>
+         <tr>
+         <td align="left"><s:text name="备注:"/></td>
+         <td align="left"><s:textarea name="memo"/></td>
          </tr>
 </table>
 <table  class="list_table" id="tb" align="center" width="80%">
