@@ -244,6 +244,24 @@
 		else
 			return false;
 	}
+	function confirmCKPrintbtn()
+	{
+		var cst = document.getElementById("customer");
+		
+		if(cst.value==0)
+			{
+			alert("    请填写购货单位\n并在下拉框中选择一个客户！");
+			return false;
+			}
+		var cf = confirm("确认打印？");
+		if(cf)
+		{
+			document.myform.action = "xssalesnotification!printck.action";
+			return true;
+		}
+		else
+			return false;
+	}
 	var weights = new Array(
 		<s:iterator id="result" value="specificationList">
 			<s:property value="#result.weight"/>,
@@ -326,6 +344,15 @@
 			
 			}
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+	function changeCPB()
+	{
+		var isChuku = document.getElementById("isChuku").checked;
+		var cpb = document.getElementById("cpb");
+		if(isChuku==false)
+			cpb.disabled = true;
+		else
+			cpb.disabled = false;
+	}
 </script>
 <s:head />
 </head>
@@ -400,7 +427,11 @@
 	          <option value="1">电汇/转账</option>
 	          <option value="2">承兑汇票</option>      
          </select></td>
-       <td align="left"><s:text name=" 备注: "/></td>
+     <td align="left"><s:text name="直接出库"/></td>
+     <td align="left"><s:checkbox name="isChuku" id="isChuku" theme="simple" onclick="javascript:changeCPB()"/></td>
+     </tr>
+     <tr>
+      <td align="left"><s:text name=" 备注: "/></td>
        <td align="left"><s:textarea name="memo"/></td>
      </tr>
 </table>
@@ -450,7 +481,8 @@
 			<td align="center">
 			<input value="提交"  type="submit" name="Submit" onclick="return confirmbtn()"/>
 			<s:reset value="重置" />
-			<input value="打印表单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+			<input value="打印通知单"  type="submit" name="Submit" onclick="return confirmPrintbtn()"/>
+			<input value="打印出库单"  type="submit" name="Submit" id="cpb" onclick="return confirmCKPrintbtn()"/>
 			</td>
 		</tr>
 	</table>
@@ -463,6 +495,7 @@
 	  obj1.onchange(obj1);
   }
   init();
+  changeCPB();
  </script>
 </body>
 

@@ -9,6 +9,7 @@ public class EntryPrintInfo {
 	private String memo;
 	private String sum;
 	private String packType;
+	private String fahuocanku;
 	public EntryPrintInfo(String productsName, String specificationName,String packType,
 			 int number, String sum,String pchName, String memo) {
 		super();
@@ -19,6 +20,18 @@ public class EntryPrintInfo {
 		this.sum = sum;
 		this.pchName = pchName;
 		this.memo = memo;
+	}
+	public EntryPrintInfo(String productsName, String specificationName,String packType,
+			 int number, String sum,String pchName, String memo,String fahuocanku) {
+		super();
+		this.productsName = productsName;
+		this.specificationName = specificationName;
+		this.packType = packType;
+		this.number = number;
+		this.sum = sum;
+		this.pchName = pchName;
+		this.memo = memo;
+		this.fahuocanku = fahuocanku;
 	}
 	public String getProductsName() {
 		return productsName;
@@ -61,6 +74,12 @@ public class EntryPrintInfo {
 	}
 	public String getSum() {
 		return sum;
+	}
+	public String getFahuocanku() {
+		return fahuocanku;
+	}
+	public void setFahuocanku(String fahuocanku) {
+		this.fahuocanku = fahuocanku;
 	}
 	
 }
