@@ -150,13 +150,8 @@ function setnumber(obj,line)
 	}
 	function checkRKNull()
 	{
-		var ele = document.getElementById("wer");
 		var ele2 = document.getElementById("rew")
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入负责人!");
-		  return false;
-		}
+	
 		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 		  alert("请输入编号!");
@@ -196,13 +191,8 @@ function setnumber(obj,line)
 	}
 	function checkPrintNull()
 	{
-		var ele = document.getElementById("wer");
 		var ele2 = document.getElementById("rew")
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-		  alert("请输入负责人!");
-		  return false;
-		}
+	
 		if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 		  alert("请输入编号!");
@@ -261,13 +251,9 @@ function setnumber(obj,line)
 <h2>中转库产成品入库单</h2>
   <s:form id="myform"  theme="simple" target="_blank">
   <table class="list_table"  align="center" width="100%" id="tb0">
-  	<tr bgcolor="#4A708B">
-  		<th>负责人</th>
-		<th>编号</th>
-  	</tr>
   	<tr>
-  		<td><s:textfield id="wer" name="rkfzr" labelposition="top"/></td>
-       <td><s:textfield id="rew" name="bno" labelposition="top"/></td>
+  	   <td><s:text name="编号："/></td>
+       <td align="left"><s:textfield id="rew" name="bno" labelposition="top" size="50"/></td>
   	</tr>
   </table>
      <table class="list_table"  align="center" width="100%" id="tb">

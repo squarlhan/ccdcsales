@@ -14,14 +14,9 @@
 <script language = "javascript" >
 	function check()
 	{
-		var ele = document.getElementById("wer");
 		var ele2 = document.getElementById("rew");
-		if(ele.value.replace(/(^\s*)|(\s*$)/g,"") == "")
-		{
-			alert("请输入负责人");
-			return false;
-		}
-		else if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
+	
+	    if(ele2.value.replace(/(^\s*)|(\s*$)/g,"") == "")
 		{
 			alert("请输入编号");
 			return false;
@@ -270,16 +265,11 @@
 <h2>储运处到货产品入库</h2>
   <s:form theme="simple" action="cyccheckinproducts" onsubmit="return check()">
     <table class="list_table"  align="center" width="320" id="tb0">
-  	<tr bgcolor="#4A708B">
-  		<th width="160">负责人</th>
-		<th width="160">编号</th>
-  	</tr>
   	<tr>
-  		<td><s:textfield id="wer" name="rkfzr" labelposition="top"/></td>
-       <td><s:textfield id="rew" name="bno" labelposition="top"/></td>
+  	   <td><s:text name="编号："/></td>
+       <td align="left"><s:textfield id="rew" name="bno" labelposition="top" size="50"/></td>
   	</tr>
   </table>
-  <br/><br/>
    <table class="list_table" id="mytable" align="center" width="100%" id="tb">
 		<tr bgcolor="#4A708B">
 		    <th width="10%">选择</th>

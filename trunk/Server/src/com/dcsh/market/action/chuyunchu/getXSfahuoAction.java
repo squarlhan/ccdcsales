@@ -1,5 +1,6 @@
 package com.dcsh.market.action.chuyunchu;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.LogManager;
@@ -24,8 +25,13 @@ public class getXSfahuoAction implements Preparable{
 	@SuppressWarnings("unchecked")
 	public String execute() throws Exception {
     	Map session = ActionContext.getContext().getSession();
-        this.xsfhlist = service.getXSfahuomx(((List<CankuPriv>)session.get("tempuser")).get(0).getCanku());
-        System.out.println(xsfhlist);
+    	this.xsfhlist = new ArrayList();
+        List<XSfahuomx> tempxsfahuomxs = service.getXSfahuomx(((List<CankuPriv>)session.get("tempuser")).get(0).getCanku());
+        for(XSfahuomx xsfahuomx:tempxsfahuomxs){
+        	if(xsfahuomx.getXsfahuoxx().getMemo().trim().equals("")||xsfahuomx.getXsfahuoxx().getMemo()==null)
+        		xsfahuomx.getXsfahuoxx().setMemo("-");
+        	this.xsfhlist.add(xsfahuomx);
+        }
         return "show_report";
       
     }
