@@ -59,7 +59,6 @@ public class WareHouseServiceImpl implements WareHouseService {
 	public void doEntryWareHouse(Rkxx rkxx) {
 		rkxx.setCanku((Canku)hibernateTemplate.load(Canku.class, rkxx.getCanku().getId()));
 		rkxx.setRkczy((Users)hibernateTemplate.load(Users.class, rkxx.getRkczy().getId()));
-		rkxx.setRkfzr((Users)hibernateTemplate.load(Users.class, rkxx.getRkfzr().getId()));
 	
 		hibernateTemplate.save(rkxx);
 		Set<Rkmx> rkmxs = rkxx.getRkmxes();
@@ -139,6 +138,10 @@ public class WareHouseServiceImpl implements WareHouseService {
 			KcxxId cid = new KcxxId(ckmx.getProducts().getId(), ckmx.getPch(),
 					ck.getCankuByCankuId().getId());
 			Kcxx ckcxx = (Kcxx) hibernateTemplate.get(Kcxx.class, cid);
+			if(ckcxx==null){
+				System.out.println("¿â´æ²»×ã£¡");
+				throw new IllegalArgumentException("¿â´æ²»×ã£¡");
+			}
 			if(ckcxx.getNumber()>ckmx.getNumber()){
 				ckcxx.entryNumber(-ckmx.getNumber());
 				hibernateTemplate.update(ckcxx);
@@ -1159,8 +1162,7 @@ public class WareHouseServiceImpl implements WareHouseService {
 	 
 	@Transactional
 	public void doentryChuYunchu(List<Chukumx> chukumxes, Rkxx rkxx) {
-	
-		rkxx.setRkfzr((Users)hibernateTemplate.get(Users.class, rkxx.getRkfzr().getId()));
+
 		hibernateTemplate.save(rkxx);
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");

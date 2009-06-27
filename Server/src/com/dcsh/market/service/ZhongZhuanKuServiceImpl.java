@@ -362,7 +362,7 @@ private HibernateTemplate hibernateTemplate;
 	 
 	@Transactional
 	public void doentryZhongzhuanku(List<Chukumx> chukumxes,Rkxx rkxx){
-		rkxx.setRkfzr((Users)hibernateTemplate.get(Users.class, rkxx.getRkfzr().getId()));
+	
 		hibernateTemplate.save(rkxx);
 		for(Chukumx chukumx:chukumxes){
 			List<Products> product = (List<Products>) hibernateTemplate.find("from Products where name='"+chukumx.getProducts().getName().trim()+"'");
@@ -876,7 +876,6 @@ private HibernateTemplate hibernateTemplate;
 	public void doEntryWareHouse(Rkxx rkxx) {
 		rkxx.setCanku((Canku)hibernateTemplate.load(Canku.class, rkxx.getCanku().getId()));
 		rkxx.setRkczy((Users)hibernateTemplate.load(Users.class, rkxx.getRkczy().getId()));
-		rkxx.setRkfzr((Users)hibernateTemplate.load(Users.class, rkxx.getRkfzr().getId()));
 	
 		hibernateTemplate.save(rkxx);
 		Set<Rkmx> rkmxs = rkxx.getRkmxes();

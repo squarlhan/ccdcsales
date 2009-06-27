@@ -95,7 +95,6 @@ public class salesNotificationAction implements Preparable {
 	
 	 public salesNotificationAction(XiaoshouService service)
 	    {
-		   System.out.println("Enter Constructor");
 	        this.service = service;
 		}
 	 

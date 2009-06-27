@@ -40,7 +40,7 @@
 			   		<a href="<s:url action="cycgoxsfahuo"><s:param name="index" value="%{#result.id}"/></s:url>">出库</a>
 			   </td>
 			   <td align="center">
-					<s:property value="#result.xsfahuoxx.memo" />
+					<s:property value="#result.xsfahuoxx.memo" default="-"/>
 			   </td>
 	        </tr>
 	    </s:iterator>

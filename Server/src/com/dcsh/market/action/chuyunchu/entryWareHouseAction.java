@@ -32,7 +32,6 @@ public class entryWareHouseAction implements Preparable{
 	private Rkmx rkmx;
     private Products newproduct;
     private Specifications newspecification;
-    private String rkfzr;
     private String bno;
     private int canku;
     private List<Products> productsList;
@@ -142,17 +141,6 @@ public class entryWareHouseAction implements Preparable{
 	public void setNewspecification(Specifications newspecification) {
 		this.newspecification = newspecification;
 	}
-
-
-	public String getRkfzr() {
-		return rkfzr;
-	}
-
-
-	public void setRkfzr(String rkfzr) {
-		this.rkfzr = rkfzr;
-	}
-
 
 	public String getBno() {
 		return bno;
@@ -306,7 +294,7 @@ public class entryWareHouseAction implements Preparable{
     	this.rkmxes.addAll(temprumxs);
     	List<CankuPriv> user = (List<CankuPriv>)session.get("tempuser");
         this.rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),
-        		new Users(this.getRkfzr()==null?Integer.valueOf("3"):Integer.valueOf(this.getRkfzr())),
+        		null,
         		this.getBno()==null?cbno:this.getBno().trim(),
         		new Date(),
         		this.getRkmxes());

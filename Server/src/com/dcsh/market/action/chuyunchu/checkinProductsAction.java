@@ -20,7 +20,6 @@ public class checkinProductsAction implements Preparable{
     private WareHouseService service;
     private List<Chukumx> resultList;
     private String bno;
-    private int rkfzr;
     private boolean flag;
     private List<Boolean> checked;
     
@@ -33,14 +32,6 @@ public class checkinProductsAction implements Preparable{
 
 	public void setBno(String bno) {
 		this.bno = bno;
-	}
-
-	public int getRkfzr() {
-		return rkfzr;
-	}
-
-	public void setRkfzr(int rkfzr) {
-		this.rkfzr = rkfzr;
 	}
 
 	public List<Chukumx> getResultList() {
@@ -83,7 +74,7 @@ public class checkinProductsAction implements Preparable{
     		return "input";
     	}
     	else{
-    	    Rkxx rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),new Users(this.getRkfzr()),this.getBno().trim(),new Date());
+    	    Rkxx rkxx = new Rkxx(user.get(0).getCanku(),user.get(0).getUser(),null,this.getBno().trim(),new Date());
 
     	    List<Chukumx> chukumxs = new ArrayList<Chukumx>();
     	    for(int i=0;i<=this.getChecked().size()-1;i++)
