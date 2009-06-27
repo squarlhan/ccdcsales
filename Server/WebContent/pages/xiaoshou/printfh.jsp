@@ -42,15 +42,15 @@
     			 <label class="STYLE3">编号：<%=request.getAttribute("bno")%></label>
                  </td>
     			 <td width="50%">
-                 <label class="STYLE3">目标仓库：<%=request.getAttribute("printCankuaim")%></label>
+                 <label class="STYLE3">发货类型：销售</label>
                  </td>
    			   </tr>
 		     </table>
     			 <table width="90%" align="center" border="0" cellspacing="0">
 				 	<tr>
-				    <td >
-    			    <label class="STYLE3">客户名称：<%=request.getAttribute("printCustom")%></label>
-                    </td>
+				 <td >
+    			 <label class="STYLE3">客户名称：<%=request.getAttribute("printCustom")%></label>
+                 </td>
 				    <td width="30%">
 				    <label class="STYLE3"><%=request.getAttribute("date") %></label>
 				 	</td>
@@ -72,7 +72,7 @@
 			</tr>
 			<s:iterator id="result" value="resultList_ckd" status="index">		
 			<tr>
-				<td align="center">
+			    <td align="center">
 						<s:property value="#result.fahuocanku" />
 				</td>
 				<td align="center">

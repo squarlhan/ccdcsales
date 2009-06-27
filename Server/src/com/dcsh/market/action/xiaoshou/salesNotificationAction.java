@@ -12,13 +12,18 @@ import java.util.logging.Logger;
 
 import com.dcsh.market.Canku;
 import com.dcsh.market.Chuku;
+import com.dcsh.market.Chukumx;
 import com.dcsh.market.Custom;
+import com.dcsh.market.EntryPrintInfo;
 import com.dcsh.market.Products;
 import com.dcsh.market.SalesPrintInfo;
 import com.dcsh.market.Specifications;
 import com.dcsh.market.Users;
 import com.dcsh.market.XSfahuomx;
 import com.dcsh.market.XSfahuoxx;
+import com.dcsh.market.XSyikumx;
+import com.dcsh.market.XSyikuxx;
+import com.dcsh.market.Yxyikusign;
 import com.dcsh.market.action.chuyunchu.saveReportAction;
 import com.dcsh.market.priv.PrivAuthenticationImpl;
 import com.dcsh.market.priv.PrivUtil;
@@ -55,7 +60,12 @@ public class salesNotificationAction implements Preparable {
 	private String saleTypeName;
 	private SalesPrintInfo spi;
 	private String date;
-
+	
+	private Boolean isChuku;
+	private EntryPrintInfo epi;
+	private List<EntryPrintInfo> resultList_ckd;
+	private String printCustom;
+	
 	public String getDelivertypeName() {
 		return delivertypeName;
 	}
@@ -98,9 +108,11 @@ public class salesNotificationAction implements Preparable {
 				Canku fahuocanku = new Canku(this.getDeli_canku().get(i),null,(byte)0);
 	        	Products products = new Products(this.getProduct().get(i),null);
 	        	Specifications sp = new Specifications(this.getSpecification().get(i),null,BigDecimal.valueOf(0),null);
-	        	//假设全部从销售出库，status为1
+	        	Byte status = (byte)0;//直接出库status为1，否则status为0
+	        	if(this.isChuku)
+	        		status = (byte)1;
 	        	XSfahuomx tempfahuomx = new XSfahuomx(null,fahuocanku,products,sp,this.getDeli_num().get(i),
-	        			BigDecimal.valueOf(Double.parseDouble(this.getPrice().get(i))),(byte)1);
+	        			BigDecimal.valueOf(Double.parseDouble(this.getPrice().get(i))),status);
 	        	this.getXsfahuomxs().add(tempfahuomx);
 		  }
 		  
@@ -115,6 +127,7 @@ public class salesNotificationAction implements Preparable {
 		  service.doXsfahuo(xsfahuoxx);
 		  
 		//下面的代码直接出库
+		  if(this.isChuku)
 		  for(XSfahuomx xsfahuomx:xsfahuomxs)
 			{
 				Chuku chuku = new Chuku(xsfahuomx.getCanku(), new Canku(0,null,(byte)3),
@@ -128,7 +141,23 @@ public class salesNotificationAction implements Preparable {
 		 return print();
 	 }
 	 
-	 public String print() throws Exception{
+	 public List<EntryPrintInfo> getResultList_ckd() {
+		return resultList_ckd;
+	}
+
+	public void setResultList_ckd(List<EntryPrintInfo> resultList_ckd) {
+		this.resultList_ckd = resultList_ckd;
+	}
+
+	public String getPrintCustom() {
+		return printCustom;
+	}
+
+	public void setPrintCustom(String printCustom) {
+		this.printCustom = printCustom;
+	}
+
+	public String print() throws Exception{
 
 			SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日"); 
 			Date d = new Date(); 
@@ -165,6 +194,62 @@ public class salesNotificationAction implements Preparable {
 			}
 			return "print";
 		}
+	 
+	 public String printck() throws Exception{
+		 
+		  SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日");  
+		  setDate(bartDateFormat.format(new Date())); 
+		  this.resultList_ckd=new ArrayList();
+		  Custom custom = service.getCustomerById(this.getCustomer());
+		  this.printCustom = custom.getCustomName();
+		  
+		  for(int i=0;i<this.getDeli_canku().size();i++)
+	      {
+	      	Canku fahuocanku = this.service.getCangkuById(this.getDeli_canku().get(i));//获取仓库信息
+	      	Products products = this.service.getProductNameById(this.getProduct().get(i)).get(0); //获取产品信息
+	      	Specifications sp = this.service.getSpecificationNameById(this.getSpecification().get(i)).get(0);//获取规格信息
+	      	XSfahuomx tempfahuomx = new XSfahuomx(null,fahuocanku,products,sp,this.getDeli_num().get(i),
+        			BigDecimal.valueOf(Double.parseDouble(this.getPrice().get(i))),(byte)0);
+	      	this.getXsfahuomxs().add(tempfahuomx);
+	      }
+	      
+	      Custom newcustom = this.service.getCustomerById(this.getCustomer());
+	      
+	      PrivAuthenticationImpl auth = (PrivAuthenticationImpl)PrivUtil.getLoginAuthentication();
+	      Users  tempshr = new Users(9);
+		  Users  tempnhr = new Users(10);
+	      this.xsfahuoxx = new XSfahuoxx(this.getDomains(),new Date(),this.getBno(),this.getCno(),
+				  this.getOrgin(),newcustom,(byte)this.getDelivertype(),(byte)this.getJstype(),
+				  this.getMemo(),tempshr,auth.getPrincipal(),tempnhr,(byte)0,(byte)this.getSaletype(),this.getXsfahuomxs());
+		  
+		  for(XSfahuomx xsfahuomx:xsfahuomxs){
+			  Chuku chuku = new Chuku(xsfahuomx.getCanku(), new Canku(0,null,(byte)3),
+						xsfahuoxx.getZdr(),xsfahuoxx.getCustomer(),xsfahuoxx.getBno(),
+						xsfahuoxx.getFahuosj(), null, xsfahuoxx.getMemo());
+				List<Chukumx> chukumxs = new ArrayList();
+				chukumxs.addAll(service.autochukumxs(xsfahuomx.getCanku(), xsfahuomx.getProduct(), 
+						xsfahuomx.getSpecification(), xsfahuoxx.getType(), xsfahuomx.getNumber(), chuku));	
+				
+				for(int i=0;i<chukumxs.size();i++){
+					
+					this.epi = 	    		
+						new EntryPrintInfo(chukumxs.get(i).getProducts().getName(),chukumxs.get(i).getSpecifications().getName(),
+								chukumxs.get(i).getSpecifications().getPackType(),chukumxs.get(i).getNumber(),
+								String.valueOf(this.ForDight(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber(),3)),
+								chukumxs.get(i).getPch(),chukumxs.get(i).getChuku().getMemo(),chukumxs.get(i).getChuku().getCankuByCankuId().getName());
+					resultList_ckd.add(epi);
+				}
+		  }
+		 
+		 return "printckd";
+		 
+	 } 
+	 
+	 public double ForDight(float Dight,int How)
+	 {
+		  double dight   =    (Math.round(Dight*Math.pow(10,How))/Math.pow(10,How));   
+		  return   dight;  
+	 }
 	 
 	public String getDomains() {
 		return domains;
@@ -239,6 +324,14 @@ public class salesNotificationAction implements Preparable {
 	}
 
 	
+
+	public Boolean getIsChuku() {
+		return isChuku;
+	}
+
+	public void setIsChuku(Boolean isChuku) {
+		this.isChuku = isChuku;
+	}
 
 	public String getMyshr() {
 		return myshr;

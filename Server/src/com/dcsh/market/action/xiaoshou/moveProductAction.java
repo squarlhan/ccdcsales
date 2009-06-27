@@ -103,7 +103,7 @@ public class moveProductAction implements Preparable {
 	        service.doYiku(xsyikuxx);
 	        
 	      //下面的代码直接移库
-	        if(this.isChuku){
+	        if(this.isChuku)
 			  for(XSyikumx xsyikumx:xsyikumxs)
 				{
 					Chuku chuku = new Chuku(xsyikumx.getCanku(), xsyikuxx.getAimcanku(),
@@ -112,11 +112,7 @@ public class moveProductAction implements Preparable {
 					chuku.setChukumxes(service.autochukumxs(xsyikumx.getCanku(), xsyikumx.getProduct(), 
 							xsyikumx.getSpecification(), xsyikuxx.getType(), xsyikumx.getNumber(), chuku));
 					service.doDeliveryWareHouse(chuku);
-				}
-			  }
-	        else
-	        	System.out.println("Here!!!");
-	        	System.out.println("+++"+this.isChuku);
+				}	  
 	        return print();
         }
  
@@ -157,15 +153,12 @@ public class moveProductAction implements Preparable {
 		}
  
  public String printck() throws Exception{
-	 
+	  SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy年MM月dd日");  
+	  setDate(bartDateFormat.format(sendtime)); 
 	  this.resultList_ckd=new ArrayList();
 	  Custom custom = service.getCustomerById(this.getCustomer());
 	  this.printCustom = custom.getCustomName();
 	  this.printCankuaim = service.getCangkuById(aimcanku).getName();
-	
-	//  this.printorgin = this.getOrgin();
-	  for(int i=0;i<this.getDeli_canku().size();i++)
-	  this.printorgin += service.getCangkuById(this.getDeli_canku().get(i)).getName();//test TODO
 	  
 	  for(int i=0;i<this.getDeli_canku().size();i++)
       {
@@ -200,8 +193,8 @@ public class moveProductAction implements Preparable {
 				this.epi = 	    		
 					new EntryPrintInfo(chukumxs.get(i).getProducts().getName(),chukumxs.get(i).getSpecifications().getName(),
 							chukumxs.get(i).getSpecifications().getPackType(),chukumxs.get(i).getNumber(),
-							String.valueOf(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber()),
-							chukumxs.get(i).getPch(),chukumxs.get(i).getChuku().getMemo());
+							String.valueOf(this.ForDight(chukumxs.get(i).getSpecifications().getWeight().floatValue()*chukumxs.get(i).getNumber(),3)),
+							chukumxs.get(i).getPch(),chukumxs.get(i).getChuku().getMemo(),chukumxs.get(i).getChuku().getCankuByCankuId().getName());
 				resultList_ckd.add(epi);
 			}
 	  }
@@ -210,6 +203,11 @@ public class moveProductAction implements Preparable {
 	 
  }
 
+ public double ForDight(float Dight,int How)
+ {
+	  double dight   =    (Math.round(Dight*Math.pow(10,How))/Math.pow(10,How));   
+	  return   dight;  
+ }
 	public Date getMydate() {
 	return mydate;
 }

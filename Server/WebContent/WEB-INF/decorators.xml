@@ -50,6 +50,7 @@
 	    <pattern>/zzkdeliverywarehouse!printxsyk.action </pattern>
 	    <pattern>/zzkdeliverywarehouse!yiku.action </pattern>
 	    <pattern>/pages/xiaoshou/printsalesnotification.jsp</pattern>
+	    <pattern>/xssalesnotification!printck.action </pattern>
 	    <pattern>/xssalesnotification!print.action </pattern>
 	    <pattern>/xssalesnotification.action</pattern>
 	    <pattern>/pages/xiaoshou/printmoveprconfirm.jsp</pattern>

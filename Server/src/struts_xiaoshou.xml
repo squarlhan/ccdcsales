@@ -60,6 +60,7 @@
             <result name="sale_save">/pages/xiaoshou/salesnotification.jsp</result>
             <!-- <result name="sale_save" type="redirect-action">xsliststorage</result> -->
             <result name="print">/pages/xiaoshou/printsalesnotification.jsp</result>
+            <result name="printckd">/pages/xiaoshou/printfh.jsp</result>
         </action>
         <action name="xslistxsfh" method="execute" class="listxsfhAction">
             <result>/pages/xiaoshou/listfahuo.jsp</result>
