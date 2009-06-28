@@ -263,13 +263,9 @@
 <body>
 <h2>欢迎进入大成仓储管理信息系统驻厂库管理页面！</h2>
   <s:form theme="simple" action="zckcheckinproducts" onsubmit="return check()">
-    <table class="list_table" align="left" width="320" id="tb0">
-  	<tr>
-  	   <td><s:text name="编号："/></td>
-       <td align="left"><s:textfield id="rew" name="bno" labelposition="top" size="50"/></td>
-  	</tr>
-  </table>
-  <br/><br/>  <br/><br/>
+      <br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<s:text name="编号："/><s:textfield id="rew" name="bno" labelposition="top" size="25"/>
+  <br/>
    <table class="list_table" id="mytable" align="center" width="100%" id="tb">
 		<tr bgcolor="#4A708B">
 		    <th width="10%">选择</th>
