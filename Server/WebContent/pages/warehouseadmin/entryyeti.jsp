@@ -247,12 +247,8 @@ function setnumber(obj,line)
 
 <h2>储运处液体产品入库单</h2>
   <s:form id="myform"  theme="simple" target="_blank">
-  <table class="list_table"  align="center" width="100%" id="tb0">
-  	<tr>
-  		<td><s:text name="编号："/></td>
-       <td align="left"><s:textfield id="rew" name="bno" labelposition="top" size="50"/></td>
-  	</tr>
-  </table>
+ 	   <br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<s:text name="编号："/><s:textfield id="rew" name="bno" labelposition="top" size="25"/>
      <table class="list_table"  align="center" width="100%" id="tb">
        <tr bgcolor="#4A708B">
             <th>工厂库</th>
